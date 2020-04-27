@@ -1,2 +1,2 @@
-# Images (Links)
+# Imgs (Links)
 **Logo sin nada:** https://imgur.com/link-a-la-imagen
