@@ -26,4 +26,8 @@ Sin embargo, para llevar un control de **TODOS LOS CAMBIOS** realizados (entre o
 </ul>
 
 # Imgs
-**Logo sin nada:** https://imgur.com/link-a-la-imagen
+ 
+<dl>
+  <dt>**Logo sin nada**</dt>
+  <dd>https://imgur.com/link-a-la-imagen</dd>
+</dl>
