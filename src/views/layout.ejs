@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('00partials/head'); -%>
+    </head>
+    <body>
+        <div class="main valign-wrapper" style="min-height: 90vh;">
+            <%- include(page) -%>
+        </div>
+        <%- include('00partials/footer', {age: new Date().getFullYear()}); -%>
+        <%- include('00partials/scripts') -%>
+    </body>
+</html>

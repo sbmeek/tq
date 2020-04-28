@@ -1,0 +1,106 @@
+*{
+    box-sizing: border-box;
+}
+
+.alert-anim{
+    transition: opacity 500ms;
+    will-change: opacity;
+}
+
+.alert-anim.faded-out {
+    opacity: 0;
+}
+
+.alert-anim.almost-removed{
+    animation-name: almost-removed;
+    animation-duration: 500ms;
+    animation-play-state: paused;
+}
+
+@keyframes almost-removed{
+    0% {
+        opacity: 1;
+        /* transform: rotate(0.5turn); */
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+#alertoverlay{
+    display: none;
+    opacity: .5;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background: #000;
+    width: 100%;
+    min-width: 100vh;
+    min-height: 100vh;
+    z-index: 11280;
+}
+
+#alertbox{
+    display: none;
+    position: fixed;
+    background: #fff;
+    border-radius:10px; 
+    z-index: 11281;
+}
+
+#alertboxinner > #alertboxhead{ 
+    background: #fff; 
+    /* font-size:35px;  */
+    color:#1b1b1b; 
+}
+
+#alertboxinner > #alertboxbody{ 
+    background:#fff; 
+    padding:0; 
+    color:#1b1b1b;
+    font-size: 16px;
+}
+
+#alertboxinner > #alertboxfoot{ 
+    background: #fff; 
+    padding:10px 0 10px 0;
+}
+
+#alertboxinner{
+    width:70%; 
+    margin: 0 auto;
+    background:#fff; 
+}
+
+#x-btn{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    margin: 10px;
+}
+
+#x-btn:hover{
+    cursor: pointer;
+}
+
+.alert-img{
+    max-height: 200px;
+    max-width: 403px;
+    margin: 5px;
+}
+
+@media only screen and (max-width: 605px){
+    #alertbox{
+        width: 90% !important;
+    }
+    #alertboxinner > #alertboxbody {
+        font-size: 17px;
+        color: #000;
+    }
+    #btn-ok{
+        width: 100%;
+    }
+    .alert-img{
+        max-width: 90% !important;
+    }
+}
