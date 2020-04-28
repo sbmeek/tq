@@ -1,5 +1,7 @@
-# TQ Repository 
+<div style="text-align:center;">
+<img src="https://avatars0.githubusercontent.com/t/3800248?s=280&v=4" title="TQ"/>
 Being developed by TQ Team. A SB-Meek's team.
+</div>
 
 # Versiones
 
