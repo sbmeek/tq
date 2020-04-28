@@ -1,6 +1,6 @@
-<div style="text-align:center;">
-<img src="https://avatars0.githubusercontent.com/t/3800248?s=280&v=4" title="TQ"/>
-</div>
+<p align="center">
+  <img src="https://avatars0.githubusercontent.com/t/3800248?s=280&v=4" title="TQ"/>
+</p>
 </br>
 <div style="text-align:center;">
 Being developed by TQ Team. A SB-Meek's team.
