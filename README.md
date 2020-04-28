@@ -28,6 +28,6 @@ Sin embargo, para llevar un control de **TODOS LOS CAMBIOS** realizados (entre o
 # Imgs
  
 <dl>
-  <dt>**Logo sin nada**</dt>
+  **Logo sin nada**
   <dd>https://imgur.com/link-a-la-imagen</dd>
 </dl>
