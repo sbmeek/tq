@@ -22,7 +22,7 @@ Sin embargo, para llevar un control de **TODOS LOS CAMBIOS** realizados (entre o
     Si el nuevo lanzamiento es para solucionar un bug se incrementará el número <b>Z</b>.
   </li>
   <li>
-    Si el nuevo lanzamiento contiene una nueva característica (por ejemplo, cuando copias el link en el "link-screen" se muestra una alerta con información relacionada) se incrementará el número <b>Y</b>.
+    Si el nuevo lanzamiento contiene una nueva característica (por ejemplo, cuando copias el link en el "link-screen" se muestra una alerta con información relacionada) se incrementará el número <b>Y</b>. Cuando el número <b>Y</b> incrementa el número <b>Z</b> debe establecerse en 0, ya que la nueva característica "no contiene bugs".
   </li>
   <li>
     Si el nuevo lanzamiento contiene cambios que obligan al usuario a reaprender la forma en que se usa la aplicación y/o cambios de funcionalidades vitales para la aplicación (por ejemplo, cambios a la interfaz gráfica "UI", la forma en que se envían los mensajes, o la forma en que un usuario inicia sesión) se incrementará el número <b>X</b>.
