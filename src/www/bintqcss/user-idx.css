@@ -82,6 +82,7 @@
     font-size: 2rem !important;
     margin-left: 7px;
 }
+
 #link {
     font-family: 'Nunito', sans-serif;
     text-transform: none;
@@ -104,21 +105,20 @@
     color:#fff;
     transition: ease-in .22s;
 }
+
 @media only screen and (max-width:1000px){
-#bien{
-    width: 80%;
-    margin-left: 10%;
-
-
-}
+    #bien{
+        width: 80%;
+        margin-left: 10%;
+    }
 }
 @media only screen and (max-width:724px) {
     #bien{
-    height: auto;
-    width: 100%;
-    margin-left: 0%;
-    background: none;
-    min-width: 300px;
+        height: auto;
+        width: 100%;
+        margin-left: 0%;
+        background: none;
+        min-width: 300px;
     }
     .section{
         padding-bottom: 9rem;
