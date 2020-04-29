@@ -6,7 +6,7 @@
 
 .section{
     padding-top: 0;
-    padding-bottom: 16rem;
+    padding-bottom: 6rem;
 }
 
 .row{
@@ -32,6 +32,7 @@
     height: 100%;
     width: 67%;
     margin-left: 15.5%;
+    min-width: 500px;
 }
 
 #_tq-link-user{
@@ -103,12 +104,28 @@
     color:#fff;
     transition: ease-in .22s;
 }
+@media only screen and (max-width:1000px){
+#bien{
+    width: 80%;
+    margin-left: 10%;
 
-@media only screen and (max-width:710px) {
+
+}
+}
+@media only screen and (max-width:724px) {
     #bien{
     height: auto;
     width: 100%;
     margin-left: 0%;
     background: none;
+    min-width: 300px;
+    }
+    .section{
+        padding-bottom: 9rem;
+    }
+}
+@media only screen and (max-width: 492px){
+    .section{
+        padding-bottom: 16rem;
     }
 }
