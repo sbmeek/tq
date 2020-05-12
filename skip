@@ -1,0 +1,359 @@
+[33mcommit 6f458d83b910424cab85c189550679fb8d21adc1[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Merge: e79abe9 9e495b2
+Author: k0o <sb.knot@gmail.com>
+Date:   Mon May 11 17:15:16 2020 -0400
+
+    - Up to version 0.10.1
+    - Reordered user authentication methods. (v0.1.186)
+    - Check users accounts that have expired at server start. (v0.2.0)
+    - Check expirations code have been improved. Unused code removed. Process optimized. (v0.2.1)
+    - Alerts added to users authentication process (main-screen). (v0.3.0)
+    - Expired users cannot log in. (v0.4.0)
+    - Fixed "Uncaught (in promise) ReferenceError: btnLink is not defined"
+            => When alerting in main-idx view. (v0.4.1)
+    - Alert edited and resized according to logo. (v0.4.2)
+    - Users logged in gonna be redirected to /auth/{username}. (v0.4.2)
+    - express.json() middleware added to server. (v0.5.0)
+    - Users schema have been improved adding mongoose/mongodb validations. (v0.6.0)
+            const uSchema = new Schema({
+                username: String,
+                enteredname: String,
+                key: String,
+                createdAt: Date,
+                willExpireAt: Date,
+                expired: Boolean
+            });
+            ---------------------------------------------
+            const uSchema = new Schema({
+                username: {type: String, required: true, unique: true, lowercase: true},
+                enteredname: {type: String, required: true, unique: true},
+                key: {type: String, required: true},
+                createdAt: {type: Date, default: new Date(), required: true},
+                willExpireAt: {type: Date, required: true},
+                expired: {type: Boolean, required: true}
+            });
+    - Web sockets have been secured reducing scope. (v0.6.1)
+    - React JS! (v0.7.0)
+    - User's keys will now be encrypted before saving to LS. (v0.8.0)
+    - Added "options" to Alert API, e.g:
+          {
+                btnCSS: `box-sizing: border-box !important;width: 100%;margin-bottom: 10px;`, (Defecto)
+                btnHTML: `<button id="btn-ok" class="btn cyan waves-light waves-effect" onclick="alert.ok()">Ok</button>`, (Defecto)
+                titleHTML: `<img class="responsive-img alert-img" src="/img/ltqrNEW.png" />`, (Defecto)
+            // For link => component/screen
+            sldIntervalID,
+                startSlider,
+                btnLnk: btnLink.current,
+    
+            }
+            (v0.9.0)
+    - Cookies (for sessions) have been signed. (v0.10.0)
+    - Fixed Main/Auth screen icon button compatibility (Icon wasn't centered) (v0.10.1)
+
+[33mcommit e79abe973ea5c5d963d1198a7324b7a4eb4d82c1[m
+Merge: f3d03a9 6aa59e1
+Author: k0o <sb.knot@gmail.com>
+Date:   Mon May 11 17:09:17 2020 -0400
+
+    Up to version 0.10.1
+    - Reordered user authentication methods. (v0.1.186)
+    - Check users accounts that have expired at server start. (v0.2.0)
+    - Check expirations code have been improved. Unused code removed. Process optimized. (v0.2.1)
+    - Alerts added to users authentication process (main-screen). (v0.3.0)
+    - Expired users cannot log in. (v0.4.0)
+    - Fixed "Uncaught (in promise) ReferenceError: btnLink is not defined"
+            => When alerting in main-idx view. (v0.4.1)
+    - Alert edited and resized according to logo. (v0.4.2)
+    - Users logged in gonna be redirected to /auth/{username}. (v0.4.2)
+    - express.json() middleware added to server. (v0.5.0)
+    - Users schema have been improved adding mongoose/mongodb validations. (v0.6.0)
+            const uSchema = new Schema({
+                username: String,
+                enteredname: String,
+                key: String,
+                createdAt: Date,
+                willExpireAt: Date,
+                expired: Boolean
+            });
+            ---------------------------------------------
+            const uSchema = new Schema({
+                username: {type: String, required: true, unique: true, lowercase: true},
+                enteredname: {type: String, required: true, unique: true},
+                key: {type: String, required: true},
+                createdAt: {type: Date, default: new Date(), required: true},
+                willExpireAt: {type: Date, required: true},
+                expired: {type: Boolean, required: true}
+            });
+    - Web sockets have been secured reducing scope. (v0.6.1)
+    - React JS! (v0.7.0)
+    - User's keys will now be encrypted before saving to LS. (v0.8.0)
+    - Added "options" to Alert API, e.g:
+          {
+                btnCSS: `box-sizing: border-box !important;width: 100%;margin-bottom: 10px;`, (Defecto)
+                btnHTML: `<button id="btn-ok" class="btn cyan waves-light waves-effect" onclick="alert.ok()">Ok</button>`, (Defecto)
+                titleHTML: `<img class="responsive-img alert-img" src="/img/ltqrNEW.png" />`, (Defecto)
+            // For link => component/screen
+            sldIntervalID,
+                startSlider,
+                btnLnk: btnLink.current,
+    
+            }
+            (v0.9.0)
+    - Cookies (for sessions) have been signed. (v0.10.0)
+    - Fixed Main/Auth screen icon button compatibility (Icon wasn't centered) (v0.10.1)
+
+[33mcommit 9e495b26914563af276b1846edf3d9fe14679f26[m
+Merge: f3d03a9 6aa59e1
+Author: k0o <sb.knot@gmail.com>
+Date:   Mon May 11 17:09:17 2020 -0400
+
+    Merge branch 'master' of https://github.com/SBMeek/tq
+
+[33mcommit f3d03a96f36ad6798b31134c462636cefa610699[m
+Author: k0o <sb.knot@gmail.com>
+Date:   Mon May 11 17:01:01 2020 -0400
+
+    + React JS and more
+    - Reordered user authentication methods. (v0.1.186)
+    - Check users accounts that have expired at server start. (v0.2.0)
+    - Check expirations code have been improved. Unused code removed. Process optimized. (v0.2.1)
+    - Alerts added to users authentication process (main-screen). (v0.3.0)
+    - Expired users cannot log in. (v0.4.0)
+    - Fixed "Uncaught (in promise) ReferenceError: btnLink is not defined"
+            => When alerting in main-idx view. (v0.4.1)
+    - Alert edited and resized according to logo. (v0.4.2)
+    - Users logged in gonna be redirected to /auth/{username}. (v0.4.2)
+    - express.json() middleware added to server. (v0.5.0)
+    - Users schema have been improved adding mongoose/mongodb validations. (v0.6.0)
+            const uSchema = new Schema({
+                username: String,
+                enteredname: String,
+                key: String,
+                createdAt: Date,
+                willExpireAt: Date,
+                expired: Boolean
+            });
+            ---------------------------------------------
+            const uSchema = new Schema({
+                username: {type: String, required: true, unique: true, lowercase: true},
+                enteredname: {type: String, required: true, unique: true},
+                key: {type: String, required: true},
+                createdAt: {type: Date, default: new Date(), required: true},
+                willExpireAt: {type: Date, required: true},
+                expired: {type: Boolean, required: true}
+            });
+    - Web sockets have been secured reducing scope. (v0.6.1)
+    - React JS! (v0.7.0)
+    - User's keys will now be encrypted before saving to LS. (v0.8.0)
+    - Added "options" to Alert API, e.g:
+          {
+                btnCSS: `box-sizing: border-box !important;width: 100%;margin-bottom: 10px;`, (Defecto)
+                btnHTML: `<button id="btn-ok" class="btn cyan waves-light waves-effect" onclick="alert.ok()">Ok</button>`, (Defecto)
+                titleHTML: `<img class="responsive-img alert-img" src="/img/ltqrNEW.png" />`, (Defecto)
+            // For link => component/screen
+            sldIntervalID,
+                startSlider,
+                btnLnk: btnLink.current,
+    
+            }
+            (v0.9.0)
+    - Cookies (for sessions) have been signed. (v0.10.0)
+    - Fixed Main/Auth screen icon button compatibility (Icon wasn't centered) (v0.10.1)
+
+[33mcommit 6aa59e17d0f49774cd82a2fb5bf5bf85973b2fdb[m
+Author: k0o <sb.knot@gmail.com>
+Date:   Mon May 11 17:01:01 2020 -0400
+
+    React JS (Read description)
+    
+    - Reordered user authentication methods.
+    - Check users accounts that have expired at server start.
+    - Check expirations code have been improved. Unused code removed. Process optimized.
+    - Alerts added to users authentication process (main-screen).
+    - Expired users cannot log in.
+    - Fixed "Uncaught (in promise) ReferenceError: btnLink is not defined"
+            => When alerting in main-idx view.
+    - Alert edited and resized according to logo.
+    - Users logged in gonna be redirected to /auth/{username}.
+    - express.json() middleware added to server.
+    - Users schema haven been improved adding mongoose/mongodb validations.
+            const uSchema = new Schema({
+                username: String,
+                enteredname: String,
+                key: String,
+                createdAt: Date,
+                willExpireAt: Date,
+                expired: Boolean
+            });
+            ---------------------------------------------
+            const uSchema = new Schema({
+                username: {type: String, required: true, unique: true, lowercase: true},
+                enteredname: {type: String, required: true, unique: true},
+                key: {type: String, required: true},
+                createdAt: {type: Date, default: new Date(), required: true},
+                willExpireAt: {type: Date, required: true},
+                expired: {type: Boolean, required: true}
+            });
+    - Web sockets have been secured reducing scope.
+    - React JS!
+    - User's keys will now be encrypted before saving to LS.
+    - Added "options" to Alert API, e.g:
+          {
+                btnCSS: `box-sizing: border-box !important;width: 100%;margin-bottom: 10px;`, (Defecto)
+                btnHTML: `<button id="btn-ok" class="btn cyan waves-light waves-effect" onclick="alert.ok()">Ok</button>`, (Defecto)
+                titleHTML: `<img class="responsive-img alert-img" src="/img/ltqrNEW.png" />`, (Defecto)
+            // For link => component/screen
+            sldIntervalID,
+                startSlider,
+                btnLnk: btnLink.current,
+    
+            }
+    - Cookies (for sessions) have been signed.
+    - Fixed Main/Auth screen icon button compatibility (Icon wasn't centered)
+
+[33mcommit c0ca89d9684d5808eec671c259868794c6577768[m
+Merge: 7a49755 184f779
+Author: Limitless <sb.knot@gmail.com>
+Date:   Wed Apr 29 00:14:24 2020 -0300
+
+    Merge pull request #2 from cqm2112/master
+    
+    actualizacion de pag-link
+    >actualizacion de pag-link. Cambios realizados: adaptacion total de las imagenes y centralizacion del contenedor en todo sentido de la palabra
+
+[33mcommit 184f779a1d2e4f747c964293e231701dc31e3492[m
+Author: Limitless <sb.knot@gmail.com>
+Date:   Wed Apr 29 00:06:34 2020 -0300
+
+    Indentación
+
+[33mcommit 8014b6313675cc8a98fc9fa92e51e9d6b32a35c3[m
+Author: cqm2112 <61892716+cqm2112@users.noreply.github.com>
+Date:   Tue Apr 28 22:57:34 2020 -0400
+
+    actualizacion de pag-link
+    
+    cambios realizados: adaptacion total de las imagenes y centralizacion del contenedor en todo sentido de la palabra
+
+[33mcommit 7a497553f038ca946a03bd9039e7b19dcf8329ef[m
+Author: Limitless <sb.knot@gmail.com>
+Date:   Tue Apr 28 22:48:56 2020 -0300
+
+    Update README.md
+
+[33mcommit 39ed6952cc0ca46a6a03816e2b11a6cc9fd2ae0c[m
+Author: Limitless <sb.knot@gmail.com>
+Date:   Tue Apr 28 03:39:25 2020 -0300
+
+    Update README.md
+
+[33mcommit c0ad09be4a95a7705c05f7374342d4294ef84843[m
+Author: Limitless <sb.knot@gmail.com>
+Date:   Tue Apr 28 03:37:59 2020 -0300
+
+    Update README.md
+
+[33mcommit 94b9c1c55a831f4cf559c9e2fc20d905424f85c5[m
+Author: Limitless <sb.knot@gmail.com>
+Date:   Tue Apr 28 03:32:35 2020 -0300
+
+    Update README.md
+
+[33mcommit 6ec0cbc00eb301b70fdcb10edc6cd553700d54aa[m
+Author: Limitless <sb.knot@gmail.com>
+Date:   Tue Apr 28 03:31:52 2020 -0300
+
+    Update README.md
+
+[33mcommit 35ba26072c96aa67511bc24e18c6cdc8fa14b707[m
+Author: Limitless <sb.knot@gmail.com>
+Date:   Tue Apr 28 03:27:59 2020 -0300
+
+    Update README.md
+
+[33mcommit 5450d4b9be3b97bc430eedfb42c47702388c4335[m
+Author: Limitless <sb.knot@gmail.com>
+Date:   Tue Apr 28 02:09:09 2020 -0300
+
+    Update README.md
+
+[33mcommit 49b4e8897d7b57b18b6f5741565eca2c0bf58c92[m
+Author: Limitless <sb.knot@gmail.com>
+Date:   Tue Apr 28 02:05:16 2020 -0300
+
+    Update README.md
+
+[33mcommit b1a9cee6dee72acd89452fce9907a8865168607b[m
+Author: Limitless <sb.knot@gmail.com>
+Date:   Tue Apr 28 02:03:06 2020 -0300
+
+    Update README.md
+
+[33mcommit 461d9d76b99de59bd42cedcb92f72ec635e65fb3[m
+Author: Limitless <sb.knot@gmail.com>
+Date:   Tue Apr 28 02:02:44 2020 -0300
+
+    Update README.md
+
+[33mcommit facf127c69f0a58d30e5c1adb323c68fdccaf114[m
+Author: Limitless <sb.knot@gmail.com>
+Date:   Tue Apr 28 01:57:43 2020 -0300
+
+    Update LICENSE
+
+[33mcommit 5960c1e79d77c1bc17f5c114b9f2b52ef4a849d8[m
+Author: Limitless <sb.knot@gmail.com>
+Date:   Tue Apr 28 01:41:29 2020 -0300
+
+    Update README.md
+
+[33mcommit 67a968126f2758f9b9c93f967111c255a2a1065e[m
+Author: Limitless <sb.knot@gmail.com>
+Date:   Tue Apr 28 01:39:58 2020 -0300
+
+    Update README.md
+
+[33mcommit a8c4b194c51410491afd752c001220edad921612[m
+Merge: 73acef2 8e5d73b
+Author: Limitless <sb.knot@gmail.com>
+Date:   Mon Apr 27 22:48:18 2020 -0300
+
+    Merge pull request #1 from Adressnalina/patch-1
+    
+    Update README.md
+
+[33mcommit 8e5d73b2a1a3ee871e927292ad0c6f4ed5e34ccb[m
+Author: Adressnalina <61914852+Adressnalina@users.noreply.github.com>
+Date:   Mon Apr 27 21:46:00 2020 -0400
+
+    Update README.md
+
+[33mcommit 73acef243b5675f7cec1c5731d4d8e3824fb6728[m
+Author: k0o <sb.knot@gmail.com>
+Date:   Mon Apr 27 21:16:34 2020 -0400
+
+    dev/sbc: tq
+
+[33mcommit cb27c5aed8779626e6063b61370ca1cacc868f73[m
+Author: k0o <sb.knot@gmail.com>
+Date:   Mon Apr 27 20:52:27 2020 -0400
+
+    add .gitignore
+
+[33mcommit 97140da118437b152c1d71aaf50bbef7f2e31c0f[m
+Author: Limitless <sb.knot@gmail.com>
+Date:   Mon Apr 27 20:34:24 2020 -0300
+
+    Update README.md
+
+[33mcommit 1ec1785225643b774ff6fd6d9ef2c132dc34e0aa[m
+Author: Limitless <sb.knot@gmail.com>
+Date:   Mon Apr 27 20:32:58 2020 -0300
+
+    Create README.md
+
+[33mcommit da9ecf28d61029351d2d7d60ded01849ff87a24e[m
+Author: Limitless <sb.knot@gmail.com>
+Date:   Mon Apr 27 20:31:56 2020 -0300
+
+    Create LICENSE

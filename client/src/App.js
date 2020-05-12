@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import io from 'socket.io-client';
 import './styles/App.css';
@@ -15,9 +15,17 @@ import {AuthContext} from './context/AuthContext';
 
 function App() {
   const { isStatus500 } = useContext(AuthContext);
+  const endpoint = `http://localhost:4000`
+  const [socket, setSocket] = useState(null);
+  useEffect(() => {
+    try {
+      setSocket(io(endpoint));
+    } catch (error) {
+      console.error(error);
+    }
+  }, [endpoint]);
+
   if(!isStatus500){
-    const endpoint = `http://localhost:4000`
-    const socket = io(endpoint);
     return (
       <Router>
         <Switch>

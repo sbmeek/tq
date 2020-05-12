@@ -8,13 +8,15 @@ import '../../styles/Main-idx.css';
 const A = new Alert();
 
 function resizeMainElements({current: input}, {current: btn}){
-    btn.style.height = input.getBoundingClientRect().height+'px';
-    let bodyHeight = document.body.getBoundingClientRect().height;
-    let bodyWidth = document.body.getBoundingClientRect().width;
-    if(bodyHeight < 627 || bodyWidth < 690){
-        document.body.classList.remove('d-scroll');
-    }else{
-        document.body.classList.add('d-scroll');
+    if(null != input && null != btn){
+        btn.style.height = input.getBoundingClientRect().height+'px';
+        let bodyHeight = document.body.getBoundingClientRect().height;
+        let bodyWidth = document.body.getBoundingClientRect().width;
+        if(bodyHeight < 627 || bodyWidth < 690){
+            document.body.classList.remove('d-scroll');
+        }else{
+            document.body.classList.add('d-scroll');
+        }
     }
 }
 
