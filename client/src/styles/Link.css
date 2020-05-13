@@ -97,7 +97,7 @@
 
 @media only screen and (max-width:1000px){
     .carousel-item{
-        width: 80%;
+        width: 80% !important;
         margin-left: 10%;
     }
 }
@@ -105,7 +105,7 @@
 @media only screen and (max-width:724px) {
     .carousel-item{
         height: auto;
-        width: 100%;
+        width: 100% !important;
         margin-left: 0%;
         background: none;
         min-width: 300px;
