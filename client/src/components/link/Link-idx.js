@@ -21,7 +21,7 @@ export default function Link() {
 
     useEffect(() => {
         (async () => {
-            if(user)
+            if(user){}
                 await setName(user.enteredname);
         })();
     }, [user]);
@@ -48,7 +48,7 @@ export default function Link() {
         inputLink.current.select();
         inputLink.current.setSelectionRange(0, 99);
         document.execCommand("copy");
-        A.trigger('{{[]: {a$$}}}', {
+        A.trigger('dame lu sicario', {
             sldIntervalID,
             startSlider,
             btnLnk: btnLink.current,
@@ -141,7 +141,7 @@ export default function Link() {
                     >
                         Copia el link aqu&iacute;
                         <i className="material-icons right">
-                            link
+                            
                         </i>
                     </button>
                     <input 
