@@ -2,8 +2,8 @@
 
 const router = require('express').Router();
 const passport = require('passport');
-const auth = require('../auth/local-auth');
 const JWT = require('jsonwebtoken');
+const { setExpirationDate } = require('../libs/user-expirations');
 
 const signToken = (userId) => (
     JWT.sign({
@@ -43,6 +43,8 @@ const signToken = (userId) => (
 
 router.post('/auth', (req, res, next) => {  
     passport.authenticate('local', { session: false }, (err, user, info) => {
+        if(err)
+            console.error(err);
         if(!user){
             res.json({ok: false});
         }
@@ -67,11 +69,13 @@ router.get('/logout', (req, res, next) => {
 }); // dev purpose
 
 router.get('/authenticated', (req, res, next) => {
-    passport.authenticate('jwt', { session: false }, (err, user, info) => {
+    passport.authenticate('jwt', { session: false }, async (err, user, info) => {
         if(!user)
             res.json({authenticated: false, user: null});
-        else
+        else{
+            await setExpirationDate(user._id);
             res.json({ authenticated: true, user });
+        }
     })(req, res, next);
 });
 

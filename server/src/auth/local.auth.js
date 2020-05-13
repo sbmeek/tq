@@ -3,8 +3,9 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const JwtStrategy = require('passport-jwt').Strategy;
-const User = require('../cmods/User');
+const User = require('../models/User');
 const uuid = require('uuid');
+const { getExpirationDate } = require('../libs/user-expirations');
 
 // passport.serializeUser((user, done) => {
 //     done(null, user.id);
@@ -64,7 +65,7 @@ module.exports = {
         const user = await User.findById(data._id);
         user.key = data.key;
         // let allowed = (user.key === data.key ? true : false);
-        let username = user.username
+        // let username = user.username;
         if(!user.expired){
             socket.emit('tq:login', user);
         }
@@ -73,16 +74,12 @@ module.exports = {
     },
     userRegister: async (data, socket) => {
         let key = uuid.v4();
-        let today = new Date();
-        let expireDate = new Date();
-        expireDate.setDate(today.getDate() + 4);
-        expireDate.setHours(0, 0, 0, 0);
         const user = new User({
             enteredname: data.tquser,
             username: data.tquser.toLowerCase(),
             key: key,
-            createdAt: today,
-            willExpireAt: expireDate,
+            createdAt: new Date(),
+            willExpireAt: getExpirationDate(),
             expired: false
         });
         key = await user.hashKey(user.key);

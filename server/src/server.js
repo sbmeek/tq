@@ -13,24 +13,24 @@ require('dotenv').config();
 
 const app = express();
 
-const instance = require('./database').instance; // Establishes db connection
+require('./database').instance; // Establishes db connection
 // require('./auth/local-auth'); // For passport
-require('./cmods/User'); // Defines and starts agenda (job: check expirations at 00:00 daily)
-require('./cmods/User').schema.methods.checkExpirations(); // Check expirations
+require(path.join(__dirname, 'models', 'User')); // Defines and starts agenda (job: check user expirations at 00:00 daily)
+require(path.join(__dirname, 'libs', 'user-expirations')).checkExpirations(); 
 
 // Settings
 app.set('port', process.env.PORT || 4000);
-app.set('favicon', path.join(__dirname, 'www', 'img', 'favicon.ico'));
+app.set('favicon', path.join(__dirname, '../favicon.ico'));
 app.set('json spaces', 2);
 
 // Middlewares
 app.use(favicon(app.get('favicon')));
 app.use(cors());
 // app.use(session({
-//   cookieName: 'token', // cookie name dictates the key name added to the request object
-//   secret: 'blar', // should be a large unguessable string
-//   duration: 24 * 60 * 60 * 1000, // how long the session will stay valid in ms
-//   cookie: {
+    //   cookieName: 'token', // cookie name dictates the key name added to the request object
+    //   secret: 'blar', // should be a large unguessable string
+    //   duration: 24 * 60 * 60 * 1000, // how long the session will stay valid in ms
+    //   cookie: {
 //     path: '/api', // cookie will only be sent to requests under '/api'
 //     maxAge: 60000, // duration of the cookie in milliseconds, defaults to duration above
 //     ephemeral: false, // when true, cookie expires when the browser closes
@@ -42,7 +42,6 @@ app.use(cookieParser('token'));
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 app.use(morgan('dev'));
-// app.use(express.static('./src/www')); => env prod
 // app.use(session({
 //     secret: process.env.SESSION_SECRET,
 //     resave: false,
@@ -51,9 +50,11 @@ app.use(morgan('dev'));
 // }));
 // app.use(passport.initialize());
 // app.use(passport.session());
+// console.log(process.env.ENV);
+// app.use(express.static('../src/www')); // => env prod
 
 // Routes
-app.use('/', require('./routes/index-routes'));
+app.use('/user', require('./routes/user.routes'));
 
 module.exports.server = app.listen(app.get('port'), () => console.log('\x1b[32m%s\x1b[0m', `Server running :${app.get('port')}`));
 require('./libs/sockets');

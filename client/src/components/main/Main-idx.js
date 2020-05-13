@@ -77,7 +77,7 @@ export default function Main({ socket }) {
                 let settings = {
                     headers: { 'Content-Type': 'application/json' }
                 }
-                const resp = await axios.post(`/auth?tquser=${userVal}&tqpwd=${inputKey.value}`, settings);
+                const resp = await axios.post(`/user/auth?tquser=${userVal}&tqpwd=${inputKey.value}`, settings);
                 const data = await resp.data;
                 if (data.authenticated){
                     // window.location.replace(`${window.origin}/auth/${userVal}`)

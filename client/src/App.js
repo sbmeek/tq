@@ -17,6 +17,7 @@ function App() {
   const { isStatus500 } = useContext(AuthContext);
   const endpoint = `http://localhost:4000`
   const [socket, setSocket] = useState(null);
+  
   useEffect(() => {
     try {
       setSocket(io(endpoint));
