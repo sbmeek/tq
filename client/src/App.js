@@ -11,7 +11,7 @@ import Error500 from './components/error/500';
 import AuthRoute from './HOCs/AuthRoute';
 import UnauthRoute from './HOCs/UnauthRoute';
 import UserLink from './components/link/Link-idx';
-import MensajeTQ from './components/MensajeTQ/mensaje-idx';
+import Msg from './components/msg/Msg-idx';
 import {AuthContext} from './context/AuthContext';
 
 
@@ -34,11 +34,13 @@ function App() {
         <Switch>
           <UnauthRoute exact path="/" component={Main} redirectTo="/link" socket={socket}/>
           <AuthRoute path="/link" component={UserLink} redirectTo="/"/>
-          <Route path="/mensaje" component={MensajeTQ} />
-          <Route>
-            <div className="main valign-wrapper" style={{ minHeight: '90vh' }}>
-              <Error404/>
-            </div>
+          <Route exact path="/:username" children={(props) => 
+              <Msg socket={socket} {...props} />
+            } 
+          >
+          </Route>
+          <Route path="*">
+            <Error404/>
           </Route>
         </Switch>
         <Route path="/" component={Footer}/>

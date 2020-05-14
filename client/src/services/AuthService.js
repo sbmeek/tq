@@ -9,10 +9,10 @@ export default async function authService () {
     } catch (error) {
         return { 
             error: true, 
-            status: 500, 
+            status: 500,
             isStatus500: true, 
             authenticated: false, 
-            username: false,  
+            username: false, 
         };
     }
 }

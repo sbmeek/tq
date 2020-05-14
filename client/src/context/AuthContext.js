@@ -33,5 +33,6 @@ export default ({ children }) => {
             }}
         >
             { children }
-        </AuthContext.Provider>)
+        </AuthContext.Provider>
+    )
 }

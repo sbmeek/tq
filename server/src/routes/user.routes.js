@@ -79,21 +79,6 @@ router.get('/authenticated', (req, res, next) => {
     })(req, res, next);
 });
 
-// router.get('/:user', (req, res, next) => {
-//     console.log(req.sessionID);
-//     let tquser = req.params.user;
-//     if(!(tquser === 'auth')){
-//         res.render('layout', {
-//             page: 'user/msg',
-//             tquser: tquser,
-//             title: tquser
-//         });
-//     }else{
-//         res.status(404);
-//         next();
-//     }
-// });
-
 router.use((req, res) => {
     res.status(404).json({
         error: true,

@@ -21,7 +21,7 @@ export default function Link() {
 
     useEffect(() => {
         (async () => {
-            if(user){}
+            if(user)
                 await setName(user.enteredname);
         })();
     }, [user]);

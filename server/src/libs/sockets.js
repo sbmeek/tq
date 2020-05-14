@@ -10,6 +10,8 @@ const {
     userRegister
 } = require('../auth/local.auth');
 
+const { sendMessage } = require('../libs/message.utils');
+
 let conns = 0;
 io.on('connection', async (socket) => {
     conns++;
@@ -26,6 +28,9 @@ io.on('connection', async (socket) => {
     socket.on('tq:login', data => userLogin(data, socket));
     socket.on('tq:register', data => userRegister(data, socket));
     //
+
+    // Send msgsendMessage(data, socket)
+    socket.on('msg:send', data => sendMessage(data, socket));
     
     socket.on('disconnect', () => {
         console.log('\x1b[31m%s\x1b[0m', `Disconnection | Socket ID: ${socket.id}`);
