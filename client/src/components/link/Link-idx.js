@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useContext, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext'
 import Alert from '../partials/Alert';
 import '../../styles/Link.css';
@@ -11,7 +12,7 @@ import ft5 from '../../img/link/ft5.png';
 const A = new Alert();
 const M = window.M; // Materialize
 
-export default function Link() {
+export default function LinkIdx() {
     const inputLink = useRef(null);
     const { user } = useContext(AuthContext);
     const [name, setName] = useState('');
@@ -157,15 +158,17 @@ export default function Link() {
                     className="col s12"
                     styleName="col"
                 >
-                    <button 
-                        type="button" 
-                        styleName="_btn-tq"
-                    >
-                        Bandeja
-                        <i className="material-icons right">
-                            inbox
-                        </i>
-                    </button>
+                    <Link to="/bandeja" >
+                        <button 
+                            type="button" 
+                            styleName="_btn-tq"
+                        >
+                            Bandeja
+                            <i className="material-icons right">
+                                inbox
+                            </i>
+                        </button>
+                    </Link>
                 </div>
             </div>
         </div>

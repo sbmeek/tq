@@ -19,9 +19,24 @@ const sendMessage = async ({ username, msg }, socket) => {
     }
 }
 
-const answerMessage = ({ answer, msgId }) => {
-    //db.users.update({"messages._id": ObjectId("5ebdb21a04c4333b588823f5")}, {$set: {"messages.$.answer": "ok"}});
-    console.log(answer, msgId);
+const answerMessage = async ({ answer, msgId }, socket) => {
+    try {
+        await User.findOneAndUpdate({"messages._id": msgId}, {
+            $set: {"messages.$.answer": answer}
+        });
+        socket.emit('msg:ans', { 
+            success: true,
+            msgAnswered: true 
+        });
+    } catch (error) {
+        console.error(error);
+        socket.emit('msg:ans', {
+            error: true,
+            errorMsg: error, 
+            success: false,
+            msgAnswered: false 
+        });
+    }
 }
 
 module.exports.answerMessage = answerMessage;

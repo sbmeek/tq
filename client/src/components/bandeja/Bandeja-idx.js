@@ -10,7 +10,7 @@ export default function Bandeja(){
             <ul>
             {
                 msgs.map(msg => 
-                    <Msg msg={msg} key={msg._id} />
+                    <Msg msg={msg} ans={msg.answer} key={msg._id} />
                 )
             }
             </ul>
