@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef, useContext } from 'react'
 import axios from 'axios';
 import Alert from '../partials/Alert';
-import logo from '../../img/ltqrNEW.png';
-import '../../styles/Main-idx.css';
+import logo from '../../assets/images/ltqrNEW.png';
+import '../../assets/styles/Main-idx.css';
 import {SocketContext} from '../../context/SocketContext';
 import { AuthContext } from '../../context/AuthContext';
 
@@ -28,25 +28,19 @@ export default function Main() {
     const inputNomTQ = useRef(null);
     const btnTQ = useRef(null);
     const form = useRef(null);
+    
     const inputKey = document.createElement('input'); inputKey.name = 'tqpwd';
 
     useEffect(() => {
-        document.querySelector('#react-root').classList.add('d-scroll')
-        window.addEventListener('load', () => resizeMainElements(inputNomTQ, btnTQ))
+        window.addEventListener("load", () => resizeMainElements(inputNomTQ, btnTQ))
         window.addEventListener("resize", () => resizeMainElements(inputNomTQ, btnTQ));
-        resizeMainElements(inputNomTQ, btnTQ);
-    }, []);
-
-    useEffect(() => {
-        resizeMainElements(inputNomTQ, btnTQ);
-    })
+        inputNomTQ.current.style.fontFamily = `Nunito, sans-serif`;
+    });
 
     const setElementsRed = () => {
-        const { current: input } = inputNomTQ;
-        const { current: btn } = btnTQ;
         let somethingsWrongColor = 'border-color:#d93025!important;box-shadow: -0.2rem 0.2rem 0.2rem 0rem rgba(249, 0, 0, 0.25) !important;'
-        btn.style.cssText += somethingsWrongColor;
-        input.style.cssText += somethingsWrongColor;
+        btnTQ.current.style.cssText += somethingsWrongColor;
+        inputNomTQ.current.style.cssText += somethingsWrongColor;
     }
 
     const handleFormSubmit = (e) => {

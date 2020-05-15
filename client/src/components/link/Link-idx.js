@@ -2,12 +2,12 @@ import React, { useRef, useEffect, useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext'
 import Alert from '../partials/Alert';
-import '../../styles/Link.css';
-import ft1 from '../../img/link/ft1.png';
-import ft2 from '../../img/link/ft2.png';
-import ft3 from '../../img/link/ft3.png';
-import ft4 from '../../img/link/ft4.png';
-import ft5 from '../../img/link/ft5.png';
+import '../../assets/styles/Link.css';
+import ft1 from '../../assets/images/link/ft1.png';
+import ft2 from '../../assets/images/link/ft2.png';
+import ft3 from '../../assets/images/link/ft3.png';
+import ft4 from '../../assets/images/link/ft4.png';
+import ft5 from '../../assets/images/link/ft5.png';
 
 const A = new Alert();
 const M = window.M; // Materialize
@@ -158,7 +158,7 @@ export default function LinkIdx() {
                     className="col s12"
                     styleName="col"
                 >
-                    <Link to="/bandeja" >
+                    <Link to="/messages" >
                         <button 
                             type="button" 
                             styleName="_btn-tq"

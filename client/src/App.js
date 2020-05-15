@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import './styles/App.css';
+import './assets/styles/App.css';
 
 // Components
 import Main from './components/main/Main-idx';
@@ -15,6 +15,7 @@ import Msg from './components/sendMsg/Msg-idx';
 
 // Context
 import {AuthContext} from './context/AuthContext';
+//
 
 function App() {
   const { isStatus500 } = useContext(AuthContext);
@@ -24,7 +25,7 @@ function App() {
       <Router>
         <Switch>
           <UnauthRoute exact path="/" component={Main} redirectTo="/link"/>
-          <AuthRoute path="/bandeja" component={Bandeja} redirectTo="/"/>
+          <AuthRoute path="/messages" component={Bandeja} redirectTo="/"/>
           <AuthRoute path="/link" component={UserLink} redirectTo="/"/>
           <Route exact path="/:username" component={Msg} />
           <Route path="*">

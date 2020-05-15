@@ -5,6 +5,7 @@ import { AuthContext } from '../../context/AuthContext';
 export default function Bandeja(){
     const { user } = useContext(AuthContext);
     const { messages: msgs } = user;
+
     return (
         <div>
             <ul>
