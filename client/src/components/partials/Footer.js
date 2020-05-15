@@ -20,14 +20,15 @@ export default function Footer() {
                     </span>
                     <p styleName="footer-text">
                         &copy; All rights reserved ({new Date().getFullYear()})
-                        <span className="red-text">
+                        {/* <span className="red-text">
                             <span id="date-n-time"></span>
-                        </span> {/*debug*/}
+                        </span> {/*debug}
                         <span className="blue-text">
                             Connections: 
                             <span id="active-connections">
                             </span>
-                        </span> {/*debug*/}
+                        </span> debug */
+                        }
                     </p>
                     </div>
                 </div>

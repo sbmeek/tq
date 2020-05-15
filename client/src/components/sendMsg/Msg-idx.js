@@ -1,23 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Error404 from '../error/404';
+import { SocketContext } from '../../context/SocketContext';
 
 export default function ({ match: { params }, ...rest }) {
   params.username = params.username.toLowerCase();
-  const [socket, setSocket] = useState(null);
+  const { socket } = useContext(SocketContext);
   const [userExists, setUserExists] = useState(true);
 
   useEffect(() => {
-    (async () => {
-      await setSocket(rest.socket);
-      if (socket !== null) {
-        socket.emit('tq:exists', { username: params.username });
-        socket.on('tq:exists', (data) => {
-          if (data === null) {
-            setUserExists(false);
-          }
-        });
+    socket.emit('tq:exists', { username: params.username });
+    socket.on('tq:exists', (data) => {
+      if (data === null) {
+        setUserExists(false);
       }
-    })();
+      if(null !== data && data.expired){
+        setUserExists(false);
+      }
+    });
   }, [socket, rest.socket, params.username]);
 
   return (
@@ -36,11 +35,15 @@ export default function ({ match: { params }, ...rest }) {
 
 function Success({ username, socket }) {
   const [msg, setMsg] = useState('');
+  const [sent, setSent] = useState(false);
 
   useEffect(() => {
     if(socket !== null){
       socket.on('msg:send', data => {
-        console.log(data);
+        if(data.sent){
+          setSent(true);
+          setMsg('');
+        }
       });
     }
   }, [socket]);
@@ -67,12 +70,15 @@ function Success({ username, socket }) {
             className="col s12 offset-s3"
             style={{width: '50%', background: 'white'}}
           >
+            {
+              sent ? 'Mensaje env\xEDado' : ''
+            }
             <input 
               type="text" 
               name="msg" 
               value={msg}
               id="msg"
-              placeholder="msg"
+              placeholder="DIGITA TU MENSAJE"
               onChange={handleInputChange}
             />
           </div>

@@ -6,7 +6,7 @@ export const AuthContext = createContext();
 export default ({ children }) => {
     const [user, setUser] = useState(null);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
-    // const [isLoaded, setIsLoaded] = useState(false);
+    const [isLoaded, setIsLoaded] = useState(false);
     const [isStatus500, setIsStatus500] = useState(false);
 
     useEffect(() => {
@@ -16,13 +16,16 @@ export default ({ children }) => {
                 setIsAuthenticated(res.authenticated);
                 setUser(res.user);
                 setIsStatus500(res.isStatus500);
-                // setIsLoaded(true);
+                setIsLoaded(true);
             }
         }
         setStuff();
     }, [isAuthenticated, isStatus500]);
 
     return (
+        !isLoaded ?
+            <div><h1 style={{fontSize: '150px'}}>Mini Cargando...</h1></div>
+        :
         <AuthContext.Provider
             value={{
                 user, 

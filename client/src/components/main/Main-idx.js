@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef, useContext } from 'react'
 import axios from 'axios';
 import Alert from '../partials/Alert';
-import { AuthContext } from '../../context/AuthContext';
 import logo from '../../img/ltqrNEW.png';
 import '../../styles/Main-idx.css';
+import {SocketContext} from '../../context/SocketContext';
+import { AuthContext } from '../../context/AuthContext';
 
 const A = new Alert();
 
@@ -20,9 +21,10 @@ function resizeMainElements({current: input}, {current: btn}){
     }
 }
 
-export default function Main({ socket }) {
+export default function Main() {
     const [fields, setFields] = useState({});
     const { setIsAuthenticated, setUser } = useContext(AuthContext); 
+    const { socket } = useContext(SocketContext);
     const inputNomTQ = useRef(null);
     const btnTQ = useRef(null);
     const form = useRef(null);
@@ -80,10 +82,8 @@ export default function Main({ socket }) {
                 const resp = await axios.post(`/user/auth?tquser=${userVal}&tqpwd=${inputKey.value}`, settings);
                 const data = await resp.data;
                 if (data.authenticated){
-                    // window.location.replace(`${window.origin}/auth/${userVal}`)
                     setIsAuthenticated(data.authenticated);
                     setUser(data.enteredname);
-                    console.log('authenticated');
                 }
                 else {
                     A.trigger('Este usuario no está disponible.', {

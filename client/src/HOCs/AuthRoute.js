@@ -4,6 +4,7 @@ import { AuthContext } from '../context/AuthContext';
 
 export default function({component: Component, ...rest }) {
     const { isAuthenticated } = useContext(AuthContext);
+    
     return (
         <Route 
             {...rest}

@@ -8,7 +8,8 @@ const msgSchema = new Schema(
     {
         sentAt: { type: Date, default: new Date() },
         content: { type: String, required: true },
-        readed: { type: Boolean, default: false }
+        readed: { type: Boolean, default: false },
+        answer: { type: String, required: false }
     }
 );
 
