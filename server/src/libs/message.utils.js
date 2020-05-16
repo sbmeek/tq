@@ -1,6 +1,6 @@
 const User = require('../models/User');
 
-const sendMessage = async ({ username, msg }, socket) => {
+module.exports.sendMessage = async ({ username, msg }, socket) => {
     try {
         await User.findOneAndUpdate({username}, { 
             $push: {
@@ -19,7 +19,7 @@ const sendMessage = async ({ username, msg }, socket) => {
     }
 }
 
-const answerMessage = async ({ answer, msgId }, socket) => {
+module.exports.answerMessage = async ({ answer, msgId }, socket) => {
     try {
         await User.findOneAndUpdate({"messages._id": msgId}, {
             $set: {"messages.$.answer": answer}
@@ -38,6 +38,3 @@ const answerMessage = async ({ answer, msgId }, socket) => {
         });
     }
 }
-
-module.exports.answerMessage = answerMessage;
-module.exports.sendMessage = sendMessage;

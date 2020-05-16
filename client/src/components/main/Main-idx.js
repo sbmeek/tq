@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useContext } from 'react'
+import React, { useState, useEffect, useRef, useContext, Suspense } from 'react'
 import axios from 'axios';
 import Alert from '../partials/Alert';
 import logo from '../../assets/images/ltqrNEW.png';
@@ -163,6 +163,7 @@ export default function Main() {
                                 draggable="false"
                                 alt='tq logo'
                             />
+                            <Suspense fallback={<div>Cargando...</div>}>
                             <div style={{ width: '100%' }}>
                                 <div 
                                     styleName="div-field-tq"
@@ -190,6 +191,7 @@ export default function Main() {
                                     <i className="material-icons">chevron_right</i>
                                 </button>
                             </div>
+                            </Suspense>
                         </form>
                         <div 
                             styleName="div-tq-secondary"

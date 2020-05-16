@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './assets/styles/App.css';
 
@@ -15,14 +15,59 @@ import Msg from './components/sendMsg/Msg-idx';
 
 // Context
 import {AuthContext} from './context/AuthContext';
+import { useRef } from 'react';
 //
 
 function App() {
-  const { isStatus500 } = useContext(AuthContext);
+  const { isStatus500, isRendered, setIsRendered } = useContext(AuthContext);
+  const wait = useRef(null);
+  useEffect(() => {
+    setTimeout(() => {
+        setIsRendered(true);
+    }, 500);
+  }, [setIsRendered])
+
+  const dots = () => {
+    window.setInterval(function() {
+        if(wait.current !== null){
+            let {current} = wait;
+            if (current.innerHTML.length >= 3) 
+                current.innerHTML = "";
+            else 
+                current.innerHTML += ".";
+        }
+    }, 100);
+  }
+
+  useEffect(() => {
+    dots()
+  }, [wait]);
 
   if(!isStatus500){
-    return (
+      return (
       <Router>
+        {
+          !isRendered && <div 
+          style={{
+              fontSize: '150px',
+              opacity: '1',
+              position: 'fixed',
+              backgroundColor: '#FFF',
+              zIndex: "24",
+              width: '100%',
+              minWidth: '110vh',
+              minHeight: '110vh'
+          }}
+          className="valign-wrapper"
+          >
+              <div 
+                  className="center-align"
+                  style={{width: '100%'}}
+              >
+                  <h1 style={{color: '#000'}}>Cargando<span ref={wait}>...</span></h1>
+              </div>
+          </div>
+      }
         <Switch>
           <UnauthRoute exact path="/" component={Main} redirectTo="/link"/>
           <AuthRoute path="/messages" component={Bandeja} redirectTo="/"/>

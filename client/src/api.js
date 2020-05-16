@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export default async function authService () {
+export const auth = async () => {
     try {
         const res = await axios.get('/user/authenticated');
         const data = await res.data;

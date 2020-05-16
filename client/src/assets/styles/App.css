@@ -1,0 +1,66 @@
+*,
+*::before,
+*::after {
+    -webkit-appearance: none;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+input[type=text],
+input[type=email],
+input[type=tel],
+input[type=url],
+input[type=search] {
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+body {
+    background-image: url(../images/fon-b.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.page-footer{
+    display: flex;
+    max-height: 63px;
+    min-height: 63px;
+    overflow: hidden;
+    font-family:'Nunito', sans-serif;
+    font-size:20px;
+    color:#ccc !important; 
+    background-color: #1b1b1b !important;
+    padding-top:0!important; 
+}
+
+.footer-sbm{
+    display: inline-block;
+    color:#ccc !important;
+    font-size:20px !important;
+    margin-top: 10px;
+}
+
+.footer-text{
+    color:#ccc !important;
+    font-size:16px !important;
+    margin:0;
+}
+
+:global .d-scroll {
+    height: 100vh;
+    overflow: hidden;
+}
+
+.d-text-select{
+    -webkit-user-select: none;     
+    -moz-user-select: none; 
+    -ms-user-select: none;
+    user-select: none;
+}
