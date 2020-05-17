@@ -16,15 +16,20 @@ import Msg from './components/sendMsg/Msg-idx';
 import Loader from './components/partial/Loader';
 
 // Context
-import { InitContext } from './global/context/InitContext';
+import { InitContext, SET_IS_RENDERED } from './global/context/InitContext';
 
 function App() {
   const { auth: { isStatus500, isLoaded } } = useSelector(store => store);
-  const { isRendered, setIsRendered } = useContext(InitContext);
+  const { state, dispatch } = useContext(InitContext);
 
   useEffect(() => {
-    setIsRendered(routeNeedsTime(window.location));
-  }, [setIsRendered]);
+    dispatch({
+      type: SET_IS_RENDERED,
+      payload: {
+        isRendered: routeNeedsTime(window.location)
+      }
+    });
+  }, [dispatch]);
 
   if(!isStatus500){
     if(!isLoaded){
@@ -33,7 +38,7 @@ function App() {
     else {
       return (
         <>
-        { !isRendered && <Loader /> }
+        { !state.isRendered && <Loader /> }
           <Router>
             <Switch>
               <UnauthRoute exact path="/" component={Main} redirectTo="/link"/>

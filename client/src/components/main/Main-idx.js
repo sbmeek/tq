@@ -6,7 +6,7 @@ import logo from '../../assets/images/ltqrNEW.png';
 import '../../assets/styles/Main-idx.css';
 
 import { getAuthInfoAction } from '../../global/ducks/authDucks';
-import { InitContext } from '../../global/context/InitContext';
+import { InitContext, SET_IS_RENDERED } from '../../global/context/InitContext';
 
 const A = new Alert();
 
@@ -15,8 +15,9 @@ function Main() {
     const inputNomTQ = useRef(null);
     const btnTQ = useRef(null);
     const form = useRef(null);
-    const dispatch = useDispatch();
-    const { socket, setIsRendered } = useContext(InitContext);
+    const dispatchAuth = useDispatch();
+    const { state: { socket }, dispatch: dispatchInit } = useContext(InitContext);
+    // const [FontsLoading, setFontsLoading] = useState(true);
     const inputKey = document.createElement('input'); inputKey.name = 'tqpwd';
 
     useEffect(() => {
@@ -28,12 +29,15 @@ function Main() {
         let font = `1rem 'Material Icons'`;
         document.fonts.ready.then(function() {
             if(document.fonts.check(font)) {
-                setIsRendered(true);
+                inputNomTQ.current.style.fontFamily = `'Nunito', sans-serif`;
+                dispatchInit({
+                    type: SET_IS_RENDERED,
+                    payload: { isRendered: true }
+                });
                 resizeMainElements(inputNomTQ, btnTQ)
-                inputNomTQ.current.style.fontFamily = `Nunito, sans-serif`;
             }
         });
-    })
+    }, [dispatchInit])
 
     const setElementsRed = () => {
         let somethingsWrongColor = 'border-color:#d93025!important;box-shadow: -0.2rem 0.2rem 0.2rem 0rem rgba(249, 0, 0, 0.25) !important;'
@@ -78,7 +82,7 @@ function Main() {
                     // setUser, 
                     // setIsAuthenticated(data.authenticated);
                     // setUser(data.enteredname);
-                    dispatch(getAuthInfoAction());
+                    dispatchAuth(getAuthInfoAction());
                 }
                 else {
                     A.trigger('Este usuario no está disponible.', {

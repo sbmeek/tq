@@ -1,29 +1,55 @@
-import React, { createContext, useState, useEffect } from 'react'
+import React, { createContext, useReducer, useEffect } from 'react'
 import io from 'socket.io-client';
 
 export const InitContext = createContext();
 
+const initialState = { 
+    socket: null, 
+    isRendered: false 
+}
+
+export const SET_SOCKET = 'SET_SOCKET';
+export const SET_IS_RENDERED = 'SET_IS_RENDERED';
+
+function reducer(state, action){
+    switch(action.type){
+        case SET_SOCKET:
+            return {
+                ...state,
+                socket: action.payload.socket
+            };
+        case SET_IS_RENDERED:
+            return {
+                ...state,
+                isRendered: action.payload.isRendered
+            };
+        default:
+            return state;
+    }
+}
+
 export default ({ children }) => {
-    const [isRendered, setIsRendered] = useState(false);
-    const [socket, setSocket] = useState(null);
+    const [state, dispatch] = useReducer(reducer, initialState);
     const endpoint = `http://localhost:4000`;
     
     useEffect(() => {
         try {
-          setSocket(io(endpoint));
+          dispatch({
+            type: SET_SOCKET,
+            payload: { socket: io(endpoint) }
+          });
         } catch (error) {
           console.error(error);
         }
     }, [endpoint]);
 
     return (
-        socket !== null
+        state.socket !== null
         &&
         <InitContext.Provider
             value={{
-                socket,
-                isRendered,
-                setIsRendered
+                state,
+                dispatch
             }}
         >
             { children }
