@@ -1,7 +1,7 @@
-import React, { useRef, useEffect, useContext, useState } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { AuthContext } from '../../context/AuthContext'
-import Alert from '../partials/Alert';
+import { useSelector } from 'react-redux'
+import Alert from '../partial/Alert';
 import '../../assets/styles/Link.css';
 import ft1 from '../../assets/images/link/ft1.png';
 import ft2 from '../../assets/images/link/ft2.png';
@@ -14,7 +14,7 @@ const M = window.M; // Materialize
 
 export default function LinkIdx() {
     const inputLink = useRef(null);
-    const { user } = useContext(AuthContext);
+    const { user } = useSelector(store => store.auth);
     const [name, setName] = useState('');
     const [link, setLink] = useState('');
     const [sldIntervalID, setSldIntervalID] = useState(null);

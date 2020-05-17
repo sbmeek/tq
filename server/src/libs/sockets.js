@@ -34,7 +34,7 @@ io.on('connection', async (socket) => {
     // Send msg
     socket.on('msg:send', data => sendMessage(data, socket));
     
-    // Answer message
+    // Answer msg
     socket.on('msg:ans', data => answerMessage(data, socket));
 
     socket.on('disconnect', () => {

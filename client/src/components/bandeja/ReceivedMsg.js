@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { SocketContext } from '../../context/SocketContext';
+import { InitContext } from '../../global/context/InitContext';
 
 export const Msg = ({ msg, ans }) => {
     const [answer, setAnswer] = useState('');
     const [answeredWSuccess, setAnsweredWSuccess] = useState(false);
     const [msgId, setMsgId] = useState(0);
-    const { socket } = useContext(SocketContext);
+    const { socket } = useContext(InitContext);
 
     useEffect(() =>{
         setMsgId(msg._id);

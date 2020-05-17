@@ -74,14 +74,20 @@ router.get('/authenticated', (req, res, next) => {
             res.json({authenticated: false, user: null});
         else{
             await setExpirationDate(user._id);
-            res.json({ authenticated: true, user });
+            const { username, enteredname, messages } = user
+            res.json({ 
+                authenticated: true,
+                username,
+                enteredname,
+                messages
+            });
         }
     })(req, res, next);
 });
 
 router.use((req, res) => {
     res.status(404).json({
-        error: true,
+        error: 8,
         code: '0- No c q pasó -x24',
         msg: "De segurito un 400 y algo...",
         info: 'Este mensaje contiene información ULTRA SECRETA',

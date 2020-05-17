@@ -1,17 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 import App from './App';
-import AuthProvider from './context/AuthContext';
-import SocketProvider from "./context/SocketContext";
+import generateStore from './global/store';
+import InitProvider from './global/context/InitContext';
 import * as serviceWorker from './serviceWorker';
+
+const store = generateStore();
 
 ReactDOM.render(
   <React.StrictMode>
-    <AuthProvider>
-      <SocketProvider>
+    <Provider store={store}>
+      <InitProvider>
         <App />
-      </SocketProvider>
-    </AuthProvider>
+      </InitProvider>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('react-root')
 );
