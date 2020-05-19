@@ -1,6 +1,9 @@
 import React, { useEffect, useState, useContext } from "react";
 import Error404 from '../error/404';
 import { SocketContext } from '../../context/SocketContext';
+import styles from '../../assets/styles/Msg.css';
+import logo from '../../assets/images/logo.tq.png';
+import materialize from  '../../assets/styles/materialize.min.css'
 
 export default function ({ match: { params }, ...rest }) {
   params.username = params.username.toLowerCase();
@@ -63,27 +66,63 @@ function Success({ username, socket }) {
   }
 
   return (
+    
+    
+ 
     <div className="valign-wrapper" style={{ minHeight: '90vh' }}>
-      <div className="row" style={{ width: '100%' }}>
+      
+      
         <form onSubmit={handleFormSubmit}>
-          <div 
-            className="col s12 offset-s3"
-            style={{width: '50%', background: 'white'}}
-          >
+          
+        <div styleName="contenedor">
+        <div className="center" >
+          <img
+                                 
+                        className="responsive-image"
+                        styleName="logoCloud"
+                        src={logo}
+                        alt="logo"
+                        draggable="false"
+                    /></div>
+             <div className="center" >
+              <h3 className="center" styleName="user">{username}</h3>
+              <h5 className="center" styleName="firstRowText" >te invitó a que le dejes un</h5>
+                       <h5 className="center" styleName="secondRowText">Mensaje anonimo</h5>
+           
+          
+            
+          
             {
               sent ? 'Mensaje env\xEDado' : ''
             }
-            <input 
+            <div  styleName="Desing" >
+            <textarea 
+            
+            styleName="Input-msg"
               type="text" 
               name="msg" 
               value={msg}
               id="msg"
               placeholder="DIGITA TU MENSAJE"
               onChange={handleInputChange}
+              autoComplete= "off"
             />
+            </div>
+          <button 
+         type="button" 
+         className="btn waves-effect waves-light"
+         styleName="_btn-tq"
+                        
+          >
+          Enviar;
+          <i className="material-icons right">
+                            
+            </i>
+          </button>
           </div>
+         </div>
+         
         </form>
-      </div>
     </div>
   )
 }
