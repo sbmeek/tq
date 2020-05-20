@@ -1,25 +1,26 @@
 import React, { useEffect, useState, useContext } from "react";
 import Error404 from '../error/404';
-import styles from '../../assets/styles/Msg.css';
+import '../../assets/styles/Msg.css';
 import logo from '../../assets/images/logo.tq.png';
-import materialize from  '../../assets/styles/materialize.min.css'
 import { InitContext } from '../../global/context/InitContext';
 
 export default function ({ match: { params }, ...rest }) {
-  params.username = params.username.toLowerCase();
   const { socket } = useContext(InitContext);
+  params.username = params.username.toLowerCase();
   const [userExists, setUserExists] = useState(true);
 
   useEffect(() => {
-    socket.emit('tq:exists', { username: params.username });
-    socket.on('tq:exists', (data) => {
-      if (data === null) {
-        setUserExists(false);
-      }
-      if(null !== data && data.expired){
-        setUserExists(false);
-      }
-    });
+    if(socket !== undefined){
+      socket.emit('tq:exists', { username: params.username });
+      socket.on('tq:exists', (data) => {
+        if (data === null) {
+          setUserExists(false);
+        }
+        if(null !== data && data.expired){
+          setUserExists(false);
+        }
+      });
+    }
   }, [socket, rest.socket, params.username]);
 
   return (
@@ -41,7 +42,7 @@ function Success({ username, socket }) {
   const [sent, setSent] = useState(false);
 
   useEffect(() => {
-    if(socket !== null){
+    if(socket !== undefined){
       socket.on('msg:send', data => {
         if(data.sent){
           setSent(true);
