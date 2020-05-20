@@ -103,12 +103,9 @@ function Success({ username, socket }) {
               name="msg" 
               value={msg}
               id="msg"
-              placeholder="Escribe tu mensaje..."
+              placeholder="DIGITA TU MENSAJE"
               onChange={handleInputChange}
               autoComplete= "off"
-              cols="22"
-              autoCorrect= "off"
-              autoFocus= "on"
             />
             </div>
           <button 
