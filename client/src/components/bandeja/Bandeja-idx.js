@@ -1,16 +1,15 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import Msg from './ReceivedMsg';
-import { AuthContext } from '../../context/AuthContext';
+import { useSelector } from 'react-redux';
 
 export default function Bandeja(){
-    const { user } = useContext(AuthContext);
-    const { messages: msgs } = user;
+    const { user: { messages } } = useSelector(store => store.auth);
 
     return (
         <div>
             <ul>
             {
-                msgs.map(msg => 
+                messages.map(msg => 
                     <Msg msg={msg} ans={msg.answer} key={msg._id} />
                 )
             }
