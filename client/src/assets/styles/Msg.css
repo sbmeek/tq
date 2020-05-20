@@ -1,0 +1,67 @@
+
+
+.contenedor {
+background:#000000a8;
+max-width: 50%; 
+height: 27rem;
+margin-left: 25%;
+margin-top: 8%;
+border-radius: 64px 64px 64px 64px;
+-moz-border-radius: 64px 64px 64px 64px;
+-webkit-border-radius: 64px 64px 64px 64px;
+border: 0px solid #000000;
+font-family: 'Nunito', sans-serif;
+
+}
+.user{
+    color: #5BF0FF;
+    font-size: 264%;
+    margin-top: 0%
+}
+._btn-tq{
+    margin-top: 19px;
+    font-family: 'Nunito', sans-serif;
+    text-transform: none;
+    box-shadow: 0px 4.5px rgb(0, 108, 119);
+    border-radius: 1000px;
+    background-color: 00909E ; 
+    color:#fff;
+    min-width: 75px;
+    min-height: 35px;
+    border: 0;
+    font-size: 12.5px;
+    transition: ease-in-out .22s;
+    padding: -13px 15px;
+    
+}
+.Desing{
+ background: white;
+    width: 57%;
+    height: 9rem;
+    border-radius: 1000px;
+-moz-border-radius: 132px 132px 132px 132px;
+-webkit-border-radius: 132px 132px 132px 132px;
+border: 0px solid;
+    margin-left: 21%;
+}
+.Input-msg{
+    max-width: 70%;
+    height: 110px;
+    resize: none;
+    margin-top: 4%;
+    border-color: #969696 !important;
+    
+    
+}
+.firstRowText{
+    color: white;
+    font-size: 106%;
+}
+.secondRowText{
+   color: white;
+   font-size: 106%;
+}
+.logoCloud{
+    margin-top: -18%;
+    width: 28%;
+}
