@@ -1,41 +1,43 @@
-import React, { useState, useEffect, useRef, useContext, Suspense } from 'react'
+import React, { useState, useEffect, useRef, useContext } from 'react'
+import { useDispatch } from 'react-redux';
 import axios from 'axios';
-import Alert from '../partials/Alert';
+import Alert from '../partial/Alert';
 import logo from '../../assets/images/ltqrNEW.png';
 import '../../assets/styles/Main-idx.css';
-import {SocketContext} from '../../context/SocketContext';
-import { AuthContext } from '../../context/AuthContext';
+
+import { getAuthInfoAction } from '../../global/ducks/authDucks';
+import { InitContext, SET_IS_RENDERED } from '../../global/context/InitContext';
 
 const A = new Alert();
 
-function resizeMainElements({current: input}, {current: btn}){
-    if(null != input && null != btn){
-        btn.style.height = input.getBoundingClientRect().height+'px';
-        let bodyHeight = document.body.getBoundingClientRect().height;
-        let bodyWidth = document.body.getBoundingClientRect().width;
-        if(bodyHeight < 627 || bodyWidth < 690){
-            document.body.classList.remove('d-scroll');
-        }else{
-            document.body.classList.add('d-scroll');
-        }
-    }
-}
-
-export default function Main() {
+function Main() {
     const [fields, setFields] = useState({});
-    const { setIsAuthenticated, setUser } = useContext(AuthContext); 
-    const { socket } = useContext(SocketContext);
     const inputNomTQ = useRef(null);
     const btnTQ = useRef(null);
     const form = useRef(null);
-    
+    const dispatchAuth = useDispatch();
+    const { state: { socket }, dispatch: dispatchInit } = useContext(InitContext);
+    // const [FontsLoading, setFontsLoading] = useState(true);
     const inputKey = document.createElement('input'); inputKey.name = 'tqpwd';
 
     useEffect(() => {
         window.addEventListener("load", () => resizeMainElements(inputNomTQ, btnTQ))
         window.addEventListener("resize", () => resizeMainElements(inputNomTQ, btnTQ));
-        inputNomTQ.current.style.fontFamily = `Nunito, sans-serif`;
-    });
+    }, []);
+
+    useEffect(() => {
+        let font = `1rem 'Material Icons'`;
+        document.fonts.ready.then(function() {
+            if(document.fonts.check(font)) {
+                inputNomTQ.current.style.fontFamily = `'Nunito', sans-serif`;
+                dispatchInit({
+                    type: SET_IS_RENDERED,
+                    payload: { isRendered: true }
+                });
+                resizeMainElements(inputNomTQ, btnTQ)
+            }
+        });
+    }, [dispatchInit])
 
     const setElementsRed = () => {
         let somethingsWrongColor = 'border-color:#d93025!important;box-shadow: -0.2rem 0.2rem 0.2rem 0rem rgba(249, 0, 0, 0.25) !important;'
@@ -76,8 +78,11 @@ export default function Main() {
                 const resp = await axios.post(`/user/auth?tquser=${userVal}&tqpwd=${inputKey.value}`, settings);
                 const data = await resp.data;
                 if (data.authenticated){
-                    setIsAuthenticated(data.authenticated);
-                    setUser(data.enteredname);
+                    // setIsAuthenticated, 
+                    // setUser, 
+                    // setIsAuthenticated(data.authenticated);
+                    // setUser(data.enteredname);
+                    dispatchAuth(getAuthInfoAction());
                 }
                 else {
                     A.trigger('Este usuario no está disponible.', {
@@ -163,7 +168,6 @@ export default function Main() {
                                 draggable="false"
                                 alt='tq logo'
                             />
-                            <Suspense fallback={<div>Cargando...</div>}>
                             <div style={{ width: '100%' }}>
                                 <div 
                                     styleName="div-field-tq"
@@ -191,7 +195,6 @@ export default function Main() {
                                     <i className="material-icons">chevron_right</i>
                                 </button>
                             </div>
-                            </Suspense>
                         </form>
                         <div 
                             styleName="div-tq-secondary"
@@ -231,3 +234,18 @@ export default function Main() {
         </div>
     )
 }
+
+function resizeMainElements({current: input}, {current: btn}){
+    if(null != input && null != btn){
+        btn.style.height = input.getBoundingClientRect().height+'px';
+        let bodyHeight = document.body.getBoundingClientRect().height;
+        let bodyWidth = document.body.getBoundingClientRect().width;
+        if(bodyHeight < 627 || bodyWidth < 690){
+            document.body.classList.remove('d-scroll');
+        }else{
+            document.body.classList.add('d-scroll');
+        }
+    }
+}
+
+export default Main;

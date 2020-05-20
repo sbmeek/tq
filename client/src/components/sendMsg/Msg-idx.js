@@ -1,13 +1,13 @@
 import React, { useEffect, useState, useContext } from "react";
 import Error404 from '../error/404';
-import { SocketContext } from '../../context/SocketContext';
 import styles from '../../assets/styles/Msg.css';
 import logo from '../../assets/images/logo.tq.png';
 import materialize from  '../../assets/styles/materialize.min.css'
+import { InitContext } from '../../global/context/InitContext';
 
 export default function ({ match: { params }, ...rest }) {
   params.username = params.username.toLowerCase();
-  const { socket } = useContext(SocketContext);
+  const { socket } = useContext(InitContext);
   const [userExists, setUserExists] = useState(true);
 
   useEffect(() => {

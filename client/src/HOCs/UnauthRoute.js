@@ -1,10 +1,16 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { Route, Redirect } from "react-router-dom";
-import { AuthContext } from '../context/AuthContext';
+import { useSelector } from 'react-redux';
+import Loader from '../components/partial/Loader';
 
 export default function({component: Component, ...rest }) {
-    const { isAuthenticated } = useContext(AuthContext);
+    const { auth: { isAuthenticated, isLoaded } } = useSelector(store => store);
+
     return (
+        !isLoaded
+        ?
+        <Loader />
+        :
         <Route 
             {...rest} 
             render={(props) => 
