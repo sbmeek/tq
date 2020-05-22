@@ -63,7 +63,7 @@ function Success({ username, socket }) {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     const data = { username, msg }
-    socket.emit('msg:send', data);
+   
   }
 
   return (
@@ -90,7 +90,7 @@ function Success({ username, socket }) {
                 name="msg"
                 value={msg}
                 id="msg"
-                placeholder="DIGITA TU MENSAJE"
+                placeholder="ESCRIBE TU MENSAJE"
                 onChange={handleInputChange}
                 autoComplete="off"
               />
