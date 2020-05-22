@@ -1,0 +1,23 @@
+{
+  "name": "tq",
+  "version": "1.0.0",
+  "description": "<p align=\"center\">\r   <img src=\"https://avatars0.githubusercontent.com/t/3800248?s=280&v=4\" title=\"TQ\"/>\r </p>\r </br>",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently -n \"server,client\" -c 'red,blue' \"cd server && npm run server\" \"cd client && npm start\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SBMeek/tq.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SBMeek/tq/issues"
+  },
+  "homepage": "https://github.com/SBMeek/tq#readme",
+  "devDependencies": {
+    "concurrently": "^5.2.0"
+  }
+}
