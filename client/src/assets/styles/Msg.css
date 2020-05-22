@@ -1,15 +1,14 @@
 .contenedor {
-    background:#000000a8;
-    max-width: 50%; 
+    background:rgba(26, 26, 26, 0.75);
+    max-width: 47%; 
     height: 28rem;
-    height: 27rem;
     margin-left: 25%;
     margin-top: 3.5%;
-    margin-top: 8%;
-    border-radius: 64px 64px 64px 64px;
-    -moz-border-radius: 64px 64px 64px 64px;
-    -webkit-border-radius: 64px 64px 64px 64px;
-    font-family: 'Nunito', sans-serif;
+    margin-top: 5%;
+    border-radius: 72px 72px 72px 72px;
+    -moz-border-radius: 72px 72px 72px 72px;
+    -webkit-border-radius: 72px 72px 72px 72px;
+
     
     }
     .user{
@@ -18,35 +17,33 @@
         font-size: 264%;
         margin-top: 0%;
         position: flex;
+        font-family: 'Nunito', sans-serif;
+        margin-top: -19px;
         
-        margin-top: 0%
     }
     ._btn-tq{
         margin-top: 19px;
         font-family: 'Nunito', sans-serif;
         text-transform: none;
-        box-shadow: 0px 4.5px rgb(13, 85, 94);
-        box-shadow: 0px 4.5px rgb(0, 108, 119);
+        box-shadow: rgb(0, 108, 119);
         border-radius: 1000px;
-        background-color: rgb(4, 134, 148) ; 
-        background-color: 00909E ; 
+        background-color: #00909E ; 
         color:#fff;
-        min-width: 75px;
-        min-height: 35px;
+        width: 80px;
+        height: 35px;
     font-family: 'Nunito', sans-serif;
+     box-shadow: 0.2px 4px 0px 0px rgba(0,108,119,1);
     }
     .Desing{
      background: white;
-        width: 66%;
-        height: 10rem;
-        width: 57%;
-        height: 9rem;
+        width: 78%;
+        height: 12.5rem;
         border-radius: 1000px;
     -moz-border-radius: 132px 132px 132px 132px;
     -webkit-border-radius: 132px 132px 132px 132px;
     border: 0px solid;
-        margin-left: 17%;
-        margin-left: 21%;
+        margin-left: 10%;
+        
     }
     .Input-msg{
         max-width: 70%;
@@ -66,17 +63,23 @@
          border-radius: 12px 12px 12px 12px;
          -moz-border-radius: 22px 22px 22px 22px;
           height: 8rem;
-          font-family: 'Balsamiq Sans', cursive;
+          font-family: 'Dubai Light';;
           font-size: 120%;
          padding-right: 1.5rem;
           padding-left: 1.5rem;
     
+    }
+    .Input-msg::placeholder {
+        color: rgb(168, 164, 164);
+        font-family: 'Dubai regular';
+        padding-top: 12.5px;
     }
     
     .firstRowText{
         color: #efebeb;
         color: white;
         font-size: 106%;
+        margin-top: -19px;
     }
     .secondRowText{
        color: #efebeb;
@@ -85,8 +88,8 @@
        margin-top: -3px;
     }
     .logoCloud{
-        margin-top: -18%;
-        width: 28%;
+        margin-top: -18.5%;
+        width: 30%;
     }
     @media only screen and (max-width: 920px){
         .Desing{

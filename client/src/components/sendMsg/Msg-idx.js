@@ -63,7 +63,7 @@ function Success({ username, socket }) {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     const data = { username, msg }
-    socket.emit('msg:send', data);
+   
   }
 
   return (
@@ -104,15 +104,16 @@ function Success({ username, socket }) {
               name="msg" 
               value={msg}
               id="msg"
-              placeholder="DIGITA TU MENSAJE"
+              placeholder="Escribe tu mensaje..."
               onChange={handleInputChange}
               autoComplete= "off"
             />
             </div>
           <button 
-         type="button" 
+         type="submit" 
          className="btn waves-effect waves-light"
          styleName="_btn-tq"
+         formAction={handleFormSubmit}
                         
           >
           Enviar;
