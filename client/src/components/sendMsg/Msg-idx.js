@@ -69,7 +69,7 @@ function Success({ username, socket }) {
   return (
     <div className="valign-wrapper" style={{ minHeight: '90vh' }}>
       <form onSubmit={handleFormSubmit}>
-        <div styleName="contenedor">
+        <div   styleName="contenedor">
           <div className="center" >
             <img
               className="responsive-image"
