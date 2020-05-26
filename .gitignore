@@ -1,5 +1,6 @@
 .env
 node_modules
+~
 Backups
 blob_storage
 Cache

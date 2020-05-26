@@ -12,7 +12,7 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <InitProvider>
-        <App />
+        <App/>
       </InitProvider>
     </Provider>
   </React.StrictMode>,

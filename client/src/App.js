@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import './assets/styles/App.css';
@@ -15,21 +15,8 @@ import UserLink from './components/link/Link-idx';
 import Msg from './components/sendMsg/Msg-idx';
 import Loader from './components/partial/Loader';
 
-// Context
-import { InitContext, SET_IS_RENDERED } from './global/context/InitContext';
-
 function App() {
   const { auth: { isStatus500, isLoaded } } = useSelector(store => store);
-  const { state, dispatch } = useContext(InitContext);
-
-  useEffect(() => {
-    dispatch({
-      type: SET_IS_RENDERED,
-      payload: {
-        isRendered: routeNeedsTime(window.location)
-      }
-    });
-  }, [dispatch]);
 
   if(!isStatus500){
     if(!isLoaded){
@@ -38,18 +25,31 @@ function App() {
     else {
       return (
         <>
-        { !state.isRendered && <Loader /> }
           <Router>
-            <Switch>
-              <UnauthRoute exact path="/" component={Main} redirectTo="/link"/>
-              <AuthRoute path="/messages" component={Bandeja} redirectTo="/"/>
-              <AuthRoute path="/link" component={UserLink} redirectTo="/"/>
-              <Route exact path="/:username" component={Msg} />
-              <Route path="*">
-                <Error404/>
-              </Route>
-            </Switch>
-            <Route path="/" component={Footer}/>
+              <Switch>
+                <UnauthRoute
+                  needsRenderTime={true}
+                  exact path="/" 
+                  component={Main} 
+                  redirectTo="/link"
+                />
+                <AuthRoute 
+                  path="/messages" 
+                  component={Bandeja} 
+                  redirectTo="/"
+                />
+                <AuthRoute 
+                  needsRenderTime={false} 
+                  path="/link" 
+                  component={UserLink} 
+                  redirectTo="/"
+                />
+                <Route exact path="/:username" component={Msg} />
+                <Route path="*">
+                  <Error404/>
+                </Route>
+              </Switch>
+              <Route path="/" component={Footer}/>
           </Router>
         </>
       );
@@ -57,15 +57,6 @@ function App() {
   }
   else
     return <Error500/>
-}
-
-function routeNeedsTime({ pathname }){
-  switch(pathname){
-    case '/':
-      return false;
-    default:
-      return true;
-  }
 }
 
 export default App;
