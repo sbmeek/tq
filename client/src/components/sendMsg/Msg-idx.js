@@ -97,7 +97,7 @@ function Success({ username, socket }) {
             </div>
             <button
               type="submit"
-              className="btn waves-effect waves-light"
+              className=" "
               styleName="_btn-tq"
             >
               Enviar;
