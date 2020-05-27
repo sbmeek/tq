@@ -78,10 +78,6 @@ function Main() {
                 const resp = await axios.post(`/user/auth?tquser=${userVal}&tqpwd=${inputKey.value}`, settings);
                 const data = await resp.data;
                 if (data.authenticated){
-                    // setIsAuthenticated, 
-                    // setUser, 
-                    // setIsAuthenticated(data.authenticated);
-                    // setUser(data.enteredname);
                     dispatchAuth(getAuthInfoAction());
                 }
                 else {

@@ -30,13 +30,13 @@ function reducer(state, action){
 
 export default ({ children }) => {
     const [state, dispatch] = useReducer(reducer, initialState);
-    const endpoint = `http://localhost:4000`;
+    const endpoint = `http://localhost:3000`; //useless nowadays
     
     useEffect(() => {
         try {
           dispatch({
             type: SET_SOCKET,
-            payload: { socket: io(endpoint) }
+            payload: { socket: io() }
           });
         } catch (error) {
           console.error(error);
