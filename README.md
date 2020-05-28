@@ -8,27 +8,27 @@
 # TQ (Idea ¿Versión beta?)
 Aquí estaremos desglosando cada funcionalidad de la aplicación, para mayor entendimiento y uso de la misma, las definiciones estarán por orden de página:
 
-## PÁGINA PRINCIPAL
+### Página Principal
 Esta cuenta con la opción de registro o inicio de sesión, por lo tanto, se encuentra un input en el cual se validará la información de registro o inicio, también cuenta con 3 botones cuya función es dirigir a la página que se le haya asignado, una vez el usuario sea creado con él usuario se crearan tres páginas únicas que son: **link**, **bandeja** y **mensajes anónimos de envió al usuario**.
 
-## Aquí está cada botón de la página principal y su funcionalidad
+### Aquí está cada botón de la página principal y su funcionalidad
 **BANDEJA:** En este apartado se encontrará el buzón de mensajes anónimos, dichos mensajes cuentan con plantillas donde se puede escribir respuestas o comentarios acerca del mensaje, dicha plantilla puede ser cambiada, según se desee o guste dentro nuestro catálogo, esta página también ofrecerá la opción de eliminar usuario.
 
 **CONTACTOS:** En este apartado estarán los medios de contactos de la empresa y también un buzón de bug, quejas, opiniones, para así tener una calificación exacta de las personas que usan dicha página.
 
 **AYUDA:** En este apartado se encontrará el manual de ayuda, en el estará toda la información acerca del uso y restricción de la página.
 
-# AUTENTICACIÓN
+### Autenticación
 Cabe destacar que en este apartado se la validara la información proveniente del usuario, y para mayor entendimiento de este una vez se valide y pase a la siguiente página este recibirá una alerta diciendo que ha sido registrado temporalmente y que su cuenta automáticamente expirara cuando no le de un uso continuo, también aclarando que en la siguiente página podrá copiar un link con el cual podrá recibir mensajes anónimos una vez lo comparta en sus redes sociales. Una vez el usuario que acepte el aviso se accederá a la siguiente página: 
 
-## LINK (Pantalla)
+### Link (Pantalla)
 Esta página cuenta con dos únicos botones y un slider promocional donde se le dice al usuario opciones de uso y funcionalidades. Los botones son los siguientes:
 
 **COPIAR LINK:** Este botón te permite copiar un acceso a la página única de mensajes anónimos de envió al usuario, este acceso será compartido por el usuario en sus redes sociales para que así usuarios anónimos puedan acceder a dicha página y dejar el mensaje o pregunta deseada.
 
 **BANDEJA:** Este botón definido anteriormente cuenta con un espacio en esta pagina para la satisfacción y mejor experiencia del usuario.
 
-# USUARIO ANÓNIMO
+### Usuario Anónimo
 Usuario anónimo cuenta con una única página con la cual únicamente se puede acceder por vía del link que el usuario principal comparta en sus redes sociales. Dicha página la llamaremos: **mensajes anónimos de envió al usuario**.
 
 Esta pagina cuenta con un input cuya función es aceptar el mensaje o pregunta de usuario anónimo y enviarlo de forma directa al usuario dueño de dicha página única. Una vez el mensaje se ha enviado se le notificará al usuario anónimo que el envío fue satisfactorio y se limpiará la página para que así pueda volver a enviar un mensaje.<br/>
@@ -45,7 +45,7 @@ También contara con la opción de ir a la página principal para registrarse y 
 
 **OJO2:** Esta opción solo está vigente para usuarios temporales, ya que en otras actualizaciones se implementarán cuentas avanzadas.
 
-# FAQs
+### FAQs
 
 **¿Puedo utilizar TQ en cualquier dispositivo?**
 
