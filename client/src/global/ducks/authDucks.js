@@ -56,13 +56,3 @@ export const getAuthInfoAction = () => async (dispatch) => {
         });
     }
 }
-
-// export const setAuthInfoAction = ({ authenticated, enteredname }) => (dispatch) => {
-//     dispatch({
-//         type: SET_AUTH_INFO
-//         payload: {
-//             isAuthenticated: authenticated,
-            
-//         }
-//     })
-// }

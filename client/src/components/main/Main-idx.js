@@ -30,10 +30,12 @@ function Main() {
         document.fonts.ready.then(function() {
             if(document.fonts.check(font)) {
                 inputNomTQ.current.style.fontFamily = `'Nunito', sans-serif`;
-                dispatchInit({
-                    type: SET_IS_RENDERED,
-                    payload: { isRendered: true }
-                });
+                setTimeout(() => {
+                    dispatchInit({
+                        type: SET_IS_RENDERED,
+                        payload: { isRendered: true }
+                    });
+                }, 500);
                 resizeMainElements(inputNomTQ, btnTQ)
             }
         });
