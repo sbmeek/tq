@@ -8,7 +8,8 @@ export default function BandejaMobile({ messages }) {
     const ansTab = useRef(null);
 
     const handleTabClick = (e) => {
-        setActualTab(e.target.id === 'msg-tab' ? 'msg' : 'ans');
+        const { id: trgtID } = e.target;
+        setActualTab(trgtID === 'msg-tab' || trgtID === '' ? 'msg' : 'ans');
     }
 
     useEffect(() => {
