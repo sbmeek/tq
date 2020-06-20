@@ -33,25 +33,21 @@ export const Msg = ({ msg, ans }) => {
     return (
         <div 
             key={msg._id}
-            style={{
-                backgroundColor: 'rgba(0,0,0,0.4)',
-                padding: '25px'
-            }}
         >
-            <li style={{color: '#26E0D5'}}>Mensaje: {msg.content}</li>
+            <li>"{msg.content}"</li>
             <form onSubmit={handleFormSubmit}>
                 <div>
                 {
                     answeredWSuccess && 
-                    <span style={{color: '#3fff2e'}}>Haz respondido este mensaje correctamente</span>
+                    <span>Haz respondido este mensaje correctamente</span>
                 }
                 </div>
-                <input
+                {/* <input
                     name="ans-msg" 
                     onChange={handleInputChange}
                     value={answer}
                     style={{backgroundColor: 'white'}}
-                />
+                /> */}
             </form>
             <br/>
         </div>

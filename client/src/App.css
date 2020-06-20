@@ -21,7 +21,7 @@ input[type=search] {
 }
 
 body {
-    background-image: url(../images/fon-b.jpg);
+    background-image: url(./assets/images/fon-b.jpg);
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -63,4 +63,8 @@ body {
     -moz-user-select: none; 
     -ms-user-select: none;
     user-select: none;
+}
+
+:global #react-root{
+    min-height: 100vh;
 }

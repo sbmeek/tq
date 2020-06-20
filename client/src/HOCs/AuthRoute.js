@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from 'react'
 import { Route, Redirect } from "react-router-dom";
 import { useSelector } from 'react-redux';
-import Loader from '../components/partial/Loader';
+import Loader from '../components/partials/Loader';
 
 // Context
 import { InitContext, SET_IS_RENDERED } from '../global/context/InitContext';

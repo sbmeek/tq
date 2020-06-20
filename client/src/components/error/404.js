@@ -1,6 +1,6 @@
 import React from 'react';
 import logo from '../../assets/images/logo.png';
-import '../../assets/styles/404.css';
+import './404.css';
 export default function () {
     return (
         <div className="main valign-wrapper" style={{ minHeight: '90vh' }}>

@@ -1,7 +1,7 @@
 
 import logo from '../../assets/images/logo.tq.png';
 import { enableScroll, disableScroll } from './DE-Scroll';
-import '../../assets/styles/Alert.css';
+import './Alert.css';
 
 let winW = null
 let winH = null

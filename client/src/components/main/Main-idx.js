@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef, useContext } from 'react'
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
-import Alert from '../partial/Alert';
+import Alert from '../partials/Alert';
 import logo from '../../assets/images/ltqrNEW.png';
-import '../../assets/styles/Main-idx.css';
+import './Main-idx.css';
 
 import { getAuthInfoAction } from '../../global/ducks/authDucks';
 import { InitContext, SET_IS_RENDERED } from '../../global/context/InitContext';
@@ -14,11 +14,8 @@ function Main() {
     const [fields, setFields] = useState({});
     const inputNomTQ = useRef(null);
     const btnTQ = useRef(null);
-    const form = useRef(null);
     const dispatchAuth = useDispatch();
     const { state: { socket }, dispatch: dispatchInit } = useContext(InitContext);
-    // const [FontsLoading, setFontsLoading] = useState(true);
-    const inputKey = document.createElement('input'); inputKey.name = 'tqpwd';
 
     useEffect(() => {
         window.addEventListener("load", () => resizeMainElements(inputNomTQ, btnTQ))
@@ -50,7 +47,6 @@ function Main() {
     const handleFormSubmit = (e) => {
         e.preventDefault();
         const { tquser: userVal } = fields;
-        const {current: formCurrent } = form;
         socket.emit('tq:exists', { username: userVal })
         socket.once('tq:exists', (data) => {
             if (data == null) {
@@ -71,13 +67,11 @@ function Main() {
                     setElementsRed();
                     return 0;
                 }
-                inputKey.value = (res.key != null ? res.key : 'err');
-                inputKey.hidden = true;
-                formCurrent.insertBefore(inputKey, formCurrent.querySelector('div'));
+                const keyVal = (res.key != null ? res.key : 'err');
                 let settings = {
                     headers: { 'Content-Type': 'application/json' }
                 }
-                const resp = await axios.post(`/user/auth?tquser=${userVal}&tqpwd=${inputKey.value}`, settings);
+                const resp = await axios.post(`/user/auth?tquser=${userVal}&tqpwd=${keyVal}`, settings);
                 const data = await resp.data;
                 if (data.authenticated){
                     dispatchAuth(getAuthInfoAction());
@@ -156,7 +150,6 @@ function Main() {
                 <div className="row">
                     <div className="col">
                         <form
-                            ref={form}
                             onSubmit={handleFormSubmit}
                         >
                             <img

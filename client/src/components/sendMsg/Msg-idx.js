@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import MsgSent from './MsgSent';
 import Error404 from '../error/404';
-import '../../assets/styles/Msg.css';
+import './Msg.css';
 import logo from '../../assets/images/logo.tq.png';
 import { InitContext } from '../../global/context/InitContext';
 

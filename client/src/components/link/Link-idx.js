@@ -1,8 +1,8 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux'
-import Alert from '../partial/Alert';
-import '../../assets/styles/Link.css';
+import Alert from '../partials/Alert';
+import './Link-idx.css';
 import ft1 from '../../assets/images/link/ft1.png';
 import ft2 from '../../assets/images/link/ft2.png';
 import ft3 from '../../assets/images/link/ft3.png';
