@@ -9,8 +9,8 @@
             "webpackHotModuleReloading": true,
             "autoResolveMultipleImports": true,
             "generateScopedName": 
-            "[name]__[local]__[hash:base64:5]"
-            // "[hash:base64:6]"
+            "[name]__[local]__[hash:base64:5]",
+            // "[hash:base64:6]",
         }
         ]
     ]

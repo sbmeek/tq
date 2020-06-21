@@ -1,11 +1,17 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
 import './Bandeja-mobile.css';
-import Msg from './ReceivedMsg';
+// import Msg from './ReceivedMsg';
+import { InitContext } from '../../global/context/InitContext';
 
 export default function BandejaMobile({ messages }) {
+    const [answer, setAnswer] = useState('');
     const [actualTab, setActualTab] = useState('msg');
-    const msgsTab = useRef(null);
-    const ansTab = useRef(null);
+    const [actualMsgId, setActualMsgId] = useState('');
+    const { socket } = useContext(InitContext);
+    const msgsTabContent = useRef(null);
+    const ansTabContent = useRef(null);
+    const templateQuestion = useRef(null);
+    const templatetAnswer = useRef(null);
 
     const handleTabClick = (e) => {
         const { id: trgtID } = e.target;
@@ -15,15 +21,48 @@ export default function BandejaMobile({ messages }) {
     useEffect(() => {
         const selectedTabColor = 'rgba(0, 0, 0, 0.8)';
         const unselectedTabColor = 'rgb(78, 78, 78)';
-        msgsTab.current.style.display = (actualTab === 'msg' ? 'flex' : 'none');
-        ansTab.current.style.display = (actualTab === 'ans' ? 'flex' : 'none');
+        msgsTabContent.current.style.display = (actualTab === 'msg' ? 'flex' : 'none');
+        ansTabContent.current.style.display = (actualTab === 'ans' ? 'flex' : 'none');
         document.querySelector('#msg-tab').style.background = (actualTab === 'msg' ? selectedTabColor : unselectedTabColor);
         document.querySelector('#ans-tab').style.background = (actualTab === 'ans' ? selectedTabColor : unselectedTabColor);
     }, [actualTab])
 
+    const handleMsgClick = (e) => {
+        setActualMsgId(e.target.classList[0]);
+    }
+
+    useEffect(() => {
+        if(actualMsgId === '') return () => 0;
+        const actualMsg = messages.filter(e => e._id === actualMsgId)[0];
+        document.querySelector('#inb-cont').style.display = 'none';
+        document.querySelector('#tmpt-cont').style.display = 'flex';
+        templatetAnswer.current.focus();
+        templateQuestion.current.innerHTML = `"${actualMsg.content}"`;
+    }, [actualMsgId, messages]);
+
+    const handleFormSubmit = e => {
+        e.preventDefault();
+        let data = { answer, actualMsgId }
+        socket.emit('msg:ans', data);
+        socket.on('msg:ans', (data) => {
+            if(data.success){
+                //success
+            }
+        });
+    }
+
+    const handleInputChange = e => {
+        setAnswer(e.target.value);
+    }
+
+    const handleBtnBackClick = () => {
+        document.querySelector('#inb-cont').style.display = 'flex';
+        document.querySelector('#tmpt-cont').style.display = 'none';
+    }
+
     return (
         <div styleName="main-container">                
-            <div styleName="inbox-container">
+            <div styleName="inbox-container" id="inb-cont">
                 <h4>
                     <i className="material-icons">inbox</i> 
                     <span>Bandeja</span>
@@ -46,19 +85,56 @@ export default function BandejaMobile({ messages }) {
                         Respondidos
                     </button>
                 </div>
-                <div ref={msgsTab}>
+                <div ref={msgsTabContent}>
                     <ul styleName="inbox-msgs">
                         {
                             messages.map(msg => 
-                                <Msg msg={msg} ans={msg.answer} key={msg._id} />
+                                <div 
+                                    onClick={handleMsgClick}
+                                    key={msg._id}
+                                    className={msg._id}
+                                >
+                                    <li className={msg._id}>"{msg.content}"</li>
+                                </div>
                             )
                         }
                     </ul>
                 </div>
-                <div ref={ansTab} styleName="template-container">
-                    <div className="template-question"></div>
-                    <div className="template-answer"></div>
+                <div ref={ansTabContent}>
                 </div>
+            </div>
+            <div styleName="template-container" id="tmpt-cont">
+                <button 
+                    styleName="template-btn-back"
+                    onClick={handleBtnBackClick}
+                >
+                    <i className="material-icons">
+                        arrow_back
+                    </i>
+                </button>
+                <div 
+                    className="d-text-select"
+                    styleName="template-question"
+                    ref={templateQuestion}
+                >
+                    "question"
+                </div>
+                <div 
+                    styleName="template-answer"
+                >
+                    <form onSubmit={handleFormSubmit}>
+                        <textarea
+                            ref={templatetAnswer}
+                            type="text"
+                            styleName="template-input-answer"
+                            placeholder="Escribe tu respuesta..."
+                            name="ans-msg" 
+                            onChange={handleInputChange}
+                            value={answer}
+                        ></textarea>
+                    </form>
+                </div>
+                {/* <button styleName="template-pencil"><i className="material-icons">edit</i></button> */}
             </div>
         </div>
     )

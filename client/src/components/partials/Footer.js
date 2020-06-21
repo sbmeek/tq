@@ -5,7 +5,7 @@ export default function Footer() {
     return (
         <footer 
             styleName="page-footer" 
-            style={{minHeight:'10vh'}}
+            style={{minHeight:'10.1vh'}}
         >
             <div className="container">
                 <div 

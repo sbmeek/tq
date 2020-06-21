@@ -123,7 +123,70 @@
 
 .template-container {
     display: none;
-    margin: 10px 250px 10px 50px;
-    min-width: 255px;
-    background: rgb(255, 0, 0);
+    min-width: 100vw;
+    min-height: 90vh;
+    background: rgb(255, 72, 72);
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    color: #fff;
+}
+
+.template-question{
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.77);
+    width: 155px;
+    height: 90px;
+    line-height: 90px;
+    font-weight: 600;
+    border-radius: 20%;
+}
+
+.template-btn-back{
+    position: fixed;
+    top: 2%;
+    left: 3%;
+    background:none;
+    cursor: pointer;
+    color: #fff;
+    min-width: 25px;
+    min-height: 25px;
+}
+
+.template-btn-back>i{
+    font-size: 30px;
+}
+
+.template-btn-back:focus{
+    background: none;
+}
+
+.template-answer{}
+
+.template-pencil{
+    float: left;
+    border-radius: 50%;
+    min-width: 45px;
+    min-height: 45px;
+}
+
+.template-input-answer{
+    color: #fff;
+    border: none !important;
+    text-align: center;
+    width: 180px;
+    height: 130px;
+    resize: none;
+    overflow: auto;
+}
+
+.template-input-answer::placeholder{
+    color: rgb(255, 255, 255, 0.5);
+    font-weight: 700;
+}
+
+.template-input-answer:focus{
+    border: none !important;
+    box-shadow: none !important;
+    outline: none;
 }
