@@ -11,7 +11,7 @@ export default function BandejaMobile({ messages }) {
     const msgsTabContent = useRef(null);
     const ansTabContent = useRef(null);
     const templateQuestion = useRef(null);
-    const templatetAnswer = useRef(null);
+    const templateAnswer = useRef(null);
 
     const handleTabClick = (e) => {
         const { id: trgtID } = e.target;
@@ -28,17 +28,14 @@ export default function BandejaMobile({ messages }) {
     }, [actualTab])
 
     const handleMsgClick = (e) => {
-        setActualMsgId(e.target.classList[0]);
-    }
-
-    useEffect(() => {
-        if(actualMsgId === '') return () => 0;
-        const actualMsg = messages.filter(e => e._id === actualMsgId)[0];
+        const _msgId = e.target.classList[0];
+        setActualMsgId(_msgId);
+        const actualMsg = messages.filter(e => e._id === _msgId)[0];
         document.querySelector('#inb-cont').style.display = 'none';
         document.querySelector('#tmpt-cont').style.display = 'flex';
-        templatetAnswer.current.focus();
+        templateAnswer.current.focus();
         templateQuestion.current.innerHTML = `"${actualMsg.content}"`;
-    }, [actualMsgId, messages]);
+    }
 
     const handleFormSubmit = e => {
         e.preventDefault();
@@ -124,7 +121,7 @@ export default function BandejaMobile({ messages }) {
                 >
                     <form onSubmit={handleFormSubmit}>
                         <textarea
-                            ref={templatetAnswer}
+                            ref={templateAnswer}
                             type="text"
                             styleName="template-input-answer"
                             placeholder="Escribe tu respuesta..."
