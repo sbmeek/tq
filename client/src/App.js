@@ -12,6 +12,7 @@ import Bandeja from './components/bandeja/Bandeja-idx';
 import AuthRoute from './HOCs/AuthRoute';
 import UnauthRoute from './HOCs/UnauthRoute';
 import UserLink from './components/link/Link-idx';
+import TemplateMSG from './components/bandeja/Template';
 import Msg from './components/sendMsg/Msg-idx';
 import Loader from './components/partials/Loader';
 
@@ -42,6 +43,12 @@ function App() {
                   needsRenderTime={false} 
                   path="/link" 
                   component={UserLink} 
+                  redirectTo="/"
+                />
+                <AuthRoute 
+                  needsRenderTime={false} 
+                  path="/message" 
+                  component={TemplateMSG} 
                   redirectTo="/"
                 />
                 <Route exact path="/:username" component={Msg} />
