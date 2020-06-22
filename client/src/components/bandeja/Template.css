@@ -26,13 +26,13 @@
 
 .template-btn-back{
     position: fixed;
-    top: 2%;
-    left: 3%;
+    top: 15px;
+    left: 15px;
     background:none;
     cursor: pointer;
     color: #fff;
-    min-width: 25px;
-    min-height: 25px;
+    min-width: 35px;
+    min-height: 35px;
 }
 
 .template-btn-back>i{
