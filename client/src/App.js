@@ -17,7 +17,7 @@ import Loader from './components/partials/Loader';
 
 function App() {
   const { auth: { isStatus500, isLoaded } } = useSelector(store => store);
-
+  
   if(!isStatus500){
     if(!isLoaded){
       return <Loader />
@@ -28,7 +28,7 @@ function App() {
           <Router>
               <Switch>
                 <UnauthRoute
-                  needsRenderTime={false}
+                  needsRenderTime={window.navigator.onLine}
                   exact path="/" 
                   component={Main} 
                   redirectTo="/link"
