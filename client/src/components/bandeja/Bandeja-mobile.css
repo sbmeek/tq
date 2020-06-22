@@ -106,6 +106,7 @@
     min-width: 100%;
     padding: 20px;
     cursor: pointer;
+    
 }
 
 .inbox-msgs>div:nth-last-child(1) {
@@ -194,4 +195,45 @@
     border: none !important;
     box-shadow: none !important;
     outline: none;
+}
+@media only screen and (min-width: 600px){
+    .inbox-container {
+        display: flex;
+        flex-direction: column;
+        min-width: 35%;
+        min-height: 90vh !important;
+       margin-left: 33%;
+       background: transparent;
+    }
+    .inbox-msgs>div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: rgb(108, 14, 14);
+        text-overflow: ellipsis;
+        color: #fff;
+        margin-bottom: 5px;
+        min-height: 72px;
+        font-weight: 700;
+        min-width: 100%;
+        padding: 20px;
+        cursor: pointer;
+        border-radius: 55px;
+    }
+    .inbox-msgs {
+        display: flex;
+        flex-direction: column;
+        min-width: 100%;
+        max-height: 46vh;
+        overflow: scroll;
+        -webkit-overflow-scrolling: touch;
+    }
+    .inbox-msgs::-webkit-scrollbar {
+        background:transparent;
+        width: 10px;
+        margin-left: -2px;
+    }
+    .inbox-tab {
+        margin-bottom: 3px;
+    }
 }
