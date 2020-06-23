@@ -1,18 +1,14 @@
-import React, { useState, useRef, useEffect, useContext } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import './Bandeja-mobile.css';
 // import Msg from './ReceivedMsg';
-import { InitContext } from '../../global/context/InitContext';
 
 export default function BandejaMobile({ messages }) {
-    const [answer, setAnswer] = useState('');
     const [actualTab, setActualTab] = useState('msg');
-    const [actualMsgId, setActualMsgId] = useState('');
-    const { socket } = useContext(InitContext);
     const msgsTabContent = useRef(null);
     const ansTabContent = useRef(null);
-    const templateQuestion = useRef(null);
-    const templateAnswer = useRef(null);
-
+    const history = useHistory();
+    
     const handleTabClick = (e) => {
         const { id: trgtID } = e.target;
         setActualTab(trgtID === 'msg-tab' || trgtID === '' ? 'msg' : 'ans');
@@ -29,32 +25,11 @@ export default function BandejaMobile({ messages }) {
 
     const handleMsgClick = (e) => {
         const _msgId = e.target.classList[0];
-        setActualMsgId(_msgId);
         const actualMsg = messages.filter(e => e._id === _msgId)[0];
-        document.querySelector('#inb-cont').style.display = 'none';
-        document.querySelector('#tmpt-cont').style.display = 'flex';
-        templateAnswer.current.focus();
-        templateQuestion.current.innerHTML = `"${actualMsg.content}"`;
-    }
-
-    const handleFormSubmit = e => {
-        e.preventDefault();
-        let data = { answer, actualMsgId }
-        socket.emit('msg:ans', data);
-        socket.on('msg:ans', (data) => {
-            if(data.success){
-                //success
-            }
+        history.push({
+            pathname: '/message',
+            state: { actualMsg }
         });
-    }
-
-    const handleInputChange = e => {
-        setAnswer(e.target.value);
-    }
-
-    const handleBtnBackClick = () => {
-        document.querySelector('#inb-cont').style.display = 'flex';
-        document.querySelector('#tmpt-cont').style.display = 'none';
     }
 
     return (
@@ -99,39 +74,6 @@ export default function BandejaMobile({ messages }) {
                 </div>
                 <div ref={ansTabContent}>
                 </div>
-            </div>
-            <div styleName="template-container" id="tmpt-cont">
-                <button 
-                    styleName="template-btn-back"
-                    onClick={handleBtnBackClick}
-                >
-                    <i className="material-icons">
-                        arrow_back
-                    </i>
-                </button>
-                <div 
-                    className="d-text-select"
-                    styleName="template-question"
-                    ref={templateQuestion}
-                >
-                    "question"
-                </div>
-                <div 
-                    styleName="template-answer"
-                >
-                    <form onSubmit={handleFormSubmit}>
-                        <textarea
-                            ref={templateAnswer}
-                            type="text"
-                            styleName="template-input-answer"
-                            placeholder="Escribe tu respuesta..."
-                            name="ans-msg" 
-                            onChange={handleInputChange}
-                            value={answer}
-                        ></textarea>
-                    </form>
-                </div>
-                {/* <button styleName="template-pencil"><i className="material-icons">edit</i></button> */}
             </div>
         </div>
     )
