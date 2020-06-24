@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import './Bandeja-mobile.css';
+import icon from '../../assets/images/icon.png'
 // import Msg from './ReceivedMsg';
 
 export default function BandejaMobile({ messages }) {
@@ -36,13 +37,20 @@ export default function BandejaMobile({ messages }) {
         <div styleName="main-container">                
             <div styleName="inbox-container" id="inb-cont">
                 <h4>
-                    <i className="material-icons">inbox</i> 
+                <div styleName="icon-fondo">
+                    <img
+                        className="responsive-image"
+                        styleName="icon"
+                        src={icon}
+                        alt="icon"
+                        draggable="false"
+                    /></div>
                     <span>Bandeja</span>
                 </h4>
                 <div>
                     <button 
                         id="msg-tab"
-                        styleName="inbox-tab inbox-tab-msgs"
+                        styleName=" inbox-tab-msgs"
                         onClick={handleTabClick}
                         autoFocus={true}
                     >
