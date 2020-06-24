@@ -1,6 +1,5 @@
 .main-container {
     display: flex;
-    justify-content: space-between;
     max-height: 89.9vh;
     background: #ecebeba3
 }
@@ -151,27 +150,15 @@
 }
 
 @media only screen and (min-width: 600px) {
+    .main-container{
+        justify-content: center;
+    }
     .inbox-container {
-        display: flex;
-        flex-direction: column;
-        min-width: 35%;
-        min-height: 90vh !important;
-        margin-left: 33%;
+        max-width: 637px;
+        min-width: 22%;
         background: transparent;
     }
     .inbox-msgs>div {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: rgb(108, 14, 14);
-        text-overflow: ellipsis;
-        color: #fff;
-        margin-bottom: 5px;
-        min-height: 72px;
-        font-weight: 700;
-        min-width: 100%;
-        padding: 20px;
-        cursor: pointer;
         border-radius: 25px 25px 25px 25px;
         -moz-border-radius: 25px 25px 25px 25px;
         -webkit-border-radius: 25px 25px 25px 25px;

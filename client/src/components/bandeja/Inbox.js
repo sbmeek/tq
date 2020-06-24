@@ -29,7 +29,7 @@ export default function BandejaMobile({ messages, answeredMsgs }) {
             msgTab.style.width = '100%';
             msgTab.style.borderRadius = "12px";
         }
-    }, [actualTab])
+    }, [actualTab, answeredMsgs.length])
 
     const handleMsgClick = (e) => {
         const _msgId = e.target.classList[0];
