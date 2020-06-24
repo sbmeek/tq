@@ -148,7 +148,10 @@ function Main() {
         <div styleName="main" className="valign-wrapper" style={{ minHeight: '90vh' }}>
             <div styleName="container" className="container valign-wrapper">
                 <div className="row">
-                    <div className="col">
+                    <div 
+                        styleName="form-container" 
+                        className="col"
+                    >
                         <form
                             onSubmit={handleFormSubmit}
                         >

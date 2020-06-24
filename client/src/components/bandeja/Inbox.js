@@ -1,10 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import './Bandeja-mobile.css';
+import './Inbox.css';
 import icon from '../../assets/images/icon.png'
-// import Msg from './ReceivedMsg';
 
-export default function BandejaMobile({ messages }) {
+export default function BandejaMobile({ messages, answeredMsgs }) {
     const [actualTab, setActualTab] = useState('msg');
     const msgsTabContent = useRef(null);
     const ansTabContent = useRef(null);
@@ -20,8 +19,16 @@ export default function BandejaMobile({ messages }) {
         const unselectedTabColor = 'rgb(78, 78, 78)';
         msgsTabContent.current.style.display = (actualTab === 'msg' ? 'flex' : 'none');
         ansTabContent.current.style.display = (actualTab === 'ans' ? 'flex' : 'none');
-        document.querySelector('#msg-tab').style.background = (actualTab === 'msg' ? selectedTabColor : unselectedTabColor);
-        document.querySelector('#ans-tab').style.background = (actualTab === 'ans' ? selectedTabColor : unselectedTabColor);
+
+        const ansTab = document.querySelector('#ans-tab');
+        const msgTab = document.querySelector('#msg-tab');
+        msgTab.style.background = (actualTab === 'msg' ? selectedTabColor : unselectedTabColor);
+        ansTab.style.background = (actualTab === 'ans' ? selectedTabColor : unselectedTabColor);
+        if(answeredMsgs.length < 1){
+            ansTab.style.display = 'none';
+            msgTab.style.width = '100%';
+            msgTab.style.borderRadius = "12px";
+        }
     }, [actualTab])
 
     const handleMsgClick = (e) => {

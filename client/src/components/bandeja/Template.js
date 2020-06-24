@@ -24,7 +24,7 @@ export default function Template() {
         data._id = actualMsg._id;
         socket.emit('msg:ans', data);
         socket.on('msg:ans', (data) => {
-            if(data.success){
+            if (data.success) {
                 //success
             }
         });
@@ -44,24 +44,23 @@ export default function Template() {
                     arrow_back
                 </i>
             </Link>
-            <div 
+            <div
                 className="d-text-select"
                 styleName="template-question"
                 ref={templateQuestion}
             >
                 ""
             </div>
-            <div 
+            <div
                 styleName="template-answer"
                 ref={templateAnswer}
             >
                 <form onSubmit={handleFormSubmit}>
                     <textarea
-                        ref={templateAnswer}
                         type="text"
                         styleName="template-input-answer"
                         placeholder="Escribe tu respuesta..."
-                        name="ans-msg" 
+                        name="ans-msg"
                         onChange={handleInputChange}
                         value={answer}
                     ></textarea>

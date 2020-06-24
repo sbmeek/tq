@@ -35,29 +35,30 @@
     justify-content: space-between;
 }
 
-.inbox-container>div>button{
+.inbox-container>div>button {
     font-weight: 600;
 }
 
-.inbox-container>div>button:focus{
+.inbox-container>div>button:focus {
     background: none;
 }
 
-.icon{
+.icon {
     height: 45px;
     width: 40px;
     margin-left: 11%;
-   
 }
-.icon-fondo{
-background:rgb(108, 14, 14);
-border-radius: 200px 200px 200px 200px;
--moz-border-radius: 200px 200px 200px 200px;
--webkit-border-radius: 200px 200px 200px 200px;
-border: 0px solid #000000;
-width: 50px;
+
+.icon-fondo {
+    background: rgb(108, 14, 14);
+    border-radius: 200px 200px 200px 200px;
+    -moz-border-radius: 200px 200px 200px 200px;
+    -webkit-border-radius: 200px 200px 200px 200px;
+    border: 0px solid #000000;
+    width: 50px;
     height: 49px;
 }
+
 .inbox-tab {
     display: inline-flex;
     align-items: center;
@@ -68,14 +69,14 @@ width: 50px;
     color: #fff;
     cursor: pointer;
     border-radius: 0px 12px 12px 0px;
--moz-border-radius: 0px 12px 12px 0px;
--webkit-border-radius: 0px 12px 12px 0px;
-border: 0px solid #000000;
+    -moz-border-radius: 0px 12px 12px 0px;
+    -webkit-border-radius: 0px 12px 12px 0px;
+    border: 0px solid #000000;
 }
 
 .inbox-tab-msgs {
     display: flex;
-      display: inline-flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     height: 50.9px;
@@ -84,9 +85,9 @@ border: 0px solid #000000;
     color: #fff;
     cursor: pointer;
     border-radius: 12px 0px 0px 12px;
--moz-border-radius: 12px 0px 0px 12px;
--webkit-border-radius: 12px 0px 0px 12px;
-border: 0px solid #000000;
+    -moz-border-radius: 12px 0px 0px 12px;
+    -webkit-border-radius: 12px 0px 0px 12px;
+    border: 0px solid #000000;
 }
 
 .new-msgs-number {
@@ -134,9 +135,7 @@ border: 0px solid #000000;
     min-width: 100%;
     padding: 20px;
     cursor: pointer;
-    
 }
-
 
 .inbox-msgs>div:nth-last-child(1) {
     margin-bottom: 0 !important;
@@ -149,91 +148,16 @@ border: 0px solid #000000;
     white-space: nowrap;
     text-overflow: ellipsis;
     text-align: center;
-
 }
 
-.template-container {
-    display: none;
-    min-width: 100vw;
-    min-height: 90vh;
-    background: rgb(255, 72, 72);
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
-    color: #fff;
-}
-
-.template-question{
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(0, 0, 0, 0.77);
-    width: fit-content;
-    height: fit-content;
-    font-weight: 600;
-    border-radius: 20%;
-    padding: 20px;
-    max-width: 284px;
-    min-width: 186px;
-    word-break: break-all;
-}
-
-.template-btn-back{
-    position: fixed;
-    top: 2%;
-    left: 3%;
-    background:none;
-    cursor: pointer;
-    color: #fff;
-    min-width: 25px;
-    min-height: 25px;
-}
-
-.template-btn-back>i{
-    font-size: 30px;
-}
-
-.template-btn-back:focus{
-    background: none;
-}
-
-
-
-.template-pencil{
-    float: left;
-    border-radius: 50%;
-    min-width: 45px;
-    min-height: 45px;
-}
-
-.template-input-answer{
-    color: #fff;
-    border: none !important;
-    text-align: center;
-    width: 180px;
-    height: 130px;
-    resize: none;
-    overflow: auto;
-}
-
-.template-input-answer::placeholder{
-    color: rgb(255, 255, 255, 0.5);
-    font-weight: 700;
-}
-
-.template-input-answer:focus{
-    border: none !important;
-    box-shadow: none !important;
-    outline: none;
-}
-@media only screen and (min-width: 600px){
+@media only screen and (min-width: 600px) {
     .inbox-container {
         display: flex;
         flex-direction: column;
         min-width: 35%;
         min-height: 90vh !important;
-       margin-left: 33%;
-       background: transparent;
+        margin-left: 33%;
+        background: transparent;
     }
     .inbox-msgs>div {
         display: flex;
@@ -249,9 +173,9 @@ border: 0px solid #000000;
         padding: 20px;
         cursor: pointer;
         border-radius: 25px 25px 25px 25px;
--moz-border-radius: 25px 25px 25px 25px;
--webkit-border-radius: 25px 25px 25px 25px;
-border: 0px solid #000000;
+        -moz-border-radius: 25px 25px 25px 25px;
+        -webkit-border-radius: 25px 25px 25px 25px;
+        border: 0px solid #000000;
     }
     .inbox-msgs {
         display: flex;
@@ -262,7 +186,7 @@ border: 0px solid #000000;
         -webkit-overflow-scrolling: touch;
     }
     .inbox-msgs::-webkit-scrollbar {
-        background:transparent;
+        background: transparent;
         width: 10px;
         margin-left: -2px;
     }
@@ -270,11 +194,11 @@ border: 0px solid #000000;
         margin-bottom: 3px;
     }
     ::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.08);
-    border-radius: 100px;
-}
-.inbox-msgs::-webkit-scrollbar {
-    background: transparent;
-    width: 10px;
-}
+        background: rgba(0, 0, 0, 0.08);
+        border-radius: 100px;
+    }
+    .inbox-msgs::-webkit-scrollbar {
+        background: transparent;
+        width: 10px;
+    }
 }
