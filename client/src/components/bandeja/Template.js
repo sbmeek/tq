@@ -36,7 +36,8 @@ export default function Template() {
 
     return (
         <div styleName="template-container" id="tmpt-cont">
-            <Link
+           <div > 
+             <Link
                 to="/messages"
                 styleName="template-btn-back"
             >
@@ -44,6 +45,28 @@ export default function Template() {
                     arrow_back
                 </i>
             </Link>
+            <Link
+                to="/messages"
+                styleName="template-btn-share"
+            >
+                <i className="material-icons">
+                    share
+                </i>
+            </Link>
+                
+            <div
+            className="template-options"
+            styleName="template-options"
+            >
+                <h3 styleName="h3">hola</h3>
+                
+            </div>
+            </div>
+            <div
+            className="template"
+            styleName="template"
+            >
+                
             <div
                 className="d-text-select"
                 styleName="template-question"
@@ -66,7 +89,8 @@ export default function Template() {
                     ></textarea>
                 </form>
             </div>
-            {/* <button styleName="template-pencil"><i className="material-icons">edit</i></button> */}
+            </div>
+            
         </div>
     )
 }

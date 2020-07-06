@@ -2,10 +2,9 @@
     display: flex;
     min-width: 100vw;
     min-height: 90vh;
-    background: rgb(255, 72, 72);
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: center;
     color: #fff;
 }
 
@@ -22,23 +21,38 @@
     max-width: 284px;
     min-width: 186px;
     word-break: break-all;
+    margin: 30px;
 }
 
 .template-btn-back{
-    position: fixed;
-    top: 15px;
-    left: 15px;
     background:none;
     cursor: pointer;
     color: #fff;
     min-width: 35px;
     min-height: 35px;
+    justify-content: right;
 }
 
 .template-btn-back>i{
-    font-size: 30px;
+    font-size: 54px;
+    background: red;
+    border-radius: 25px;
+    margin-right: 119px;
+    
+    
+}
+.template-btn-share{
+    background:none;
+    cursor: pointer;
+    color: #fff;
+   
 }
 
+.template-btn-share>i{
+    font-size: 54px;
+    background: red;
+    border-radius: 25px;
+}
 .template-btn-back:focus{
     background: none;
 }
@@ -71,4 +85,35 @@
     border: none !important;
     box-shadow: none !important;
     outline: none;
+}
+.template{
+    background: rgb(255, 72, 72);
+    max-width: 260px;
+    height: 500px;
+    border-radius: 25px;
+    margin-left: 15px;
+    
+}
+.template-options{
+    background: black;
+    width: 226px;
+    height: 416px;
+    border-radius: 25px;
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
+    
+}
+.template-options::-webkit-scrollbar {
+    width: 10px;
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.88);
+    border-radius: 2px;
+    color: transparent;
+}
+.h3{
+    justify-content: center;
+    margin: 30px;
 }
