@@ -29,6 +29,11 @@ export default function BandejaMobile({ messages, answeredMsgs }) {
             msgTab.style.width = '100%';
             msgTab.style.borderRadius = "12px";
         }
+        if(messages.length < 1){
+            msgTab.innerHTML = `No tienes mensajes :(`;
+            msgTab.style.cursor = `default`;
+            msgsTabContent.current.style.display = 'none';
+        }
     }, [actualTab, answeredMsgs.length])
 
     const handleMsgClick = (e) => {
