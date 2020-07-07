@@ -15,7 +15,7 @@ function Main() {
     const inputNomTQ = useRef(null);
     const btnTQ = useRef(null);
     const dispatchAuth = useDispatch();
-    const { state: { socket }, dispatch: dispatchInit } = useContext(InitContext);
+    const { state: { socket, lang: { Main: lang } }, dispatch: dispatchInit } = useContext(InitContext);
 
     useEffect(() => {
         window.addEventListener("load", () => resizeMainElements(inputNomTQ, btnTQ))
@@ -61,7 +61,7 @@ function Main() {
             }
             socket.once('tq:login', async (res) => {
                 if (res.expired) {
-                    A.trigger('Este usuario ha expirado.', {
+                    A.trigger(`${lang["AlertUserExpired"]}.`, {
                         btnHTML: '<button id="btn-ok" class="btn red darken-4 waves-light waves-effect" onclick="A.ok()">Ok</button>'
                     });
                     setElementsRed();
@@ -77,7 +77,7 @@ function Main() {
                     dispatchAuth(getAuthInfoAction());
                 }
                 else {
-                    A.trigger('Este usuario no está disponible.', {
+                    A.trigger(`${lang["AlertUserNotAvailable"]}.`, {
                         btnHTML: '<button id="btn-ok" class="btn red darken-4 waves-light waves-effect" onclick="A.ok()">Ok</button>'
                     });
                     setElementsRed();
@@ -168,7 +168,7 @@ function Main() {
                                     className="input-field"
                                 >
                                     <input
-                                        placeholder="CREA UN NOMBRE PARA TQ"
+                                        placeholder={lang["InputPlaceholder"]}
                                         id="usrTQ"
                                         name="tquser"
                                         autoComplete="off"
@@ -199,21 +199,21 @@ function Main() {
                                 styleName="_btn-tq"
                                 className="btn"
                             >
-                                Bandeja
+                                {lang["BtnInbox"]}
                             </button>
                             <button
                                 type="button"
                                 styleName="btn-med _btn-tq"
                                 className="btn"
                             >
-                                Contactos
+                                {lang["BtnContacts"]}
                             </button>
                             <button 
                                 type="button" 
                                 styleName="_btn-tq"
                                 className="btn"
                             >
-                                Ayuda
+                                {lang["BtnHelp"]}
                                 <i
                                     className="material-icons right"
                                     style={{ marginLeft: '3px' }}

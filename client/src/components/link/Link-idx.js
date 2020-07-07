@@ -1,6 +1,7 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux'
+import { InitContext } from '../../global/context/InitContext';
 import Alert from '../partials/Alert';
 import './Link-idx.css';
 import ft1 from '../../assets/images/link/ft1.png';
@@ -19,6 +20,7 @@ export default function LinkIdx() {
     const [link, setLink] = useState('');
     const [sldIntervalID, setSldIntervalID] = useState(null);
     const btnLink = useRef(null);
+    const { state: { lang: { Link: lang } } } = useContext(InitContext);
 
     useEffect(() => {
         (async () => {
@@ -49,7 +51,7 @@ export default function LinkIdx() {
         inputLink.current.select();
         inputLink.current.setSelectionRange(0, 99);
         document.execCommand("copy");
-        A.trigger('dame lu sicario', {
+        A.trigger(`${lang["AlertLinkCopied"]}.`, {
             sldIntervalID,
             startSlider,
             btnLnk: btnLink.current,
@@ -140,9 +142,9 @@ export default function LinkIdx() {
                         ref={btnLink}
                         onClick={copyLink}
                     >
-                        Copia el link aqu&iacute;
+                        {lang["BtnCopyLink"]}
                         <i className="material-icons right">
-                            
+                            link
                         </i>
                     </button>
                     <input 
@@ -163,7 +165,7 @@ export default function LinkIdx() {
                             type="button" 
                             styleName="_btn-tq"
                         >
-                            Bandeja
+                            {lang["BtnInbox"]}
                             <i className="material-icons right">
                                 inbox
                             </i>

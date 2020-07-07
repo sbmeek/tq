@@ -1,14 +1,16 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import './Inbox.css';
 import icon from '../../assets/images/icon.png'
+import { InitContext } from '../../global/context/InitContext';
 
 export default function BandejaMobile({ messages, answeredMsgs }) {
     const [actualTab, setActualTab] = useState('msg');
     const msgsTabContent = useRef(null);
     const ansTabContent = useRef(null);
     const history = useHistory();
-    
+    const { state: { lang: { Inbox: lang } } } = useContext(InitContext);
+
     const handleTabClick = (e) => {
         const { id: trgtID } = e.target;
         setActualTab(trgtID === 'msg-tab' || trgtID === '' ? 'msg' : 'ans');
@@ -22,19 +24,21 @@ export default function BandejaMobile({ messages, answeredMsgs }) {
 
         const ansTab = document.querySelector('#ans-tab');
         const msgTab = document.querySelector('#msg-tab');
+
         msgTab.style.background = (actualTab === 'msg' ? selectedTabColor : unselectedTabColor);
         ansTab.style.background = (actualTab === 'ans' ? selectedTabColor : unselectedTabColor);
+
         if(answeredMsgs.length < 1){
             ansTab.style.display = 'none';
             msgTab.style.width = '100%';
             msgTab.style.borderRadius = "12px";
         }
         if(messages.length < 1){
-            msgTab.innerHTML = `No tienes mensajes :(`;
             msgTab.style.cursor = `default`;
             msgsTabContent.current.style.display = 'none';
         }
-    }, [actualTab, answeredMsgs.length])
+        msgTab.innerHTML = (messages.length < 1 ? `${lang["NoMessagesInfo"]}` : `${lang["MsgTab"]}`);
+    })
 
     const handleMsgClick = (e) => {
         const _msgId = e.target.classList[0];
@@ -57,7 +61,7 @@ export default function BandejaMobile({ messages, answeredMsgs }) {
                         alt="icon"
                         draggable="false"
                     /></div>
-                    <span>Bandeja</span>
+                    <span>{lang["Title"]}</span>
                 </h4>
                 <div>
                     <button 
@@ -66,7 +70,7 @@ export default function BandejaMobile({ messages, answeredMsgs }) {
                         onClick={handleTabClick}
                         autoFocus={true}
                     >
-                            <span>Mensajes</span> 
+                            <span>{lang["MsgTab"]}</span> 
         <div styleName="new-msgs-number">{messages.length}</div>
                     </button>
                     <button
@@ -74,7 +78,7 @@ export default function BandejaMobile({ messages, answeredMsgs }) {
                         styleName="inbox-tab"
                         onClick={handleTabClick}
                     >
-                        Respondidos
+                        {lang["AnsTab"]}
                     </button>
                 </div>
                 <div ref={msgsTabContent}>

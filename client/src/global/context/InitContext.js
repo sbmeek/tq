@@ -1,15 +1,20 @@
 import React, { createContext, useReducer, useEffect } from 'react'
 import io from 'socket.io-client';
 
+import en from '../../lang/en';
+import es from '../../lang/es';
+
 export const InitContext = createContext();
 
 const initialState = { 
     socket: null, 
-    isRendered: false 
+    isRendered: false,
+    lang: en
 }
 
 export const SET_SOCKET = 'SET_SOCKET';
 export const SET_IS_RENDERED = 'SET_IS_RENDERED';
+export const SET_LANG = 'SET_LANG';
 
 function reducer(state, action){
     switch(action.type){
@@ -23,6 +28,11 @@ function reducer(state, action){
                 ...state,
                 isRendered: action.payload.isRendered
             };
+        case SET_LANG:
+            return {
+                ...state,
+                lang: action.payload.lang
+            }
         default:
             return state;
     }
@@ -42,6 +52,20 @@ export default ({ children }) => {
           console.error(error);
         }
     }, [endpoint]);
+
+    useEffect(() => {
+        dispatch({
+            type: SET_LANG,
+            payload: { lang: gsetLang() }
+        })
+    }, []);
+
+    const gsetLang = () => {
+        switch(navigator.language.substring(0, 2)){
+            case 'es': return es;
+            default: return en;
+        }
+    }
 
     return (
         state.socket !== null

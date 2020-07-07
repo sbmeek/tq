@@ -1,4 +1,3 @@
-
 import logo from '../../assets/images/logo.tq.png';
 import { enableScroll, disableScroll } from './DE-Scroll';
 import './Alert.css';
@@ -78,10 +77,10 @@ export default class Alert{
     // eslint-disable-next-line
     ok = (startSlider = null) => {
         //link => screen/component
-        if('undefined' !== typeof btnLink) btnLink.innerHTML = `Copia el link aqu&iacute;
-        <i class="material-icons right">
-            link
-        </i>`;
+        // if('undefined' !== typeof btnLink) btnLink.innerHTML = `Copia el link aqu&iacute;
+        // <i class="material-icons right">
+        //     link
+        // </i>`;
         if(null !== startSlider) startSlider();
         //
 
