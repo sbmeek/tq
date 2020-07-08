@@ -1,7 +1,15 @@
+:root{
+    --tq-dark-gray-00: rgb(40, 40, 40);
+    --tq-dark-gray-01: rgb(55, 55, 55);
+    --tq-dark-gray-02: rgb(60, 59, 59);
+    --tq-gray-00: rgb(125, 125, 125);
+    --tq-gray-01: rgb(145, 145, 145);
+    --tq-gray-02: rgb(165, 165, 165);
+}
+
 .template-container {
     display: flex;
-    min-width: 100vw;
-    min-height: 90vh;
+    min-height: 89.9vh;
     flex-direction: row;
     align-items: center;
     justify-content: center;
@@ -24,40 +32,31 @@
     margin: 30px;
 }
 
-.template-btn-back{
-    background:none;
-    cursor: pointer;
-    color: #fff;
-    min-width: 35px;
-    min-height: 35px;
-    justify-content: right;
+.template-head-btns{
+    display: flex;
+    justify-content: space-between;
 }
 
-.template-btn-back>i{
-    font-size: 54px;
-    background: red;
-    border-radius: 25px;
-    margin-right: 119px;
-    
-    
-}
+.template-btn-back,
 .template-btn-share{
-    background:none;
+    display: inline-flex;
+    align-items: center;
     cursor: pointer;
     color: #fff;
-   
+    background: rgb(167, 7, 7);
+    border-radius: 35px;
+    padding: 7.2px;
 }
 
+.template-btn-back>i,
 .template-btn-share>i{
-    font-size: 54px;
-    background: red;
-    border-radius: 25px;
+    font-size: 46px;
 }
+
 .template-btn-back:focus{
     background: none;
 }
 
-.template-answer{}
 
 .template-pencil{
     float: left;
@@ -66,14 +65,40 @@
     min-height: 45px;
 }
 
+.template-answer{
+    display: flex;
+    align-items: flex-end;
+    background: #191616;
+    width: 226px;
+    height: 425px;
+    margin-top: 10px;
+    border-radius: 25px;
+}
+
+.template-answer-form-container{
+    display: grid;
+    grid-template-rows: 10% 20% 65%;
+    min-height: 65%;
+}
+
+.template-input-answer-container{
+    display: flex;
+    justify-content: center;
+}
+
 .template-input-answer{
     color: #fff;
     border: none !important;
-    text-align: center;
-    width: 180px;
-    height: 130px;
-    resize: none;
-    overflow: auto;
+    background-color: var(--tq-gray-00) !important;
+    border-radius: 21px !important;
+    padding: 0 14px !important;
+    max-width: 82% !important;
+    font-size: 14px !important;
+}
+
+.template-input-answer:hover,
+.template-input-answer:focus{
+    background-color: var(--tq-gray-01) !important;
 }
 
 .template-input-answer::placeholder{
@@ -81,39 +106,71 @@
     font-weight: 700;
 }
 
+.template-answer-btns-control-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 0 16px;
+}
+
+.template-answer-btns-control-container>button,
+.template-answer-btns-format>button
+{
+    cursor: pointer;
+    background-color: transparent;
+    color: var(--tq-gray-00);
+}
+
+.template-answer-btns-format{
+    display: flex;
+    width: 38%;
+    justify-content: space-around;
+}
+
 .template-input-answer:focus{
     border: none !important;
     box-shadow: none !important;
     outline: none;
 }
-.template{
+
+.template-answer-options{
+    display: flex;
+    align-self: flex-end;
+    align-items: flex-end;
+    min-height: fit-content;
+    overflow: auto;
+    margin: 0 15px;
+}
+
+.template-answer-options>button:first-child{ background: var(--tq-gray-00) }
+
+.template-answer-options>button{
+    cursor: pointer;
+    min-height: 55px;
+    min-width: 55px;
+    border-radius: 35px;
+    margin: 0 5px;
+    background: var(--tq-dark-gray-02);
+    color: #fff;
+}
+
+.template-question-container{
     background: rgb(255, 72, 72);
     max-width: 260px;
     height: 500px;
     border-radius: 25px;
     margin-left: 15px;
-    
-}
-.template-options{
-    background: black;
-    width: 226px;
-    height: 416px;
-    border-radius: 25px;
-    overflow: scroll;
-    -webkit-overflow-scrolling: touch;
-    
-}
-.template-options::-webkit-scrollbar {
-    width: 10px;
-    background: transparent;
 }
 
-::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.88);
-    border-radius: 2px;
-    color: transparent;
+.template-answer-from-question{ 
+    margin: 0 15px; 
+    min-height: 100px;
 }
-.h3{
-    justify-content: center;
-    margin: 30px;
+
+.template-answer-from-question>div{
+    max-width: 216px;
+    max-height: 100px;
+    overflow: auto;
+    overflow-wrap: break-word;
+    text-align: center;
 }

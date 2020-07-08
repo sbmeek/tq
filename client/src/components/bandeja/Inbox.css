@@ -109,16 +109,6 @@
     min-width: 100%;
     max-height: 67vh;
     overflow: scroll;
-    -webkit-overflow-scrolling: touch;
-}
-
-.inbox-msgs::-webkit-scrollbar {
-    width: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.88);
-    border-radius: 2px;
 }
 
 .inbox-msgs>div {
@@ -170,22 +160,8 @@
         min-width: 100%;
         max-height: 46vh;
         overflow: scroll;
-        -webkit-overflow-scrolling: touch;
-    }
-    .inbox-msgs::-webkit-scrollbar {
-        background: transparent;
-        width: 10px;
-        margin-left: -2px;
     }
     .inbox-tab {
         margin-bottom: 3px;
-    }
-    ::-webkit-scrollbar-thumb {
-        background: rgba(0, 0, 0, 0.08);
-        border-radius: 100px;
-    }
-    .inbox-msgs::-webkit-scrollbar {
-        background: transparent;
-        width: 10px;
     }
 }
