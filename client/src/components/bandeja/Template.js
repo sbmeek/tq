@@ -66,53 +66,55 @@ export default function Template() {
                     </button>
                 </div>
                 <div styleName="template-answer">
-                    <form 
-                        styleName="template-answer-form-container" 
+                    <form
+                        styleName="template-answer-form-container"
                         onSubmit={handleFormSubmit}
                     >
-                        <div styleName="template-answer-btns-format-container">
-                            <div styleName="template-answer-btns-format">
-                                <button
-                                    title="Bold"
-                                    type="button"
-                                    onClick={handleBtnFormatClick}
-                                ><i className="material-icons">format_bold</i>
-                                </button>
-                                <button 
-                                    title="Italic"
-                                    type="button"
-                                    onClick={handleBtnFormatClick}
-                                >
-                                    <i className="material-icons">format_italic</i>
-                                </button>
-                                <button
-                                    title="Underline"
-                                    type="button"
-                                    onClick={handleBtnFormatClick}
-                                >
-                                    <i className="material-icons">format_underlined</i>
+                        <div>
+                            <div styleName="template-answer-btns-format-container">
+                                <div styleName="template-answer-btns-format">
+                                    <button
+                                        title="Bold"
+                                        type="button"
+                                        onClick={handleBtnFormatClick}
+                                    ><i className="material-icons">format_bold</i>
+                                    </button>
+                                    <button
+                                        title="Italic"
+                                        type="button"
+                                        onClick={handleBtnFormatClick}
+                                    >
+                                        <i className="material-icons">format_italic</i>
+                                    </button>
+                                    <button
+                                        title="Underline"
+                                        type="button"
+                                        onClick={handleBtnFormatClick}
+                                    >
+                                        <i className="material-icons">format_underlined</i>
+                                    </button>
+                                </div>
+                                <button type="button">
+                                    <i className="material-icons">emoji_emotions</i>
                                 </button>
                             </div>
-                            <button type="button">
-                                <i className="material-icons">emoji_emotions</i>
-                            </button>
-                        </div>
-                        <div styleName="template-input-answer-container">
-                            <div styleName="template-input-answer-inner-container">
-                                <div>
-                                    <div
-                                        style={{ visibility: isPlaceholderVisible ? 'visible' : 'hidden' }}
-                                        styleName="template-input-answer-placeholder"
-                                    >Escribe tu respuesta...</div>
-                                    <div
-                                        styleName="template-input-answer"
-                                        name="ans-msg"
-                                        onInput={handleInput}
-                                        value={answer}
-                                        contentEditable
-                                        ref={ansInput}
-                                        spellCheck="false"
-                                    ></div>
+                            <div styleName="template-input-answer-container">
+                                <div styleName="template-input-answer-inner-container">
+                                    <div>
+                                        <div
+                                            style={{ visibility: isPlaceholderVisible ? 'visible' : 'hidden' }}
+                                            styleName="template-input-answer-placeholder"
+                                        >Escribe tu respuesta...</div>
+                                        <div
+                                            styleName="template-input-answer"
+                                            name="ans-msg"
+                                            onInput={handleInput}
+                                            value={answer}
+                                            contentEditable
+                                            ref={ansInput}
+                                            spellCheck="false"
+                                        ></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
