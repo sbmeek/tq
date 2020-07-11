@@ -1,15 +1,17 @@
 import React, { useState, useContext, useEffect, useRef } from 'react'
 import { useLocation, Link } from 'react-router-dom';
+import parse from 'html-react-parser';
 import { InitContext } from '../../global/context/InitContext';
 import './Template.css';
 
 export default function Template() {
     const [answer, setAnswer] = useState('');
     const [actualMsg, setActualMsg] = useState({});
+    const [isPlaceholderVisible, setIsPlaceholderVisible] = useState(true);
     const { socket } = useContext(InitContext);
     const templateQuestion = useRef(null);
     const templateAnswer = useRef(null);
-    const ansContainer = useRef(null);
+    const ansInput = useRef(null);
     const location = useLocation();
 
     useEffect(() => {
@@ -31,11 +33,22 @@ export default function Template() {
         });
     }
 
-    const handleInputChange = e => {
-        const { value: ansVal } = e.target;
-        const { current: ansTemplate } = ansContainer; 
-        setAnswer(ansVal);
-        ansTemplate.innerHTML = ansVal;
+    const handleInput = async e => {
+        const { textContent: ansVal } = e.currentTarget;
+        setIsPlaceholderVisible(ansVal.length < 1);
+        await setAnswer(e.currentTarget.innerHTML);
+        console.log(answer);
+    }
+
+    const handleBtnFormatClick = (e) => {
+        const { target: { parentElement: target } } = e;
+        formatAnswer(target.title.toLowerCase());
+    }
+
+    const formatAnswer = (cmd) => {
+        document.execCommand(cmd, false, null);
+        setAnswer(ansInput.current.innerHTML);
+        ansInput.current.focus();
     }
 
     return (
@@ -57,19 +70,25 @@ export default function Template() {
                         styleName="template-answer-form-container" 
                         onSubmit={handleFormSubmit}
                     >
-                        <div styleName="template-answer-btns-control-container">
+                        <div styleName="template-answer-btns-format-container">
                             <div styleName="template-answer-btns-format">
-                                <button 
+                                <button
+                                    title="Bold"
                                     type="button"
+                                    onClick={handleBtnFormatClick}
                                 ><i className="material-icons">format_bold</i>
                                 </button>
                                 <button 
+                                    title="Italic"
                                     type="button"
+                                    onClick={handleBtnFormatClick}
                                 >
                                     <i className="material-icons">format_italic</i>
                                 </button>
-                                <button 
+                                <button
+                                    title="Underline"
                                     type="button"
+                                    onClick={handleBtnFormatClick}
                                 >
                                     <i className="material-icons">format_underlined</i>
                                 </button>
@@ -79,15 +98,22 @@ export default function Template() {
                             </button>
                         </div>
                         <div styleName="template-input-answer-container">
-                            <input
-                                type="text"
-                                styleName="template-input-answer"
-                                placeholder="Escribe tu respuesta..."
-                                name="ans-msg"
-                                onChange={handleInputChange}
-                                value={answer}
-                                autoComplete="off"
-                            />
+                            <div styleName="template-input-answer-inner-container">
+                                <div>
+                                    <div
+                                        style={{ visibility: isPlaceholderVisible ? 'visible' : 'hidden' }}
+                                        styleName="template-input-answer-placeholder"
+                                    >Escribe tu respuesta...</div>
+                                    <div
+                                        styleName="template-input-answer"
+                                        name="ans-msg"
+                                        onInput={handleInput}
+                                        value={answer}
+                                        contentEditable
+                                        ref={ansInput}
+                                    ></div>
+                                </div>
+                            </div>
                         </div>
                         <div styleName="template-answer-options">
                             <button type="button">S</button>
@@ -111,7 +137,7 @@ export default function Template() {
                     styleName="template-answer-from-question"
                     ref={templateAnswer}
                 >
-                    <div ref={ansContainer}></div>
+                    <div>{parse(answer)}</div>
                 </div>
             </div>
         </div>
