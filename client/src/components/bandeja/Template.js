@@ -111,6 +111,7 @@ export default function Template() {
                                         value={answer}
                                         contentEditable
                                         ref={ansInput}
+                                        spellCheck="false"
                                     ></div>
                                 </div>
                             </div>
