@@ -63,6 +63,8 @@ export default class Alert{
         let alertBoxFoot = document.querySelector('#alertboxfoot');
         alertBoxFoot.innerHTML = (opts.btnHTML || `<button id="btn-ok" class="btn cyan waves-light waves-effect">Ok</button>`);
 
+        alertoverlay.addEventListener('click', () => this.ok());
+        
         let btnOk = document.querySelector('#btn-ok');
         if(opts.startSlider !== undefined){
             btnOk.onclick = () => this.ok(opts.startSlider);
@@ -74,6 +76,7 @@ export default class Alert{
         this.recenter();
         document.body.classList.add('d-scroll');
     }
+
     // eslint-disable-next-line
     ok = (startSlider = null) => {
         //link => screen/component
