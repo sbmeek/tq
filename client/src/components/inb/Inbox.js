@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import './Inbox.css';
 import icon from '../../assets/images/icon.png'
 import { InitContext } from '../../global/context/InitContext';
+import SimpleBar from 'simplebar-react';
 
 export default function BandejaMobile({ messages, answeredMsgs }) {
     const [actualTab, setActualTab] = useState('msg');
@@ -53,10 +54,9 @@ export default function BandejaMobile({ messages, answeredMsgs }) {
         <div styleName="main-container">                
             <div styleName="inbox-container" id="inb-cont">
                 <h4>
-                <div styleName="icon-fondo">
+                <div styleName="inbox-icon">
                     <img
                         className="responsive-image"
-                        styleName="icon"
                         src={icon}
                         alt="icon"
                         draggable="false"
@@ -81,21 +81,24 @@ export default function BandejaMobile({ messages, answeredMsgs }) {
                         {lang["AnsTab"]}
                     </button>
                 </div>
-                <div ref={msgsTabContent}>
-                    <ul styleName="inbox-msgs">
-                        {
-                            messages.map(msg => 
-                                <div 
-                                    onClick={handleMsgClick}
-                                    key={msg._id}
-                                    className={msg._id}
-                                >
-                                    <li className={msg._id}>"{msg.content}"</li>
-                                </div>
-                            )
-                        }
-                    </ul>
-                </div>
+                    <div ref={msgsTabContent}>
+                        <ul styleName="inbox-msgs-container">
+                            <SimpleBar>
+                            {
+                                messages.map(msg => 
+                                        <div 
+                                            onClick={handleMsgClick}
+                                            key={msg._id}
+                                            className={msg._id}
+                                            styleName="inbox-msg"
+                                        >
+                                            <li className={msg._id}>"{msg.content}"</li>
+                                        </div>
+                                )
+                            }
+                            </SimpleBar>
+                        </ul>
+                    </div>
                 <div ref={ansTabContent}>
                 </div>
             </div>

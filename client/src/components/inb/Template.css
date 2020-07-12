@@ -1,18 +1,3 @@
-* {
-    scrollbar-width: thin !important;
-    scrollbar-color: var(--tq-dark-gray-01) transparent !important;
-}
-
-:root{
-    --tq-dark-gray-00: rgb(40, 40, 40);
-    --tq-dark-gray-01: rgb(55, 55, 55);
-    --tq-dark-gray-02: rgb(60, 59, 59);
-    --tq-gray-00: rgb(125, 125, 125);
-    --tq-gray-01: rgb(145, 145, 145);
-    --tq-gray-02: rgb(165, 165, 165);
-    --tq-input-placeholder: rgb(191, 191, 191);;
-}
-
 .template-container {
     display: flex;
     min-height: 89.9vh;
@@ -249,12 +234,23 @@
     text-align: center;
 }
 
-::-webkit-scrollbar {
+.template-answer-options::-webkit-scrollbar,
+.template-input-answer::-webkit-scrollbar,
+.template-answer-from-question>div::-webkit-scrollbar {
     width: 6px !important;
     height: 6px !important;
 }
 
-::-webkit-scrollbar-thumb{
+.template-answer-options::-webkit-scrollbar-thumb,
+.template-input-answer::-webkit-scrollbar-thumb,
+.template-answer-from-question>div::-webkit-scrollbar-thumb {
     background: var(--tq-dark-gray-01) !important;
     border-radius: 10px;
+}
+
+.template-answer-options,
+.template-input-answer,
+.template-answer-from-question>div {
+    scrollbar-width: thin !important;
+    scrollbar-color: var(--tq-dark-gray-01) transparent !important;
 }

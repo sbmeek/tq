@@ -8,7 +8,7 @@ import Main from './components/main/Main-idx';
 import Footer from './components/partials/Footer';
 import Error404 from './components/error/404';
 import Error500 from './components/error/500';
-import Bandeja from './components/bandeja/Bandeja-idx';
+import Inbx from './components/inb/Inb-idx';
 import AuthRoute from './HOCs/AuthRoute';
 import UnauthRoute from './HOCs/UnauthRoute';
 import UserLink from './components/link/Link-idx';
@@ -36,7 +36,7 @@ function App() {
                 />
                 <AuthRoute 
                   path="/messages" 
-                  component={Bandeja} 
+                  component={Inbx} 
                   redirectTo="/"
                 />
                 <AuthRoute 

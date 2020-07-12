@@ -1,0 +1,378 @@
+.main-container {
+    display: flex;
+    max-height: 89.9vh;
+    background: #ecebeba3
+}
+
+.inbox-container {
+    display: flex;
+    flex-direction: column;
+    min-width: 100%;
+    min-height: 90vh !important;
+    background: #fff;
+}
+
+.inbox-container>h4 {
+    display: inline-flex;
+    color: var(--tq-red-00);
+    margin: 25px 13px;
+    align-items: center;
+    justify-content: center
+}
+
+.inbox-container>h4>i {
+    font-size: 44px;
+}
+
+.inbox-container>h4>span {
+    padding-left: 25px;
+    font-weight: 600;
+}
+
+.inbox-container>div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.inbox-container>div>button {
+    font-weight: 600;
+}
+
+.inbox-container>div>button:focus {
+    background: none;
+}
+
+.inbox-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--tq-red-00);
+    border-radius: 200px 200px 200px 200px;
+    -moz-border-radius: 200px 200px 200px 200px;
+    -webkit-border-radius: 200px 200px 200px 200px;
+    border: 0px solid #000000;
+    width: 52px;
+    height: 51px;
+}
+
+.inbox-icon>img {
+    height: 35px;
+    width: 32px;
+}
+
+.inbox-tab {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 50.9px;
+    width: 49.4%;
+    margin: 0;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 0px 12px 12px 0px;
+    -moz-border-radius: 0px 12px 12px 0px;
+    -webkit-border-radius: 0px 12px 12px 0px;
+    border: 0px solid #000000;
+}
+
+.inbox-tab-msgs {
+    display: flex;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 50.9px;
+    width: 49.4%;
+    margin: 0;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 12px 0px 0px 12px;
+    -moz-border-radius: 12px 0px 0px 12px;
+    -webkit-border-radius: 12px 0px 0px 12px;
+    border: 0px solid #000000;
+}
+
+.new-msgs-number {
+    display: inline-flex;
+    background-color: var(--tq-red-02);
+    border-radius: 50%;
+    color: #fff;
+    padding: 1px 4px;
+    font-size: 12px;
+    margin-left: 2px;
+    width: 20px;
+    height: 20px;
+    align-items: inherit;
+    justify-content: center;
+}
+
+.inbox-msgs-container,
+.inbox-msgs-container>div:first-child {
+    display: flex;
+    flex-direction: row;
+    min-width: 100%;
+    max-height: 67vh;
+}
+
+.inbox-msg{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--tq-red-03);
+    text-overflow: ellipsis;
+    color: #fff;
+    margin-bottom: 5px;
+    min-height: 85px;
+    font-weight: 700;
+    min-width: 100%;
+    padding: 20px;
+    cursor: pointer;
+}
+
+.inbox-msg:nth-last-child(1) {
+    margin-bottom: 0 !important;
+}
+
+.inbox-msg>li {
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: center;
+}
+
+@media only screen and (min-width: 600px) {
+    .main-container {
+        justify-content: center;
+    }
+    .inbox-container {
+        max-width: 649px;
+        min-width: 34%;
+        background: transparent;
+    }
+    .inbox-msg {
+        border-radius: 25px 25px 25px 25px;
+        -moz-border-radius: 25px 25px 25px 25px;
+        -webkit-border-radius: 25px 25px 25px 25px;
+        border: 0px solid #000000;
+    }
+    .inbox-msgs-container {
+        min-width: 100%;
+        max-height: 46vh;
+    }
+    .inbox-tab {
+        margin-bottom: 3px;
+    }
+}
+
+/* SB */
+:global [data-simplebar] {
+    position: relative;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: flex-start;
+    align-items: flex-start;
+}
+
+:global .simplebar-wrapper {
+    overflow: hidden;
+    width: inherit;
+    height: inherit;
+    max-width: inherit;
+    max-height: inherit;
+}
+
+:global .simplebar-mask {
+    direction: inherit;
+    position: absolute;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: auto !important;
+    height: auto !important;
+    z-index: 0;
+}
+
+:global .simplebar-offset {
+    direction: inherit !important;
+    box-sizing: inherit !important;
+    resize: none !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    padding: 0;
+    margin: 0;
+    -webkit-overflow-scrolling: touch;
+}
+
+:global .simplebar-content-wrapper {
+    direction: inherit;
+    box-sizing: border-box !important;
+    position: relative;
+    display: block;
+    height: 100%;
+    width: auto;
+    max-width: 100%;
+    max-height: 100%;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+:global .simplebar-content-wrapper::-webkit-scrollbar, :global .simplebar-hide-scrollbar::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+:global .simplebar-content:before, :global .simplebar-content:after {
+    content: ' ';
+    display: table;
+}
+
+:global .simplebar-placeholder {
+    max-height: 100%;
+    max-width: 100%;
+    width: 100%;
+    pointer-events: none;
+}
+
+:global .simplebar-height-auto-observer-wrapper {
+    box-sizing: inherit !important;
+    height: 100%;
+    width: 100%;
+    max-width: 1px;
+    position: relative;
+    float: left;
+    max-height: 1px;
+    overflow: hidden;
+    z-index: -1;
+    padding: 0;
+    margin: 0;
+    pointer-events: none;
+    flex-grow: inherit;
+    flex-shrink: 0;
+    flex-basis: 0;
+}
+
+:global .simplebar-height-auto-observer {
+    box-sizing: inherit;
+    display: block;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 1000%;
+    width: 1000%;
+    min-height: 1px;
+    min-width: 1px;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: -1;
+}
+
+:global .simplebar-track {
+    z-index: 1;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+:global [data-simplebar].simplebar-dragging :global .simplebar-content {
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+:global [data-simplebar].simplebar-dragging :global .simplebar-track {
+    pointer-events: all;
+}
+
+:global .simplebar-scrollbar {
+    position: absolute;
+    left: 0;
+    right: 0;
+    min-height: 10px;
+}
+
+:global .simplebar-scrollbar:before {
+    position: absolute;
+    content: '';
+    background: black;
+    border-radius: 7px;
+    left: 2px;
+    right: 2px;
+    opacity: 0;
+    transition: opacity 0.2s linear;
+}
+
+:global .simplebar-scrollbar.simplebar-visible:before {
+    /* When hovered, remove all transitions from drag handle */
+    opacity: 0.5;
+    transition: opacity 0s linear;
+}
+
+:global .simplebar-track.simplebar-vertical {
+    top: 0;
+    width: 11px;
+}
+
+:global .simplebar-track.simplebar-vertical :global .simplebar-scrollbar:before {
+    top: 2px;
+    bottom: 2px;
+}
+
+:global .simplebar-track.simplebar-horizontal {
+    left: 0;
+    height: 11px;
+}
+
+:global .simplebar-track.simplebar-horizontal :global .simplebar-scrollbar:before {
+    height: 100%;
+    left: 2px;
+    right: 2px;
+}
+
+:global .simplebar-track.simplebar-horizontal :global .simplebar-scrollbar {
+    right: auto;
+    left: 0;
+    top: 2px;
+    height: 7px;
+    min-height: 0;
+    min-width: 10px;
+    width: auto;
+}
+
+/* Rtl support */
+
+:global [data-simplebar-direction='rtl'] :global .simplebar-track.simplebar-vertical {
+    right: auto;
+    left: 0;
+}
+
+:global .hs-dummy-scrollbar-size {
+    direction: rtl;
+    position: fixed;
+    opacity: 0;
+    visibility: hidden;
+    height: 500px;
+    width: 500px;
+    overflow-y: hidden;
+    overflow-x: scroll;
+}
+
+:global .simplebar-hide-scrollbar {
+    position: fixed;
+    left: 0;
+    visibility: hidden;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
