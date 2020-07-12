@@ -12,7 +12,7 @@ import Inbx from './components/inb/Inb-idx';
 import AuthRoute from './HOCs/AuthRoute';
 import UnauthRoute from './HOCs/UnauthRoute';
 import UserLink from './components/link/Link-idx';
-import TemplateMSG from './components/bandeja/Template';
+import TemplateMSG from './components/inb/Template';
 import Msg from './components/sendMsg/Msg-idx';
 import Loader from './components/partials/Loader';
 

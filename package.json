@@ -19,8 +19,5 @@
   "homepage": "https://github.com/SBMeek/tq#readme",
   "devDependencies": {
     "concurrently": "^5.2.0"
-  },
-  "dependencies": {
-    "react-svg": "^11.0.26"
   }
 }

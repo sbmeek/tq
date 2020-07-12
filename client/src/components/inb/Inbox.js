@@ -5,7 +5,7 @@ import icon from '../../assets/images/icon.png'
 import { InitContext } from '../../global/context/InitContext';
 import SimpleBar from 'simplebar-react';
 
-export default function BandejaMobile({ messages, answeredMsgs }) {
+export default function Inbox({ messages, answeredMsgs }) {
     const [actualTab, setActualTab] = useState('msg');
     const msgsTabContent = useRef(null);
     const ansTabContent = useRef(null);
