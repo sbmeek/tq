@@ -1,6 +1,4 @@
-*,
-*::before,
-*::after {
+*, *::before, *::after {
     -webkit-appearance: none;
     box-sizing: border-box;
     margin: 0;
@@ -8,11 +6,21 @@
     border: 0;
 }
 
-input[type=text],
-input[type=email],
-input[type=tel],
-input[type=url],
-input[type=search] {
+:root {
+    --tq-dark-gray-00: rgb(40, 40, 40);
+    --tq-dark-gray-01: rgb(55, 55, 55);
+    --tq-dark-gray-02: rgb(60, 59, 59);
+    --tq-gray-00: rgb(125, 125, 125);
+    --tq-gray-01: rgb(145, 145, 145);
+    --tq-gray-02: rgb(165, 165, 165);
+    --tq-input-placeholder: rgb(191, 191, 191);
+    --tq-red-00: rgb(169, 20, 20);
+    --tq-red-01: rgb(160, 14, 14);
+    --tq-red-02: rgb(172, 0, 0);
+    --tq-red-03: rgb(108, 14, 14);
+}
+
+input[type=text], input[type=email], input[type=tel], input[type=url], input[type=search] {
     appearance: none;
     -moz-appearance: none;
     -webkit-appearance: none;
@@ -28,30 +36,30 @@ body {
     background-size: cover;
 }
 
-.page-footer{
+.page-footer {
     display: flex;
     justify-content: center;
     max-height: 63px;
     min-height: 63px;
     overflow: hidden;
-    font-family:'Nunito', sans-serif;
-    font-size:20px;
-    color:#ccc !important; 
+    font-family: 'Nunito', sans-serif;
+    font-size: 20px;
+    color: #ccc !important;
     background-color: #1b1b1b !important;
-    padding-top:0!important; 
+    padding-top: 0!important;
 }
 
-.footer-sbm{
+.footer-sbm {
     display: inline-block;
-    color:#ccc !important;
-    font-size:20px !important;
+    color: #ccc !important;
+    font-size: 20px !important;
     margin-top: 10px;
 }
 
-.footer-text{
-    color:#ccc !important;
-    font-size:16px !important;
-    margin:0;
+.footer-text {
+    color: #ccc !important;
+    font-size: 16px !important;
+    margin: 0;
 }
 
 :global .d-scroll {
@@ -59,13 +67,13 @@ body {
     overflow: hidden;
 }
 
-:global .d-text-select{
-    -webkit-user-select: none;     
-    -moz-user-select: none; 
+:global .d-text-select {
+    -webkit-user-select: none;
+    -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
 }
 
-:global #react-root{
+:global #react-root {
     min-height: 100vh;
 }

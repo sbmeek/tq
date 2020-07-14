@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import Inbox from './Inbox';
 
-export default function Bandeja(){
+export default function InbIdx(){
     const { user: { messages } } = useSelector(store => store.auth);
     const [msgsList, setMsgsList] = useState([]);
     const [answeredMsgs, setAnsweredMsgs] = useState([]); 
