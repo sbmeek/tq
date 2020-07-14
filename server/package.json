@@ -4,7 +4,8 @@
   "description": "",
   "main": "./src/server.js",
   "scripts": {
-    "server": "nodemon ./src/server.js --trace-warnings"
+    "dev": "nodemon ./src/server.js --trace-warnings",
+    "start": "node ./src/server.js"
   },
   "repository": {
     "type": "git",
