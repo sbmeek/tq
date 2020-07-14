@@ -3,22 +3,20 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux'
 import { InitContext } from '../../global/context/InitContext';
 import Alert from '../partials/Alert';
+import Slider from "./slider.js";
+import './slider.css';
 import './Link-idx.css';
-import ft1 from '../../assets/images/link/ft1.png';
-import ft2 from '../../assets/images/link/ft2.png';
-import ft3 from '../../assets/images/link/ft3.png';
-import ft4 from '../../assets/images/link/ft4.png';
-import ft5 from '../../assets/images/link/ft5.png';
+
 
 const A = new Alert();
 const M = window.M; // Materialize
+
 
 export default function LinkIdx() {
     const inputLink = useRef(null);
     const { user } = useSelector(store => store.auth);
     const [name, setName] = useState('');
     const [link, setLink] = useState('');
-    const [sldIntervalID, setSldIntervalID] = useState(null);
     const btnLink = useRef(null);
     const { state: { lang: { Link: lang } } } = useContext(InitContext);
 
@@ -29,22 +27,7 @@ export default function LinkIdx() {
         })();
     }, [user]);
 
-    useEffect(() => {
-        startSlider();
-    }, []);
     
-    const startSlider = () => {
-        let elems = document.querySelectorAll('.carousel');
-        let instances = M.Carousel.init(elems,{
-            indicators: true,
-            fullWidth: true,
-            numVisible: 4
-        });
-        let intervalID = setInterval(() => {
-            instances[0].next()
-        }, 3000);
-        setSldIntervalID(intervalID);
-    }
 
     const copyLink = async () => {
         await setLink(`${window.location.origin}/${name}`);
@@ -52,8 +35,7 @@ export default function LinkIdx() {
         inputLink.current.setSelectionRange(0, 99);
         document.execCommand("copy");
         A.trigger(`${lang["AlertLinkCopied"]}.`, {
-            sldIntervalID,
-            startSlider,
+          
             btnLnk: btnLink.current,
         });
     }
@@ -63,71 +45,10 @@ export default function LinkIdx() {
             className="container section"
             styleName="container section"
         >
-            <div 
-                className="row"
-                styleName="row"
-            >
-                <div 
-                    className="col s12"
-                    styleName="col"
-                >
-                    <div 
-                        className="carousel carousel-slider" 
-                        styleName="carousel"
-                        style={{background: 'rgba(29, 30, 31, 0.705)'}}
-                    >
-                        <div className="carousel-fixed-item center">
-                        </div>
-                        <div
-                            className="carousel-item" 
-                            >
-                            <img 
-                                styleName="carousel-item"
-                                src={ft1} 
-                                alt="ft1"
-                            />
-                        </div>
-                        <div 
-                            className="carousel-item"
-                            >
-                            <img 
-                                styleName="carousel-item"
-                                src={ft2}
-                                alt="ft2"
-                            />
-                        </div>
-                        <div 
-                            className="carousel-item"
-                            >
-                            <img 
-                                styleName="carousel-item"
-                                src={ft3}
-                                alt="ft3"
-                            />
-                        </div>
-                        <div 
-                            className="carousel-item"
-                            href="#"
-                            >
-                            <img 
-                                styleName="carousel-item"
-                                src={ft4}
-                                alt="ft4"
-                            />
-                        </div>
-                        <div 
-                            className="carousel-item"
-                            href="#"
-                        >
-                            <img 
-                                styleName="carousel-item"
-                                src={ft5}
-                                alt="ft5" 
-                            />
-                        </div>
-                    </div>
-                </div>
-            </div>
+           <div>
+               <Slider />
+           </div>
+           
             <div 
                 className="center"
             >

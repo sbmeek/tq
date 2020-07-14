@@ -5,16 +5,16 @@ import { Link } from 'react-router-dom';
 export const MsgSent = () => {
 
   return (
-      <div >
-            <span 
+      <div  style={{ display: 'flex', flexDirection:'column',alignItems: 'center'}}>
+           <t styleName='send'> <span 
             style={{border: '#0aff0a', 
             borderStyle:'solid', 
             color: '#0aff0a',
             fontSize: '16px'
               }
                 }  
-            class="material-icons"> check</span> <t styleName='send'>MENSAJE ENVIADO.</t>
-          <button onClick={() => window.location.reload()}> <p>envia otro mensaje</p></button>
+            class="material-icons"> check</span>MENSAJE ENVIADO.</t>
+          <button onClick={() => window.location.reload()} style={{background: 'none', margin:'3px' }}> <p>envia otro mensaje</p></button>
           <h3 styleName='h3'>¿Te gustaria recibir</h3>
           <h3 styleName='h3-2'> mensajes de tus amigos?</h3>
           <Link to= "/">

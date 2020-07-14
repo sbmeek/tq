@@ -30,6 +30,7 @@ body {
 
 .page-footer{
     display: flex;
+    justify-content: center;
     max-height: 63px;
     min-height: 63px;
     overflow: hidden;

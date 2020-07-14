@@ -68,7 +68,7 @@ function Success({ username, socket }) {
   }
 
   return (
-    <div className="valign-wrapper" style={{ minHeight: '90vh' }}>
+    <div className="valign-wrapper" style={{ minHeight: '90vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <form onSubmit={handleFormSubmit}>
           <div styleName="contenedor">
             <div className="center" >
@@ -85,7 +85,7 @@ function Success({ username, socket }) {
                 sent 
                 ? <MsgSent />
                 :
-                <div>
+                <div styleName="container2">
                   <h3 
                     className="center" 
                     styleName="user"
