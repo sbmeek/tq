@@ -5,14 +5,13 @@
     width: 100%;
     height: 46vh;
     box-sizing: border-box;
-    margin: 0;
     padding: 0;
+    margin-bottom: 40px;
 }
 .slide{
     display: flex;
     align-items: center;
     justify-content: center;
-    
     min-width: 100%;
     height: 55vh;
     transition: 0.5s;
@@ -39,5 +38,28 @@
     color: white;
 }
 .slideimage{
-    width: 40%
+   height: 46vh;
+}
+@media only screen and (max-width:445px){
+    .slideimage{
+        max-width: 100%;
+        height: 45vh;
+
+    }
+    .slide{
+        align-items: start;
+        height: 47vh;
+        background: none;
+
+    }
+    
+}
+@media only screen and (max-width:336px){
+.slideimage{
+    height: 35vh;
+}
+.slider{
+       
+    margin-bottom: 0px;
+}
 }

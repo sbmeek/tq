@@ -42,6 +42,7 @@
 }
 
 ._btn-tq{
+    
     margin-top: 15px;
     font-family: 'Nunito', sans-serif;
     text-transform: none;
@@ -75,6 +76,7 @@
 
 .btn-waves-effect-waves-light  {
     font-family: 'Nunito', sans-serif;
+    display: flex;
     text-transform: none;
     box-shadow: 1.5px 1.5px rgb(7, 7, 7);
     border-radius: 1000px;
@@ -86,7 +88,6 @@
     font-size: 22.5px;
     transition: ease-in-out .22s;
     margin-bottom: 16px;
-    margin-top: 39px;
     color: #00909E;
     padding: 6px 23px;
 }
@@ -113,11 +114,6 @@
         min-width: 300px;
     }
     .section{
-        padding-bottom: 9rem;
-    }
-}
-@media only screen and (max-width: 492px){
-    .section{
-        padding-bottom: 16rem;
+        padding-bottom: 12rem;
     }
 }
