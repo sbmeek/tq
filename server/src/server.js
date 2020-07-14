@@ -10,6 +10,7 @@ const cookieParser = require('cookie-parser');
 // const session = require('client-sessions');
 const cors = require('cors');
 require('dotenv').config();
+const { SESSION_SECRET } = process.env;
 
 const app = express();
 
@@ -38,7 +39,7 @@ app.use(cors());
 //     secure: false // when true, cookie will only be sent over SSL. use key 'secureProxy' instead if you handle SSL not in your node process
 //   }
 // }));
-app.use(cookieParser('token'));
+app.use(cookieParser(SESSION_SECRET));
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 app.use(morgan('dev'));

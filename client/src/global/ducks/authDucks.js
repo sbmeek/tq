@@ -9,6 +9,7 @@ const initialData = {
 
 // Types
 const GET_AUTH_INFO = 'GET_AUTH_INFO';
+const SET_MESSAGES = 'SET_MESSAGES';
 //const GET_AUTH_INFO_ERROR = 'GET_AUTH_INFO_ERROR';
 
 // Reducer
@@ -22,6 +23,12 @@ export default function authReducer(state = initialData, action){
                 isLoaded: action.payload.isLoaded,
                 isAuthenticated: action.payload.isAuthenticated
             };
+        case SET_MESSAGES:
+            const { user } = state;
+            return {
+                ...state,
+                user: {...user, messages: action.payload.messages }
+            }
         default:
             return state;
     }
@@ -55,4 +62,11 @@ export const getAuthInfoAction = () => async (dispatch) => {
             }
         });
     }
+}
+
+export const setUserMessagesAction = (messages) => async (dispatch) => {
+    dispatch({
+        type: SET_MESSAGES,
+        payload: { messages }
+    });
 }

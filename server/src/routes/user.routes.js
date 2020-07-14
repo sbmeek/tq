@@ -4,12 +4,14 @@ const router = require('express').Router();
 const passport = require('passport');
 const JWT = require('jsonwebtoken');
 const { setExpirationDate } = require('../libs/user-expirations');
+const { SESSION_SECRET } = process.env;
+
 
 const signToken = (userId) => (
     JWT.sign({
-        iis: "token",
+        iis: "proc",
         sub: userId
-    }, "token", { expiresIn: '1h' })
+    }, SESSION_SECRET, { expiresIn: '1h' })
 )
 
 // router.get('/authed', isAuthed, (req, res) => {
@@ -51,7 +53,7 @@ router.post('/auth', (req, res, next) => {
         else{
             const {_id, enteredname} = user;
             const token = signToken(_id);
-            res.cookie('token', token, { httpOnly: true, sameSite: true, signed: true });
+            res.cookie('proc', token, { httpOnly: true, sameSite: true, signed: true });
             res.status(200).json({ authenticated: true, enteredname })
         }
     })(req, res, next);
@@ -62,7 +64,7 @@ router.get('/logout', (req, res, next) => {
         if(!user)
             res.json({authenticated: false, success: false});
         else{
-            res.clearCookie('token');
+            res.clearCookie('proc');
             res.json({username: "", success: true});
         }
     })(req, res, next);

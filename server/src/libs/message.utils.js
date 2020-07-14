@@ -1,12 +1,17 @@
 const User = require('../models/User');
 
-module.exports.sendMessage = async ({ username, msg }, socket) => {
+exports.sendMessage = async ({ username, msg }, socket, io, onlineUsrs) => {
     try {
-        await User.findOneAndUpdate({username}, { 
+        const _utmp = await User.findOneAndUpdate({username}, { 
             $push: {
                 messages: { content: msg }
-            } 
-        });
+            }
+        }, { new: true });
+        console.log(_utmp.messages);
+        for(let _uid in onlineUsrs){
+            if(onlineUsrs[_uid] === username)
+                io.to(_uid).emit('msg:new', _utmp.messages);
+        }
         socket.emit('msg:send', { success: true, sent: true })
     } catch (error) {
         console.error(error)
@@ -19,7 +24,7 @@ module.exports.sendMessage = async ({ username, msg }, socket) => {
     }
 }
 
-module.exports.answerMessage = async ({ answer, msgId }, socket) => {
+exports.answerMessage = async ({ answer, msgId }, socket) => {
     try {
         await User.findOneAndUpdate({"messages._id": msgId}, {
             $set: {"messages.$.answer": answer}

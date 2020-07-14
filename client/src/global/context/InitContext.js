@@ -40,7 +40,7 @@ function reducer(state, action){
 
 export default ({ children }) => {
     const [state, dispatch] = useReducer(reducer, initialState);
-    const endpoint = `http://localhost:3000`; //useless nowadays
+    // const endpoint = `http://localhost:3000`;
     
     useEffect(() => {
         try {
@@ -51,7 +51,7 @@ export default ({ children }) => {
         } catch (error) {
           console.error(error);
         }
-    }, [endpoint]);
+    }, []);
 
     useEffect(() => {
         dispatch({

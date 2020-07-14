@@ -15,10 +15,20 @@ import UserLink from './components/link/Link-idx';
 import TemplateMSG from './components/inb/Template';
 import Msg from './components/sendMsg/Msg-idx';
 import Loader from './components/partials/Loader';
+import { useEffect } from 'react';
+import { useContext } from 'react';
+import { InitContext } from './global/context/InitContext';
 
 function App() {
-  const { auth: { isStatus500, isLoaded } } = useSelector(store => store);
-  
+  const { isStatus500, isLoaded, user } = useSelector(store => store.auth);
+  const { state: { socket } } = useContext(InitContext);
+
+  useEffect(() => {
+    if(user !== null){
+      socket.emit('tq:init-user', { username: user.username });
+    }
+  }, [user, socket])
+
   if(!isStatus500){
     if(!isLoaded){
       return <Loader />

@@ -37,6 +37,7 @@
     background: rgb(167, 7, 7);
     border-radius: 35px;
     padding: 7.2px;
+    text-decoration: none;
 }
 
 .template-btn-back>i,
