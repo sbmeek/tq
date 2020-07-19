@@ -4,14 +4,23 @@ import parse from 'html-react-parser';
 import { InitContext } from '../../global/context/InitContext';
 import './Template.css';
 
+import BgColors from './TemplateOpts/BgColors';
+import Labels from './TemplateOpts/Labels';
+
 export default function Template() {
     const [answer, setAnswer] = useState('');
     const [actualMsg, setActualMsg] = useState({});
+    const InitialStateOptsVisibility = {
+        bgColorsOptShown: false,
+        labelsOptShown: false
+    };
+    const [optsVisibility, setOptsVisibility] = useState(InitialStateOptsVisibility);
     const [isPlaceholderVisible, setIsPlaceholderVisible] = useState(true);
     const { socket } = useContext(InitContext);
     const templateQuestion = useRef(null);
     const templateAnswer = useRef(null);
     const ansInput = useRef(null);
+    const optsSwipe = useRef(null);
     const location = useLocation();
 
     useEffect(() => {
@@ -50,6 +59,42 @@ export default function Template() {
         setAnswer(ansInput.current.innerHTML);
         ansInput.current.focus();
     }
+
+    const toggleOptSwipe = (e) => {
+        const { target: trgt } = e;
+        const { current: optSwp } = optsSwipe
+        let _dsrdOpt = getDesiredOpt(trgt.id);
+        let desiredOpt = Object.keys(_dsrdOpt)[0];
+        let _optsVisibility = { ...InitialStateOptsVisibility, [Object.keys(_dsrdOpt)[0]]: true };
+
+        if(optSwp.classList.contains('opts-swipe_actv')){
+            if(optsVisibility[desiredOpt]){
+                optSwp.classList.remove('opts-swipe_actv');
+                _optsVisibility = InitialStateOptsVisibility;
+            }
+            else 
+                _optsVisibility = { 
+                    ...InitialStateOptsVisibility, 
+                    [Object.keys(_dsrdOpt)[0]]: true 
+                };
+        }
+        else optSwp.classList.toggle('opts-swipe_actv');
+
+        setOptsVisibility(_optsVisibility)
+    }
+
+    const getDesiredOpt = (_id) => {
+        switch(_id){
+            case 'bg-colors': 
+                return { bgColorsOptShown: true };
+            case 'labels': 
+                return { labelsOptShown: true };
+        }
+    }
+
+    useEffect(() => {
+        console.log(optsVisibility);
+    }, [optsVisibility])
 
     return (
         <div styleName="template-container" id="tmpt-cont">
@@ -118,12 +163,43 @@ export default function Template() {
                                 </div>
                             </div>
                         </div>
-                        <div styleName="template-answer-options">
-                            <button type="button">S</button>
-                            <button type="button">P</button>
-                            <button type="button">T</button>
-                            <button type="button">M</button>
-                            <button type="button">R</button>
+                        <div styleName="template-answer-options-container">
+                            <div styleName="template-answer-options">
+                                <button 
+                                    type="button" 
+                                    onClick={toggleOptSwipe} 
+                                    id="bg-colors"
+                                >S</button>
+                                <button
+                                    type="button" 
+                                    onClick={toggleOptSwipe}
+                                    id="labels"
+                                >P</button>
+                                <button 
+                                    type="button" 
+                                    onClick={toggleOptSwipe}
+                                >T</button>
+                                <button 
+                                    type="button" 
+                                    onClick={toggleOptSwipe}
+                                >M</button>
+                                <button 
+                                    type="button" 
+                                    onClick={toggleOptSwipe}
+                                >R</button>
+                            </div>
+                        </div>
+                        <div 
+                            ref={optsSwipe} 
+                            styleName="template-answer-opts-menu"
+                            className="opts-swipe_inactv"
+                        >
+                            <div style={{ height: (optsVisibility.bgColorsOptShown ? '100%' : '0') }}>
+                                <BgColors/>
+                            </div>
+                            <div style={{ height: (optsVisibility.labelsOptShown ? '100%' : '0') }}>
+                                <Labels/>
+                            </div>
                         </div>
                     </form>
                 </div>

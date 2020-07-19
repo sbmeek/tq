@@ -1,13 +1,3 @@
-/* #fondo {
-    background:url('/img/fonb.jpg');
-} */
-
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 .contenedor{
     height:100%;
     width:100%;

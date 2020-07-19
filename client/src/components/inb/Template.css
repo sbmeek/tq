@@ -5,6 +5,7 @@
     align-items: center;
     justify-content: center;
     color: #fff;
+    z-index: -1;
 }
 
 .template-question{
@@ -60,17 +61,19 @@
 .template-answer{
     display: flex;
     align-items: flex-end;
-    background: #191616;
+    background: var(--tq-bg-00);
     width: 226px;
     height: 425px;
     margin-top: 10px;
     border-radius: 25px;
+    overflow: hidden;
 }
 
 .template-answer-form-container{
     display: grid;
     grid-template-rows: minmax(51%, 63%) 34%;
     height: 90%;
+    position: relative;
 }
 
 .template-answer-form-container>div:nth-child(1){
@@ -148,8 +151,6 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    z-index: 100;
-    z-index: 2;
 }
 
 .template-answer-btns-format-container{
@@ -178,14 +179,24 @@
     justify-content: space-around;
 }
 
-.template-answer-options{
+.template-answer-options-container{
     display: flex;
     align-self: flex-end;
-    align-items: flex-end;
-    min-height: fit-content;
-    margin: 0 15px;
+    max-height: fit-content;
+    margin: 0px 2px -12px 2px;
+    width: 98%;
+    overflow-y: hidden;
+    z-index: 3;
+    background: var(--tq-bg-00);
+    border-radius: 0 0 10px 10px;
+}
+
+.template-answer-options{
+    display: flex;
+    margin: 0px 15px 6px 15px;
     overflow-x: auto;
     overflow-y: hidden;
+    background: var(--tq-bg-00);
     border-radius: 38px;
 }
 
@@ -201,9 +212,9 @@
     color: #fff;
 }
 
-.template-answer-options>button:hover,
-.template-answer-options>button:first-child:hover {
-    animation: jump 0.5s;
+.template-answer-options>button:active,
+.template-answer-options>button:first-child:active {
+    animation: jump 1s;
 }
   
 @keyframes jump {
@@ -212,6 +223,31 @@
     50% { transform: translate(0, -1.8px); }
     75% { transform: translate(0, -1.4px); }
     100% { transform: translate(0, 0); }
+}
+
+.template-answer-opts-menu{
+    position: absolute;
+    top: 84%;
+    width: 98%;
+    margin: 0 2px;
+    height: 100%;
+    background: var(--tq-dark-gray-02);
+    z-index: 0;
+    transform: translateY(100%);
+    transition: transform 500ms;
+    overflow: hidden;
+}
+
+
+:global .opts-swipe_actv{
+    z-index: 2;
+    transform: translateY(-100%);
+    transition: transform 500ms;
+}
+
+.template-answer-opts-menu>div{
+    transition: height 250ms ease-out;
+    overflow: hidden;
 }
 
 .template-question-container{

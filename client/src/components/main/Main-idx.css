@@ -1,11 +1,6 @@
-﻿*{
-    box-sizing: border-box;
-}
-
-body {
+﻿body {
     display: flex!important;
     flex-direction: column!important;
-  
 }
 
 .form-container{

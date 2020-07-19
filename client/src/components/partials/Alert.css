@@ -1,7 +1,3 @@
-*{
-    box-sizing: border-box;
-}
-
 :global .alert-anim{
     transition: opacity 500ms;
     will-change: opacity;
