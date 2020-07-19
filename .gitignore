@@ -1,15 +1,7 @@
+.DS_Store
 .env
 node_modules
-~
-Backups
-blob_storage
-Cache
-CachedData
-CachedExtensions
-Code Cache
-Dictionaries
-GPUCache
-logs
-Session Storage
-User
-style.css.save
+npm-debug.log
+.vscode/
+dist
+build
