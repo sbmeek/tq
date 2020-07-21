@@ -7,10 +7,7 @@ import Slider from "./slider.js";
 import './slider.css';
 import './Link-idx.css';
 
-
 const A = new Alert();
-const M = window.M; // Materialize
-
 
 export default function LinkIdx() {
     const inputLink = useRef(null);

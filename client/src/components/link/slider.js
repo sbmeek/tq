@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import './slider.css';
 import ft1 from '../../assets/images/link/ft1.png';
 import ft2 from '../../assets/images/link/ft2.png';
@@ -8,10 +8,6 @@ import ft5 from '../../assets/images/link/ft5.png';
 
 function Slider(){
    
-    
-    
-    
-    
 return(
     <div className="slider"    >
        <div styleName="slider">
@@ -20,11 +16,11 @@ return(
                 
                      <div   className="slide" styleName="slide"  >
                          <ul>
-                         <img  src={ft1}styleName="slideimage"></img>
-                         <img src={ft2}styleName="slideimage"></img>
-                         <img src={ft3}styleName="slideimage"></img>
-                         <img src={ft4}styleName="slideimage"></img>
-                         <img src={ft5}styleName="slideimage"></img>
+                            <img  src={ft1}styleName="slideimage"></img>
+                            <img src={ft2}styleName="slideimage"></img>
+                            <img src={ft3}styleName="slideimage"></img>
+                            <img src={ft4}styleName="slideimage"></img>
+                            <img src={ft5}styleName="slideimage"></img>
                          </ul>
                      </div>
 

@@ -89,6 +89,8 @@ export default function Template() {
                 return { bgColorsOptShown: true };
             case 'labels': 
                 return { labelsOptShown: true };
+            default:
+                return { };
         }
     }
 

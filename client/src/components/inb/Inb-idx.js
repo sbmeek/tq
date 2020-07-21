@@ -16,7 +16,7 @@ export default function InbIdx(){
         socket.on('msg:new', (data) => {
             dispatch(setUserMessagesAction(data))
         });
-    }, [socket]);
+    }, [socket, dispatch]);
 
     useEffect(() => {
         let _ml = messages.filter(e => undefined === e.answer);
