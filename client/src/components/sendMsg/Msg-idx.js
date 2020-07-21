@@ -2,9 +2,10 @@ import React, { useEffect, useState, useContext } from "react";
 import MsgSent from './MsgSent';
 import Error404 from '../error/404';
 import './Msg.css';
-import logo from '../../assets/images/logo.tq.png';
+import logo from '../../assets/images/msg/PerfilTQ.png';
 import { InitContext } from '../../global/context/InitContext';
-
+import nubes from '../../assets/images/msg/nubes-azul.png'
+import nubes2 from '../../assets/images/msg/nubes-azul-2.png'
 export default function ({ match: { params } }) {
   const { state } = useContext(InitContext);
   params.username = params.username.toLowerCase();
@@ -55,7 +56,7 @@ function Success({ username, socket }) {
 
   const handleInputChange = async (e) => {
     const { value } = e.target;
-    if (' ' === value)
+    if (3 === value)
       return 0;
     else
       await setMsg(value);
@@ -66,12 +67,32 @@ function Success({ username, socket }) {
     const data = { username, msg }
     socket.emit('msg:send', data);
   }
-
+  function shoot() {
+    
+    if ( msg ==="") {
+      
+      var _btn = document.querySelector("button");
+      _btn.style.width = "35px";
+      _btn.style.color = "white"
+      console.log(msg);
+    } else{
+      var _btn = document.querySelector("button");
+      _btn.style.width = "0px";
+      _btn.style.color = "transparent"
+    }
+    
+  }
   return (
-    <div className="valign-wrapper" style={{ minHeight: '90vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <form onSubmit={handleFormSubmit}>
+    <div className="valign-wrapper" style={{ minHeight: '100vh', display: 'flex', flexDirection:'column', justifyContent: 'center',  background: 'linear-gradient(to top, white 82%, rgba(246,246,246,0.81) 62%, rgba(237,237,237,1) 497%)'}}>
+        <form onSubmit={handleFormSubmit} >
+       
           <div styleName="contenedor">
-            <div className="center" >
+          <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
+        <img 
+            src={nubes}
+            styleName="nube"
+             />
+      
               <img
                 className="responsive-image"
                 styleName="logoCloud"
@@ -79,13 +100,16 @@ function Success({ username, socket }) {
                 alt="logo"
                 draggable="false"
               />
-            </div>
+              <img 
+               style={{ margin: '-44px', height: '58px', zIndex: '1'}}
+            src={nubes2}
+             />
+             </div>
+            
             <div className="center">
-              {
-                sent 
-                ? <MsgSent />
-                :
+             
                 <div styleName="container2">
+                  <div styleName="sombra_perfil"></div>
                   <h3 
                     className="center" 
                     styleName="user"
@@ -98,7 +122,33 @@ function Success({ username, socket }) {
                     className="center"
                     styleName="secondRowText"
                   >Mensaje anonimo</h5>
-                  <div styleName="Desing" >
+                  
+                 
+                </div>
+          
+            </div>
+            
+          </div>
+          <div style={{display: "flex", justifyContent: "center", alignitems: 'flex-end',}}>
+                <img 
+               style={{width: '120px', height: '70px', }}
+            src={nubes2}
+            
+             />
+             <img 
+               style={{width: '120px', height: '70px', marginLeft: '93px'}}
+            src={nubes2}
+             />
+             </div>
+        <div styleName="Desing" >
+          
+        {
+                sent 
+                ? <MsgSent />
+                :
+                
+                <div styleName="Desing" >
+                  
                     <textarea
                       styleName="Input-msg"
                       type="text"
@@ -108,21 +158,29 @@ function Success({ username, socket }) {
                       placeholder="Escribe tu mensaje"
                       onChange={handleInputChange}
                       autoComplete="off"
+                      onInput={shoot}
                     />
-                  </div>
+                  
                   <button
                     type="submit"
                     className=" "
                     styleName="_btn-tq"
                   >
-                    Enviar;
+                    -3
                     <i className="material-icons right"></i>
                   </button>
-                </div>
-              }
-            </div>
-          </div>
-        </form>
+                  
+                 </div>
+}
+                  </div>
+                  </form>
+                 
+                  <div style={{display: "flex", justifyContent: "center", margin: "25px"}}>
+                  <img 
+            src={nubes}
+            style={{width: '120px', margin: '-41.5px', height: '70px', marginleft: '-77px', zIndex: '1'}}
+             />
+                  <div styleName="sombra_textarea"></div></div>
     </div>
   )
 }

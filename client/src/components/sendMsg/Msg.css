@@ -1,20 +1,21 @@
 .contenedor {
+    height: 328px;
     justify-content: center;
-    background:rgba(26, 26, 26, 0.75);
-    max-width: 600px; 
-    height: 420px !important;
-    margin-top: 7%;
-    border-radius: 72px;
-    -moz-border-radius: 72px;
-    -webkit-border-radius: 72px;
+    background-image: url('../../assets/images/msg/capa.png');
+    background-repeat: no-repeat;
+    background-size: 79% 327px;
+    background-position: center;
     text-align: center;
-    justify-self:center;
+    margin: 3.5%;
+
+}
     
-    }
     .container2{
         display: flex;
         flex-direction: column;
         align-items: center;
+        
+        
     }
 form{
     margin: 0 auto;
@@ -32,59 +33,53 @@ form{
         
     }
     ._btn-tq{
-        margin-top: 24px;
         font-family: 'Nunito', sans-serif;
         text-transform: none;
         box-shadow: rgb(0, 108, 119);
         border-radius: 1000px;
-        background-color: #00909E ; 
-        color:#fff;
-        width: 80px;
+        background-color: #00909E;
+        color: #fff;
+        width: 0px;
         height: 35px;
-    font-family: 'Nunito', sans-serif;
-     box-shadow: 0.2px 4px 0px 0px rgba(0,108,119,1);
-    }
-    .Desing{
-     background: white;
-        width: 78%;
-        height: 12.5rem;
-        border-radius: 1000px;
-    -moz-border-radius: 132px 132px 132px 132px;
-    -webkit-border-radius: 132px 132px 132px 132px;
-    border: 0px solid;
-      
+        font-family: 'Nunito', sans-serif;
+        box-shadow: 0.2px 4px 0px 0px rgba(0,108,119,1);
+        border-radius: 10px 78px 78px 0px;
+        -moz-border-radius: 10px 78px 78px 0px;
+        -webkit-border-radius: 10px 78px 78px 0px;
+        border: 0px solid #000000;
+        transition: 300ms;
+        color: transparent;
+        margin-top: -50px;
         
     }
+    
     .Input-msg{
-        max-width: 70%;
-        height: 110px !important;
+        width: 343px;
+        height: 135px !important;
         resize: none;
-        margin-top: 2.5%;
         font-family: 'Balsamiq Sans', cursive;
         border-color: #969696 !important;
-        
-        
-    }
-    .Input-msg:focus {
-         border: #969696 !important;
-         outline: none !important;
-         outline-width: 100% !important;
-         background-color:#d1ceceba ;
-         border-radius: 12px 12px 12px 12px;
-         -moz-border-radius: 22px 22px 22px 22px;
-          height: 8rem;
-          font-family: 'Dubai Light';;
-          font-size: 120%;
-         padding-right: 1.5rem;
-          padding-left: 1.5rem;
-          padding-top: 6px;
-    
+        border: #969696 !important;
+        outline: none !important;
+        background-color: #d4d4d4;
+        border-radius: 12px 12px 12px 12px;
+        -moz-border-radius: 22px 22px 22px 22px;
+        margin-left: 51px;
+        font-size: 120%;
+        padding-right: 1.5rem;
+        padding-left: 1.5rem;
+        padding-top: 6px;
+        margin-top: -58px
     }
     .Input-msg::placeholder {
         color: rgb(168, 164, 164);
         font-family: 'Dubai regular';
         
     }
+    .Input-msg::-webkit-scrollbar {
+        display: none;
+    }
+
     
     .firstRowText{
         color: #efebeb;
@@ -100,92 +95,39 @@ form{
        margin-bottom: 2px;
     }
     .logoCloud{
-        margin-top: -18.5%;
-        width: 30%;
+        width: 17%;
+        border-radius: 200px 200px 200px 200px;
+-moz-border-radius: 200px 200px 200px 200px;
+-webkit-border-radius: 200px 200px 200px 200px;
+border: 5px solid #000000;
+
+    }
+    .sombra_perfil{
+        background-color: #00000063;
+        width: 91px;
+        height: 9px;
+        margin: 25px;
+        border-radius: 50%;
+    }
+    .sombra_textarea{
+        background-color:#00000063;
+        width: 317px;
+        height: 6px;
+        border-radius: 50%;
+       
+    }
+    .Desing{
+            display: flex;
+        justify-content: center;
+        align-items: center;
+        }
+    .nube{
+        width: 120px;
+        /* margin: -51.5px; */
+        height: 70px;
+        z-index: 1;
+        margin-top: -28px;
+        margin-left: -80px;
+        position: absolute;
     }
     
-    @media only screen and (max-width: 533px){
-        .contenedor { 
-            max-width: 1000px;
-            height: 740px !important;
-            margin-left: 0%;
-            margin-top: 0%;
-            border-radius: 0px 0px 0px 0px;
-    -moz-border-radius: 0px 0px 0px 0px;
-    -webkit-border-radius: 0px 0px 0px 0px;
-    border: 0px solid #000000;
-            
-        }
-        .user{
-            margin-top: -3px;
-            
-        }
-        .firstRowText{
-            margin-top: 1px;
-        }
-        .logoCloud{
-            margin-top: 5%;
-            width: 40%;
-           
-        }
-        .Desing{
-            border-radius: 0px;
-            -moz-border-radius: 25px 25px 25px 25px;
-    -webkit-border-radius: 25px 25px 25px 25px;
-    border: 0px solid #000000;
-    width: 90%;
-    height: 11.5rem;
-    
-        }
-        .Input-msg:focus {
-            height: 12.5rem;
-        }
-        ._btn-tq{
-           min-height: -5px; 
-           min-width: 118px;
-           margin-top: 48px;
-        }
-    }
-    @media only screen and (max-width: 405px){
-        .contenedor { 
-            max-width: 1000px;
-            height: 55rem !important;
-            margin-left: 0%;
-            margin-top: 0%;
-            border-radius: 0px 0px 0px 0px;
-    -moz-border-radius: 0px 0px 0px 0px;
-    -webkit-border-radius: 0px 0px 0px 0px;
-    border: 0px solid #000000;
-            
-        }
-        .user{
-            margin-top: -3px;
-            font-size: 250%;
-        }
-        .firstRowText{
-            margin-top: -5px;
-        }
-        .logoCloud{
-            margin-top: 3%;
-            width: 40%;
-           
-        }
-        .Desing{
-            border-radius: 0px;
-            -moz-border-radius: 25px 25px 25px 25px;
-    -webkit-border-radius: 25px 25px 25px 25px;
-    border: 0px solid #000000;
-    width: 90%;
-    height: 11rem;
-    margin-left: 5%;
-    margin-top: 15px;
-        }
-        .Input-msg:focus {
-            height: 12.5rem;
-        }
-        ._btn-tq{
-           min-height: 48px; 
-           min-width: 118px;
-           margin-top: 48px;
-        }
-    }
