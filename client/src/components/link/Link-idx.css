@@ -2,11 +2,8 @@
     margin: 0;
     width: 100%;
     max-width: 2000px;
-}
-
-.section{
-    padding-top: 0;
-    padding-bottom: 6rem;
+    padding-bottom: 10px;
+    min-height: 89.9vh;
 }
 
 .row{
@@ -41,11 +38,15 @@
     left: -999em;
 }
 
+.a_btn-tq{
+    text-decoration: none;
+}
+
 ._btn-tq{
-    
-    margin-top: 15px;
+    display: inline-flex;
+    align-items: center;
+    margin-top: 3px;
     font-family: 'Nunito', sans-serif;
-    text-transform: none;
     box-shadow: 0px 4.5px rgb(88, 0, 3);
     border-radius: 1000px;
     background-color:#9E0004 !important;

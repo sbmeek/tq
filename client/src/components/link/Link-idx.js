@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux'
 import { InitContext } from '../../global/context/InitContext';
 import Alert from '../partials/Alert';
-import Slider from "./slider.js";
-import './slider.css';
+import Slider from "./Slider.js";
 import './Link-idx.css';
 
 const A = new Alert();
@@ -19,43 +18,25 @@ export default function LinkIdx() {
 
     useEffect(() => {
         (async () => {
-            if(user)
-                await setName(user.enteredname);
+            if(user) await setName(user.enteredname);
         })();
     }, [user]);
-
-    
 
     const copyLink = async () => {
         await setLink(`${window.location.origin}/${name}`);
         inputLink.current.select();
         inputLink.current.setSelectionRange(0, 99);
         document.execCommand("copy");
-        A.trigger(`${lang["AlertLinkCopied"]}.`, {
-          
-            btnLnk: btnLink.current,
-        });
+        A.trigger(`${lang["AlertLinkCopied"]}.`, { btnLnk: btnLink.current } );
     }
 
     return (
-        <div 
-            className="container section"
-            styleName="container section"
-        >
-           <div>
-               <Slider />
-           </div>
-           
-            <div 
-                className="center"
-            >
-                <div 
-                    className="col s12"
-                    styleName="col"
-                >
+        <div styleName="container">
+           <div><Slider /></div>
+            <div>
+                <div styleName="col">
                     <button 
                         type="button" 
-                        className="btn waves-effect waves-light"
                         styleName="btn-waves-effect-waves-light"
                         ref={btnLink}
                         onClick={copyLink}
@@ -74,11 +55,8 @@ export default function LinkIdx() {
                         readOnly={true}
                     />
                 </div>
-                <div 
-                    className="col s12"
-                    styleName="col"
-                >
-                    <Link to="/messages" >
+                <div styleName="col">
+                    <Link to="/messages" styleName="a_btn-tq">
                         <button 
                             type="button" 
                             styleName="_btn-tq"

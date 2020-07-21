@@ -7,127 +7,126 @@
     background-position: center;
     text-align: center;
     margin: 3.5%;
-
 }
-    
-    .container2{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        
-        
-    }
-form{
+
+.container2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form {
     margin: 0 auto;
+}
 
+.user {
+    padding: 2px;
+    color: #5BF0FF;
+    font-size: 264%;
+    margin-top: 0%;
+    position: flex;
+    font-family: 'Nunito', sans-serif;
+    margin-top: -19px;
+}
 
-    }
-.user{
-        padding: 2px;
-        color: #5BF0FF;
-        font-size: 264%;
-        margin-top: 0%;
-        position: flex;
-        font-family: 'Nunito', sans-serif;
-        margin-top: -19px;
-        
-    }
-    ._btn-tq{
-        font-family: 'Nunito', sans-serif;
-        text-transform: none;
-        box-shadow: rgb(0, 108, 119);
-        border-radius: 1000px;
-        background-color: #00909E;
-        color: #fff;
-        width: 0px;
-        height: 35px;
-        font-family: 'Nunito', sans-serif;
-        box-shadow: 0.2px 4px 0px 0px rgba(0,108,119,1);
-        border-radius: 10px 78px 78px 0px;
-        -moz-border-radius: 10px 78px 78px 0px;
-        -webkit-border-radius: 10px 78px 78px 0px;
-        border: 0px solid #000000;
-        transition: 300ms;
-        color: transparent;
-        margin-top: -50px;
-        
-    }
-    
-    .Input-msg{
-        width: 343px;
-        height: 135px !important;
-        resize: none;
-        font-family: 'Balsamiq Sans', cursive;
-        border-color: #969696 !important;
-        border: #969696 !important;
-        outline: none !important;
-        background-color: #d4d4d4;
-        border-radius: 12px 12px 12px 12px;
-        -moz-border-radius: 22px 22px 22px 22px;
-        margin-left: 51px;
-        font-size: 120%;
-        padding-right: 1.5rem;
-        padding-left: 1.5rem;
-        padding-top: 6px;
-        margin-top: -58px
-    }
-    .Input-msg::placeholder {
-        color: rgb(168, 164, 164);
-        font-family: 'Dubai regular';
-        
-    }
-    .Input-msg::-webkit-scrollbar {
-        display: none;
-    }
+._btn-tq {
+    font-family: 'Nunito', sans-serif;
+    text-transform: none;
+    box-shadow: rgb(0, 108, 119);
+    border-radius: 1000px;
+    background-color: #00909E;
+    color: #fff;
+    width: 0px;
+    height: 35px;
+    font-family: 'Nunito', sans-serif;
+    box-shadow: 0.2px 4px 0px 0px rgba(0, 108, 119, 1);
+    border-radius: 10px 78px 78px 0px;
+    -moz-border-radius: 10px 78px 78px 0px;
+    -webkit-border-radius: 10px 78px 78px 0px;
+    border: 0px solid #000000;
+    transition: 300ms;
+    color: transparent;
+    margin-top: -50px;
+}
 
-    
-    .firstRowText{
-        color: #efebeb;
-        color: white;
-        font-size: 106%;
-        margin-top: -2px;
-    }
-    .secondRowText{
-       color: #efebeb;
-       color: white;
-       font-size: 106%;
-       margin-top: -3px;
-       margin-bottom: 2px;
-    }
-    .logoCloud{
-        width: 17%;
-        border-radius: 200px 200px 200px 200px;
--moz-border-radius: 200px 200px 200px 200px;
--webkit-border-radius: 200px 200px 200px 200px;
-border: 5px solid #000000;
+.Input-msg {
+    width: 343px;
+    height: 135px !important;
+    resize: none;
+    font-family: 'Balsamiq Sans', cursive;
+    border-color: #969696 !important;
+    border: #969696 !important;
+    outline: none !important;
+    background-color: #d4d4d4;
+    border-radius: 12px 12px 12px 12px;
+    -moz-border-radius: 22px 22px 22px 22px;
+    margin-left: 51px;
+    font-size: 120%;
+    padding-right: 1.5rem;
+    padding-left: 1.5rem;
+    padding-top: 6px;
+    margin-top: -58px
+}
 
-    }
-    .sombra_perfil{
-        background-color: #00000063;
-        width: 91px;
-        height: 9px;
-        margin: 25px;
-        border-radius: 50%;
-    }
-    .sombra_textarea{
-        background-color:#00000063;
-        width: 317px;
-        height: 6px;
-        border-radius: 50%;
-       
-    }
-    .Desing{
-            display: flex;
-        justify-content: center;
-        align-items: center;
-        }
-    .nube{
-        width: 120px;
-        /* margin: -51.5px; */
-        height: 70px;
-        z-index: 1;
-        margin-top: -28px;
-        margin-left: -80px;
-        position: absolute;
-    }
-    
+.Input-msg::placeholder {
+    color: rgb(168, 164, 164);
+    font-family: 'Dubai regular';
+}
+
+.Input-msg::-webkit-scrollbar {
+    display: none;
+}
+
+.firstRowText {
+    color: #efebeb;
+    color: white;
+    font-size: 106%;
+    margin-top: -2px;
+}
+
+.secondRowText {
+    color: #efebeb;
+    color: white;
+    font-size: 106%;
+    margin-top: -3px;
+    margin-bottom: 2px;
+}
+
+.logoCloud {
+    width: 17%;
+    border-radius: 200px 200px 200px 200px;
+    -moz-border-radius: 200px 200px 200px 200px;
+    -webkit-border-radius: 200px 200px 200px 200px;
+    border: 5px solid #000000;
+}
+
+.sombra_perfil {
+    background-color: #00000063;
+    width: 91px;
+    height: 9px;
+    margin: 25px;
+    border-radius: 50%;
+}
+
+.sombra_textarea {
+    background-color: #00000063;
+    width: 317px;
+    height: 6px;
+    border-radius: 50%;
+}
+
+.Desing {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nube {
+    width: 120px;
+    /* margin: -51.5px; */
+    height: 70px;
+    z-index: 1;
+    margin-top: -28px;
+    margin-left: -80px;
+    position: absolute;
+}
