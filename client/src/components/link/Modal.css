@@ -32,3 +32,8 @@
     min-height: 17px;
     min-width: 17px;
 }
+
+@media only screen and (max-width: 780px){
+    .modal-container{ left: 0; }
+    .btn-close-modal{ left: 100%; }
+}

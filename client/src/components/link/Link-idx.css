@@ -137,7 +137,13 @@
         background: none;
         min-width: 300px;
     }
-    .section{
-        padding-bottom: 12rem;
-    }
+}
+
+@media only screen and (max-width:525px){
+    .col{ margin-top: 25px; }
+    .col:nth-child(1){ margin-top: 30px; }
+}
+
+@media only screen and (max-width: 410px){
+    .col:nth-child(1){ margin-top: 45px; }
 }
