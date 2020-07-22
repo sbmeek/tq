@@ -11,3 +11,17 @@ jobs:
       uses: actions/setup-node@v2.1.0
       with:
         node-version: 14.x
+        name: Continuous Integration
+  prettier:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        ref: ${{ github.head_ref }}
+
+    - name: Prettify code
+      uses: creyD/prettier_action@v2.2
+      with:
+        prettier_options: --write **/*.{js,md}
