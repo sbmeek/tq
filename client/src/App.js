@@ -33,10 +33,8 @@ export default function App() {
 
 	if (!isStatus500) {
 		if (!isLoaded) {
-			document.querySelector('#react-root').classList.add('d-scroll')
 			return <Loader />
 		} else {
-			document.querySelector('#react-root').classList.remove('d-scroll')
 			return (
 				<>
 					<Router>

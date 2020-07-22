@@ -20,16 +20,16 @@ export default function LinkIdx() {
 		dispatch,
 	} = useContext(InitContext)
 
-	useEffect(() => {
-		const setAsRendered = {
-			type: SET_IS_RENDERED,
-			payload: { isRendered: true },
-		}
-		window.addEventListener('load', () =>
-			setTimeout(() => dispatch(setAsRendered))
-		)
-		setTimeout(() => dispatch(setAsRendered), 9000)
-	}, [dispatch])
+	// useEffect(() => {
+	// 	const setAsRendered =
+	// 	window.addEventListener('load', () =>
+	// 		setTimeout(() => dispatch(setAsRendered))
+	// 	)
+
+	// 	return () => {
+	// 		window.removeEventListener('load', () => setTimeout(() => dispatch(setAsRendered)))
+	// 	}
+	// }, [dispatch])
 
 	useEffect(() => {
 		;(async () => {
@@ -45,7 +45,19 @@ export default function LinkIdx() {
 	}
 
 	return (
-		<div styleName="container">
+		<div
+			styleName="container"
+			onLoad={() =>
+				setTimeout(
+					() =>
+						dispatch({
+							type: SET_IS_RENDERED,
+							payload: { isRendered: true },
+						}),
+					205
+				)
+			}
+		>
 			<div>
 				<Slider />
 			</div>
