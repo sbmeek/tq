@@ -6,12 +6,15 @@
 -Being developed by TQ Team. A SB-Meek's team.
 
 # TQ (Idea ¿Versión beta?)
+
 Aquí estaremos desglosando cada funcionalidad de la aplicación, para mayor entendimiento y uso de la misma, las definiciones estarán por orden de página:
 
 ### Página Principal
+
 Esta cuenta con la opción de registro o inicio de sesión, por lo tanto, se encuentra un input en el cual se validará la información de registro o inicio, también cuenta con 3 botones cuya función es dirigir a la página que se le haya asignado, una vez el usuario sea creado con él usuario se crearan tres páginas únicas que son: **link**, **bandeja** y **mensajes anónimos de envió al usuario**.
 
 ### Aquí está cada botón de la página principal y su funcionalidad
+
 **BANDEJA:** En este apartado se encontrará el buzón de mensajes anónimos, dichos mensajes cuentan con plantillas donde se puede escribir respuestas o comentarios acerca del mensaje, dicha plantilla puede ser cambiada, según se desee o guste dentro nuestro catálogo, esta página también ofrecerá la opción de eliminar usuario.
 
 **CONTACTOS:** En este apartado estarán los medios de contactos de la empresa y también un buzón de bug, quejas, opiniones, para así tener una calificación exacta de las personas que usan dicha página.
@@ -19,9 +22,11 @@ Esta cuenta con la opción de registro o inicio de sesión, por lo tanto, se enc
 **AYUDA:** En este apartado se encontrará el manual de ayuda, en el estará toda la información acerca del uso y restricción de la página.
 
 ### Autenticación
-Cabe destacar que en este apartado se la validara la información proveniente del usuario, y para mayor entendimiento de este una vez se valide y pase a la siguiente página este recibirá una alerta diciendo que ha sido registrado temporalmente y que su cuenta automáticamente expirara cuando no le de un uso continuo, también aclarando que en la siguiente página podrá copiar un link con el cual podrá recibir mensajes anónimos una vez lo comparta en sus redes sociales. Una vez el usuario que acepte el aviso se accederá a la siguiente página: 
+
+Cabe destacar que en este apartado se la validara la información proveniente del usuario, y para mayor entendimiento de este una vez se valide y pase a la siguiente página este recibirá una alerta diciendo que ha sido registrado temporalmente y que su cuenta automáticamente expirara cuando no le de un uso continuo, también aclarando que en la siguiente página podrá copiar un link con el cual podrá recibir mensajes anónimos una vez lo comparta en sus redes sociales. Una vez el usuario que acepte el aviso se accederá a la siguiente página:
 
 ### Link (Pantalla)
+
 Esta página cuenta con dos únicos botones y un slider promocional donde se le dice al usuario opciones de uso y funcionalidades. Los botones son los siguientes:
 
 **COPIAR LINK:** Este botón te permite copiar un acceso a la página única de mensajes anónimos de envió al usuario, este acceso será compartido por el usuario en sus redes sociales para que así usuarios anónimos puedan acceder a dicha página y dejar el mensaje o pregunta deseada.
@@ -29,6 +34,7 @@ Esta página cuenta con dos únicos botones y un slider promocional donde se le 
 **BANDEJA:** Este botón definido anteriormente cuenta con un espacio en esta pagina para la satisfacción y mejor experiencia del usuario.
 
 ### Usuario Anónimo
+
 Usuario anónimo cuenta con una única página con la cual únicamente se puede acceder por vía del link que el usuario principal comparta en sus redes sociales. Dicha página la llamaremos: **mensajes anónimos de envió al usuario**.
 
 Esta pagina cuenta con un input cuya función es aceptar el mensaje o pregunta de usuario anónimo y enviarlo de forma directa al usuario dueño de dicha página única. Una vez el mensaje se ha enviado se le notificará al usuario anónimo que el envío fue satisfactorio y se limpiará la página para que así pueda volver a enviar un mensaje.<br/>
@@ -57,12 +63,11 @@ Se debe de tener en cuenta que solo puedes iniciar sesión en el dispositivo en 
 Actualmente tu usuario estará infinito mientras lo uses constantemente, pero si duras un limite de 4 dias tu cuenta pasara a estar expirada o inactiva.
 En actualizaciones futuras podrás crearte una cuenta donde podrás iniciar sin problemas y de manera indefinida.
 
-
 **¿Dónde se guardan mis mensajes y si estarán ahí indefinidamente mientras no expire mi usuario?**
 
 Tu usuario guarda tus mensajes en una carpeta única para ti en nuestra base de datos donde estarán 100% seguros, POR TIEMPO LIMITADO.
 Tus mensajes al igual que tu usuario tendrá una fecha de expiración que se actualizara cada vez que abras el mensaje, una vez un mensaje ya tenga un tiempo sin abrirse se mandara a la papelera de la base de datos y de ahí en 24 horas el mensaje quedara eliminado definitivamente.
-OJO: si nunca has abierto el mensaje se quedará ahí hasta que lo abras, una vez abierto por primera vez se le asignara una fecha de expiración que se actualizara cada vez que abras el mensaje 
+OJO: si nunca has abierto el mensaje se quedará ahí hasta que lo abras, una vez abierto por primera vez se le asignara una fecha de expiración que se actualizara cada vez que abras el mensaje
 
 **COMPARTIDO:** Tus mensajes los podrás responder y borrar cuando quieras, podrá compartir tus respuestas atreves del enlace de compartir que tendrá la plantilla, así pudiendo subir tus mensajes y respuestas a las storys de tus redes sociales, para que el usuario anónimo que te dejo un mensaje o pregunta, vea tu respuesta y talvez te responda atreves de otro mensaje, ordenando los mensajes de forma que otras aplicaciones no pueden.
 
@@ -74,7 +79,7 @@ Utilizaremos [SemVer](https://semver.org), es decir el **versionado semántico**
 
 Sin embargo, para llevar un control de los cambios realizados (entre otros motivos no listados, tales como **marketing**), se partirá desde este punto y/o versión **0.1.183**.
 
->**0** ya que ninguna versión ha salido a producción hasta este momento (2020-04-28T03:17:34.263Z). **1** y **183** tomando en cuenta todos los cambios que se realizaron en el antiguo repositorio (**0.1.183** como un punto inicial).
+> **0** ya que ninguna versión ha salido a producción hasta este momento (2020-04-28T03:17:34.263Z). **1** y **183** tomando en cuenta todos los cambios que se realizaron en el antiguo repositorio (**0.1.183** como un punto inicial).
 
 ### En conclusión: X.Y.Z
 

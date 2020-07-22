@@ -1,46 +1,44 @@
 import React, { useEffect, useContext } from 'react'
-import { Route, Redirect } from "react-router-dom";
-import { useSelector } from 'react-redux';
-import Loader from '../components/partials/Loader';
+import { Route, Redirect } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import Loader from '../components/partials/Loader'
 
 // Context
-import { InitContext, SET_IS_RENDERED } from '../global/context/InitContext';
+import { InitContext, SET_IS_RENDERED } from '../global/context/InitContext'
 
-export default function({component: Component, needsRenderTime, ...rest }) {
-    const { auth: { isAuthenticated, isLoaded } } = useSelector(store => store);
-    const { state, dispatch } = useContext(InitContext);
+export default function ({ component: Component, needsRenderTime, ...rest }) {
+	const {
+		auth: { isAuthenticated, isLoaded },
+	} = useSelector((store) => store)
+	const { state, dispatch } = useContext(InitContext)
 
-    useEffect(() => {
-        dispatch({
-            type: SET_IS_RENDERED,
-            payload: {
-                isRendered: !needsRenderTime
-            }
-        });
-    }, [dispatch, needsRenderTime]);
+	useEffect(() => {
+		dispatch({
+			type: SET_IS_RENDERED,
+			payload: {
+				isRendered: !needsRenderTime,
+			},
+		})
+	}, [dispatch, needsRenderTime])
 
-    return (
-        <>
-        {
-            !isLoaded
-            ? <Loader/>
-            : !state.isRendered && <Loader />
-        }
-            <Route
-                {...rest}
-                render={(props) => 
-                (
-                    !isAuthenticated ? 
-                    <Redirect
-                        to={{ 
-                            pathname: rest.redirectTo, 
-                            state: { from: props.location } 
-                        }}
-                    /> :
-                    <Component />
-                )
-            }
-            />
-        </>
-    )
+	return (
+		<>
+			{!isLoaded ? <Loader /> : !state.isRendered && <Loader />}
+			<Route
+				{...rest}
+				render={(props) =>
+					!isAuthenticated ? (
+						<Redirect
+							to={{
+								pathname: rest.redirectTo,
+								state: { from: props.location },
+							}}
+						/>
+					) : (
+						<Component />
+					)
+				}
+			/>
+		</>
+	)
 }

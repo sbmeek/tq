@@ -1,62 +1,55 @@
 .send {
-   
-    color: #0aff0a;
-    font-size: 26px
-    
+	color: #0aff0a;
+	font-size: 26px;
 }
 P {
-    color: green;
-    font-size: 15px;
+	color: green;
+	font-size: 15px;
 }
-.h3{
-    font-family: 'Nunito', sans-serif;
-    color: #ffff;
-    
+.h3 {
+	font-family: 'Nunito', sans-serif;
+	color: #ffff;
 }
-.h3-2{
-    font-family: 'Nunito', sans-serif;
-    color: #ffff;
-    
+.h3-2 {
+	font-family: 'Nunito', sans-serif;
+	color: #ffff;
 }
 
-._btn-tq{
-    margin-top: 10px;
-    font-family: 'Nunito', sans-serif;
-    text-transform: none;
-    box-shadow: rgb(0, 108, 119);
-    border-radius: 1000px;
-    background-color: #00909E ; 
-    color:#fff;
-    width: 102px;
-    height: 46px;
- box-shadow: 0.2px 4px 0px 0px rgba(0,108,119,1);
+._btn-tq {
+	margin-top: 10px;
+	font-family: 'Nunito', sans-serif;
+	text-transform: none;
+	box-shadow: rgb(0, 108, 119);
+	border-radius: 1000px;
+	background-color: #00909e;
+	color: #fff;
+	width: 102px;
+	height: 46px;
+	box-shadow: 0.2px 4px 0px 0px rgba(0, 108, 119, 1);
 }
 
-@media only screen and (max-width: 533px){
-    ._btn-tq{
-        height: 53px;
-        font-size: 20px;
-        width: 129px;
-        height: 68px;
-    } 
-    .send{
-        font-size: 32px;
-    }
-    a {
-        font-size: 19px;
-    }
-    
+@media only screen and (max-width: 533px) {
+	._btn-tq {
+		height: 53px;
+		font-size: 20px;
+		width: 129px;
+		height: 68px;
+	}
+	.send {
+		font-size: 32px;
+	}
+	a {
+		font-size: 19px;
+	}
 }
-@media only screen and (max-width: 386px){
-
-.h3{
-font-size: 257%;
+@media only screen and (max-width: 386px) {
+	.h3 {
+		font-size: 257%;
+	}
+	.h3-2 {
+		font-size: 257%;
+	}
+	p span {
+		font-size: 15px;
+	}
 }
-.h3-2{
- font-size: 257%;
-}
-p span{
-    font-size: 15px;
-}
-}
-
