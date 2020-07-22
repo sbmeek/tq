@@ -1,84 +1,90 @@
-*, *::before, *::after {
-    -webkit-appearance: none;
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    border: 0;
+*,
+*::before,
+*::after {
+	-webkit-appearance: none;
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	border: 0;
 }
 
 :root {
-    --tq-bg-00: #191616;
-    --tq-dark-gray-00: rgb(40, 40, 40);
-    --tq-dark-gray-01: rgb(55, 55, 55);
-    --tq-dark-gray-02: rgb(60, 59, 59);
-    --tq-gray-00: rgb(125, 125, 125);
-    --tq-gray-01: rgb(145, 145, 145);
-    --tq-gray-02: rgb(165, 165, 165);
-    --tq-input-placeholder: rgb(191, 191, 191);
-    --tq-red-00: rgb(169, 20, 20);
-    --tq-red-01: rgb(160, 14, 14);
-    --tq-red-02: rgb(172, 0, 0);
-    --tq-red-03: rgb(108, 14, 14);
+	--tq-bg-00: #191616;
+	--tq-dark-gray-00: rgb(40, 40, 40);
+	--tq-dark-gray-01: rgb(55, 55, 55);
+	--tq-dark-gray-02: rgb(60, 59, 59);
+	--tq-gray-00: rgb(125, 125, 125);
+	--tq-gray-01: rgb(145, 145, 145);
+	--tq-gray-02: rgb(165, 165, 165);
+	--tq-input-placeholder: rgb(191, 191, 191);
+	--tq-red-00: rgb(169, 20, 20);
+	--tq-red-01: rgb(160, 14, 14);
+	--tq-red-02: rgb(172, 0, 0);
+	--tq-red-03: rgb(108, 14, 14);
 }
 
-input[type=text], input[type=email], input[type=tel], input[type=url], input[type=search] {
-    appearance: none;
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    border-radius: 0;
-    box-shadow: none;
+input[type='text'],
+input[type='email'],
+input[type='tel'],
+input[type='url'],
+input[type='search'] {
+	appearance: none;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	border-radius: 0;
+	box-shadow: none;
 }
 
 body {
-    background-image: url(./assets/images/fon-b.jpg);
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
+	background-image: url(./assets/images/fon-b.jpg);
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
 }
 
 .page-footer {
-    display: flex;
-    justify-content: center;
-    max-height: 63px;
-    min-height: 63px;
-    overflow: hidden;
-    font-family: 'Nunito', sans-serif;
-    font-size: 20px;
-    color: #ccc !important;
-    background-color: #1b1b1b !important;
-    padding-top: 0!important;
+	display: flex;
+	justify-content: center;
+	max-height: 63px;
+	min-height: 63px;
+	overflow: hidden;
+	font-family: 'Nunito', sans-serif;
+	font-size: 20px;
+	color: #ccc !important;
+	background-color: #1b1b1b !important;
+	padding-top: 0 !important;
 }
 
 .footer-sbm {
-    display: inline-block;
-    color: #ccc !important;
-    font-size: 20px !important;
-    margin-top: 10px;
+	display: inline-block;
+	color: #ccc !important;
+	font-size: 20px !important;
+	margin-top: 10px;
 }
 
 .footer-text {
-    color: #ccc !important;
-    font-size: 16px !important;
-    margin: 0;
+	color: #ccc !important;
+	font-size: 16px !important;
+	margin: 0;
 }
 
 :global .d-scroll {
-    height: 100vh;
-    overflow: hidden;
+	height: 100vh;
+	overflow: hidden;
 }
 
 :global .d-text-select {
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 :global #react-root {
-    min-height: 100vh;
+	min-height: 100vh;
 }
 
-button:focus{
-    outline: none !important;
+button:focus {
+	outline: none !important;
 }
