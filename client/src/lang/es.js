@@ -10,7 +10,7 @@ export default {
     Link: {
         "BtnCopyLink": "Copia tu link aquí",
         "BtnInbox": "Bandeja",
-        "AlertLinkCopied": "Ha copiado el enlace de su cuenta de TQ, puede compartirlo en sus redes sociales y recibir mensajes anónimos de sus amigos, conocidos y seguidores"
+        "AlertLinkCopied": 'Tu link sirve para recibir <span style="color: var(--tq-red-03);">mensajes anónimos en bandeja</span>. Compártelo en tus <span style="color: var(--tq-red-03);">redes sociales</span>'
     },
     Inbox: {
         "NoMessagesInfo": "Aún no hay nada aquí :(",

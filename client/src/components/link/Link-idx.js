@@ -2,17 +2,16 @@ import React, { useRef, useEffect, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux'
 import { InitContext } from '../../global/context/InitContext';
-import Alert from '../partials/Alert';
 import Slider from "./Slider.js";
+import Modal from './Modal';
 import './Link-idx.css';
-
-const A = new Alert();
 
 export default function LinkIdx() {
     const inputLink = useRef(null);
     const { user } = useSelector(store => store.auth);
     const [name, setName] = useState('');
     const [link, setLink] = useState('');
+    const [showModal, setShowModal] = useState(false);
     const btnLink = useRef(null);
     const { state: { lang: { Link: lang } } } = useContext(InitContext);
 
@@ -27,7 +26,8 @@ export default function LinkIdx() {
         inputLink.current.select();
         inputLink.current.setSelectionRange(0, 99);
         document.execCommand("copy");
-        A.trigger(`${lang["AlertLinkCopied"]}.`, { btnLnk: btnLink.current } );
+        // setShowModal(true);
+        // A.trigger(`${lang["AlertLinkCopied"]}.`, { btnLnk: btnLink.current } );
     }
 
     return (
@@ -35,17 +35,29 @@ export default function LinkIdx() {
            <div><Slider /></div>
             <div>
                 <div styleName="col">
-                    <button 
-                        type="button" 
-                        styleName="btn-waves-effect-waves-light"
-                        ref={btnLink}
-                        onClick={copyLink}
-                    >
-                        {lang["BtnCopyLink"]}
-                        <i className="material-icons right">
-                            link
-                        </i>
-                    </button>
+                    <div styleName="col-inner-container">
+                        <button 
+                            type="button" 
+                            styleName="btn-waves-effect-waves-light"
+                            ref={btnLink}
+                            onClick={copyLink}
+                        >
+                            {lang["BtnCopyLink"]}
+                            <i className="material-icons right">
+                                link
+                            </i>
+                        </button>
+                        <button 
+                            styleName="btn-copied-link-help"
+                            onClick={() => setShowModal(true)}
+                            style={ { visibility: !showModal ? 'visible' : 'hidden', } }
+                        >?</button>
+                        <Modal 
+                            modalTxt={`${lang["AlertLinkCopied"]}.`}
+                            showModal={showModal}
+                            setShowModal={setShowModal}
+                        />
+                    </div>
                     <input 
                         type="text" 
                         value={link}

@@ -10,7 +10,7 @@ export default {
     Link: {
         "BtnCopyLink": "Copy your link here",
         "BtnInbox": "Inbox",
-        "AlertLinkCopied": "You have copied your TQ's account link, you can share it in your social networks and receive anonymous messages from your friends, knowns and followers"
+        "AlertLinkCopied": 'Your link is used to receive <span style="color: var(--tq-red-03);">anonymous messages in inbox</span>. Share it on your <span style="color: var(--tq-red-03);">social networks</span>'
     },
     Inbox: {
         "NoMessagesInfo": "There isn't nothing here yet :(",
