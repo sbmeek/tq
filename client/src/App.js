@@ -29,11 +29,17 @@ function App() {
     }
   }, [user, socket])
 
+  const toggleRootScroll = () => {
+    document.querySelector('#react-root').classList.toggle('d-scroll');
+  }
+
   if(!isStatus500){
     if(!isLoaded){
+      toggleRootScroll();
       return <Loader />
     }
     else {
+      toggleRootScroll();
       return (
         <>
           <Router>
@@ -50,7 +56,7 @@ function App() {
                   redirectTo="/"
                 />
                 <AuthRoute 
-                  needsRenderTime={false} 
+                  needsRenderTime={true} 
                   path="/link" 
                   component={UserLink} 
                   redirectTo="/"

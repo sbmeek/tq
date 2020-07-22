@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux'
-import { InitContext } from '../../global/context/InitContext';
+import { InitContext, SET_IS_RENDERED } from '../../global/context/InitContext';
 import Slider from "./Slider.js";
 import Modal from './Modal';
 import './Link-idx.css';
@@ -13,7 +13,16 @@ export default function LinkIdx() {
     const [link, setLink] = useState('');
     const [showModal, setShowModal] = useState(false);
     const btnLink = useRef(null);
-    const { state: { lang: { Link: lang } } } = useContext(InitContext);
+    const { state: { lang: { Link: lang } }, dispatch } = useContext(InitContext);
+
+    useEffect(() => {
+        const setAsRendered = {
+            type: SET_IS_RENDERED,
+            payload: { isRendered: true }
+        }
+        window.addEventListener('load', () => setTimeout( () => dispatch(setAsRendered)));
+        setTimeout(() => dispatch(setAsRendered), 9000);
+    }, [])
 
     useEffect(() => {
         (async () => {
@@ -26,8 +35,6 @@ export default function LinkIdx() {
         inputLink.current.select();
         inputLink.current.setSelectionRange(0, 99);
         document.execCommand("copy");
-        // setShowModal(true);
-        // A.trigger(`${lang["AlertLinkCopied"]}.`, { btnLnk: btnLink.current } );
     }
 
     return (
