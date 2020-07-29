@@ -32,14 +32,12 @@ form {
 ._btn-tq {
 	font-family: 'Nunito', sans-serif;
 	text-transform: none;
-	box-shadow: rgb(0, 108, 119);
 	border-radius: 1000px;
 	background-color: #00909e;
 	color: #fff;
 	width: 0px;
 	height: 35px;
 	font-family: 'Nunito', sans-serif;
-	box-shadow: 0.2px 4px 0px 0px rgba(0, 108, 119, 1);
 	border-radius: 10px 78px 78px 0px;
 	-moz-border-radius: 10px 78px 78px 0px;
 	-webkit-border-radius: 10px 78px 78px 0px;
@@ -66,6 +64,7 @@ form {
 	padding-left: 1.5rem;
 	padding-top: 6px;
 	margin-top: -58px;
+	z-index: 1;
 }
 
 .Input-msg::placeholder {
@@ -101,15 +100,15 @@ form {
 }
 
 .sombra_perfil {
-	background-color: #00000063;
-	width: 91px;
+	background-color: #00000021;
+	width: 163px;
 	height: 9px;
 	margin: 25px;
 	border-radius: 50%;
 }
 
 .sombra_textarea {
-	background-color: #00000063;
+	background-color: #00000021;
 	width: 317px;
 	height: 6px;
 	border-radius: 50%;
@@ -122,11 +121,10 @@ form {
 }
 
 .nube {
-	width: 120px;
-	/* margin: -51.5px; */
-	height: 70px;
-	z-index: 1;
-	margin-top: -28px;
-	margin-left: -80px;
-	position: absolute;
+	width: 80px;
+    height: 55px;
+    z-index: 1;
+    margin-top: -28px;
+    margin-left: -104px;
+    position: absolute;
 }

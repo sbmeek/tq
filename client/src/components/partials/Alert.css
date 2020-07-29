@@ -13,15 +13,8 @@
 	animation-play-state: paused;
 }
 /* stylelint-disable */
-@keyframes: global(almost) {
-	0% {
-		opacity: 1;
-		/* transform: rotate(0.5turn); */
-	}
-	100% {
-		opacity: 0;
-	}
-}
+
+
 /* stylelint-enable */
 
 :global #alertoverlay {

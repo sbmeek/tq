@@ -73,6 +73,9 @@ function Success({ username, socket }) {
 	}
 
 	return (
+		<div>{sent ? (
+			<MsgSent />
+		) : (
 		<div
 			className="valign-wrapper"
 			style={{
@@ -81,7 +84,7 @@ function Success({ username, socket }) {
 				flexDirection: 'column',
 				justifyContent: 'center',
 				background:
-					'linear-gradient(to top, white 82%, rgba(246,246,246,0.81) 62%, rgba(237,237,237,1) 497%)',
+					'linear-gradient(to top, white 80.5%, rgba(246,246,246,0.81) 62%, rgba(237,237,237,1) 497%)',
 			}}
 		>
 			<form onSubmit={handleFormSubmit}>
@@ -93,7 +96,7 @@ function Success({ username, socket }) {
 							justifyContent: 'center',
 						}}
 					>
-						<img src={nubes} styleName="nube" />
+						<img src={nubes2} styleName="nube" />
 
 						<img
 							className="responsive-image"
@@ -104,11 +107,15 @@ function Success({ username, socket }) {
 						/>
 						<img
 							style={{
-								margin: '-44px',
-								height: '58px',
-								zIndex: '1',
+								margin: '-34px',
+    height:'70px',
+    zindex: '1',
+    marginLeft: '90px',
+    transform: 'scaleX(-1)',
+    position: 'absolute'
+
 							}}
-							src={nubes2}
+							src={nubes}
 						/>
 					</div>
 
@@ -132,22 +139,23 @@ function Success({ username, socket }) {
 						display: 'flex',
 						justifyContent: 'center',
 						alignitems: 'flex-end',
+						marginTop: '-13px'
 					}}
 				>
-					<img style={{ width: '120px', height: '70px' }} src={nubes2} />
+					<img style={{ width: '120px', height: '70px', transform: 'scaleX(-1)' }} src={nubes2} />
 					<img
 						style={{
-							width: '120px',
+							width: '130px',
 							height: '70px',
-							marginLeft: '93px',
+							marginLeft: '105px',
+							marginTop: '-7px'
+
 						}}
-						src={nubes2}
+						src={nubes}
 					/>
 				</div>
 				<div styleName="Desing">
-					{sent ? (
-						<MsgSent />
-					) : (
+					
 						<div styleName="Desing">
 							<textarea
 								styleName="Input-msg"
@@ -166,7 +174,7 @@ function Success({ username, socket }) {
 								<i className="material-icons right"></i>
 							</button>
 						</div>
-					)}
+					
 				</div>
 			</form>
 
@@ -189,6 +197,8 @@ function Success({ username, socket }) {
 				/>
 				<div styleName="sombra_textarea"></div>
 			</div>
+		</div>
+		)}
 		</div>
 	)
 }

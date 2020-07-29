@@ -1,31 +1,41 @@
-.send {
-	color: #0aff0a;
-	font-size: 26px;
-}
+
 P {
-	color: green;
+	color: #45b7ca;
 	font-size: 15px;
 }
-.h3 {
+.H3 {
 	font-family: 'Nunito', sans-serif;
 	color: #ffff;
+	font-size: -webkit-xxx-large ;
+
 }
-.h3-2 {
-	font-family: 'Nunito', sans-serif;
+.H3-2 {
+	font-family: Nunito, sans-serif;
 	color: #ffff;
+	font-size: -webkit-xxx-large;
+	margin-top: -15px;
 }
 
 ._btn-tq {
 	margin-top: 10px;
 	font-family: 'Nunito', sans-serif;
 	text-transform: none;
-	box-shadow: rgb(0, 108, 119);
 	border-radius: 1000px;
-	background-color: #00909e;
+	background-color: #9e0004;
 	color: #fff;
 	width: 102px;
-	height: 46px;
-	box-shadow: 0.2px 4px 0px 0px rgba(0, 108, 119, 1);
+	height: 36px;
+	box-shadow: 0.2px 4px 0px 0px rgb(88, 0, 3);
+}
+.perfil {
+	background-color: #c3c3c321;
+	width: 163px;
+	height: 9px;
+	margin-top: 15px;
+	border-radius: 50%;
+	display: flex;
+	flex-direction: column;
+	text-align: center;
 }
 
 @media only screen and (max-width: 533px) {
