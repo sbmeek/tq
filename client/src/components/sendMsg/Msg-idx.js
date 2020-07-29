@@ -73,132 +73,136 @@ function Success({ username, socket }) {
 	}
 
 	return (
-		<div>{sent ? (
-			<MsgSent />
-		) : (
-		<div
-			className="valign-wrapper"
-			style={{
-				minHeight: '100vh',
-				display: 'flex',
-				flexDirection: 'column',
-				justifyContent: 'center',
-				background:
-					'linear-gradient(to top, white 80.5%, rgba(246,246,246,0.81) 62%, rgba(237,237,237,1) 497%)',
-			}}
-		>
-			<form onSubmit={handleFormSubmit}>
-				<div styleName="contenedor">
+		<div>
+			{sent ? (
+				<MsgSent />
+			) : (
+				<div
+					className="valign-wrapper"
+					style={{
+						minHeight: '100vh',
+						display: 'flex',
+						flexDirection: 'column',
+						justifyContent: 'center',
+						background:
+							'linear-gradient(to top, white 80.5%, rgba(246,246,246,0.81) 62%, rgba(237,237,237,1) 497%)',
+					}}
+				>
+					<form onSubmit={handleFormSubmit}>
+						<div styleName="contenedor">
+							<div
+								style={{
+									display: 'flex',
+									flexDirection: 'row',
+									justifyContent: 'center',
+								}}
+							>
+								<img src={nubes2} styleName="nube" />
+
+								<img
+									className="responsive-image"
+									styleName="logoCloud"
+									src={logo}
+									alt="logo"
+									draggable="false"
+								/>
+								<img
+									style={{
+										margin: '-34px',
+										height: '70px',
+										zindex: '1',
+										marginLeft: '90px',
+										transform: 'scaleX(-1)',
+										position: 'absolute',
+									}}
+									src={nubes}
+								/>
+							</div>
+
+							<div className="center">
+								<div styleName="container2">
+									<div styleName="sombra_perfil"></div>
+									<h3 className="center" styleName="user">
+										{username}
+									</h3>
+									<h5 className="center" styleName="firstRowText">
+										te invitó a que le dejes un
+									</h5>
+									<h5 className="center" styleName="secondRowText">
+										Mensaje anonimo
+									</h5>
+								</div>
+							</div>
+						</div>
+						<div
+							style={{
+								display: 'flex',
+								justifyContent: 'center',
+								alignitems: 'flex-end',
+								marginTop: '-13px',
+							}}
+						>
+							<img
+								style={{
+									width: '120px',
+									height: '70px',
+									transform: 'scaleX(-1)',
+								}}
+								src={nubes2}
+							/>
+							<img
+								style={{
+									width: '130px',
+									height: '70px',
+									marginLeft: '105px',
+									marginTop: '-7px',
+								}}
+								src={nubes}
+							/>
+						</div>
+						<div styleName="Desing">
+							<div styleName="Desing">
+								<textarea
+									styleName="Input-msg"
+									type="text"
+									name="msg"
+									value={msg}
+									id="msg"
+									placeholder="Escribe tu mensaje"
+									onChange={handleInputChange}
+									autoComplete="off"
+									onInput={shoot}
+								/>
+
+								<button type="submit" ref={btnSubmitMsg} styleName="_btn-tq">
+									-3
+									<i className="material-icons right"></i>
+								</button>
+							</div>
+						</div>
+					</form>
+
 					<div
 						style={{
 							display: 'flex',
-							flexDirection: 'row',
 							justifyContent: 'center',
+							margin: '25px',
 						}}
 					>
-						<img src={nubes2} styleName="nube" />
-
 						<img
-							className="responsive-image"
-							styleName="logoCloud"
-							src={logo}
-							alt="logo"
-							draggable="false"
-						/>
-						<img
-							style={{
-								margin: '-34px',
-    height:'70px',
-    zindex: '1',
-    marginLeft: '90px',
-    transform: 'scaleX(-1)',
-    position: 'absolute'
-
-							}}
 							src={nubes}
+							style={{
+								width: '120px',
+								margin: '-41.5px',
+								height: '70px',
+								marginleft: '-77px',
+								zIndex: '1',
+							}}
 						/>
-					</div>
-
-					<div className="center">
-						<div styleName="container2">
-							<div styleName="sombra_perfil"></div>
-							<h3 className="center" styleName="user">
-								{username}
-							</h3>
-							<h5 className="center" styleName="firstRowText">
-								te invitó a que le dejes un
-							</h5>
-							<h5 className="center" styleName="secondRowText">
-								Mensaje anonimo
-							</h5>
-						</div>
+						<div styleName="sombra_textarea"></div>
 					</div>
 				</div>
-				<div
-					style={{
-						display: 'flex',
-						justifyContent: 'center',
-						alignitems: 'flex-end',
-						marginTop: '-13px'
-					}}
-				>
-					<img style={{ width: '120px', height: '70px', transform: 'scaleX(-1)' }} src={nubes2} />
-					<img
-						style={{
-							width: '130px',
-							height: '70px',
-							marginLeft: '105px',
-							marginTop: '-7px'
-
-						}}
-						src={nubes}
-					/>
-				</div>
-				<div styleName="Desing">
-					
-						<div styleName="Desing">
-							<textarea
-								styleName="Input-msg"
-								type="text"
-								name="msg"
-								value={msg}
-								id="msg"
-								placeholder="Escribe tu mensaje"
-								onChange={handleInputChange}
-								autoComplete="off"
-								onInput={shoot}
-							/>
-
-							<button type="submit" ref={btnSubmitMsg} styleName="_btn-tq">
-								-3
-								<i className="material-icons right"></i>
-							</button>
-						</div>
-					
-				</div>
-			</form>
-
-			<div
-				style={{
-					display: 'flex',
-					justifyContent: 'center',
-					margin: '25px',
-				}}
-			>
-				<img
-					src={nubes}
-					style={{
-						width: '120px',
-						margin: '-41.5px',
-						height: '70px',
-						marginleft: '-77px',
-						zIndex: '1',
-					}}
-				/>
-				<div styleName="sombra_textarea"></div>
-			</div>
-		</div>
-		)}
+			)}
 		</div>
 	)
 }
