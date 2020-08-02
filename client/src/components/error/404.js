@@ -3,7 +3,7 @@ import logo from '../../assets/images/logo.png'
 import './404.css'
 export default function () {
 	return (
-		<div className="main valign-wrapper" style={{ minHeight: '90vh' }}>
+		<div className="main valign-wrapper" style={{ minHeight: '90vh', display: 'flex', alignItems: 'center' }}>
 			<div styleName="contenedor">
 				<div>
 					<img

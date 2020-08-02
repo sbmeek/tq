@@ -27,11 +27,11 @@
 	width: 100%;
 }
 
-/* .contenedor>div>span{
-    
-} */
-
 .insidetext {
+	display: flex;
+    flex-direction: column;
+	justify-content: center;
+	padding-bottom: 19px;
 	max-width: 570px;
 	width: 100%;
 	margin: 0 0 0 20%;
@@ -40,11 +40,6 @@
 	font-size: 28px;
 	text-align: left;
 }
-
-/* #insidetext>span,
-#insidetext>h2{
-    float:left;
-} */
 
 .firstRowText {
 	display: inline-block;
@@ -55,7 +50,41 @@
 .secondRowText {
 	display: inline-block;
 	word-wrap: break-word;
-	font-size: 12.5px;
+	font-size: 14px;
+}
+
+.err4s {
+	color: #9e0004;
+}
+
+.__btn-tq {
+	display: flex;
+    align-items: center;
+    justify-content: center;
+	float: left;
+	margin-top: 15px;
+	font-family: 'Nunito', sans-serif;
+	text-transform: none;
+	box-shadow: 0px 4.5px rgb(88, 0, 3);
+	border-radius: 1000px;
+	background-color: #9e0004 !important;
+	color: #fff;
+	min-width: 115px;
+	min-height: 55px;
+	border: 0;
+	font-size: 22.5px;
+	transition: ease-in-out 0.22s;
+	cursor: pointer;
+}
+
+.__btn-tq > i {
+	font-size: 1.1em;
+}
+
+.__btn-tq:hover {
+	background-color: #fff !important;
+	color: rgb(88, 0, 3);
+	transition: ease-in 0.22s;
 }
 
 @media only screen and (max-width: 1150px) {
@@ -102,6 +131,7 @@
 		margin-top: 0 !important;
 		min-width: 66px !important;
 		min-height: 30px !important;
+		font-size: 15px !important;
 	}
 }
 
@@ -125,7 +155,7 @@
 		max-width: 667px;
 		width: 430px;
 		left: 2%;
-		margin: 65px 0 0 0;
+		margin: 59px 0 0 0;
 	}
 }
 
@@ -140,8 +170,8 @@
 	}
 	.__btn-tq {
 		font-size: 16px !important;
-		min-width: 32px !important;
-		min-height: 16px !important;
+		min-width: 78px !important;
+		min-height: 26px !important;
 	}
 	.logoCloud {
 		top: -47%;
@@ -165,34 +195,4 @@
 		/* max-width: 300px; */
 		max-width: 225px;
 	}
-}
-
-.err4s {
-	color: #9e0004;
-}
-
-.__btn-tq {
-	float: left;
-	margin-top: 15px;
-	font-family: 'Nunito', sans-serif;
-	text-transform: none;
-	box-shadow: 0px 4.5px rgb(88, 0, 3);
-	border-radius: 1000px;
-	background-color: #9e0004 !important;
-	color: #fff;
-	min-width: 115px;
-	min-height: 55px;
-	border: 0;
-	font-size: 22.5px;
-	transition: ease-in-out 0.22s;
-}
-
-.__btn-tq > i {
-	font-size: 1.1em;
-}
-
-.__btn-tq:hover {
-	background-color: #fff !important;
-	color: rgb(88, 0, 3);
-	transition: ease-in 0.22s;
 }
