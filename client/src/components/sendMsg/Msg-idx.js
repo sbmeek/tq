@@ -55,9 +55,9 @@ function Success({ username, socket }) {
 
 	const handleInputChange = async (e) => {
 		const { value: val } = e.target
-		if (3 === val) return 0;
-		else await setMsg(val);
-		shoot(val);
+		if (3 === val) return 0
+		else await setMsg(val)
+		shoot(val)
 	}
 
 	const handleFormSubmit = (e) => {
@@ -68,7 +68,7 @@ function Success({ username, socket }) {
 
 	function shoot(val) {
 		const { current: _btn } = btnSubmitMsg
-		let isMsgNotEmpty = val.length !== 0;
+		let isMsgNotEmpty = val.length !== 0
 		_btn.style.width = isMsgNotEmpty ? '35px' : '0px'
 		_btn.style.color = isMsgNotEmpty ? 'white' : 'transparent'
 	}
@@ -91,7 +91,7 @@ function Success({ username, socket }) {
 				>
 					<form onSubmit={handleFormSubmit}>
 						<div styleName="contenedor">
-							<div 
+							<div
 								style={{
 									display: 'flex',
 									flexDirection: 'row',
