@@ -54,9 +54,10 @@ function Success({ username, socket }) {
 	}, [socket])
 
 	const handleInputChange = async (e) => {
-		const { value } = e.target
-		if (3 === value) return 0
-		else await setMsg(value)
+		const { value: val } = e.target
+		if (3 === val) return 0;
+		else await setMsg(val);
+		shoot(val);
 	}
 
 	const handleFormSubmit = (e) => {
@@ -65,11 +66,11 @@ function Success({ username, socket }) {
 		socket.emit('msg:send', data)
 	}
 
-	function shoot() {
+	function shoot(val) {
 		const { current: _btn } = btnSubmitMsg
-		let isMsgEmpty = msg === ''
-		_btn.style.width = isMsgEmpty ? '35px' : '0px'
-		_btn.style.color = isMsgEmpty ? 'white' : 'transparent'
+		let isMsgNotEmpty = val.length !== 0;
+		_btn.style.width = isMsgNotEmpty ? '35px' : '0px'
+		_btn.style.color = isMsgNotEmpty ? 'white' : 'transparent'
 	}
 
 	return (
@@ -90,7 +91,7 @@ function Success({ username, socket }) {
 				>
 					<form onSubmit={handleFormSubmit}>
 						<div styleName="contenedor">
-							<div
+							<div 
 								style={{
 									display: 'flex',
 									flexDirection: 'row',
@@ -171,7 +172,6 @@ function Success({ username, socket }) {
 									placeholder="Escribe tu mensaje"
 									onChange={handleInputChange}
 									autoComplete="off"
-									onInput={shoot}
 								/>
 
 								<button type="submit" ref={btnSubmitMsg} styleName="_btn-tq">
