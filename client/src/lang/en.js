@@ -12,6 +12,7 @@ export default {
 		BtnInbox: 'Inbox',
 		AlertLinkCopied:
 			'Your link is used to receive <span style="color: var(--tq-red-03);">anonymous messages in inbox</span>. Share it on your <span style="color: var(--tq-red-03);">social networks</span>',
+		BtnLinkCopiedToClipboard: 'Link copied to clipboard',
 	},
 	Inbox: {
 		NoMessagesInfo: "There isn't nothing here yet :(",

@@ -12,6 +12,7 @@ export default {
 		BtnInbox: 'Bandeja',
 		AlertLinkCopied:
 			'Tu link sirve para recibir <span style="color: var(--tq-red-03);">mensajes anónimos en bandeja</span>. Compártelo en tus <span style="color: var(--tq-red-03);">redes sociales</span>',
+		BtnLinkCopiedToClipboard: 'Link copiado',
 	},
 	Inbox: {
 		NoMessagesInfo: 'Aún no hay nada aquí :(',

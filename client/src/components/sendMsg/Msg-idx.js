@@ -9,8 +9,8 @@ import nubes2 from '../../assets/images/msg/nubes-azul-2.png'
 
 export default function ({ match: { params } }) {
 	const { state } = useContext(InitContext)
-	params.username = params.username.toLowerCase()
 	const [userExists, setUserExists] = useState(true)
+	params.username = params.username.toLowerCase()
 
 	useEffect(() => {
 		if (state.socket !== undefined) {

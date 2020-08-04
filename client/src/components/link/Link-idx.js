@@ -11,8 +11,10 @@ export default function LinkIdx() {
 	const { user } = useSelector((store) => store.auth)
 	const [name, setName] = useState('')
 	const [link, setLink] = useState('')
+	const [showCopiedLinkMsg, setShowCopiedLinkMsg] = useState(false);
 	const [showModal, setShowModal] = useState(false)
 	const btnLink = useRef(null)
+
 	const {
 		state: {
 			lang: { Link: lang },
@@ -42,6 +44,8 @@ export default function LinkIdx() {
 		inputLink.current.select()
 		inputLink.current.setSelectionRange(0, 99)
 		document.execCommand('copy')
+		setShowCopiedLinkMsg(true);
+		setTimeout(() => setShowCopiedLinkMsg(false), 7000);
 	}
 
 	return (
@@ -58,8 +62,18 @@ export default function LinkIdx() {
 							ref={btnLink}
 							onClick={copyLink}
 						>
-							{lang['BtnCopyLink']}
-							<i className="material-icons right">link</i>
+							{
+								showCopiedLinkMsg 
+								?  
+								<>
+									{lang['BtnLinkCopiedToClipboard']}
+								</>
+								:
+								<>
+									{lang['BtnCopyLink']}
+									<i className="material-icons right">link</i>
+								</> 
+							}
 						</button>
 						<button
 							styleName="btn-copied-link-help"
