@@ -80,14 +80,8 @@ function Success({ username, socket }) {
 			) : (
 				<div
 					className="valign-wrapper"
-					style={{
-						minHeight: '100vh',
-						display: 'flex',
-						flexDirection: 'column',
-						justifyContent: 'center',
-						background:
-							'linear-gradient(to top, white 80.5%, rgba(246,246,246,0.81) 62%, rgba(237,237,237,1) 497%)',
-					}}
+					styleName="main"
+					
 				>
 					<form onSubmit={handleFormSubmit}>
 						<div styleName="contenedor">
@@ -108,14 +102,7 @@ function Success({ username, socket }) {
 									draggable="false"
 								/>
 								<img
-									style={{
-										margin: '-34px',
-										height: '70px',
-										zindex: '1',
-										marginLeft: '90px',
-										transform: 'scaleX(-1)',
-										position: 'absolute',
-									}}
+									styleName="nubes2"
 									src={nubes}
 								/>
 							</div>

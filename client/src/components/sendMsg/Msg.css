@@ -1,12 +1,28 @@
+.main{
+	min-Height: 657px;
+	display: flex;
+	flex-Direction: column;
+	justify-Content: center;
+	background:	linear-gradient(to top, white 83%, rgba(246,246,246,0.81) 62%, rgba(237,237,237,1) 497%)
+}
 .contenedor {
 	height: 328px;
 	justify-content: center;
 	background-image: url('../../assets/images/msg/capa.png');
 	background-repeat: no-repeat;
-	background-size: 79% 327px;
+	background-size: 831px 327px;
 	background-position: center;
 	text-align: center;
-	margin: 3.5%;
+	margin-bottom: 46.5px;
+}
+.nubes2{
+	width: 120px;
+	height: 70px;
+	transform: scaleX(-1);
+	margin: -34px;									
+	z-index: 1;
+	margin-Left: 90px;									
+	position: absolute;
 }
 
 .container2 {
@@ -15,9 +31,7 @@
 	align-items: center;
 }
 
-form {
-	margin: 0 auto;
-}
+
 
 .user {
 	padding: 2px;
@@ -92,7 +106,7 @@ form {
 }
 
 .logoCloud {
-	width: 17%;
+	height: 157px;
 	border-radius: 200px 200px 200px 200px;
 	-moz-border-radius: 200px 200px 200px 200px;
 	-webkit-border-radius: 200px 200px 200px 200px;
@@ -127,4 +141,40 @@ form {
     margin-top: -28px;
     margin-left: -104px;
     position: absolute;
+}
+@media only screen and (max-width: 760px) {
+	
+
+}
+@media only screen and (max-width: 573px) {
+	.contenedor{
+		margin: 0;
+		height: 295px;
+		background-size: 101% 217px;
+	}
+	.nubes2{
+		height:55px;
+		margin-left: 52px;
+		margin-top: -31px;
+
+	}
+	.logoCloud{
+		width: 104px;
+		height: 104px;
+	}
+	.user {
+		font-size: 197%;
+		margin-top: 0;
+	}
+	.Input-msg {
+		width: 252px;
+	}
+	.main{
+		background:	linear-gradient(to top, white 74.4%, rgba(246,246,246,0.81) 62%, rgba(237,237,237,1) 497%);
+	}
+	.sombra_perfil {
+		margin: 0px;
+		margin-top: 25px;
+	}
+
 }
