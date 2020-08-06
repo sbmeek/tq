@@ -1,4 +1,12 @@
-
+.container{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 500px;
+	height: 230px;
+	background: #3B3B3B;
+	border-Radius: 46px;
+}
 P {
 	color: #45b7ca;
 	font-size: 15px;
@@ -38,28 +46,20 @@ P {
 	text-align: center;
 }
 
-@media only screen and (max-width: 533px) {
-	._btn-tq {
-		height: 53px;
-		font-size: 20px;
-		width: 129px;
-		height: 68px;
+@media only screen and (max-width: 433px) {
+	.container{
+		width: 342px; 
+		height: 192px;
+
 	}
-	.send {
-		font-size: 32px;
+	.H3 {
+		font-size: xx-large;
+
 	}
-	a {
-		font-size: 19px;
+	.H3-2 {
+		font-size: xx-large;
+		margin-top: -6px;
+
 	}
-}
-@media only screen and (max-width: 386px) {
-	.h3 {
-		font-size: 257%;
-	}
-	.h3-2 {
-		font-size: 257%;
-	}
-	p span {
-		font-size: 15px;
-	}
+
 }

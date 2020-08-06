@@ -7,7 +7,7 @@ export const MsgSent = () => {
 	return (
 		<div
 			style={{
-				height: '90vh',
+				minHeight: '657px',
 				display: 'flex',
 				justifyContent: 'center',
 				alignItems: 'center',
@@ -16,15 +16,8 @@ export const MsgSent = () => {
 			}}
 		>
 			<div
-				style={{
-					display: 'flex',
-					flexDirection: 'column',
-					alignItems: 'center',
-					width: '500px',
-					height: '230px',
-					background: '#3B3B3B',
-					borderRadius: '46px',
-				}}
+				styleName="container"
+					
 			>
 				<img
 					src={logo2}
