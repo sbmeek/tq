@@ -9,6 +9,7 @@ import Labels from './TemplateOpts/Labels'
 
 export default function Template() {
 	const [answer, setAnswer] = useState('')
+	const [showLabel, setShowLabel] = useState(false);
 	const [actualMsg, setActualMsg] = useState({})
 	const InitialStateOptsVisibility = {
 		bgColorsOptShown: false,
@@ -24,6 +25,7 @@ export default function Template() {
 	const templateAnswer = useRef(null)
 	const ansInput = useRef(null)
 	const optsSwipe = useRef(null)
+	const label = useRef(null);
 	const location = useLocation()
 
 	useEffect(() => {
@@ -207,15 +209,23 @@ export default function Template() {
 									height: optsVisibility.labelsOptShown ? '100%' : '0',
 								}}
 							>
-								<Labels />
+								<Labels label={label.current} setShowLabel={setShowLabel} />
 							</div>
 						</div>
 					</form>
 				</div>
 			</div>
-			<div styleName="template-question-container" ref={templateQuestionContainer}>
+			<div 
+				styleName="template-question-container" 
+				ref={templateQuestionContainer}
+				className="d-text-select"
+			>
+				<div 
+					styleName="template-question-label"
+					ref={label}
+					style={{ opacity: (showLabel ? "1" : "0") }}
+				></div>
 				<div
-					className="d-text-select"
 					styleName="template-question"
 					ref={templateQuestion}
 				>

@@ -1,41 +1,41 @@
 import React from 'react'
-import './BgColors.css'
+import styles from './BgColors.css'
 
 export default function BgColors({ templateQuestionContainer }) {
 
 	const bgColorClickHandler = (e) => {
-		templateQuestionContainer.style.background = e.target.id;
-		console.log(templateQuestionContainer);
+		if(e.target.classList.contains(styles['bg-color'])) e.target = e.target.children[0];
+		templateQuestionContainer.style.background = window.getComputedStyle(e.target).background;
 	}
 
 	return (
 		<div styleName="bg-colors-container">
 			<div styleName="bg-color" onClick={bgColorClickHandler}>
-				<div id="#f0210f"></div>
+				<div></div>
 			</div>
 			<div styleName="bg-color" onClick={bgColorClickHandler}>
-				<div id="#40265f"></div>
+				<div></div>
 			</div>
 			<div styleName="bg-color" onClick={bgColorClickHandler}>
-				<div id="#60224f"></div>
+				<div></div>
 			</div>
 			<div styleName="bg-color" onClick={bgColorClickHandler}>
-				<div id="#10244f"></div>
+				<div></div>
 			</div>
 			<div styleName="bg-color" onClick={bgColorClickHandler}>
-				<div id="#90564f"></div>
+				<div></div>
 			</div>
 			<div styleName="bg-color" onClick={bgColorClickHandler}>
-				<div id="#94124f"></div>
+				<div></div>
 			</div>
 			<div styleName="bg-color" onClick={bgColorClickHandler}>
-				<div id="#91221f"></div>
+				<div></div>
 			</div>
 			<div styleName="bg-color" onClick={bgColorClickHandler}>
-				<div id="#50278f"></div>
+				<div></div>
 			</div>
 			<div styleName="bg-color" onClick={bgColorClickHandler}>
-				<div id="#60257f"></div>
+				<div></div>
 			</div>
 		</div>
 	)

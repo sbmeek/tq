@@ -17,6 +17,12 @@
 	min-width: 45px;
 	min-height: 45px;
 	font-size: 31px;
+	cursor: pointer;
+}
+
+.label>span{
+	text-align: center;
+    width: 100%;
 }
 
 .label:nth-child(1) {
