@@ -15,6 +15,7 @@ function Main() {
 	const [inputMode, setInputMode] = useState(false)
 	const [showSubmitBtn, setShowSubmitBtn] = useState(false)
 	const tqField = useRef(null)
+	const tqForm = useRef(null)
 	const dispatchAuth = useDispatch()
 
 	const {
@@ -95,9 +96,14 @@ function Main() {
 		if(e.type === "focus") tqField.current.focus();
 	}
 
+	const handleKeyPress = (e) => {
+		if(e.key === 'Enter') tqForm.current.dispatchEvent(new Event('submit'));
+		
+	}
+
 	return (
 		<div styleName="main">
-			<form styleName="form-container" onSubmit={handleFormSubmit}>
+			<form ref={tqForm} styleName="form-container" onSubmit={handleFormSubmit}>
 				<img
 					styleName="_tq-logo"
 					src={logo}
@@ -123,6 +129,7 @@ function Main() {
 								onChange={handleFieldChange}
 								onFocus={handleFieldFocus}
 								onBlur={handleFieldFocus}
+								onKeyPress={handleKeyPress}
 								ref={tqField}
 								spellCheck="false"
 							/>
@@ -136,7 +143,6 @@ function Main() {
 								>
 									{">"}
 								</button>
-								
 							}
 						</div>
 						<div>
