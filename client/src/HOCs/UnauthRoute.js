@@ -21,6 +21,11 @@ export default function ({ component: Component, needsRenderTime, ...rest }) {
 		})
 	}, [dispatch, needsRenderTime])
 
+	useEffect(() => {
+		const rootCls = document.querySelector('#react-root').classList
+		!state.isRendered ? rootCls.add('d-scroll') : rootCls.remove('d-scroll')
+	}, [state.isRendered])
+
 	return (
 		<>
 			{!isLoaded ? <Loader /> : !state.isRendered && <Loader />}
