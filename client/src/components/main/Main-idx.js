@@ -107,13 +107,16 @@ function Main() {
 				<div styleName="main-elements-container">
 					<div styleName="field-tq">
 						<div styleName={`${inputMode ? "input-mode" : ""}`} tabIndex="-1">
-							<input
+					
+							<textarea
+								rows="2"
+								cols="150"
 								value={!inputMode ? lang['InputPlaceholder'] : username}
 								id="usrTQ"
 								name="tquser"
 								autoComplete="off"
 								styleName={`main-input ${inputMode ? "input-mode" : ""}`}
-								style={{ maxWidth: `${showSubmitBtn ? "90%" : "100%"}` }}
+								style={{ maxWidth: `${showSubmitBtn ? "90%" : "100%"}`, resize: "none", overflow:"hidden", textAlign: "center", padding:"6px" }}
 								type={inputMode ? "text" : "button"}
 								onChange={handleFieldChange}
 								onFocus={handleFieldFocus}
@@ -124,13 +127,16 @@ function Main() {
 							{
 								showSubmitBtn 
 								&& 
+								
 								<button
 									type="button"
 									styleName="main-btn"
 								>
 									{">"}
 								</button>
+								
 							}
+
 						</div>
 						<div>
 							<button type="button" styleName="_btn-tq">
