@@ -4,6 +4,7 @@ export default {
 		BtnInbox: 'Bandeja',
 		BtnContacts: 'Contactos',
 		BtnHelp: 'Ayuda',
+		BtnInfo: 'Info.',
 		AlertUserExpired: 'Este usuario ha expirado',
 		AlertUserNotAvailable: 'Este usuario no está disponible',
 	},

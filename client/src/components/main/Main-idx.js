@@ -46,13 +46,6 @@ function Main() {
 		})
 	}, [dispatchInit])
 
-	const setElementsRed = () => {
-		let somethingsWrongColor =
-			'border-color:#d93025!important;box-shadow: -0.2rem 0.2rem 0.2rem 0rem rgba(249, 0, 0, 0.25) !important;'
-		btnTQ.current.style.cssText += somethingsWrongColor
-		inputNomTQ.current.style.cssText += somethingsWrongColor
-	}
-
 	const handleFormSubmit = (e) => {
 		e.preventDefault()
 		const { tquser: userVal } = fields
@@ -74,7 +67,6 @@ function Main() {
 						btnHTML:
 							'<button id="btn-ok" class="btn red darken-4 waves-light waves-effect" onclick="A.ok()">Ok</button>',
 					})
-					setElementsRed()
 					return 0
 				}
 				const keyVal = res.key != null ? res.key : 'err'
@@ -93,7 +85,6 @@ function Main() {
 						btnHTML:
 							'<button id="btn-ok" class="btn red darken-4 waves-light waves-effect" onclick="A.ok()">Ok</button>',
 					})
-					setElementsRed()
 				}
 			})
 		})
@@ -102,41 +93,14 @@ function Main() {
 	const handleFieldFocus = () => {
 		const { current: input } = inputNomTQ
 		const { current: btn } = btnTQ
-		if (
-			input.style.borderColor !== 'rgb(217, 48, 37)' &&
-			input.style.borderColor !== 'rgb(128, 189, 255)'
-		)
-			btn.style.cssText += `
-            color: #ccc;
-            background-color: #fff !important;
-            border-color: #80bdff !important;
-            outline: 0 !important;
-            box-shadow: -0.2rem 0.2rem 0.2rem 0rem rgba(0, 123, 255, 0.25) !important;`
+		
 		resizeMainElements(inputNomTQ, btnTQ)
 	}
 
 	const handleFieldBlur = () => {
 		const { current: input } = inputNomTQ
 		const { current: btn } = btnTQ
-		if (
-			input.style.borderColor !== 'rgb(217, 48, 37)' &&
-			input.style.borderColor !== 'rgb(128, 189, 255)'
-		)
-			btn.style.cssText += `
-            color: #fff;
-            display: inline-block;
-            background: #00909E !important;
-            border: 1.5px solid #000 !important;
-            border-left: none !important;
-            border-top-right-radius: 30px 30px;
-            border-bottom-right-radius: 30px 30px;
-            border-top-left-radius: 0px 0px;
-            border-bottom-left-radius: 0px 0px;
-            box-sizing: border-box;
-            box-shadow: none;
-            padding: 0 7px;
-            transition: ease-in .22s;`
-
+		
 		resizeMainElements(inputNomTQ, btnTQ)
 	}
 
@@ -146,85 +110,54 @@ function Main() {
 		let inputVal = input.value
 		inputVal = inputVal.replace(/\s/g, '')
 		input.value = inputVal
-		if (inputVal === '') {
-			setElementsRed()
-		} else {
-			input.setAttribute(
-				'style',
-				'border-color:#80bdff!important;box-shadow: -0.2rem 0.2rem 0.2rem 0rem rgba(76, 175, 80, 0.3) !important;'
-			)
-			btn.style.cssText += `color: rgb(204, 204, 204); !important;
-            background-color: #fff !important;
-            border-color: #80bdff !important;
-            outline: 0 !important;
-            box-shadow: -0.2rem 0.2rem 0.2rem 0rem rgba(0, 123, 255, 0.25) !important;`
-		}
 		setFields({ ...fields, tquser: inputVal })
 		resizeMainElements(inputNomTQ, btnTQ)
 	}
 
 	return (
-		<div
-			styleName="main"
-			className="valign-wrapper"
-			style={{ minHeight: '90vh' }}
-		>
-			<div styleName="container" className="container valign-wrapper">
-				<div className="row">
-					<div styleName="form-container" className="col">
-						<form onSubmit={handleFormSubmit}>
-							<img
-								styleName="_0x24f8"
-								className="responsive-img"
-								src={logo}
-								draggable="false"
-								alt="tq logo"
+		<div styleName="main">
+			<form styleName="form-container" onSubmit={handleFormSubmit}>
+				<img
+					styleName="_tq-logo"
+					src={logo}
+					draggable="false"
+					alt="logo"
+				/>
+				<div styleName="main-elements-container">
+					<div styleName="field-tq">
+						<div>
+							<input
+								placeholder={lang['InputPlaceholder']}
+								id="usrTQ"
+								name="tquser"
+								autoComplete="off"
+								styleName="inputNomTQ"
+								onChange={handleFieldChange}
+								onFocus={handleFieldFocus}
+								onBlur={handleFieldBlur}
+								ref={inputNomTQ}
 							/>
-							<div style={{ width: '100%' }}>
-								<div styleName="div-field-tq" className="input-field">
-									<input
-										placeholder={lang['InputPlaceholder']}
-										id="usrTQ"
-										name="tquser"
-										autoComplete="off"
-										styleName="inputNomTQ"
-										onChange={handleFieldChange}
-										onFocus={handleFieldFocus}
-										onBlur={handleFieldBlur}
-										ref={inputNomTQ}
-									/>
-								</div>
-								<button
-									ref={btnTQ}
-									type="submit"
-									styleName="btnTQ"
-									className="btn center-align"
-									style={{ float: 'left' }}
-								>
-									<i className="material-icons">chevron_right</i>
-								</button>
-							</div>
-						</form>
-						<div styleName="div-tq-secondary" className="center">
-							<button type="button" styleName="_btn-tq" className="btn">
-								{lang['BtnInbox']}
+							<button
+								ref={btnTQ}
+								type="submit"
+								styleName="btnTQ"
+							>
+								<i className="material-icons">chevron_right</i>
 							</button>
-							<button type="button" styleName="btn-med _btn-tq" className="btn">
-								{lang['BtnContacts']}
+						</div>
+						<div>
+							<button type="button" styleName="_btn-tq">
+								{lang['BtnInfo']}
+								<i className="material-icons">info</i>
 							</button>
-							<button type="button" styleName="_btn-tq" className="btn">
+							<button type="button" styleName="_btn-tq">
 								{lang['BtnHelp']}
-								<i
-									className="material-icons right"
-									style={{ marginLeft: '3px' }}
-								>
-									help
-								</i>
+								<i className="material-icons">help</i>
 							</button>
 						</div>
 					</div>
 				</div>
-			</div>
+			</form>							
 		</div>
 	)
 }
