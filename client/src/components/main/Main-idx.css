@@ -82,13 +82,17 @@
 }
 
 .main-input{
+	display:table-cell;
+	vertical-align:middle;
 	color: #03666d;
 	background: transparent;
 	border-radius: 30px;
 	min-height: 100%;
 	min-width: 100%;
 	cursor: pointer;
-	padding: 0 10px;
+	resize: none;
+	white-space: nowrap;
+	overflow: hidden;
 }
 
 .input-mode {
