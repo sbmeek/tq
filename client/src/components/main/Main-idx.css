@@ -22,6 +22,7 @@
 	align-items: center;
 	justify-content: center;
 	min-width: 250px;
+	min-height: 360px;
 	height: 74vh;
 }
 
@@ -57,74 +58,56 @@
 
 .field-tq>div:nth-child(1){
 	display: flex;
-}
-
-.inputNomTQ {
-	background-color: rgb(232, 240, 254);
-	border-color: cornflowerblue;
-	border-top-left-radius: 20px;
-	border-bottom-left-radius: 20px;
-	padding: 10px;
-	height: 40%;
-	max-height: 42px;
-	width: 95%;
-	font-size: 1rem;
-	color: #495057;
-	background-color: #fff;
-	background-clip: padding-box;
-	border: 1.5px solid #000;
-	float: left;
-	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
-		0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
-}
-
-.inputNomTQ:focus {
-	color: #495057;
-	background-color: #fff;
-	border-color: #80bdff;
-	outline: 0;
-	box-shadow: -0.2rem 0.2rem 0.2rem 0rem rgba(0, 123, 255, 0.25);
-}
-
-.btnTQ {
-	display: inline-block;
-	background: #00909e;
-	color: #fff;
-	border: 1.5px solid #000;
-	border-left: none;
-	height: 43px;
-	border-top-right-radius: 30px 30px;
-	border-bottom-right-radius: 30px 30px;
-	border-top-left-radius: 0px 0px;
-	border-bottom-left-radius: 0px 0px;
+	width: 100%;
+	color: #03666d;
+	border: 5.9px solid #018b9a;
+	background: #00b2c2;
+	height: 42px;
+	border-radius: 30px;
+	box-shadow: 0px 6.4px #01636d;
+	transition: background 100ms ease-in,
+	border 100ms ease-in;
 	box-sizing: border-box;
-	box-shadow: none;
+	padding: 0 !important;
+}
+
+.field-tq>div:nth-child(1):hover{
+	border: 5.9px solid #03a5b7;
+    background: #0ccfe0;
+}
+
+.field-tq>div:nth-child(1).input-mode{
+	border: 5.9px solid #3defff !important;
+	background: #03c9db !important;
+}
+
+.main-input{
+	color: #03666d;
+	background: transparent;
+	border-radius: 30px;
+	min-height: 100%;
+	min-width: 100%;
+	cursor: pointer;
+	padding: 0 10px;
+}
+
+.input-mode {
+	color: #fff;
+	font-size: 1.1rem;
+	outline: none;
+}
+
+.main-btn{
+	background: #018b9a;
+	color: #fff;
+	min-height: 100%;
+	min-width: 10%;
+	border-radius: 0 30px 30px 0;
 	padding: 0 7px;
-	transition: ease-in 0.22s;
 }
 
-.btnTQ > i {
-	line-height: 105%;
-	text-align: center;
-	font-size: 40px;
-}
-
-.btnTQ:hover {
-	transition: ease-in 0.22s;
-	color: #000;
-	background: #00909e;
-	-webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
-		0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
-	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
-		0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
-}
-
-.btnTQ:focus {
-	background: #00909e;
-	-webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
-		0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
-	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
-		0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+.main-btn{
+	box-shadow: 0px 6.4px #01636d;
 }
 
 .field-tq>div:nth-child(2) {

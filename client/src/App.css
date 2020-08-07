@@ -86,6 +86,7 @@ body {
 	background: rgba(255, 255, 255, 0.57);
 }
 
-button:focus {
+button:focus,
+input[type="button"] {
 	outline: none !important;
 }

@@ -11,10 +11,12 @@ import { InitContext, SET_IS_RENDERED } from '../../global/context/InitContext'
 const A = new Alert()
 
 function Main() {
-	const [fields, setFields] = useState({})
-	const inputNomTQ = useRef(null)
-	const btnTQ = useRef(null)
+	const [username, setUsername] = useState("")
+	const [inputMode, setInputMode] = useState(false)
+	const [showSubmitBtn, setShowSubmitBtn] = useState(false)
+	const tqField = useRef(null)
 	const dispatchAuth = useDispatch()
+
 	const {
 		state: {
 			socket,
@@ -24,31 +26,23 @@ function Main() {
 	} = useContext(InitContext)
 
 	useEffect(() => {
-		window.addEventListener('load', () => resizeMainElements(inputNomTQ, btnTQ))
-		window.addEventListener('resize', () =>
-			resizeMainElements(inputNomTQ, btnTQ)
-		)
-	}, [])
-
-	useEffect(() => {
 		let font = `1rem 'Material Icons'`
-		document.fonts.ready.then(function () {
+		document.fonts.ready.then(function() {
 			if (document.fonts.check(font)) {
-				inputNomTQ.current.style.fontFamily = `'Nunito', sans-serif`
+				tqField.current.style.fontFamily = `'Nunito', sans-serif`
 				setTimeout(() => {
 					dispatchInit({
 						type: SET_IS_RENDERED,
 						payload: { isRendered: true },
 					})
 				}, 500)
-				resizeMainElements(inputNomTQ, btnTQ)
 			}
 		})
 	}, [dispatchInit])
 
 	const handleFormSubmit = (e) => {
 		e.preventDefault()
-		const { tquser: userVal } = fields
+		const userVal = username
 		socket.emit('tq:exists', { username: userVal })
 		socket.once('tq:exists', (data) => {
 			if (data == null) {
@@ -90,28 +84,15 @@ function Main() {
 		})
 	}
 
-	const handleFieldFocus = () => {
-		const { current: input } = inputNomTQ
-		const { current: btn } = btnTQ
-		
-		resizeMainElements(inputNomTQ, btnTQ)
+	const handleFieldChange = (e) => {
+		const { value: val } = e.target;
+		setUsername(val.replace(/\s/g, ''));
+		setShowSubmitBtn(val.length > 0);
 	}
 
-	const handleFieldBlur = () => {
-		const { current: input } = inputNomTQ
-		const { current: btn } = btnTQ
-		
-		resizeMainElements(inputNomTQ, btnTQ)
-	}
-
-	const handleFieldChange = () => {
-		const { current: input } = inputNomTQ
-		const { current: btn } = btnTQ
-		let inputVal = input.value
-		inputVal = inputVal.replace(/\s/g, '')
-		input.value = inputVal
-		setFields({ ...fields, tquser: inputVal })
-		resizeMainElements(inputNomTQ, btnTQ)
+	const handleFieldFocus = (e) => {
+		setInputMode(!(e.type === "blur" && username.length === 0))
+		if(e.type === "focus") tqField.current.focus();
 	}
 
 	return (
@@ -125,25 +106,31 @@ function Main() {
 				/>
 				<div styleName="main-elements-container">
 					<div styleName="field-tq">
-						<div>
+						<div styleName={`${inputMode ? "input-mode" : ""}`} tabIndex="-1">
 							<input
-								placeholder={lang['InputPlaceholder']}
+								value={!inputMode ? lang['InputPlaceholder'] : username}
 								id="usrTQ"
 								name="tquser"
 								autoComplete="off"
-								styleName="inputNomTQ"
+								styleName={`main-input ${inputMode ? "input-mode" : ""}`}
+								style={{ maxWidth: `${showSubmitBtn ? "90%" : "100%"}` }}
+								type={inputMode ? "text" : "button"}
 								onChange={handleFieldChange}
 								onFocus={handleFieldFocus}
-								onBlur={handleFieldBlur}
-								ref={inputNomTQ}
+								onBlur={handleFieldFocus}
+								ref={tqField}
+								spellCheck="false"
 							/>
-							<button
-								ref={btnTQ}
-								type="submit"
-								styleName="btnTQ"
-							>
-								<i className="material-icons">chevron_right</i>
-							</button>
+							{
+								showSubmitBtn 
+								&& 
+								<button
+									type="button"
+									styleName="main-btn"
+								>
+									{">"}
+								</button>
+							}
 						</div>
 						<div>
 							<button type="button" styleName="_btn-tq">
@@ -160,19 +147,6 @@ function Main() {
 			</form>							
 		</div>
 	)
-}
-
-function resizeMainElements({ current: input }, { current: btn }) {
-	if (null != input && null != btn) {
-		btn.style.height = input.getBoundingClientRect().height + 'px'
-		let bodyHeight = document.body.getBoundingClientRect().height
-		let bodyWidth = document.body.getBoundingClientRect().width
-		if (bodyHeight < 627 || bodyWidth < 690) {
-			document.body.classList.remove('d-scroll')
-		} else {
-			document.body.classList.add('d-scroll')
-		}
-	}
 }
 
 export default Main
