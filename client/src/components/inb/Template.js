@@ -20,6 +20,7 @@ export default function Template() {
 	const [isPlaceholderVisible, setIsPlaceholderVisible] = useState(true)
 	const { socket } = useContext(InitContext)
 	const templateQuestion = useRef(null)
+	const templateQuestionContainer = useRef(null)
 	const templateAnswer = useRef(null)
 	const ansInput = useRef(null)
 	const optsSwipe = useRef(null)
@@ -100,10 +101,6 @@ export default function Template() {
 				return {}
 		}
 	}
-
-	useEffect(() => {
-		console.log(optsVisibility)
-	}, [optsVisibility])
 
 	return (
 		<div styleName="template-container" id="tmpt-cont">
@@ -203,7 +200,7 @@ export default function Template() {
 									height: optsVisibility.bgColorsOptShown ? '100%' : '0',
 								}}
 							>
-								<BgColors />
+								<BgColors templateQuestionContainer={templateQuestionContainer.current} />
 							</div>
 							<div
 								style={{
@@ -216,7 +213,7 @@ export default function Template() {
 					</form>
 				</div>
 			</div>
-			<div styleName="template-question-container">
+			<div styleName="template-question-container" ref={templateQuestionContainer}>
 				<div
 					className="d-text-select"
 					styleName="template-question"
