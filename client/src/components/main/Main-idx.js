@@ -97,7 +97,8 @@ function Main() {
 	}
 
 	const handleKeyPress = (e) => {
-		if(e.key === 'Enter') tqForm.current.dispatchEvent(new Event('submit'));
+		if(e.key === 'Enter') 
+			tqForm.current.dispatchEvent(new Event('submit', { cancelable: true }));
 		
 	}
 
