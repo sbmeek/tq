@@ -27,10 +27,8 @@ export default function LinkIdx() {
 			type: SET_IS_RENDERED,
 			payload: { isRendered: true },
 		}
-		window.addEventListener('load', () =>
-			setTimeout(() => dispatch(setAsRendered))
-		)
-		setTimeout(() => dispatch(setAsRendered), 9000)
+		window.addEventListener('load', () => dispatch(setAsRendered))
+		setTimeout(() => dispatch(setAsRendered), 1000)
 	}, [dispatch])
 
 	useEffect(() => {
