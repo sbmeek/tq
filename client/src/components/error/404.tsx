@@ -1,13 +1,13 @@
 import React from 'react'
 import logo from '../../assets/images/logo.png'
 import './404.css'
+
 export default function () {
 	return (
-		<div className="main valign-wrapper" style={{ minHeight: '90vh', display: 'flex', alignItems: 'center' }}>
+		<div styleName="main">
 			<div styleName="contenedor">
 				<div>
 					<img
-						className="responsive-image"
 						styleName="logoCloud"
 						src={logo}
 						alt="logo"
@@ -28,10 +28,10 @@ export default function () {
 						</span>
 						<br />
 						<a href="/">
-							<button href="/" className="btn" styleName="__btn-tq">
+							<button styleName="__btn-tq">
 								Inicio
 								<i
-									className="material-icons right"
+									className="material-icons"
 									style={{ marginLeft: '3px' }}
 								>
 									home

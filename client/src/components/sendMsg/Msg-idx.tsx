@@ -1,4 +1,11 @@
-import React, { useEffect, useState, useContext, useRef } from 'react'
+import React, {
+	useEffect,
+	useState,
+	useContext,
+	useRef,
+	ChangeEvent,
+	FormEvent
+} from 'react'
 import MsgSent from './MsgSent'
 import Error404 from '../error/404'
 import './Msg.css'
@@ -7,7 +14,13 @@ import { InitContext } from '../../global/context/InitContext'
 import nubes from '../../assets/images/msg/nubes-azul.png'
 import nubes2 from '../../assets/images/msg/nubes-azul-2.png'
 
-export default function ({ match: { params } }) {
+type DataType = {
+	key?: string
+	expired?: boolean
+	sent?: boolean
+}
+
+export default function ({ match: { params } }: any) {
 	const { state } = useContext(InitContext)
 	const [userExists, setUserExists] = useState(true)
 	params.username = params.username.toLowerCase()
@@ -15,7 +28,7 @@ export default function ({ match: { params } }) {
 	useEffect(() => {
 		if (state.socket !== undefined) {
 			state.socket.emit('tq:exists', { username: params.username })
-			state.socket.on('tq:exists', (data) => {
+			state.socket.on('tq:exists', (data: DataType) => {
 				if (data === null) {
 					setUserExists(false)
 				}
@@ -37,14 +50,14 @@ export default function ({ match: { params } }) {
 	)
 }
 
-function Success({ username, socket }) {
+function Success({ username, socket }: any) {
 	const [msg, setMsg] = useState('')
 	const [sent, setSent] = useState(false)
-	const btnSubmitMsg = useRef(null)
+	const btnSubmitMsg = useRef<HTMLButtonElement>(null)
 
 	useEffect(() => {
 		if (socket !== undefined) {
-			socket.on('msg:send', (data) => {
+			socket.on('msg:send', (data: DataType) => {
 				if (data.sent) {
 					setSent(true)
 					setMsg('')
@@ -53,21 +66,21 @@ function Success({ username, socket }) {
 		}
 	}, [socket])
 
-	const handleInputChange = async (e) => {
-		const { value: val } = e.target
-		if (3 === val) return 0
-		else await setMsg(val)
+	const handleInputChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+		const targetElement = e.target as HTMLTextAreaElement
+		const { value: val } = targetElement
+		setMsg(val)
 		shoot(val)
 	}
 
-	const handleFormSubmit = (e) => {
+	const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
 		const data = { username, msg }
 		socket.emit('msg:send', data)
 	}
 
-	function shoot(val) {
-		const { current: _btn } = btnSubmitMsg
+	function shoot(val: string) {
+		const _btn = btnSubmitMsg.current!
 		let isMsgNotEmpty = val.length !== 0
 		_btn.style.width = isMsgNotEmpty ? '35px' : '0px'
 		_btn.style.color = isMsgNotEmpty ? 'white' : 'transparent'
@@ -78,11 +91,7 @@ function Success({ username, socket }) {
 			{sent ? (
 				<MsgSent />
 			) : (
-				<div
-					className="valign-wrapper"
-					styleName="main"
-					
-				>
+				<div className="valign-wrapper" styleName="main">
 					<form onSubmit={handleFormSubmit}>
 						<div styleName="contenedor">
 							<div
@@ -92,7 +101,7 @@ function Success({ username, socket }) {
 									justifyContent: 'center',
 								}}
 							>
-								<img src={nubes2} styleName="nube" />
+								<img alt="nubes2" src={nubes2} styleName="nube" />
 
 								<img
 									className="responsive-image"
@@ -101,10 +110,7 @@ function Success({ username, socket }) {
 									alt="logo"
 									draggable="false"
 								/>
-								<img
-									styleName="nubes2"
-									src={nubes}
-								/>
+								<img alt="nubes" styleName="nubes2" src={nubes} />
 							</div>
 
 							<div className="center">
@@ -126,11 +132,12 @@ function Success({ username, socket }) {
 							style={{
 								display: 'flex',
 								justifyContent: 'center',
-								alignitems: 'flex-end',
+								alignItems: 'flex-end',
 								marginTop: '-13px',
 							}}
 						>
 							<img
+								alt="nubes2"
 								style={{
 									width: '120px',
 									height: '70px',
@@ -139,6 +146,7 @@ function Success({ username, socket }) {
 								src={nubes2}
 							/>
 							<img
+								alt="nubes"
 								style={{
 									width: '130px',
 									height: '70px',
@@ -152,7 +160,7 @@ function Success({ username, socket }) {
 							<div styleName="Desing">
 								<textarea
 									styleName="Input-msg"
-									type="text"
+									data-type="text"
 									name="msg"
 									value={msg}
 									id="msg"
@@ -177,13 +185,14 @@ function Success({ username, socket }) {
 						}}
 					>
 						<img
+							alt="nubes"
 							src={nubes}
 							style={{
 								width: '120px',
 								margin: '-41.5px',
 								height: '70px',
-								marginleft: '-77px',
-								zIndex: '1',
+								marginLeft: '-77px',
+								zIndex: 1,
 							}}
 						/>
 						<div styleName="sombra_textarea"></div>

@@ -1,14 +1,19 @@
-import React, { useState, useRef, useEffect, useContext } from 'react'
+import React, { useState, useRef, useEffect, useContext, MouseEvent } from 'react'
 import { useHistory } from 'react-router-dom'
 import './Inbox.css'
 import icon from '../../assets/images/icon.png'
 import { InitContext } from '../../global/context/InitContext'
 import SimpleBar from 'simplebar-react'
 
-export default function Inbox({ messages, answeredMsgs }) {
+interface IProps {
+	messages: ITQMessage[];
+	answeredMsgs: ITQMessage[];
+}
+
+export default function Inbox({ messages, answeredMsgs }: IProps) {
 	const [actualTab, setActualTab] = useState('msg')
-	const msgsTabContent = useRef(null)
-	const ansTabContent = useRef(null)
+	const msgsTabContent = useRef<HTMLDivElement>(null)
+	const ansTabContent = useRef<HTMLDivElement>(null)
 	const history = useHistory()
 	const {
 		state: {
@@ -16,19 +21,20 @@ export default function Inbox({ messages, answeredMsgs }) {
 		},
 	} = useContext(InitContext)
 
-	const handleTabClick = (e) => {
-		const { id: trgtID } = e.target
+	const handleTabClick = (e: MouseEvent<HTMLButtonElement>) => {
+		const targetElement = (e.target as HTMLButtonElement);
+		const { id: trgtID } = targetElement;
 		setActualTab(trgtID === 'msg-tab' || trgtID === '' ? 'msg' : 'ans')
 	}
 
 	useEffect(() => {
 		const selectedTabColor = 'rgba(0, 0, 0, 0.8)'
 		const unselectedTabColor = 'rgb(78, 78, 78)'
-		msgsTabContent.current.style.display = actualTab === 'msg' ? 'flex' : 'none'
-		ansTabContent.current.style.display = actualTab === 'ans' ? 'flex' : 'none'
+		msgsTabContent.current!.style.display = actualTab === 'msg' ? 'flex' : 'none'
+		ansTabContent.current!.style.display = actualTab === 'ans' ? 'flex' : 'none'
 
-		const ansTab = document.querySelector('#ans-tab')
-		const msgTab = document.querySelector('#msg-tab')
+		const ansTab = (document.querySelector('#btn-ans-tab')! as HTMLButtonElement)
+		const msgTab = (document.querySelector('#btn-msg-tab')! as HTMLButtonElement)
 
 		msgTab.style.background =
 			actualTab === 'msg' ? selectedTabColor : unselectedTabColor
@@ -42,14 +48,15 @@ export default function Inbox({ messages, answeredMsgs }) {
 		}
 		if (messages.length < 1) {
 			msgTab.style.cursor = `default`
-			msgsTabContent.current.style.display = 'none'
+			msgsTabContent.current!.style.display = 'none'
 		}
 		msgTab.innerHTML =
 			messages.length < 1 ? `${lang['NoMessagesInfo']}` : `${lang['MsgTab']}`
 	})
 
-	const handleMsgClick = (e) => {
-		const _msgId = e.target.classList[0]
+	const handleMsgClick = (e: MouseEvent<HTMLDivElement>) => {
+		const targetElement = (e.target as HTMLDivElement);
+		const _msgId = targetElement.classList[0]
 		const actualMsg = messages.filter((e) => e._id === _msgId)[0]
 		history.push({
 			pathname: '/message',
@@ -73,7 +80,7 @@ export default function Inbox({ messages, answeredMsgs }) {
 				</h4>
 				<div>
 					<button
-						id="msg-tab"
+						id="btn-msg-tab"
 						styleName=" inbox-tab-msgs"
 						onClick={handleTabClick}
 						autoFocus={true}
@@ -81,7 +88,7 @@ export default function Inbox({ messages, answeredMsgs }) {
 						<span>{lang['MsgTab']}</span>
 						<div styleName="new-msgs-number">{messages.length}</div>
 					</button>
-					<button id="ans-tab" styleName="inbox-tab" onClick={handleTabClick}>
+					<button id="btn-ans-tab" styleName="inbox-tab" onClick={handleTabClick}>
 						{lang['AnsTab']}
 					</button>
 				</div>

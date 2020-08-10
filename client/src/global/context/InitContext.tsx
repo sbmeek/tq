@@ -1,22 +1,32 @@
-import React, { createContext, useReducer, useEffect } from 'react'
+import React, { createContext, useReducer, useEffect, ReactNode } from 'react'
 import io from 'socket.io-client'
-
 import en from '../../lang/en'
 import es from '../../lang/es'
 
-export const InitContext = createContext()
+interface IContextState {
+	socket: SocketIOClientStatic["Socket"];
+	isRendered: boolean;
+	lang: object;
+}
 
-const initialState = {
-	socket: null,
+interface IContextAction {
+	type: string;
+	payload: any;
+}
+
+const initialState: IContextState = {
+	socket: io(),
 	isRendered: false,
 	lang: en,
 }
+
+export const InitContext = createContext<any>({ state: initialState })
 
 export const SET_SOCKET = 'SET_SOCKET'
 export const SET_IS_RENDERED = 'SET_IS_RENDERED'
 export const SET_LANG = 'SET_LANG'
 
-function reducer(state, action) {
+function reducer(state: IContextState, action: IContextAction) {
 	switch (action.type) {
 		case SET_SOCKET:
 			return {
@@ -38,9 +48,12 @@ function reducer(state, action) {
 	}
 }
 
-export default ({ children }) => {
+interface IProps {
+	children: ReactNode
+}
+
+export default ({ children }: IProps) => {
 	const [state, dispatch] = useReducer(reducer, initialState)
-	// const endpoint = `http://localhost:3000`;
 
 	useEffect(() => {
 		try {
@@ -70,7 +83,7 @@ export default ({ children }) => {
 	}
 
 	return (
-		state.socket !== null && (
+		state.socket !== null ? (
 			<InitContext.Provider
 				value={{
 					state,
@@ -79,6 +92,6 @@ export default ({ children }) => {
 			>
 				{children}
 			</InitContext.Provider>
-		)
+		) : null
 	)
 }

@@ -12,13 +12,13 @@ const Loader = () => {
 				xmlns="http://www.w3.org/2000/svg"
 				xmlnsXlink="http://www.w3.org/1999/xlink"
 				xmlSpace="preserve"
-				xmlnsserif="http://www.serif.com/"
+				data-xmlnsserif="http://www.serif.com/"
 				style={{
 					fillRule: 'evenodd',
 					clipRule: 'evenodd',
 					strokeLinejoin: 'round',
 					strokeMiterlimit: '2',
-				}}
+				} as any}
 			>
 				<g transform="matrix(8.54483e-16,5.31355,5.84382,-9.39759e-16,-4538.65,-2587.11)">
 					<path

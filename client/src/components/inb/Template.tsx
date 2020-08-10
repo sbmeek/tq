@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect, useRef } from 'react'
+import React, { useState, useContext, useEffect, useRef, FormEvent, KeyboardEvent, MouseEvent } from 'react'
 import { useLocation, Link } from 'react-router-dom'
 import parse from 'html-react-parser'
 import { InitContext } from '../../global/context/InitContext'
@@ -7,79 +7,80 @@ import './Template.css'
 import BgColors from './TemplateOpts/BgColors'
 import Labels from './TemplateOpts/Labels'
 
+interface IOptsVisibility {
+	bgColorsOptShown: boolean,
+	labelsOptShown: boolean,
+	[key: string]: boolean;
+}
+
 export default function Template() {
-	const [answer, setAnswer] = useState('')
-	const [showLabel, setShowLabel] = useState(false);
-	const [actualMsg, setActualMsg] = useState({})
-	const InitialStateOptsVisibility = {
+	const [answer, setAnswer] = useState<string>('')
+	const [showLabel, setShowLabel] = useState<boolean>(false);
+	const [actualMsg, setActualMsg] = useState<ITQMessage>()
+	const InitialStateOptsVisibility: IOptsVisibility = {
 		bgColorsOptShown: false,
 		labelsOptShown: false,
 	}
-	const [optsVisibility, setOptsVisibility] = useState(
-		InitialStateOptsVisibility
-	)
-	const [isPlaceholderVisible, setIsPlaceholderVisible] = useState(true)
+	const [optsVisibility, setOptsVisibility] = useState<IOptsVisibility>(InitialStateOptsVisibility);
+	const [isPlaceholderVisible, setIsPlaceholderVisible] = useState<boolean>(true)
 	const { socket } = useContext(InitContext)
-	const templateQuestion = useRef(null)
-	const templateQuestionContainer = useRef(null)
-	const templateAnswer = useRef(null)
-	const ansInput = useRef(null)
-	const optsSwipe = useRef(null)
-	const label = useRef(null);
-	const location = useLocation()
+	const templateQuestion = useRef<HTMLDivElement>(null)
+	const templateAnswer = useRef<HTMLDivElement>(null)
+	const templateQuestionContainer = useRef<HTMLDivElement>(null)
+	const ansInput = useRef<HTMLDivElement>(null)
+	const optsSwipe = useRef<HTMLDivElement>(null)
+	const label = useRef<HTMLDivElement>(null);
+	const location = useLocation<ITQMessage>()
 
 	useEffect(() => {
-		const {
-			state: { actualMsg: msg },
-		} = location
+		const msg = ((location.state as any)["actualMsg"]) as ITQMessage
 		setActualMsg(msg)
-		templateAnswer.current.focus()
-		templateQuestion.current.innerHTML = `"${actualMsg.content}"`
+		templateAnswer.current!.focus()
+		templateQuestion.current!.innerHTML = `"${msg!.content}"`
 	}, [location, actualMsg])
 
-	const handleFormSubmit = (e) => {
+	const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
-		let data = { answer }
-		data._id = actualMsg._id
+		let data = { answer, _id: '' }
+		data._id = actualMsg!._id
 		socket.emit('msg:ans', data)
-		socket.on('msg:ans', (data) => {
-			if (data.success) {
-				//success
-			}
+		socket.on('msg:ans', (data: Object) => {
+			// if (data.success) {
+			// 	//success
+			// }
 		})
 	}
 
-	const handleInput = async (e) => {
-		const { textContent: ansVal } = e.currentTarget
-		setIsPlaceholderVisible(ansVal.length < 1)
-		await setAnswer(e.currentTarget.innerHTML)
-		console.log(answer)
+	const handleInput = async (e: KeyboardEvent<HTMLDivElement>) => {
+		const targetElement = (e.currentTarget as HTMLDivElement);
+		const { textContent: ansVal } = targetElement
+		setIsPlaceholderVisible(ansVal!.length < 1)
+		await setAnswer(targetElement.innerHTML)
 	}
 
-	const handleBtnFormatClick = (e) => {
-		const {
-			target: { parentElement: target },
-		} = e
-		formatAnswer(target.title.toLowerCase())
+	const handleBtnFormatClick = (e: MouseEvent<HTMLButtonElement>) => {
+		const targetElement = (e.target as HTMLButtonElement)
+		const { parentElement: target } = targetElement
+		formatAnswer(target!.title.toLowerCase())
 	}
 
-	const formatAnswer = (cmd) => {
-		document.execCommand(cmd, false, null)
-		setAnswer(ansInput.current.innerHTML)
-		ansInput.current.focus()
+	const formatAnswer = (cmd: string) => {
+		document.execCommand(cmd, false, '')
+		setAnswer(ansInput.current!.innerHTML)
+		ansInput.current!.focus()
 	}
 
-	const toggleOptSwipe = (e) => {
-		const { target: trgt } = e
-		const { current: optSwp } = optsSwipe
-		let _dsrdOpt = getDesiredOpt(trgt.id)
+	const toggleOptSwipe = (e: MouseEvent<HTMLButtonElement>) => {
+		const targetElement = (e.target as HTMLButtonElement)
+		const optSwp = optsSwipe.current!
+		let _dsrdOpt = getDesiredOpt(targetElement.id)
 		let desiredOpt = Object.keys(_dsrdOpt)[0]
 		let _optsVisibility = {
 			...InitialStateOptsVisibility,
 			[Object.keys(_dsrdOpt)[0]]: true,
 		}
 
-		if (optSwp.classList.contains('opts-swipe_actv')) {
+		if (optSwp!.classList.contains('opts-swipe_actv')) {
 			if (optsVisibility[desiredOpt]) {
 				optSwp.classList.remove('opts-swipe_actv')
 				_optsVisibility = InitialStateOptsVisibility
@@ -93,7 +94,7 @@ export default function Template() {
 		setOptsVisibility(_optsVisibility)
 	}
 
-	const getDesiredOpt = (_id) => {
+	const getDesiredOpt = (_id: string) => {
 		switch (_id) {
 			case 'bg-colors':
 				return { bgColorsOptShown: true }
@@ -162,9 +163,9 @@ export default function Template() {
 										</div>
 										<div
 											styleName="template-input-answer"
-											name="ans-msg"
+											data-name="ans-msg"
 											onInput={handleInput}
-											value={answer}
+											data-value={answer}
 											contentEditable
 											ref={ansInput}
 											spellCheck="false"
@@ -202,14 +203,14 @@ export default function Template() {
 									height: optsVisibility.bgColorsOptShown ? '100%' : '0',
 								}}
 							>
-								<BgColors templateQuestionContainer={templateQuestionContainer.current} />
+								<BgColors templateQuestionContainer={templateQuestionContainer.current!} />
 							</div>
 							<div
 								style={{
 									height: optsVisibility.labelsOptShown ? '100%' : '0',
 								}}
 							>
-								<Labels label={label.current} setShowLabel={setShowLabel} />
+								<Labels label={label.current!} setShowLabel={setShowLabel} />
 							</div>
 						</div>
 					</form>

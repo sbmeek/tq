@@ -1,4 +1,14 @@
-import React, { useState, useEffect, useRef, useContext } from 'react'
+import React, {
+	useState,
+	useEffect,
+	useRef,
+	useContext,
+	FormEvent,
+	CSSProperties,
+	FocusEvent,
+	ChangeEvent,
+	KeyboardEvent,
+} from 'react'
 import { useDispatch } from 'react-redux'
 import axios from 'axios'
 import Alert from '../partials/Alert'
@@ -10,12 +20,22 @@ import { InitContext, SET_IS_RENDERED } from '../../global/context/InitContext'
 
 const A = new Alert()
 
+type ResType = {
+	key: string
+	expired: boolean
+}
+
+type DataType = {
+	_id: string
+	key: string
+}
+
 function Main() {
-	const [username, setUsername] = useState("")
+	const [username, setUsername] = useState('')
 	const [inputMode, setInputMode] = useState(false)
 	const [showSubmitBtn, setShowSubmitBtn] = useState(false)
-	const tqField = useRef(null)
-	const tqForm = useRef(null)
+	const tqField = useRef<HTMLTextAreaElement>(null)
+	const tqForm = useRef<HTMLFormElement>(null)
 	const dispatchAuth = useDispatch()
 
 	const {
@@ -28,9 +48,9 @@ function Main() {
 
 	useEffect(() => {
 		let font = `1rem 'Material Icons'`
-		document.fonts.ready.then(function() {
-			if (document.fonts.check(font)) {
-				tqField.current.style.fontFamily = `'Nunito', sans-serif`
+		;(document as any).fonts.ready.then(function () {
+			if ((document as any).fonts.check(font)) {
+				tqField.current!.style.fontFamily = `'Nunito', sans-serif`
 				setTimeout(() => {
 					dispatchInit({
 						type: SET_IS_RENDERED,
@@ -41,22 +61,22 @@ function Main() {
 		})
 	}, [dispatchInit])
 
-	const handleFormSubmit = (e) => {
+	const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
 		const userVal = username
 		socket.emit('tq:exists', { username: userVal })
-		socket.once('tq:exists', (data) => {
+		socket.once('tq:exists', (data: DataType) => {
 			if (data == null) {
 				socket.emit('tq:register', { tquser: userVal })
-				socket.on('save:LS', (data) => {
+				socket.on('save:LS', (data: DataType) => {
 					localStorage.setItem(data._id, data.key)
 					socket.emit('tq:login', data)
 				})
 			} else {
-				data.key = localStorage.getItem(data._id)
+				data.key = localStorage.getItem(data._id) as string
 				socket.emit('tq:login', data)
 			}
-			socket.once('tq:login', async (res) => {
+			socket.once('tq:login', async (res: ResType) => {
 				if (res.expired) {
 					A.trigger(`${lang['AlertUserExpired']}.`, {
 						btnHTML:
@@ -85,48 +105,44 @@ function Main() {
 		})
 	}
 
-	const handleFieldChange = (e) => {
-		const { value: val } = e.target;
-		setUsername(val.replace(/\s/g, ''));
-		setShowSubmitBtn(val.length > 0);
+	const handleFieldChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+		const targetElement = (e.target as HTMLTextAreaElement);
+		const { value: val } = targetElement;
+		setUsername(val.replace(/\s/g, ''))
+		setShowSubmitBtn(val.length > 0)
 	}
 
-	const handleFieldFocus = (e) => {
-		setInputMode(!(e.type === "blur" && username.length === 0))
-		if(e.type === "focus") tqField.current.focus();
+	const handleFieldFocus = (e: FocusEvent<HTMLTextAreaElement>) => {
+		setInputMode(!(e.type === 'blur' && username.length === 0))
+		if (e.type === 'focus') tqField.current!.focus()
 	}
 
-	const handleKeyPress = (e) => {
-		if(e.key === 'Enter') 
-			tqForm.current.dispatchEvent(new Event('submit', { cancelable: true }));
-		
+	const handleKeyPress = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+		if (e.key === 'Enter')
+			tqForm.current!.dispatchEvent(new Event('submit', { cancelable: true }))
 	}
 
 	return (
 		<div styleName="main">
 			<form ref={tqForm} styleName="form-container" onSubmit={handleFormSubmit}>
-				<img
-					styleName="_tq-logo"
-					src={logo}
-					draggable="false"
-					alt="logo"
-				/>
+				<img styleName="_tq-logo" src={logo} draggable="false" alt="logo" />
 				<div styleName="main-elements-container">
 					<div styleName="field-tq">
-						<div styleName={`${inputMode ? "input-mode" : ""}`} tabIndex="-1">
-					
+						<div styleName={`${inputMode ? 'input-mode' : ''}`} tabIndex={-1}>
 							<textarea
 								value={!inputMode ? lang['InputPlaceholder'] : username}
 								id="usrTQ"
 								name="tquser"
 								autoComplete="off"
-								styleName={`main-input ${inputMode ? "input-mode" : ""}`}
-								style={{ 
-									maxWidth: `${showSubmitBtn ? "90%" : "100%"}`,
-									textAlign: `${inputMode ? "left" : "center"}`,
-									padding: `${inputMode ? "4px 10px" : "7px"}`
-								}}
-								type={inputMode ? "text" : "button"}
+								styleName={`main-input ${inputMode ? 'input-mode' : ''}`}
+								style={
+									{
+										maxWidth: `${showSubmitBtn ? '90%' : '100%'}`,
+										textAlign: `${inputMode ? 'left' : 'center'}`,
+										padding: `${inputMode ? '4px 10px' : '7px'}`,
+									} as CSSProperties
+								}
+								data-type={inputMode ? 'text' : 'button'}
 								onChange={handleFieldChange}
 								onFocus={handleFieldFocus}
 								onBlur={handleFieldFocus}
@@ -134,17 +150,11 @@ function Main() {
 								ref={tqField}
 								spellCheck="false"
 							/>
-							{
-								showSubmitBtn 
-								&& 
-								
-								<button
-									type="button"
-									styleName="main-btn"
-								>
-									{">"}
+							{showSubmitBtn && (
+								<button type="button" styleName="main-btn">
+									{'>'}
 								</button>
-							}
+							)}
 						</div>
 						<div>
 							<button type="button" styleName="_btn-tq">
@@ -158,7 +168,7 @@ function Main() {
 						</div>
 					</div>
 				</div>
-			</form>							
+			</form>
 		</div>
 	)
 }

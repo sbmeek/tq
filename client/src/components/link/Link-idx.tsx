@@ -1,14 +1,14 @@
 import React, { useRef, useEffect, useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useSelector, RootStateOrAny } from 'react-redux'
 import { InitContext, SET_IS_RENDERED } from '../../global/context/InitContext'
-import Slider from './Slider.js'
+import Slider from './Slider'
 import Modal from './Modal'
 import './Link-idx.css'
 
 export default function LinkIdx() {
-	const inputLink = useRef(null)
-	const { user } = useSelector((store) => store.auth)
+	const inputLink = useRef<HTMLInputElement>(null)
+	const { user } = useSelector((store: RootStateOrAny) => store.auth)
 	const [name, setName] = useState('')
 	const [link, setLink] = useState('')
 	const [showCopiedLinkMsg, setShowCopiedLinkMsg] = useState(false);
@@ -41,8 +41,8 @@ export default function LinkIdx() {
 
 	const copyLink = async () => {
 		await setLink(`${window.location.origin}/${name}`)
-		inputLink.current.select()
-		inputLink.current.setSelectionRange(0, 99)
+		inputLink.current!.select()
+		inputLink.current!.setSelectionRange(0, 99)
 		document.execCommand('copy')
 		setShowCopiedLinkMsg(true);
 		setTimeout(() => setShowCopiedLinkMsg(false), 7000);

@@ -1,9 +1,8 @@
-import React from 'react'
+import React, { useEffect, useContext } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useSelector, RootStateOrAny } from 'react-redux'
 import './App.css'
 
-// Components
 import Main from './components/main/Main-idx'
 import Footer from './components/partials/Footer'
 import Error404 from './components/error/404'
@@ -15,20 +14,15 @@ import UserLink from './components/link/Link-idx'
 import TemplateMSG from './components/inb/Template'
 import Msg from './components/sendMsg/Msg-idx'
 import Loader from './components/partials/Loader'
-import { useEffect } from 'react'
-import { useContext } from 'react'
 import { InitContext } from './global/context/InitContext'
 
 export default function App() {
-	const { isStatus500, isLoaded, user } = useSelector((store) => store.auth)
-	const {
-		state: { socket },
-	} = useContext(InitContext)
+	const { isStatus500, isLoaded, user } = useSelector((store: RootStateOrAny) => store.auth)
+	const { state: { socket } } = useContext(InitContext)
 
 	useEffect(() => {
-		if (user !== null) {
-			socket.emit('tq:init-user', { username: user.username })
-		}
+		if (user !== null) 
+			socket!.emit('tq:init-user', { username: user.username })
 	}, [user, socket])
 
 	if (!isStatus500) {
@@ -46,7 +40,12 @@ export default function App() {
 								component={Main}
 								redirectTo="/link"
 							/>
-							<AuthRoute path="/messages" component={Inbx} redirectTo="/" />
+							<AuthRoute 
+								path="/messages" 
+								component={Inbx} 
+								redirectTo="/"
+								needsRenderTime={false}
+							/>
 							<AuthRoute
 								needsRenderTime={true}
 								path="/link"

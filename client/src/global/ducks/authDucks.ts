@@ -1,7 +1,20 @@
 import axios from 'axios'
+import { Dispatch } from 'redux'
 
-const initialData = {
-	user: null,
+export interface IDucksAction {
+	type: string;
+	payload: any;
+}
+
+interface IDucksState {
+	user: Object;
+	isAuthenticated: boolean;
+	isLoaded: boolean;
+	isStatus500: boolean;
+}
+
+const initialData: IDucksState = {
+	user: {},
 	isAuthenticated: false,
 	isLoaded: false,
 	isStatus500: false, //Server error
@@ -10,10 +23,9 @@ const initialData = {
 // Types
 const GET_AUTH_INFO = 'GET_AUTH_INFO'
 const SET_MESSAGES = 'SET_MESSAGES'
-//const GET_AUTH_INFO_ERROR = 'GET_AUTH_INFO_ERROR';
 
 // Reducer
-export default function authReducer(state = initialData, action) {
+export default function authReducer(state = initialData, action: IDucksAction) {
 	switch (action.type) {
 		case GET_AUTH_INFO:
 			return {
@@ -35,12 +47,12 @@ export default function authReducer(state = initialData, action) {
 }
 
 // Actions
-export const getAuthInfoAction = () => async (dispatch) => {
+export const getAuthInfoAction = () => async (dispatch?: Dispatch) => {
 	try {
 		const res = await axios.get('/user/authenticated')
 		if (res.status !== 500) {
 			const { username, enteredname, messages } = res.data
-			dispatch({
+			dispatch!({
 				type: GET_AUTH_INFO,
 				payload: {
 					user: { username, enteredname, messages },
@@ -52,7 +64,7 @@ export const getAuthInfoAction = () => async (dispatch) => {
 		}
 	} catch (error) {
 		console.error(error)
-		dispatch({
+		dispatch!({
 			type: GET_AUTH_INFO,
 			payload: {
 				user: null,
@@ -64,7 +76,7 @@ export const getAuthInfoAction = () => async (dispatch) => {
 	}
 }
 
-export const setUserMessagesAction = (messages) => async (dispatch) => {
+export const setUserMessagesAction = (messages: ITQMessage[]) => async (dispatch: Dispatch) => {
 	dispatch({
 		type: SET_MESSAGES,
 		payload: { messages },

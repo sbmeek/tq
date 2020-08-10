@@ -1,15 +1,15 @@
 import React, { useEffect, useContext } from 'react'
 import { Route, Redirect } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useSelector, RootStateOrAny } from 'react-redux'
 import Loader from '../components/partials/Loader'
-
-// Context
 import { InitContext, SET_IS_RENDERED } from '../global/context/InitContext'
+import IPropsHOCs from './IPropsHOCs'
 
-export default function ({ component: Component, needsRenderTime, ...rest }) {
+export default function ({ component: Component, needsRenderTime, ...rest }: IPropsHOCs) {
+
 	const {
 		auth: { isAuthenticated, isLoaded },
-	} = useSelector((store) => store)
+	} = useSelector((store: RootStateOrAny) => store)
 	const { state, dispatch } = useContext(InitContext)
 
 	useEffect(() => {
@@ -22,7 +22,7 @@ export default function ({ component: Component, needsRenderTime, ...rest }) {
 	}, [dispatch, needsRenderTime])
 
 	useEffect(() => {
-		const rootCls = document.querySelector('#react-root').classList
+		const rootCls = document.querySelector('#react-root')!.classList
 		!state.isRendered ? rootCls.add('d-scroll') : rootCls.remove('d-scroll')
 	}, [state.isRendered])
 
