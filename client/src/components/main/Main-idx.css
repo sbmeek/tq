@@ -58,6 +58,7 @@
 
 .field-tq>div:nth-child(1){
 	display: flex;
+	position: relative;
 	width: 100%;
 	color: #03666d;
 	border: 5.9px solid #018b9a;
@@ -82,23 +83,44 @@
 }
 
 .main-input{
-	display:table-cell;
-	vertical-align:middle;
+	padding: 3px 10px;
 	color: #03666d;
 	background: transparent;
 	border-radius: 30px;
 	min-height: 100%;
 	min-width: 100%;
+	max-height: 42px;
 	cursor: pointer;
-	resize: none;
 	white-space: nowrap;
 	overflow: hidden;
+	line-height: 27px;;
+	text-align: center;
+    resize: none !important;
+}
+
+.main-input::-moz-placeholder
+.main-input:-moz-placeholder,
+.main-input:-ms-input-placeholder{
+	display: flex;
+	align-items: center;
+	color: #03666d !important;
+}
+
+.main-input::placeholder{
+	color: #03666d !important;
+}
+
+.main-input br {
+	display: none;
 }
 
 .input-mode {
 	color: #fff;
 	font-size: 1.1rem;
 	outline: none;
+	line-height: 1.5em !important;
+	text-align: left !important;
+	cursor: text !important;
 }
 
 .main-btn{

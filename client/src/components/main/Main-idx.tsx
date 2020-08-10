@@ -4,17 +4,15 @@ import React, {
 	useRef,
 	useContext,
 	FormEvent,
-	CSSProperties,
 	FocusEvent,
-	ChangeEvent,
 	KeyboardEvent,
+	ChangeEvent
 } from 'react'
 import { useDispatch } from 'react-redux'
 import axios from 'axios'
 import Alert from '../partials/Alert'
 import logo from '../../assets/images/ltqrNEW.png'
 import './Main-idx.css'
-
 import { getAuthInfoAction } from '../../global/ducks/authDucks'
 import { InitContext, SET_IS_RENDERED } from '../../global/context/InitContext'
 
@@ -105,10 +103,15 @@ function Main() {
 		})
 	}
 
+	const formatVal = (val: string): string => {
+		let l = val.length;
+		return (val!.slice(0, l - (l - 20)) as string)
+	}
+
 	const handleFieldChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-		const targetElement = (e.target as HTMLTextAreaElement);
-		const { value: val } = targetElement;
-		setUsername(val.replace(/\s/g, ''))
+		const targetElement = e.target as HTMLTextAreaElement
+		const { value: val } = targetElement
+		setUsername(formatVal(val.replace(/\s/g, '')))
 		setShowSubmitBtn(val.length > 0)
 	}
 
@@ -130,18 +133,10 @@ function Main() {
 					<div styleName="field-tq">
 						<div styleName={`${inputMode ? 'input-mode' : ''}`} tabIndex={-1}>
 							<textarea
-								value={!inputMode ? lang['InputPlaceholder'] : username}
+								value={username}
 								id="usrTQ"
-								name="tquser"
-								autoComplete="off"
+								data-name="tquser"
 								styleName={`main-input ${inputMode ? 'input-mode' : ''}`}
-								style={
-									{
-										maxWidth: `${showSubmitBtn ? '90%' : '100%'}`,
-										textAlign: `${inputMode ? 'left' : 'center'}`,
-										padding: `${inputMode ? '4px 10px' : '7px'}`,
-									} as CSSProperties
-								}
 								data-type={inputMode ? 'text' : 'button'}
 								onChange={handleFieldChange}
 								onFocus={handleFieldFocus}
@@ -149,7 +144,11 @@ function Main() {
 								onKeyPress={handleKeyPress}
 								ref={tqField}
 								spellCheck="false"
-							/>
+								autoComplete="off"
+								role="main-input/btn"
+								maxLength={20}
+								placeholder={!inputMode ? lang['InputPlaceholder'] : ""}
+							></textarea>
 							{showSubmitBtn && (
 								<button type="button" styleName="main-btn">
 									{'>'}
