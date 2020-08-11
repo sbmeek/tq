@@ -14,7 +14,7 @@ import Alert from '../partials/Alert'
 import logo from '../../assets/images/ltqrNEW.png'
 import './Main-idx.css'
 import { getAuthInfoAction } from '../../global/ducks/authDucks'
-import { InitContext, SET_IS_RENDERED } from '../../global/context/InitContext'
+import { InitContext, ActionEnum } from '../../global/context/InitContext'
 
 const A = new Alert()
 
@@ -51,7 +51,7 @@ function Main() {
 				tqField.current!.style.fontFamily = `'Nunito', sans-serif`
 				setTimeout(() => {
 					dispatchInit({
-						type: SET_IS_RENDERED,
+						type: ActionEnum.SET_IS_RENDERED,
 						payload: { isRendered: true },
 					})
 				}, 500)

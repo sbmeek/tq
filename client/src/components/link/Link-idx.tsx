@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector, RootStateOrAny } from 'react-redux'
-import { InitContext, SET_IS_RENDERED } from '../../global/context/InitContext'
+import { InitContext, ActionEnum } from '../../global/context/InitContext'
 import Slider from './Slider'
 import Modal from './Modal'
 import './Link-idx.css'
@@ -24,7 +24,7 @@ export default function LinkIdx() {
 
 	useEffect(() => {
 		const setAsRendered = {
-			type: SET_IS_RENDERED,
+			type: ActionEnum.SET_IS_RENDERED,
 			payload: { isRendered: true },
 		}
 		window.addEventListener('load', () => dispatch(setAsRendered))

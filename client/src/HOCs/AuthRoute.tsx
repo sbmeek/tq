@@ -2,7 +2,7 @@ import React, { useEffect, useContext } from 'react'
 import { Route, Redirect } from 'react-router-dom'
 import { useSelector, RootStateOrAny } from 'react-redux'
 import Loader from '../components/partials/Loader'
-import { InitContext, SET_IS_RENDERED } from '../global/context/InitContext'
+import { InitContext, ActionEnum } from '../global/context/InitContext'
 import IPropsHOCs from './IPropsHOCs'
 
 export default function ({ component: Component, needsRenderTime, ...rest }: IPropsHOCs)  {
@@ -11,7 +11,7 @@ export default function ({ component: Component, needsRenderTime, ...rest }: IPr
 
 	useEffect(() => {
 		dispatch({
-			type: SET_IS_RENDERED,
+			type: ActionEnum.SET_IS_RENDERED,
 			payload: {
 				isRendered: !needsRenderTime,
 			},

@@ -20,25 +20,28 @@ const initialState: IContextState = {
 	lang: en,
 }
 
+export enum ActionEnum {
+	SET_SOCKET = 'SET_SOCKET',
+	SET_IS_RENDERED = 'SET_IS_RENDERED',
+	SET_LANG = 'SET_LANG'
+}
+
 export const InitContext = createContext<any>({ state: initialState })
 
-export const SET_SOCKET = 'SET_SOCKET'
-export const SET_IS_RENDERED = 'SET_IS_RENDERED'
-export const SET_LANG = 'SET_LANG'
 
 function reducer(state: IContextState, action: IContextAction) {
 	switch (action.type) {
-		case SET_SOCKET:
+		case ActionEnum.SET_SOCKET:
 			return {
 				...state,
 				socket: action.payload.socket,
 			}
-		case SET_IS_RENDERED:
+		case ActionEnum.SET_IS_RENDERED:
 			return {
 				...state,
 				isRendered: action.payload.isRendered,
 			}
-		case SET_LANG:
+		case ActionEnum.SET_LANG:
 			return {
 				...state,
 				lang: action.payload.lang,
@@ -58,7 +61,7 @@ export default ({ children }: IProps) => {
 	useEffect(() => {
 		try {
 			dispatch({
-				type: SET_SOCKET,
+				type: ActionEnum.SET_SOCKET,
 				payload: { socket: io() },
 			})
 		} catch (error) {
@@ -68,7 +71,7 @@ export default ({ children }: IProps) => {
 
 	useEffect(() => {
 		dispatch({
-			type: SET_LANG,
+			type: ActionEnum.SET_LANG,
 			payload: { lang: gsetLang() },
 		})
 	}, [])
