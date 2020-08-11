@@ -10,7 +10,7 @@ export default function Labels({ label, setShowLabel }: IProps) {
 
 	const labelClickHandler = (e: MouseEvent<HTMLDivElement>) => {
 		const targetElement = (e.target as HTMLDivElement);
-		label.innerHTML = targetElement.innerHTML;
+		label.innerText = targetElement.innerHTML;
 		setShowLabel(true);
 		label.style.color = window.getComputedStyle(targetElement).color;
 	}

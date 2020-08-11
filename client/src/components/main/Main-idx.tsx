@@ -145,7 +145,6 @@ function Main() {
 								ref={tqField}
 								spellCheck="false"
 								autoComplete="off"
-								role="main-input/btn"
 								maxLength={20}
 								placeholder={!inputMode ? lang['InputPlaceholder'] : ""}
 							></textarea>

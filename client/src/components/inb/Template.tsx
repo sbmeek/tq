@@ -1,39 +1,50 @@
-import React, { useState, useContext, useEffect, useRef, FormEvent, KeyboardEvent, MouseEvent } from 'react'
+import React, {
+	useState,
+	useContext,
+	useEffect,
+	useRef,
+	FormEvent,
+	KeyboardEvent,
+	MouseEvent,
+} from 'react'
 import { useLocation, Link } from 'react-router-dom'
 import parse from 'html-react-parser'
 import { InitContext } from '../../global/context/InitContext'
-import './Template.css'
-
+import styles from './Template.css'
 import BgColors from './TemplateOpts/BgColors'
 import Labels from './TemplateOpts/Labels'
 
 interface IOptsVisibility {
-	bgColorsOptShown: boolean,
-	labelsOptShown: boolean,
-	[key: string]: boolean;
+	bgColorsOptShown: boolean
+	labelsOptShown: boolean
+	[key: string]: boolean
 }
 
 export default function Template() {
 	const [answer, setAnswer] = useState<string>('')
-	const [showLabel, setShowLabel] = useState<boolean>(false);
+	const [showLabel, setShowLabel] = useState<boolean>(false)
 	const [actualMsg, setActualMsg] = useState<ITQMessage>()
 	const InitialStateOptsVisibility: IOptsVisibility = {
 		bgColorsOptShown: false,
 		labelsOptShown: false,
 	}
-	const [optsVisibility, setOptsVisibility] = useState<IOptsVisibility>(InitialStateOptsVisibility);
-	const [isPlaceholderVisible, setIsPlaceholderVisible] = useState<boolean>(true)
+	const [optsVisibility, setOptsVisibility] = useState<IOptsVisibility>(
+		InitialStateOptsVisibility
+	)
+	const [isPlaceholderVisible, setIsPlaceholderVisible] = useState<boolean>(
+		true
+	)
 	const { socket } = useContext(InitContext)
 	const templateQuestion = useRef<HTMLDivElement>(null)
 	const templateAnswer = useRef<HTMLDivElement>(null)
 	const templateQuestionContainer = useRef<HTMLDivElement>(null)
 	const ansInput = useRef<HTMLDivElement>(null)
 	const optsSwipe = useRef<HTMLDivElement>(null)
-	const label = useRef<HTMLDivElement>(null);
+	const label = useRef<HTMLDivElement>(null)
 	const location = useLocation<ITQMessage>()
 
 	useEffect(() => {
-		const msg = ((location.state as any)["actualMsg"]) as ITQMessage
+		const msg = (location.state as any)['actualMsg'] as ITQMessage
 		setActualMsg(msg)
 		templateAnswer.current!.focus()
 		templateQuestion.current!.innerHTML = `"${msg!.content}"`
@@ -52,14 +63,14 @@ export default function Template() {
 	}
 
 	const handleInput = async (e: KeyboardEvent<HTMLDivElement>) => {
-		const targetElement = (e.currentTarget as HTMLDivElement);
+		const targetElement = e.currentTarget as HTMLDivElement
 		const { textContent: ansVal } = targetElement
 		setIsPlaceholderVisible(ansVal!.length < 1)
 		await setAnswer(targetElement.innerHTML)
 	}
 
 	const handleBtnFormatClick = (e: MouseEvent<HTMLButtonElement>) => {
-		const targetElement = (e.target as HTMLButtonElement)
+		const targetElement = e.target as HTMLButtonElement
 		const { parentElement: target } = targetElement
 		formatAnswer(target!.title.toLowerCase())
 	}
@@ -71,7 +82,7 @@ export default function Template() {
 	}
 
 	const toggleOptSwipe = (e: MouseEvent<HTMLButtonElement>) => {
-		const targetElement = (e.target as HTMLButtonElement)
+		const targetElement = e.target as HTMLButtonElement
 		const optSwp = optsSwipe.current!
 		let _dsrdOpt = getDesiredOpt(targetElement.id)
 		let desiredOpt = Object.keys(_dsrdOpt)[0]
@@ -105,8 +116,26 @@ export default function Template() {
 		}
 	}
 
+	const toggleLabelHandler = (e: MouseEvent<HTMLDivElement>) => {
+		const targetElement = e.target as HTMLDivElement
+		if(label.current!.classList.contains(styles['template-question-label-active'])){
+			switch (e.type) {
+				case 'mouseenter':
+					targetElement.classList.add(styles['remove-label'])
+					break
+				case 'click':
+					label.current!.classList.remove(styles['remove-label'])
+					break
+			}
+		}
+	}
+
 	return (
-		<div styleName="template-container" id="tmpt-cont">
+		<div
+			styleName="template-container"
+			id="tmpt-cont"
+			onClick={toggleLabelHandler}
+		>
 			<div>
 				<div styleName="template-head-btns">
 					<Link to="/messages" styleName="template-btn-back">
@@ -203,7 +232,9 @@ export default function Template() {
 									height: optsVisibility.bgColorsOptShown ? '100%' : '0',
 								}}
 							>
-								<BgColors templateQuestionContainer={templateQuestionContainer.current!} />
+								<BgColors
+									templateQuestionContainer={templateQuestionContainer.current!}
+								/>
 							</div>
 							<div
 								style={{
@@ -216,20 +247,22 @@ export default function Template() {
 					</form>
 				</div>
 			</div>
-			<div 
-				styleName="template-question-container" 
+			<div
+				styleName="template-question-container"
 				ref={templateQuestionContainer}
 				className="d-text-select"
 			>
-				<div 
-					styleName="template-question-label"
-					ref={label}
-					style={{ opacity: (showLabel ? "1" : "0") }}
-				></div>
 				<div
-					styleName="template-question"
-					ref={templateQuestion}
-				>
+					styleName={`template-question-label ${
+						showLabel ? 'template-question-label-active' : ''
+					}`}
+					ref={label}
+					onMouseEnter={toggleLabelHandler}
+				></div>
+				<div styleName="remove-label-box" onClick={() => setShowLabel(false)}>
+					✕
+				</div>
+				<div styleName="template-question" ref={templateQuestion}>
 					""
 				</div>
 				<div styleName="template-answer-from-question" ref={templateAnswer}>
