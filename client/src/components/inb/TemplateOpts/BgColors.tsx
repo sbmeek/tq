@@ -1,17 +1,18 @@
 import React from 'react'
 import styles from './BgColors.css'
 
-interface IProps {
-	templateQuestionContainer: HTMLDivElement
-}
-
-export default function BgColors({ templateQuestionContainer }: IProps) {
-
+export default function BgColors<
+	T extends {
+		templateQuestionContainer: HTMLDivElement
+	}
+>({ templateQuestionContainer }: T) {
 	const bgColorClickHandler = (e: React.MouseEvent<HTMLDivElement>) => {
-		const targetElement = (e.target as HTMLDivElement);
-		if(targetElement.classList.contains(styles['bg-color'])) 
-			e.target = targetElement.children[0];
-		templateQuestionContainer.style.background = window.getComputedStyle(targetElement).background;
+		const targetElement = e.target as HTMLDivElement
+		if (targetElement.classList.contains(styles['bg-color']))
+			e.target = targetElement.children[0]
+		templateQuestionContainer.style.background = window.getComputedStyle(
+			targetElement
+		).background
 	}
 
 	return (

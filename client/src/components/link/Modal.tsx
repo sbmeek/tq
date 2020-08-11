@@ -2,13 +2,12 @@ import React, { CSSProperties } from 'react'
 import Interweave from 'interweave'
 import './Modal.css'
 
-interface IProps {
+export default function Modal <T extends { 
 	modalTxt: string;
 	showModal: boolean;
 	setShowModal: Function;
-}
-
-export default function Modal({ modalTxt, showModal, setShowModal }: IProps) {
+}>({ modalTxt, showModal, setShowModal }: T) 
+{
 
 	const modalStyle: CSSProperties = {
 		visibility: showModal ? 'visible' : 'hidden',

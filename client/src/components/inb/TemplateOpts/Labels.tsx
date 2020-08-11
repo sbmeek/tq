@@ -1,18 +1,17 @@
 import React, { MouseEvent } from 'react'
 import './Labels.css'
 
-interface IProps {
-	label: HTMLDivElement;
-	setShowLabel: Function;
-}
-
-export default function Labels({ label, setShowLabel }: IProps) {
-
+export default function Labels<
+	T extends {
+		label: HTMLDivElement
+		setShowLabel: Function
+	}
+>({ label, setShowLabel }: T) {
 	const labelClickHandler = (e: MouseEvent<HTMLDivElement>) => {
-		const targetElement = (e.target as HTMLDivElement);
-		label.innerText = targetElement.innerHTML;
-		setShowLabel(true);
-		label.style.color = window.getComputedStyle(targetElement).color;
+		const targetElement = e.target as HTMLDivElement
+		label.innerText = targetElement.innerHTML
+		setShowLabel(true)
+		label.style.color = window.getComputedStyle(targetElement).color
 	}
 
 	return (

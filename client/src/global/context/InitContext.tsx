@@ -4,14 +4,14 @@ import en from '../../lang/en'
 import es from '../../lang/es'
 
 interface IContextState {
-	socket: SocketIOClientStatic["Socket"];
-	isRendered: boolean;
-	lang: object;
+	socket: SocketIOClientStatic['Socket']
+	isRendered: boolean
+	lang: object
 }
 
 interface IContextAction {
-	type: string;
-	payload: any;
+	type: string
+	payload: any
 }
 
 const initialState: IContextState = {
@@ -23,11 +23,10 @@ const initialState: IContextState = {
 export enum ActionEnum {
 	SET_SOCKET = 'SET_SOCKET',
 	SET_IS_RENDERED = 'SET_IS_RENDERED',
-	SET_LANG = 'SET_LANG'
+	SET_LANG = 'SET_LANG',
 }
 
 export const InitContext = createContext<any>({ state: initialState })
-
 
 function reducer(state: IContextState, action: IContextAction) {
 	switch (action.type) {
@@ -51,11 +50,7 @@ function reducer(state: IContextState, action: IContextAction) {
 	}
 }
 
-interface IProps {
-	children: ReactNode
-}
-
-export default ({ children }: IProps) => {
+export default function <T extends { children: ReactNode }>({ children }: T) {
 	const [state, dispatch] = useReducer(reducer, initialState)
 
 	useEffect(() => {
@@ -85,16 +80,14 @@ export default ({ children }: IProps) => {
 		}
 	}
 
-	return (
-		state.socket !== null ? (
-			<InitContext.Provider
-				value={{
-					state,
-					dispatch,
-				}}
-			>
-				{children}
-			</InitContext.Provider>
-		) : null
-	)
+	return state.socket !== null ? (
+		<InitContext.Provider
+			value={{
+				state,
+				dispatch,
+			}}
+		>
+			{children}
+		</InitContext.Provider>
+	) : null
 }

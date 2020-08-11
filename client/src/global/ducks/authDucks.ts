@@ -7,7 +7,7 @@ export interface IDucksAction {
 }
 
 interface IDucksState {
-	user: Object;
+	user: object;
 	isAuthenticated: boolean;
 	isLoaded: boolean;
 	isStatus500: boolean;

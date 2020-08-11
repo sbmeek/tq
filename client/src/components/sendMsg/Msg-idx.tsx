@@ -4,7 +4,7 @@ import React, {
 	useContext,
 	useRef,
 	ChangeEvent,
-	FormEvent
+	FormEvent,
 } from 'react'
 import MsgSent from './MsgSent'
 import Error404 from '../error/404'
@@ -20,7 +20,10 @@ type DataType = {
 	sent?: boolean
 }
 
-export default function ({ match: { params } }: any) {
+export default function <
+	T extends { match: { params: P } },
+	P extends { username: string }
+>({ match: { params } }: T) {
 	const { state } = useContext(InitContext)
 	const [userExists, setUserExists] = useState(true)
 	params.username = params.username.toLowerCase()
