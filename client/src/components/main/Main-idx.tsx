@@ -18,11 +18,6 @@ import { InitContext, ActionEnum } from '../../global/context/InitContext'
 
 const A = new Alert()
 
-type ResType = {
-	key: string
-	expired: boolean
-}
-
 type DataType = {
 	_id: string
 	key: string
@@ -63,10 +58,10 @@ function Main() {
 		e.preventDefault()
 		const userVal = username
 		socket.emit('tq:exists', { username: userVal })
-		socket.once('tq:exists', (data: DataType) => {
+		socket.once('tq:exists', function (data: DataType) {
 			if (data == null) {
 				socket.emit('tq:register', { tquser: userVal })
-				socket.on('save:LS', (data: DataType) => {
+				socket.on('save:LS', function (data: DataType) {
 					localStorage.setItem(data._id, data.key)
 					socket.emit('tq:login', data)
 				})
@@ -74,7 +69,10 @@ function Main() {
 				data.key = localStorage.getItem(data._id) as string
 				socket.emit('tq:login', data)
 			}
-			socket.once('tq:login', async (res: ResType) => {
+			socket.once('tq:login', async function <T extends {
+				key: string
+				expired: boolean
+			}>(res: T) {
 				if (res.expired) {
 					A.trigger(`${lang['AlertUserExpired']}.`, {
 						btnHTML:
