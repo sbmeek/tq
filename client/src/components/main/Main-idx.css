@@ -23,13 +23,15 @@
 	justify-content: center;
 	min-width: 250px;
 	min-height: 360px;
-	height: 74vh;
+    height: 74vh;
+    z-index: 2;
 }
 
 .main-elements-container{
 	display: flex;
 	justify-content: center;
-	width: 100%;
+    width: 100%;
+    z-index: -2;
 }
 
 ._tq-logo {
@@ -58,18 +60,18 @@
 
 .field-tq>div:nth-child(1){
 	display: flex;
-	position: relative;
-	width: 100%;
-	color: #03666d;
-	border: 5.9px solid #018b9a;
-	background: #00b2c2;
-	height: 42px;
-	border-radius: 30px;
-	box-shadow: 0px 6.4px #01636d;
-	transition: background 100ms ease-in,
-	border 100ms ease-in;
-	box-sizing: border-box;
-	padding: 0 !important;
+    position: relative;
+    width: 100%;
+    color: #03666d;
+    border: 5.9px solid #018b9a;
+    background: #00b2c2;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    height: 42px;
+    border-radius: 30px;
+    transition: background 100ms ease-in, border 100ms ease-in;
+    box-sizing: border-box;
+    padding: 0 !important;
 }
 
 .field-tq>div:nth-child(1):hover{
@@ -120,20 +122,26 @@
 	outline: none;
 	line-height: 1.5em !important;
 	text-align: left !important;
-	cursor: text !important;
+    cursor: text !important;
 }
 
 .main-btn{
-	background: #018b9a;
-	color: #fff;
-	min-height: 100%;
-	min-width: 10%;
-	border-radius: 0 30px 30px 0;
-	padding: 0 7px;
-}
-
-.main-btn{
-	box-shadow: 0px 6.4px #01636d;
+	position: absolute;
+    background: #018b9a;
+    color: #fff;
+    min-height: 100%;
+    min-width: 114%;
+    border-radius: 30px;
+    padding: 0 7px;
+    left: -3%;
+    top: -5px;
+    height: 41px;
+    z-index: -1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+	box-shadow: 0px 5.4px #01636d;
+    cursor: pointer;
 }
 
 .field-tq>div:nth-child(2) {

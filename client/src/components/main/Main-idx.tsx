@@ -129,7 +129,9 @@ function Main() {
 				<img styleName="_tq-logo" src={logo} draggable="false" alt="logo" />
 				<div styleName="main-elements-container">
 					<div styleName="field-tq">
-						<div styleName={`${inputMode ? 'input-mode' : ''}`} tabIndex={-1}>
+						<div styleName={`${inputMode ? 'input-mode' : ''}`} style={{
+                            boxShadow: `${showSubmitBtn ? 'none' : '0px 3.2px 0px 2.2px #01636d' }`
+                        }} tabIndex={-1}>
 							<textarea
 								value={username}
 								id="usrTQ"
@@ -147,7 +149,7 @@ function Main() {
 								placeholder={!inputMode ? lang['InputPlaceholder'] : ""}
 							></textarea>
 							{showSubmitBtn && (
-								<button type="button" styleName="main-btn">
+								<button type="submit" styleName="main-btn">
 									{'>'}
 								</button>
 							)}
