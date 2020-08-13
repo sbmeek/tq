@@ -9,13 +9,11 @@ import * as serviceWorker from './serviceWorker'
 const store = generateStore()
 
 ReactDOM.render(
-	<React.StrictMode>
-		<Provider store={store}>
-			<InitProvider>
-				<App />
-			</InitProvider>
-		</Provider>
-	</React.StrictMode>,
+    <Provider store={store}>
+        <InitProvider>
+            <App />
+        </InitProvider>
+    </Provider>,
 	document.getElementById('react-root')
 )
 
