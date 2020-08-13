@@ -15,6 +15,7 @@ import TemplateMSG from './components/inb/Template'
 import Msg from './components/sendMsg/Msg-idx'
 import Loader from './components/partials/Loader'
 import { InitContext } from './global/context/InitContext'
+import Menu from './components/partials/Menu'
 
 export default function App() {
 	const { isStatus500, isLoaded, user } = useSelector((store: RootStateOrAny) => store.auth)
@@ -32,6 +33,7 @@ export default function App() {
 			return (
 				<>
 					<Router>
+						<Route path="/" component={Menu} />
 						<Switch>
 							<UnauthRoute
 								needsRenderTime={window.navigator.onLine}
@@ -64,6 +66,7 @@ export default function App() {
 							</Route>
 						</Switch>
 						<Route path="/" component={Footer} />
+						
 					</Router>
 				</>
 			)
