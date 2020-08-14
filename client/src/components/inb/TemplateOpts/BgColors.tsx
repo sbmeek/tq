@@ -7,12 +7,10 @@ export default function BgColors<
 	}
 >({ templateQuestionContainer }: T) {
 	const bgColorClickHandler = (e: React.MouseEvent<HTMLDivElement>) => {
-		const targetElement = e.target as HTMLDivElement
+		let targetElement = e.target as HTMLDivElement
 		if (targetElement.classList.contains(styles['bg-color']))
-			e.target = targetElement.children[0]
-		templateQuestionContainer.style.background = window.getComputedStyle(
-			targetElement
-		).background
+            targetElement = targetElement.children[0] as HTMLDivElement
+		templateQuestionContainer.style.background = window.getComputedStyle(targetElement).background
 	}
 
 	return (

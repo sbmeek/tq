@@ -1,11 +1,12 @@
 *,
 *::before,
 *::after {
-	-webkit-appearance: none;
-	box-sizing: border-box;
+    box-sizing: border-box;
 	margin: 0;
 	padding: 0;
-	border: 0;
+    border: 0;
+	-webkit-appearance: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
 :root {
@@ -90,12 +91,4 @@ body {
 button:focus,
 input[type="button"] {
     outline: none !important;
-}
-
-input,
-textarea,
-button,
-select,
-a {
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
