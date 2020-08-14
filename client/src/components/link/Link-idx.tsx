@@ -27,12 +27,13 @@ export default function LinkIdx() {
 			type: ActionEnum.SET_IS_RENDERED,
 			payload: { isRendered: true },
 		}
-		window.addEventListener('load', () => dispatch(setAsRendered))
-		setTimeout(() => dispatch(setAsRendered), 1000)
+		window.addEventListener('load', () => {
+            dispatch(setAsRendered)
+        })
 	}, [dispatch])
 
 	useEffect(() => {
-		;(async () => {
+		(async () => {
 			if (user) await setName(user.enteredname)
 		})()
 	}, [user])

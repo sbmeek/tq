@@ -49,7 +49,7 @@ export default function App() {
 								needsRenderTime={false}
 							/>
 							<AuthRoute
-								needsRenderTime={true}
+								needsRenderTime={false}
 								path="/link"
 								component={UserLink}
 								redirectTo="/"
