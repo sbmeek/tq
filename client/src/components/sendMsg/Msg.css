@@ -1,9 +1,9 @@
 .main{
-	min-Height: 657px;
+	min-Height: 89.9vh;
 	display: flex;
 	flex-Direction: column;
 	justify-Content: center;
-	background:	linear-gradient(to top, white 83%, rgba(246,246,246,0.81) 62%, rgba(237,237,237,1) 497%)
+	background:	linear-gradient(to top, white 80.5%, rgba(246,246,246,0.81) 62%, rgba(237,237,237,1) 497%)
 }
 .contenedor {
 	height: 328px;
