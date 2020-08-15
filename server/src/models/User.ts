@@ -1,8 +1,28 @@
-'use strict'
+import { Schema, Document, model } from 'mongoose';
+import bcrypt from 'bcrypt';
 
-const mongoose = require('mongoose')
-const bcrypt = require('bcrypt')
-const { Schema } = mongoose
+type uSchemaType = {
+    compareKey: Function;
+    hashKey: Function;
+}
+
+export interface IMsg { 
+    sentAt?: Date;
+    content?: string;
+    readed?: boolean;
+    answer?: string;
+}
+
+export interface IUser extends Document, uSchemaType{
+    username: string;
+    enteredname: string;
+    key: string;
+    createdAt: Date;
+    willExpireAt: Date;
+    expired: boolean;
+    messages: IMsg[];
+    _doc?: any;
+}
 
 const msgSchema = new Schema({
 	sentAt: { type: Date, default: new Date() },
@@ -43,11 +63,11 @@ const uSchema = new Schema({
 	messages: [msgSchema],
 })
 
-uSchema.methods.compareKey = async (DBkey, LSkey) => {
+uSchema.methods.compareKey = async (DBkey: string, LSkey: string) => {
 	return await bcrypt.compare(DBkey, LSkey)
 }
 
-uSchema.methods.hashKey = async (key) => {
+uSchema.methods.hashKey = async (key: string) => {
 	try {
 		const salt = await bcrypt.genSalt(10)
 		const hash = await bcrypt.hash(key, salt)
@@ -57,4 +77,4 @@ uSchema.methods.hashKey = async (key) => {
 	}
 }
 
-module.exports = mongoose.model('users', uSchema)
+export default model<IUser>('users', uSchema)

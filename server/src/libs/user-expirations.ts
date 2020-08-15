@@ -1,8 +1,13 @@
-const Agenda = require('agenda')
-const User = require('../models/User')
+import Agenda from 'agenda';
+import User from 'models/User';
 const instance = require('../database').instance
 
-module.exports.checkExpirations = checkExpirations = async () => {
+interface IExpired {
+    Expired?: { username: string }, 
+    [index: number]: any 
+}
+
+export const checkExpirations = async () => {
 	const uList = await User.find()
 	uList.length > 0
 		? console.log(
@@ -10,8 +15,8 @@ module.exports.checkExpirations = checkExpirations = async () => {
 				`\nValidating users expirations (${new Date().toISOString()})`
 		  )
 		: 0
-	let expired = {}
-	let notExpired = {}
+	let expired: IExpired = {};
+	let notExpired: IExpired = {};
 	uList.forEach(async (user, idx) => {
 		let expireDate = new Date(user.willExpireAt)
 		if (Date.now() >= expireDate.getTime()) {
@@ -19,7 +24,7 @@ module.exports.checkExpirations = checkExpirations = async () => {
 			user.expired = true
 			await user.save()
 		} else {
-			let hr = expireDate - new Date()
+			let hr = expireDate.getTime() - new Date().getTime()
 			hr /= 3.6e6
 			notExpired[idx] = {
 				'Not expired': user.username,
@@ -28,12 +33,12 @@ module.exports.checkExpirations = checkExpirations = async () => {
 		}
 	})
 	console.log('\x1b[31m%s\x1b[0m', `\nExpired users`)
-	console.table(expired)
+	console.table(expired!)
 	console.log('\x1b[34m%s\x1b[0m', `\nActive users`)
-	console.table(notExpired)
+	console.table(notExpired!)
 }
 
-module.exports.setExpirationDate = setExpirationDate = async (_id) => {
+export const setExpirationDate = async (_id: string) => {
 	try {
 		const user = await User.findByIdAndUpdate(
 			_id,
@@ -47,7 +52,7 @@ module.exports.setExpirationDate = setExpirationDate = async (_id) => {
 		return {
 			hasBeenUpdatedBySetExpirationDate: true,
 			success: true,
-			...user._doc,
+			...user!._doc,
 		}
 	} catch (error) {
 		console.error(error)
@@ -55,7 +60,7 @@ module.exports.setExpirationDate = setExpirationDate = async (_id) => {
 	}
 }
 
-module.exports.getExpirationDate = getExpirationDate = () => {
+export const getExpirationDate = () => {
 	let today = new Date()
 	let expireDate = new Date()
 	expireDate.setDate(today.getDate() + 4)

@@ -1,6 +1,11 @@
-const User = require('../models/User')
+import { Socket, Server } from "socket.io"
+import { OnlineUsrsType } from './sockets'
+import User from "models/User"
 
-exports.sendMessage = async ({ username, msg }, socket, io, onlineUsrs) => {
+export const sendMessage = async function <T extends {
+    username: string;
+    msg: string
+}>({ username, msg }:T, socket: Socket, io: Server, onlineUsrs: OnlineUsrsType) {
 	try {
 		const _utmp = await User.findOneAndUpdate(
 			{ username },
@@ -11,10 +16,10 @@ exports.sendMessage = async ({ username, msg }, socket, io, onlineUsrs) => {
 			},
 			{ new: true }
 		)
-		console.log(_utmp.messages)
+		console.log(_utmp!.messages)
 		for (let _uid in onlineUsrs) {
 			if (onlineUsrs[_uid] === username)
-				io.to(_uid).emit('msg:new', _utmp.messages)
+				io.to(_uid).emit('msg:new', _utmp!.messages)
 		}
 		socket.emit('msg:send', { success: true, sent: true })
 	} catch (error) {
@@ -28,7 +33,10 @@ exports.sendMessage = async ({ username, msg }, socket, io, onlineUsrs) => {
 	}
 }
 
-exports.answerMessage = async ({ answer, msgId }, socket) => {
+export const answerMessage = async function <T extends {
+    answer: string;
+    msgId: string;
+}>({ answer, msgId }: T, socket: Socket) {
 	try {
 		await User.findOneAndUpdate(
 			{ 'messages._id': msgId },

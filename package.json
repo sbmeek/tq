@@ -20,6 +20,8 @@
 	"homepage": "https://github.com/SBMeek/tq#readme",
 	"devDependencies": {
 		"concurrently": "^5.2.0",
-		"prettier": "2.0.5"
-	}
+		"prettier": "2.0.5",
+		"typescript": "^3.9.7"
+	},
+	"dependencies": {}
 }

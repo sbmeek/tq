@@ -1,15 +1,15 @@
-'use strict'
-
-const server = require('../server').server
-const SocketIO = require('socket.io')
+import { server } from 'server'
+import SocketIO from 'socket.io'
 const io = SocketIO(server)
-const { userExists, userLogin, userRegister } = require('../auth/local.auth')
+import { userExists, userLogin, userRegister } from 'auth/local.auth';
+import { sendMessage, answerMessage } from './message.utils'
 
-const { sendMessage, answerMessage } = require('../libs/message.utils')
+export type OnlineUsrsType = {
+    [index: string]: string;
+}
 
+export const onlineUsrs: OnlineUsrsType = {}
 let conns = 0
-const onlineUsrs = { def: 0 }
-// let clientSocket = null;
 
 io.on('connection', async (socket) => {
 	conns++
@@ -18,23 +18,17 @@ io.on('connection', async (socket) => {
 	io.emit('connections:updated', { n: conns })
 
 	socket.on('tq:init-user', ({ username }) => {
-		onlineUsrs[socket.id] = username
+        onlineUsrs[socket.id] = (username === undefined ? "Not authenticated" : username)
 		console.log(onlineUsrs)
 	})
-
-	// setInterval(() => {
-	//     socket.emit('date-time', { iso: new Date() })
-	// }, 1000);
 
 	// User Auth
 	socket.on('tq:exists', (data) => userExists(data, socket))
 	socket.on('tq:login', (data) => userLogin(data, socket, onlineUsrs))
 	socket.on('tq:register', (data) => userRegister(data, socket))
 
-	// Send msg
+    // Msg
 	socket.on('msg:send', (data) => sendMessage(data, socket, io, onlineUsrs))
-
-	// Answer msg
 	socket.on('msg:ans', (data) => answerMessage(data, socket))
 
 	socket.on('disconnect', () => {
@@ -46,5 +40,3 @@ io.on('connection', async (socket) => {
 		console.log(onlineUsrs)
 	})
 })
-
-module.exports = { onlineUsrs }
