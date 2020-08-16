@@ -118,8 +118,8 @@
 	padding: 1px 4px;
 	font-size: 12px;
 	margin-left: 2px;
-	width: 20px;
-	height: 20px;
+    width: 19px;
+    height: 20px;
 	align-items: inherit;
 	justify-content: center;
 }
@@ -128,7 +128,6 @@
 .answered-msgs-container,
 .inbox-msgs-container>div:first-child {
 	display: flex;
-	flex-direction: row;
 	min-width: 100%;
 	max-height: 67vh;
 }
@@ -142,10 +141,6 @@
     justify-content: center;
 }
 
-.answered-msgs-container{
-    flex-direction: column !important;
-}
-
 .inbox-msg {
 	display: flex;
 	justify-content: center;
@@ -156,7 +151,7 @@
 	margin-bottom: 5px;
 	min-height: 85px;
 	font-weight: 700;
-	min-width: 100%;
+    width: 100%;
 	padding: 20px;
 	cursor: pointer;
 }
@@ -179,8 +174,9 @@
 		justify-content: center;
 	}
 	.inbox-container {
-		max-width: 649px;
-		min-width: 34%;
+		max-width: 383px;
+        min-width: initial;
+        width: 100%;
 		background: transparent;
 	}
 	.inbox-msg {
@@ -189,7 +185,8 @@
 		-webkit-border-radius: 25px 25px 25px 25px;
 		border: 0px solid #000000;
 	}
-	.inbox-msgs-container {
+    .inbox-msgs-container,
+    .answered-msgs-container {
 		min-width: 100%;
 		max-height: 46vh;
 	}
@@ -205,7 +202,8 @@
 	flex-wrap: wrap;
 	justify-content: flex-start;
 	align-content: flex-start;
-	align-items: flex-start;
+    align-items: flex-start;
+    width: 100%;
 }
 
 :global .simplebar-wrapper {

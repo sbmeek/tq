@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom'
 import './Inbox.css'
 import icon from '../../assets/images/icon.png'
 import { InitContext } from '../../global/context/InitContext'
+import parse from 'html-react-parser'
 import SimpleBar from 'simplebar-react'
 
 export default function Inbox<
@@ -101,14 +102,16 @@ export default function Inbox<
 				</div>
 				<div style={{ display: `${actualTab === 'ans' ? 'flex' : 'none'}` }}>
 					<ul styleName="answered-msgs-container">
-						{answeredMsgs.map((msg) => (
-							<div key={msg._id} styleName="inbox-msg">
-								<li className={msg._id}>
-									"{msg.content}"<br />
-									<i>ans: {msg.answer}</i>
-								</li>
-							</div>
-						))}
+						<SimpleBar>
+							{answeredMsgs.map((msg) => (
+								<div key={msg._id} styleName="inbox-msg">
+									<li className={msg._id}>
+										"{msg.content}"<br />
+										<i>ans: {parse(msg.answer as string)}</i>
+									</li>
+								</div>
+							))}
+						</SimpleBar>
 					</ul>
 				</div>
 			</div>
