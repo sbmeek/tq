@@ -64,9 +64,12 @@ export default function Inbox<
 						onClick={handleTabClick}
 						autoFocus={true}
 					>
-						{messages.length < 1
+                        {
+                            messages.length < 1
+                            && answeredMsgs.length < 1
 							? `${lang['NoMessagesInfo']}`
-							: `${lang['MsgTab']}`}
+							: `${lang['MsgTab']}`
+                        }
 						<div styleName={`new-msgs-number ${messages.length < 1 && answeredMsgs.length < 1 ? 'no-msgs' : ''}`}>{messages.length}</div>
 					</button>
 					<button

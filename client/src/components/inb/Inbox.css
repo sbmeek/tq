@@ -36,14 +36,6 @@
 	justify-content: space-between;
 }
 
-.inbox-container > div > button {
-	font-weight: 600;
-}
-
-.inbox-container > div > button:focus {
-	background: none;
-}
-
 .inbox-icon {
 	display: flex;
 	align-items: center;
@@ -62,6 +54,16 @@
 	width: 32px;
 }
 
+.inbox-tab-msgs,
+.ans-tab{
+    font-weight: 600;
+}
+
+.inbox-tab-msgs:focus,
+.ans-tab:focus{
+    background: var(--tq-dark-gray-01);
+}
+
 .ans-tab{
     display: flex;
 	align-items: center;
@@ -74,12 +76,12 @@
 	border-radius: 0px 12px 12px 0px;
 	-moz-border-radius: 0px 12px 12px 0px;
     -webkit-border-radius: 0px 12px 12px 0px;
-    background: var(--tq-dark-gray-00);
+    background: var(--tq-dark-gray-02);
 }
 
 .selected-tab{
     display: flex !important;
-    background: var(--tq-dark-gray-02) !important;
+    background: var(--tq-dark-gray-00) !important;
 }
 
 .inbox-tab-msgs {
@@ -94,7 +96,7 @@
 	border-radius: 12px 0px 0px 12px;
 	-moz-border-radius: 12px 0px 0px 12px;
     -webkit-border-radius: 12px 0px 0px 12px;
-    background: var(--tq-dark-gray-00);
+    background: var(--tq-dark-gray-02);
 }
 
 .inbox-tab-msgs.no-msgs,

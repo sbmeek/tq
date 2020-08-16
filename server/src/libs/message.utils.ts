@@ -38,16 +38,18 @@ export const answerMessage = async function <T extends {
     _id: string;
 }>({ answer, _id }: T, socket: Socket) {
 	try {
-		await User.findOneAndUpdate(
+		const _utmp = await User.findOneAndUpdate(
 			{ 'messages._id': _id },
 			{
 				$set: { 'messages.$.answer': answer },
-			}
+			},
+			{ new: true }
 		)
 		socket.emit('msg:ans', {
 			success: true,
 			msgAnswered: true,
-		})
+        })
+        socket.emit('msg:new', _utmp!.messages);
 	} catch (error) {
 		console.error(error)
 		socket.emit('msg:ans', {
