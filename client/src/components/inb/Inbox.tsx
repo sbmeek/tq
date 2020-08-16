@@ -1,10 +1,4 @@
-import React, {
-	useState,
-	useRef,
-	useEffect,
-	useContext,
-	MouseEvent,
-} from 'react'
+import React, { useState, useContext, MouseEvent } from 'react'
 import { useHistory } from 'react-router-dom'
 import './Inbox.css'
 import icon from '../../assets/images/icon.png'
@@ -64,13 +58,16 @@ export default function Inbox<
 						onClick={handleTabClick}
 						autoFocus={true}
 					>
-                        {
-                            messages.length < 1
-                            && answeredMsgs.length < 1
+						{messages.length < 1 && answeredMsgs.length < 1
 							? `${lang['NoMessagesInfo']}`
-							: `${lang['MsgTab']}`
-                        }
-						<div styleName={`new-msgs-number ${messages.length < 1 && answeredMsgs.length < 1 ? 'no-msgs' : ''}`}>{messages.length}</div>
+							: `${lang['MsgTab']}`}
+						<div
+							styleName={`new-msgs-number ${
+								messages.length < 1 && answeredMsgs.length < 1 ? 'no-msgs' : ''
+							}`}
+						>
+							{messages.length}
+						</div>
 					</button>
 					<button
 						id="ans-tab"
@@ -84,19 +81,23 @@ export default function Inbox<
 					</button>
 				</div>
 				<div style={{ display: `${actualTab === 'msg' ? 'flex' : 'none'}` }}>
-					<ul styleName="inbox-msgs-container">
-						<SimpleBar>
-							{messages.map((msg) => (
-								<div
-									onClick={(e) => handleMsgClick(e, msg._id)}
-									key={msg._id}
-									styleName="inbox-msg"
-								>
-									<li className={msg._id}>"{msg.content}"</li>
-								</div>
-							))}
-						</SimpleBar>
-					</ul>
+					{messages.length > 0 ? (
+						<ul styleName="inbox-msgs-container">
+							<SimpleBar>
+								{messages.map((msg) => (
+									<div
+										onClick={(e) => handleMsgClick(e, msg._id)}
+										key={msg._id}
+										styleName="inbox-msg"
+									>
+										<li className={msg._id}>"{msg.content}"</li>
+									</div>
+								))}
+							</SimpleBar>
+						</ul>
+					) : (
+						<div styleName="_info-no-msgs">{lang['NoMessagesInfo']}</div>
+					)}
 				</div>
 				<div style={{ display: `${actualTab === 'ans' ? 'flex' : 'none'}` }}>
 					<ul styleName="answered-msgs-container">
