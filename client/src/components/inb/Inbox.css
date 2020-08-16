@@ -9,7 +9,6 @@
 	flex-direction: column;
 	min-width: 100%;
 	min-height: 90vh !important;
-	background: #fff;
 }
 
 .inbox-container > h4 {
@@ -41,9 +40,9 @@
 	align-items: center;
 	justify-content: center;
 	background: var(--tq-red-00);
-	border-radius: 200px 200px 200px 200px;
-	-moz-border-radius: 200px 200px 200px 200px;
-	-webkit-border-radius: 200px 200px 200px 200px;
+	border-radius: 30px;
+	-moz-border-radius: 30px;
+	-webkit-border-radius: 30px;
 	border: 0px solid #000000;
 	width: 52px;
 	height: 51px;
@@ -73,9 +72,7 @@
 	margin: 0;
 	color: #fff;
 	cursor: pointer;
-	border-radius: 0px 12px 12px 0px;
-	-moz-border-radius: 0px 12px 12px 0px;
-    -webkit-border-radius: 0px 12px 12px 0px;
+	border-radius: 0;
     background: var(--tq-dark-gray-02);
 }
 
@@ -92,10 +89,8 @@
 	width: 49.4%;
 	margin: 0;
 	color: #fff;
-	cursor: pointer;
-	border-radius: 12px 0px 0px 12px;
-	-moz-border-radius: 12px 0px 0px 12px;
-    -webkit-border-radius: 12px 0px 0px 12px;
+    cursor: pointer;
+    border-radius: 0;
     background: var(--tq-dark-gray-02);
 }
 
@@ -180,17 +175,23 @@
 		background: transparent;
 	}
 	.inbox-msg {
-		border-radius: 25px 25px 25px 25px;
-		-moz-border-radius: 25px 25px 25px 25px;
-		-webkit-border-radius: 25px 25px 25px 25px;
+		border-radius: 25px;
+		-moz-border-radius: 25px;
+		-webkit-border-radius: 25px;
 		border: 0px solid #000000;
 	}
     .inbox-msgs-container,
     .answered-msgs-container {
 		min-width: 100%;
 		max-height: 46vh;
-	}
-	.inbox-tab {
+    }
+    .inbox-tab-msgs{
+        border-radius: 12px 0 0 12px;
+    }
+    .ans-tab{
+        border-radius: 0 12px 12px 0;
+    }
+    .inbox-tab {
 		margin-bottom: 3px;
 	}
 }
