@@ -18,8 +18,6 @@ export default function Inbox<
 	}
 >({ messages, answeredMsgs }: T) {
 	const [actualTab, setActualTab] = useState('msg')
-	const msgsTabContent = useRef<HTMLDivElement>(null)
-	const ansTabContent = useRef<HTMLDivElement>(null)
 	const history = useHistory()
 	const {
 		state: {
@@ -29,42 +27,12 @@ export default function Inbox<
 
 	const handleTabClick = (e: MouseEvent<HTMLButtonElement>) => {
 		const targetElement = e.target as HTMLButtonElement
-		const { id: trgtID } = targetElement
-		setActualTab(trgtID === 'msg-tab' || trgtID === '' ? 'msg' : 'ans')
+		const { id } = targetElement
+		setActualTab(id === 'msg-tab' || id === '' ? 'msg' : 'ans')
 	}
 
-	useEffect(() => {
-		const selectedTabColor = 'rgba(0, 0, 0, 0.8)'
-		const unselectedTabColor = 'rgb(78, 78, 78)'
-		msgsTabContent.current!.style.display =
-			actualTab === 'msg' ? 'flex' : 'none'
-		ansTabContent.current!.style.display = actualTab === 'ans' ? 'flex' : 'none'
-
-		const ansTab = document.querySelector('#btn-ans-tab')! as HTMLButtonElement
-		const msgTab = document.querySelector('#btn-msg-tab')! as HTMLButtonElement
-
-		msgTab.style.background =
-			actualTab === 'msg' ? selectedTabColor : unselectedTabColor
-		ansTab.style.background =
-			actualTab === 'ans' ? selectedTabColor : unselectedTabColor
-
-		if (answeredMsgs.length < 1) {
-			ansTab.style.display = 'none'
-			msgTab.style.width = '100%'
-			msgTab.style.borderRadius = '12px'
-		}
-		if (messages.length < 1) {
-			msgTab.style.cursor = `default`
-			msgsTabContent.current!.style.display = 'none'
-		}
-		msgTab.innerHTML =
-			messages.length < 1 ? `${lang['NoMessagesInfo']}` : `${lang['MsgTab']}`
-	})
-
-	const handleMsgClick = (e: MouseEvent<HTMLDivElement>) => {
-		const targetElement = e.target as HTMLDivElement
-		const _msgId = targetElement.classList[0]
-		const actualMsg = messages.filter((e) => e._id === _msgId)[0]
+	const handleMsgClick = (_e: MouseEvent<HTMLDivElement>, _msgId: string) => {
+		const actualMsg = messages.filter((m) => m._id === _msgId)[0]
 		history.push({
 			pathname: '/message',
 			state: { actualMsg },
@@ -87,30 +55,38 @@ export default function Inbox<
 				</h4>
 				<div>
 					<button
-						id="btn-msg-tab"
-						styleName=" inbox-tab-msgs"
+						id="msg-tab"
+						styleName={`inbox-tab-msgs ${
+							actualTab === 'msg' ? 'selected-tab' : ''
+						} ${answeredMsgs.length < 1 ? 'not-answered-msgs' : ''} ${
+							messages.length < 1 && answeredMsgs.length < 1 ? 'no-msgs' : ''
+						} `}
 						onClick={handleTabClick}
 						autoFocus={true}
 					>
-						<span>{lang['MsgTab']}</span>
-						<div styleName="new-msgs-number">{messages.length}</div>
+						{messages.length < 1
+							? `${lang['NoMessagesInfo']}`
+							: `${lang['MsgTab']}`}
+						<div styleName={`new-msgs-number ${messages.length < 1 && answeredMsgs.length < 1 ? 'no-msgs' : ''}`}>{messages.length}</div>
 					</button>
 					<button
-						id="btn-ans-tab"
-						styleName="inbox-tab"
+						id="ans-tab"
+						styleName={`ans-tab ${actualTab === 'ans' ? 'selected-tab' : ''}`}
+						style={{
+							display: answeredMsgs.length < 1 ? 'none' : 'flex',
+						}}
 						onClick={handleTabClick}
 					>
 						{lang['AnsTab']}
 					</button>
 				</div>
-				<div ref={msgsTabContent}>
+				<div style={{ display: `${actualTab === 'msg' ? 'flex' : 'none'}` }}>
 					<ul styleName="inbox-msgs-container">
 						<SimpleBar>
 							{messages.map((msg) => (
 								<div
-									onClick={handleMsgClick}
+									onClick={(e) => handleMsgClick(e, msg._id)}
 									key={msg._id}
-									className={msg._id}
 									styleName="inbox-msg"
 								>
 									<li className={msg._id}>"{msg.content}"</li>
@@ -119,7 +95,18 @@ export default function Inbox<
 						</SimpleBar>
 					</ul>
 				</div>
-				<div ref={ansTabContent}></div>
+				<div style={{ display: `${actualTab === 'ans' ? 'flex' : 'none'}` }}>
+					<ul styleName="answered-msgs-container">
+						{answeredMsgs.map((msg) => (
+							<div key={msg._id} styleName="inbox-msg">
+								<li className={msg._id}>
+									"{msg.content}"<br />
+									<i>ans: {msg.answer}</i>
+								</li>
+							</div>
+						))}
+					</ul>
+				</div>
 			</div>
 		</div>
 	)

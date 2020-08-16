@@ -1,0 +1,50 @@
+.overlay,
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.overlay{
+    z-index: 34;
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100vw;
+    min-height: 100vh;
+    background: rgba(0, 0, 0, .8);
+    z-index: 12440;
+}
+
+.container{
+    flex-direction: column;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: 12441;
+}
+
+._btn,
+.x_btn{
+    font-family: 'Nunito', sans-serif;
+    font-size: 1rem;
+    background: var(--tq-red-00);
+    color: #fff;
+    cursor: pointer;
+}
+
+._btn{
+    border-radius: 20px;
+    min-width: 30%;
+    min-height: 49px;
+    padding: 5px;
+    margin: 10px;
+}
+
+.x_btn{
+    position: absolute;
+    top: 80px;
+    left: 32%;
+    padding: 0 10px;
+    border-radius: 30px;
+    font-size: 2rem;
+}

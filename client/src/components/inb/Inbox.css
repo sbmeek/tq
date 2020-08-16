@@ -26,7 +26,9 @@
 
 .inbox-container > h4 > span {
 	padding-left: 25px;
-	font-weight: 600;
+    font-weight: 600;
+    font-size: 2.3em;
+    font-family: 'Nunito', sans-serif; 
 }
 
 .inbox-container > div {
@@ -60,8 +62,8 @@
 	width: 32px;
 }
 
-.inbox-tab {
-	display: inline-flex;
+.ans-tab{
+    display: flex;
 	align-items: center;
 	justify-content: center;
 	height: 50.9px;
@@ -71,13 +73,17 @@
 	cursor: pointer;
 	border-radius: 0px 12px 12px 0px;
 	-moz-border-radius: 0px 12px 12px 0px;
-	-webkit-border-radius: 0px 12px 12px 0px;
-	border: 0px solid #000000;
+    -webkit-border-radius: 0px 12px 12px 0px;
+    background: var(--tq-dark-gray-00);
+}
+
+.selected-tab{
+    display: flex !important;
+    background: var(--tq-dark-gray-02) !important;
 }
 
 .inbox-tab-msgs {
 	display: flex;
-	display: inline-flex;
 	align-items: center;
 	justify-content: center;
 	height: 50.9px;
@@ -87,8 +93,19 @@
 	cursor: pointer;
 	border-radius: 12px 0px 0px 12px;
 	-moz-border-radius: 12px 0px 0px 12px;
-	-webkit-border-radius: 12px 0px 0px 12px;
-	border: 0px solid #000000;
+    -webkit-border-radius: 12px 0px 0px 12px;
+    background: var(--tq-dark-gray-00);
+}
+
+.inbox-tab-msgs.no-msgs,
+.new-msgs-number.no-msgs{
+    display: none;
+    cursor: default;
+}
+
+.inbox-tab-msgs.not-answered-msgs{
+    width: 100% !important;
+    border-radius: 12px !important;
 }
 
 .new-msgs-number {
@@ -106,11 +123,16 @@
 }
 
 .inbox-msgs-container,
-.inbox-msgs-container > div:first-child {
+.answered-msgs-container,
+.inbox-msgs-container>div:first-child {
 	display: flex;
 	flex-direction: row;
 	min-width: 100%;
 	max-height: 67vh;
+}
+
+.answered-msgs-container{
+    flex-direction: column !important;
 }
 
 .inbox-msg {

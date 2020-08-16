@@ -79,7 +79,12 @@
 	background: rgb(167, 7, 7);
 	border-radius: 35px;
 	padding: 7.2px;
-	text-decoration: none;
+    text-decoration: none;
+}
+
+.template-btn-share{
+    font-size: 3rem;
+    padding: 0 7.2px;
 }
 
 .template-btn-back > i,

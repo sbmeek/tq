@@ -13,6 +13,7 @@ import { InitContext } from '../../global/context/InitContext'
 import styles from './Template.css'
 import BgColors from './TemplateOpts/BgColors'
 import Labels from './TemplateOpts/Labels'
+import AnswerOverlay from './Answer'
 
 interface IOptsVisibility {
 	bgColorsOptShown: boolean
@@ -24,6 +25,7 @@ export default function Template() {
 	const [answer, setAnswer] = useState<string>('')
 	const [showLabel, setShowLabel] = useState<boolean>(false)
 	const [actualMsg, setActualMsg] = useState<ITQMessage>()
+	const [isAnswerOverlayOpened, setIsAnswerOverlayOpened] = useState(false)
 	const InitialStateOptsVisibility: IOptsVisibility = {
 		bgColorsOptShown: false,
 		labelsOptShown: false,
@@ -34,13 +36,16 @@ export default function Template() {
 	const [isPlaceholderVisible, setIsPlaceholderVisible] = useState<boolean>(
 		true
 	)
-	const { socket } = useContext(InitContext)
+	const {
+		state: { socket },
+	} = useContext(InitContext)
 	const templateQuestion = useRef<HTMLDivElement>(null)
 	const templateAnswer = useRef<HTMLDivElement>(null)
 	const templateQuestionContainer = useRef<HTMLDivElement>(null)
 	const ansInput = useRef<HTMLDivElement>(null)
 	const optsSwipe = useRef<HTMLDivElement>(null)
 	const label = useRef<HTMLDivElement>(null)
+	const form = useRef<HTMLFormElement>(null)
 	const location = useLocation<ITQMessage>()
 
 	useEffect(() => {
@@ -55,7 +60,8 @@ export default function Template() {
 		let data = { answer, _id: '' }
 		data._id = actualMsg!._id
 		socket.emit('msg:ans', data)
-		socket.on('msg:ans', (data: Object) => {
+		socket.on('msg:ans', (_data: Object) => {
+            console.log(data);
 			// if (data.success) {
 			// 	//success
 			// }
@@ -118,7 +124,11 @@ export default function Template() {
 
 	const toggleLabelHandler = (e: MouseEvent<HTMLDivElement>) => {
 		const targetElement = e.target as HTMLDivElement
-		if(label.current!.classList.contains(styles['template-question-label-active'])){
+		if (
+			label.current!.classList.contains(
+				styles['template-question-label-active']
+			)
+		) {
 			switch (e.type) {
 				case 'mouseenter':
 					targetElement.classList.add(styles['remove-label'])
@@ -141,14 +151,23 @@ export default function Template() {
 					<Link to="/messages" styleName="template-btn-back">
 						<i className="material-icons">keyboard_backspace</i>
 					</Link>
-					<button styleName="template-btn-share" onClick={() => alert('share')}>
-						<i className="material-icons">share</i>
+					<button
+						styleName="template-btn-share"
+						onClick={() => setIsAnswerOverlayOpened(!isAnswerOverlayOpened)}
+					>
+						⇨
 					</button>
 				</div>
+				<AnswerOverlay
+					opened={isAnswerOverlayOpened}
+					setOpened={setIsAnswerOverlayOpened}
+					form={form.current as HTMLFormElement}
+				/>
 				<div styleName="template-answer">
 					<form
 						styleName="template-answer-form-container"
 						onSubmit={handleFormSubmit}
+						ref={form}
 					>
 						<div>
 							<div styleName="template-answer-btns-format-container">

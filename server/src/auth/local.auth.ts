@@ -64,8 +64,6 @@ export const userLogin = async (
 ) => {
 	const user = (await User.findById(data._id)) as IUser
 	user.key = data.key
-	// let allowed = (user.key === data.key ? true : false);
-	// let username = user.username;
 	if (!user.expired) {
 		socket.emit('tq:login', user)
 		onlineUsrs[socket.id] = user.username

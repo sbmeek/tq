@@ -35,11 +35,11 @@ export const sendMessage = async function <T extends {
 
 export const answerMessage = async function <T extends {
     answer: string;
-    msgId: string;
-}>({ answer, msgId }: T, socket: Socket) {
+    _id: string;
+}>({ answer, _id }: T, socket: Socket) {
 	try {
 		await User.findOneAndUpdate(
-			{ 'messages._id': msgId },
+			{ 'messages._id': _id },
 			{
 				$set: { 'messages.$.answer': answer },
 			}
