@@ -22,26 +22,22 @@ router.post('/auth', (req: Request, res: Response, next) => {
 			res.json({ ok: false })
 		} else {
 			const { _id, enteredname } = user
-			const token = signToken(_id)
-			res.cookie('proc', token, {
-				httpOnly: true,
-				sameSite: true,
-				signed: true,
-			})
+            const token = signToken(_id)
+			req.proc!.proc = token;
 			res.status(200).json({ authenticated: true, enteredname })
 		}
 	})(req, res, next)
 })
 
-router.get('/logout', (req, res, next) => {
+router.get('/logout', (req: any, res, next) => {
 	passport.authenticate('jwt', { session: false }, (_err, user) => {
 		if (!user) res.json({ authenticated: false, success: false })
 		else {
-			res.clearCookie('proc')
+			req.proc.reset();
 			res.json({ username: '', success: true })
 		}
 	})(req, res, next)
-}) // dev purpose
+})
 
 router.get('/authenticated', (req, res, next) => {
 	passport.authenticate('jwt', { session: false }, async (_err, user) => {

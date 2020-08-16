@@ -2,26 +2,18 @@ import passport from 'passport'
 import User, { IUser } from 'models/User'
 import { v4 as uuidv4 } from 'uuid'
 import { getExpirationDate } from '../libs/user-expirations'
-import { Request } from 'express'
 import { OnlineUsrsType } from 'libs/sockets'
 import { Socket } from 'socket.io'
+import { Request } from 'express'
 const LocalStrategy = require('passport-local').Strategy
 const JwtStrategy = require('passport-jwt').Strategy
 const { SESSION_SECRET } = process.env
-
-const cookieExtractor = (req: Request) => {
-	let proc = null
-	if (req && req.signedCookies) {
-		proc = req.signedCookies.proc
-	}
-	return proc
-}
 
 // Authorization
 passport.use(
 	new JwtStrategy(
 		{
-			jwtFromRequest: cookieExtractor,
+			jwtFromRequest: (req: Request) => (req.proc ? req.proc.proc : null),
 			secretOrKey: SESSION_SECRET,
 		},
 		(payload: { [index: string]: string }, done: Function) => {

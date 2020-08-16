@@ -2,17 +2,17 @@ import express from 'express'
 import morgan from 'morgan'
 import favicon from 'serve-favicon'
 import path from 'path'
-import cookieParser from 'cookie-parser'
 import cors from 'cors'
-import userRoutes from './routes/user.routes';
-
-require('dotenv').config();
+import userRoutes from './routes/user.routes'
+import session from 'client-sessions'
+require('dotenv').config()
 
 const { SESSION_SECRET } = process.env
 const app = express()
 require('./database') // Establishes db connection
-import(path.join(__dirname, 'libs', 'user-expirations'))
-.then(userExpirations => userExpirations.checkExpirations());// Defines and starts agenda (job: check user expirations at 00:00 daily)
+import(
+	path.join(__dirname, 'libs', 'user-expirations')
+).then((userExpirations) => userExpirations.checkExpirations()) // Defines and starts agenda (job: check user expirations at 00:00 daily)
 
 // Settings
 app.set('port', process.env.PORT || 4000)
@@ -21,8 +21,18 @@ app.set('json spaces', 2)
 
 // Middlewares
 app.use(favicon(app.get('favicon')))
-app.use(cors())
-app.use(cookieParser(SESSION_SECRET))
+app.use(cors( { origin: 'http://localhost:3000' } ))
+app.use(
+	session({
+		cookieName: 'proc',
+		secret: SESSION_SECRET as string,
+		duration: 24 * 60 * 60 * 1000,
+		cookie: {
+            httpOnly: true,
+			secure: false,
+		},
+	})
+)
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 app.use(morgan('dev'))

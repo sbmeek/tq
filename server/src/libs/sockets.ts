@@ -18,8 +18,10 @@ io.on('connection', async (socket) => {
 	io.emit('connections:updated', { n: conns })
 
 	socket.on('tq:init-user', ({ username }) => {
-        onlineUsrs[socket.id] = (username === undefined ? "Not authenticated" : username)
-		console.log(onlineUsrs)
+        if(username !== undefined){
+            onlineUsrs[socket.id] = username
+            console.log(onlineUsrs)
+        }
 	})
 
 	// User Auth
