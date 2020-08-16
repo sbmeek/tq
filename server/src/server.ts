@@ -15,13 +15,13 @@ import(
 ).then((userExpirations) => userExpirations.checkExpirations()) // Defines and starts agenda (job: check user expirations at 00:00 daily)
 
 // Settings
-app.set('port', process.env.PORT || 4000)
+app.set('port', process.env.PORT || 2017)
 app.set('favicon', path.join(__dirname, '../favicon.ico'))
 app.set('json spaces', 2)
 
 // Middlewares
 app.use(favicon(app.get('favicon')))
-app.use(cors( { origin: 'http://localhost:3000' } ))
+app.use(cors( { origin: 'http://127.0.0.1:3000' } ))
 app.use(
 	session({
 		cookieName: 'proc',

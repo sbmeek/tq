@@ -4,7 +4,7 @@
 	"description": "",
 	"main": "./src/server.ts",
 	"scripts": {
-		"dev": "NODE_PATH=./dist tsc-watch --onSuccess \"node ./dist/server.js\"",
+		"dev": "cross-env NODE_PATH=./dist tsc-watch --onSuccess \"node ./dist/server.js\"",
 		"tsn": "NODE_PATH=./src nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec 'ts-node' src/server.ts",
 		"start": "NODE_PATH=./dist node ./dist/server.js",
 		"build": "tsc"
@@ -59,6 +59,7 @@
 		"@types/serve-favicon": "^2.5.0",
 		"@types/socket.io": "^2.1.11",
 		"@types/uuid": "^8.3.0",
+		"cross-env": "^7.0.2",
 		"ts-node": "^8.10.2",
 		"tsc-watch": "^4.2.9",
 		"typescript": "^3.9.7"

@@ -15,7 +15,7 @@ interface IContextAction {
 }
 
 const initialState: IContextState = {
-	socket: io(),
+	socket: io('2017'),
 	isRendered: false,
 	lang: en,
 }

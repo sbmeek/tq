@@ -1,14 +1,30 @@
 {
-	"presets": ["react-app"],
-	"plugins": [
-		[
-			"react-css-modules",
-			{
-				"webpackHotModuleReloading": true,
-				"autoResolveMultipleImports": true,
-				"generateScopedName": "[name]__[local]__[hash:base64:5]"
-				// "[hash:base64:6]",
-			}
-		]
-	]
-}
+    "presets": ["react-app"],
+    "env": {
+      "production": {
+        "presets": ["react-app"],
+        "plugins": [
+            [
+                "react-css-modules",
+                {
+                    "webpackHotModuleReloading": true,
+                    "autoResolveMultipleImports": true,
+                    "generateScopedName": "[hash:base64:6]"
+                }
+            ]
+        ]
+      },
+      "development": {
+        "plugins": [
+            [
+                "react-css-modules",
+                {
+                    "webpackHotModuleReloading": true,
+                    "autoResolveMultipleImports": true,
+                    "generateScopedName": "[name]__[local]__[hash:base64:5]"
+                }
+            ]
+        ]
+      }
+    }
+  }
