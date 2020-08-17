@@ -49,12 +49,9 @@ export default function Answer<
 	return (
 		<div>
 			<div
-				id="overlay"
 				onClick={handleOverlayClick}
-				styleName="overlay"
-				style={{
-					transform: `translateX(${opened ? '0%' : '-100%'})`,
-				}}
+				styleName={`overlay ${opened ? 'active' : ''}`}
+				id="overlay"
 			>
 				<div styleName="container">
 					<img

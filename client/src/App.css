@@ -92,3 +92,7 @@ button:focus,
 input[type="button"] {
     outline: none !important;
 }
+
+svg circle, svg line, svg path, svg polygon, svg rect {
+    shape-rendering: geometricprecision;
+}

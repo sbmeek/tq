@@ -6,13 +6,21 @@
 }
 
 .overlay{
-    z-index: 34;
+    z-index: -34;
     position: fixed;
     top: 0;
     left: 0;
     min-width: 100vw;
     min-height: 100vh;
+    opacity: 0;
     background: rgba(0, 0, 0, .8);
+    transition: opacity 250ms;
+}
+
+.overlay.active{
+    height: auto;
+    opacity: 1;
+    z-index: 34;
 }
 
 .container{
@@ -35,7 +43,9 @@
 
 ._btn{
     border-radius: 20px;
-    min-width: 30%;
+    min-width: 250px;
+    max-width: 290px;
+    width: 30%;
     min-height: 49px;
     padding: 5px;
     margin: 10px;
