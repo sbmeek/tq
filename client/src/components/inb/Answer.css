@@ -13,18 +13,19 @@
     min-width: 100vw;
     min-height: 100vh;
     background: rgba(0, 0, 0, .8);
-    z-index: 12440;
 }
 
 .container{
     flex-direction: column;
     min-width: 100%;
     min-height: 100%;
-    z-index: 12441;
 }
 
 ._btn,
 .x_btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-family: 'Nunito', sans-serif;
     font-size: 1rem;
     background: var(--tq-red-00);
@@ -47,4 +48,10 @@
     padding: 0 10px;
     border-radius: 30px;
     font-size: 2rem;
+}
+
+.ans-img{
+    display: none;
+    position: fixed;
+    left: -999rem;
 }

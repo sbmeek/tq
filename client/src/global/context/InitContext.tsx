@@ -15,13 +15,12 @@ interface IContextAction {
 }
 
 const initialState: IContextState = {
-	socket: io('2017'),
+	socket: io(),
 	isRendered: false,
 	lang: en,
 }
 
 export enum ActionEnum {
-	SET_SOCKET = 'SET_SOCKET',
 	SET_IS_RENDERED = 'SET_IS_RENDERED',
 	SET_LANG = 'SET_LANG',
 }
@@ -30,11 +29,6 @@ export const InitContext = createContext<any>({ state: initialState })
 
 function reducer(state: IContextState, action: IContextAction) {
 	switch (action.type) {
-		case ActionEnum.SET_SOCKET:
-			return {
-				...state,
-				socket: action.payload.socket,
-			}
 		case ActionEnum.SET_IS_RENDERED:
 			return {
 				...state,
@@ -52,17 +46,6 @@ function reducer(state: IContextState, action: IContextAction) {
 
 export default function <T extends { children: ReactNode }>({ children }: T) {
 	const [state, dispatch] = useReducer(reducer, initialState)
-
-	useEffect(() => {
-		try {
-			dispatch({
-				type: ActionEnum.SET_SOCKET,
-				payload: { socket: io() },
-			})
-		} catch (error) {
-			console.error(error)
-		}
-	}, [])
 
 	useEffect(() => {
 		dispatch({

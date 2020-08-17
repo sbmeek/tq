@@ -161,7 +161,8 @@ export default function Template() {
 				<AnswerOverlay
 					opened={isAnswerOverlayOpened}
 					setOpened={setIsAnswerOverlayOpened}
-					form={form.current as HTMLFormElement}
+                    form={form.current as HTMLFormElement}
+                    templateQuestion={templateQuestionContainer.current as HTMLDivElement}
 				/>
 				<div styleName="template-answer">
 					<form
