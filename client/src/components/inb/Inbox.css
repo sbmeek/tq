@@ -1,7 +1,7 @@
 .main-container {
-	display: flex;
-	max-height: 89.9vh;
-	background: #ecebeba3;
+    display: flex;
+    align-items: center;
+    min-height: 100vh;
 }
 
 .inbox-container {
@@ -26,7 +26,7 @@
 .inbox-container > h4 > span {
 	padding-left: 25px;
     font-weight: 600;
-    font-size: 2.3em;
+    font-size: 2.8em;
     font-family: 'Nunito', sans-serif; 
 }
 

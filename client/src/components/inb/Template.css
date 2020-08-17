@@ -1,6 +1,6 @@
 .template-container {
 	display: flex;
-	min-height: 89.9vh;
+	min-height: 100vh;
 	flex-direction: row;
 	align-items: center;
 	justify-content: center;

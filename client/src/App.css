@@ -44,32 +44,6 @@ body {
 	background-size: cover;
 }
 
-.page-footer {
-	display: flex;
-	justify-content: center;
-	max-height: 63px;
-	min-height: 63px;
-	overflow: hidden;
-	font-family: 'Nunito', sans-serif;
-	font-size: 20px;
-	color: #ccc !important;
-	background-color: #1b1b1b !important;
-	padding-top: 0 !important;
-}
-
-.footer-sbm {
-	display: inline-block;
-	color: #ccc !important;
-	font-size: 20px !important;
-	margin-top: 10px;
-}
-
-.footer-text {
-	color: #ccc !important;
-	font-size: 16px !important;
-	margin: 0;
-}
-
 :global .d-scroll {
 	height: 100vh;
 	overflow: hidden;
@@ -84,7 +58,7 @@ body {
 
 :global #react-root {
 	min-height: 100vh;
-    background: rgba(255, 255, 255, 0.57);
+    background: #ecebeba3;
     z-index: 0;
 }
 

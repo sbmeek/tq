@@ -4,7 +4,6 @@ import { useSelector, RootStateOrAny } from 'react-redux'
 import './App.css'
 
 import Main from './components/main/Main-idx'
-import Footer from './components/partials/Footer'
 import Error404 from './components/error/404'
 import Error500 from './components/error/500'
 import Inbx from './components/inb/Inb-idx'
@@ -65,8 +64,6 @@ export default function App() {
 								<Error404 />
 							</Route>
 						</Switch>
-						<Route path="/" component={Footer} />
-						
 					</Router>
 				</>
 			)
