@@ -1,13 +1,15 @@
-import { Socket, Server } from "socket.io"
-import { OnlineUsrsType } from './sockets'
-import User from "models/User"
+import { Socket, Server } from 'socket.io'
+import User from 'models/User'
 
-export const sendMessage = async function <T extends {
-    username: string;
-    msg: string
-}>({ username, msg }:T, socket: Socket, io: Server, onlineUsrs: OnlineUsrsType) {
+export const sendMessage = async function <
+	T extends {
+		username: string
+		msg: string
+	},
+	S extends Map<string, Set<string>>
+>({ username, msg }: T, socket: Socket, io: Server, onlineUsers: S) {
 	try {
-		const _utmp = await User.findOneAndUpdate(
+		const _tempUser = await User.findOneAndUpdate(
 			{ username },
 			{
 				$push: {
@@ -16,11 +18,11 @@ export const sendMessage = async function <T extends {
 			},
 			{ new: true }
 		)
-		console.log(_utmp!.messages)
-		for (let _uid in onlineUsrs) {
-			if (onlineUsrs[_uid] === username)
-				io.to(_uid).emit('msg:new', _utmp!.messages)
-		}
+        console.log(_tempUser!.messages)
+        const userSockets = onlineUsers.get(username);
+        for(let e of userSockets!){
+            io.to(e).emit('msg:new', _tempUser!.messages)
+        }
 		socket.emit('msg:send', { success: true, sent: true })
 	} catch (error) {
 		console.error(error)
@@ -33,12 +35,14 @@ export const sendMessage = async function <T extends {
 	}
 }
 
-export const answerMessage = async function <T extends {
-    answer: string;
-    _id: string;
-}>({ answer, _id }: T, socket: Socket) {
+export const answerMessage = async function <
+	T extends {
+		answer: string
+		_id: string
+	}
+>({ answer, _id }: T, socket: Socket) {
 	try {
-		const _utmp = await User.findOneAndUpdate(
+		const _tempUser = await User.findOneAndUpdate(
 			{ 'messages._id': _id },
 			{
 				$set: { 'messages.$.answer': answer },
@@ -48,8 +52,8 @@ export const answerMessage = async function <T extends {
 		socket.emit('msg:ans', {
 			success: true,
 			msgAnswered: true,
-        })
-        socket.emit('msg:new', _utmp!.messages);
+		})
+		socket.emit('msg:new', _tempUser!.messages)
 	} catch (error) {
 		console.error(error)
 		socket.emit('msg:ans', {

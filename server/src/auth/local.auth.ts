@@ -2,7 +2,7 @@ import passport from 'passport'
 import User, { IUser } from 'models/User'
 import { v4 as uuidv4 } from 'uuid'
 import { getExpirationDate } from '../libs/user-expirations'
-import { OnlineUsrsType } from 'libs/sockets'
+import { addUser } from 'libs/sockets'
 import { Socket } from 'socket.io'
 import { Request } from 'express'
 const LocalStrategy = require('passport-local').Strategy
@@ -60,14 +60,13 @@ export const userExists = async (data: IUser, socket: Socket) => {
 export const userLogin = async (
 	data: IUser,
 	socket: Socket,
-	onlineUsrs: OnlineUsrsType
 ) => {
 	const user = (await User.findById(data._id)) as IUser
 	user.key = data.key
 	if (!user.expired) {
-		socket.emit('tq:login', user)
-		onlineUsrs[socket.id] = user.username
-	} else socket.emit('tq:login', { error: data._id, expired: true })
+		socket.emit('tq:login', user);
+        addUser(user.username, socket.id);
+	} else socket.emit('tq:login', { error: data._id, expired: true });
 }
 
 export const userRegister = async function <T extends { tquser: string; }>(

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { useSelector, RootStateOrAny } from 'react-redux'
+import io from 'socket.io-client'
 import './App.css'
 
 import Main from './components/main/Main-idx'
@@ -13,7 +14,7 @@ import UserLink from './components/link/Link-idx'
 import TemplateMSG from './components/inb/Template'
 import Msg from './components/sendMsg/Msg-idx'
 import Loader from './components/partials/Loader'
-import { InitContext } from './global/context/InitContext'
+import { InitContext, ActionEnum } from './global/context/InitContext'
 import Menu from './components/partials/Menu'
 
 export default function App() {
@@ -21,21 +22,34 @@ export default function App() {
 	const { isStatus500, isLoaded, user } = useSelector(
 		(store: RootStateOrAny) => store.auth
 	)
-	const {
+	let {
 		state: { socket },
+		dispatch,
 	} = useContext(InitContext)
 
 	useEffect(() => {
-		if (user !== null) socket!.emit('tq:init-user', { username: user.username })
-	}, [user, socket])
+        if(user === null) return;
+        if (user.username !== undefined) {
+            socket.disconnect();
+			dispatch({
+				action: ActionEnum.SET_SOCKET,
+				payload: {
+					socket: io('/', {
+						forceNew: true,
+						query: { username: user.username },
+					}),
+				},
+			})
+		}
+	}, [user, dispatch, socket])
 
 	useEffect(() => {
-        setTimeout(() => {
-            if (!localStorage.getItem('sbm-tq-ft')) {
-                setIsUserNew(true)
-                localStorage.setItem('sbm-tq-ft', '1')
-            }
-        }, 1000)
+		setTimeout(() => {
+			if (!localStorage.getItem('sbm-tq-ft')) {
+				setIsUserNew(true)
+				localStorage.setItem('sbm-tq-ft', '1')
+			}
+		}, 1000)
 	}, [])
 
 	if (!isStatus500) {

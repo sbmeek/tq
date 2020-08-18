@@ -60,7 +60,7 @@ export const getAuthInfoAction = () => async (dispatch?: Dispatch) => {
 					isStatus500: false,
 					isLoaded: true,
 				},
-			})
+            })
 		}
 	} catch (error) {
 		console.error(error)

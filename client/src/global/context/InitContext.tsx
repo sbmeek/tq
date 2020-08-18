@@ -15,20 +15,26 @@ interface IContextAction {
 }
 
 const initialState: IContextState = {
-	socket: io(),
+	socket: io('http://localhost:2017/', { forceNew: true }),
 	isRendered: false,
 	lang: en,
 }
 
 export enum ActionEnum {
 	SET_IS_RENDERED = 'SET_IS_RENDERED',
-	SET_LANG = 'SET_LANG',
+    SET_LANG = 'SET_LANG',
+    SET_SOCKET = 'SET_SOCKET'
 }
 
 export const InitContext = createContext<any>({ state: initialState })
 
 function reducer(state: IContextState, action: IContextAction) {
 	switch (action.type) {
+        case ActionEnum.SET_SOCKET:
+            return {
+                ...state,
+                socket: action.payload.socket
+            }
 		case ActionEnum.SET_IS_RENDERED:
 			return {
 				...state,
