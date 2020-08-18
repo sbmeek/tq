@@ -5,6 +5,7 @@ import path from 'path'
 import cors from 'cors'
 import userRoutes from './routes/user.routes'
 import session from 'client-sessions'
+import helmet from 'helmet'
 require('dotenv').config()
 
 const { SESSION_SECRET } = process.env
@@ -20,6 +21,7 @@ app.set('favicon', path.join(__dirname, '../favicon.ico'))
 app.set('json spaces', 2)
 
 // Middlewares
+app.use(helmet());
 app.use(favicon(app.get('favicon')))
 app.use(cors( { origin: 'http://127.0.0.1:3000' } ))
 app.use(

@@ -19,6 +19,10 @@ io.on('connection', async (socket) => {
 
 	socket.on('tq:init-user', ({ username }) => {
         if(username !== undefined){
+            for(let i in onlineUsrs){
+                if(onlineUsrs[i] === username)
+                    delete onlineUsrs[i]
+            }
             onlineUsrs[socket.id] = username
             console.log(onlineUsrs)
         }
