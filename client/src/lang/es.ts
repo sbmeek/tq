@@ -20,5 +20,8 @@ export default {
 		Title: 'Bandeja',
 		MsgTab: 'Mensajes',
 		AnsTab: 'Respondidos',
-	},
+    },
+    Menu: {
+        ModalForNewUsers: "¿Sabías que esto es un menú?"
+    }
 }

@@ -1,11 +1,19 @@
 import React, { useState, useEffect } from 'react'
 import flecha from '../../assets/images/flecha-roja.png'
 import menulog from '../../assets/images/menu-logo.png'
+import FirstTimeModal from './FirstTimeModal'
 import './Menu.css'
 
-export default function Menu() {
+export default function Menu<T extends { isUserNew: boolean }>({
+	isUserNew
+}: T) {
 	const [showMenu, setShowMenu] = useState(false)
 	const [enoughSpace, setEnoughSpace] = useState(false)
+	const [showNewUserModal, setShowNewUserModal] = useState(false)
+
+    useEffect(() => {
+        setShowNewUserModal(isUserNew);
+    }, [isUserNew])
 
 	useEffect(() => {
 		handleSpace()
@@ -18,6 +26,7 @@ export default function Menu() {
 	}
 
 	const toggleMenuActivation = () => {
+		if (showNewUserModal) setShowNewUserModal(false)
 		setShowMenu(!showMenu)
 	}
 
@@ -46,16 +55,28 @@ export default function Menu() {
 							<h1>Menu</h1>
 						</div>
 						<div styleName="btn-container">
-							<button styleName="sidebar-button"><i>i</i><span>Inicio</span></button>
+							<button styleName="sidebar-button">
+								<i>i</i>
+								<span>Inicio</span>
+							</button>
 						</div>
 						<div styleName="btn-container">
-							<button styleName="sidebar-button"><i>i</i><span>Bandeja</span></button>
+							<button styleName="sidebar-button">
+								<i>i</i>
+								<span>Bandeja</span>
+							</button>
 						</div>
 						<div styleName="btn-container">
-							<button styleName="sidebar-button"><i>i</i><span>TQ</span></button>
+							<button styleName="sidebar-button">
+								<i>i</i>
+								<span>TQ</span>
+							</button>
 						</div>
 						<div styleName="btn-container">
-							<button styleName="sidebar-button"><i>i</i><span>SB Meek</span></button>
+							<button styleName="sidebar-button">
+								<i>i</i>
+								<span>SB Meek</span>
+							</button>
 						</div>
 						<div styleName="terms-container">
 							<button styleName="btn-terms">Terminos y Condiciones</button>
@@ -63,6 +84,7 @@ export default function Menu() {
 					</div>
 				</div>
 			</div>
+			<FirstTimeModal active={showNewUserModal} />
 		</div>
 	)
 }

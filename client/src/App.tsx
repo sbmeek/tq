@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { useSelector, RootStateOrAny } from 'react-redux'
 import './App.css'
@@ -17,13 +17,26 @@ import { InitContext } from './global/context/InitContext'
 import Menu from './components/partials/Menu'
 
 export default function App() {
-	const { isStatus500, isLoaded, user } = useSelector((store: RootStateOrAny) => store.auth)
-	const { state: { socket } } = useContext(InitContext)
+	const [isUserNew, setIsUserNew] = useState(false)
+	const { isStatus500, isLoaded, user } = useSelector(
+		(store: RootStateOrAny) => store.auth
+	)
+	const {
+		state: { socket },
+	} = useContext(InitContext)
 
 	useEffect(() => {
-		if (user !== null) 
-			socket!.emit('tq:init-user', { username: user.username })
+		if (user !== null) socket!.emit('tq:init-user', { username: user.username })
 	}, [user, socket])
+
+	useEffect(() => {
+        setTimeout(() => {
+            if (!localStorage.getItem('sbm-tq-ft')) {
+                setIsUserNew(true)
+                localStorage.setItem('sbm-tq-ft', '1')
+            }
+        }, 1000)
+	}, [])
 
 	if (!isStatus500) {
 		if (!isLoaded) {
@@ -32,7 +45,9 @@ export default function App() {
 			return (
 				<>
 					<Router>
-						<Route path="/" component={Menu} />
+						<Route path="/">
+							<Menu isUserNew={isUserNew} />
+						</Route>
 						<Switch>
 							<UnauthRoute
 								needsRenderTime={window.navigator.onLine}
@@ -41,9 +56,9 @@ export default function App() {
 								component={Main}
 								redirectTo="/link"
 							/>
-							<AuthRoute 
-								path="/messages" 
-								component={Inbx} 
+							<AuthRoute
+								path="/messages"
+								component={Inbx}
 								redirectTo="/"
 								needsRenderTime={false}
 							/>

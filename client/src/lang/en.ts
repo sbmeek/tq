@@ -21,5 +21,8 @@ export default {
 		Title: 'Inbox',
 		MsgTab: 'Messages',
 		AnsTab: 'Answered',
-	},
+    },
+    Menu: {
+        ModalForNewUsers: "Did you know this is a menu?"
+    }
 }
