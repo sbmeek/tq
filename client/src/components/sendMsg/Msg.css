@@ -1,95 +1,82 @@
-.main{
-	min-Height: 89.9vh;
+.curtain {
+	min-height: 100vh;
+	background: #ccc;
 	display: flex;
-	flex-Direction: column;
-	justify-Content: center;
-	background:	linear-gradient(to top, white 80.5%, rgba(246,246,246,0.81) 62%, rgba(237,237,237,1) 497%)
+	align-items: flex-end;
 }
-.contenedor {
-	height: 328px;
-	justify-content: center;
-	background-image: url('../../assets/images/msg/capa.png');
+.capa {
+	background-image: url(../../assets/images/msg/capa.png);
 	background-repeat: no-repeat;
-	background-size: 831px 327px;
-	background-position: center;
-	text-align: center;
-	margin-bottom: 46.5px;
+	background-size: 100% auto;
+	background-position: 50% 0%;
+	min-height: 80vh;
+	width: 100%;
+	max-width: 880px;
+	margin-top: -64px;
+	padding-top: 66px;
+	min-width: 877px;
 }
-.nubes2{
-	width: 120px;
+.nubes-top {
+	display: flex;
+	justify-content: center;
+	position: fixed;
+	align-items: flex-end;
+}
+.nubes2-top {
+	width: 89px;
 	height: 70px;
 	transform: scaleX(-1);
-	margin: -34px;									
+	margin: -41px;
 	z-index: 1;
-	margin-Left: 90px;									
+	margin-left: 100px;
 	position: absolute;
 }
 
-.container2 {
+.nubes1-top {
+	width: 80px;
+	height: 55px;
+	z-index: 1;
+	margin-top: -39px;
+	margin-left: -123px;
+	position: absolute;
+	transform: scaleX(-1);
+}
+.en-capa {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	margin-top: -102px;
 }
-
-
-
+.logo-div{
+	box-sizing: content-box;
+    min-height: 157px;
+    min-width: 160px;
+    max-width: 170px;
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 5px solid #000000;
+}
+.logo {
+	width: 100%;
+	height: auto;
+}
+.sombra_perfil {
+	background-color: #00000021;
+	width: 163px;
+	height: 9px;
+	margin: 15px;
+	border-radius: 50%;
+}
 .user {
 	padding: 2px;
 	color: #5bf0ff;
 	font-size: 264%;
-	margin-top: 0%;
 	position: flex;
 	font-family: 'Nunito', sans-serif;
-	margin-top: -19px;
+	margin-top: -13px;
 }
-
-._btn-tq {
-	font-family: 'Nunito', sans-serif;
-	text-transform: none;
-	border-radius: 1000px;
-	background-color: #00909e;
-	color: #fff;
-	width: 0px;
-	height: 35px;
-	font-family: 'Nunito', sans-serif;
-	border-radius: 10px 78px 78px 0px;
-	-moz-border-radius: 10px 78px 78px 0px;
-	-webkit-border-radius: 10px 78px 78px 0px;
-	border: 0px solid #000000;
-	transition: 300ms;
-	color: transparent;
-	margin-top: -50px;
-}
-
-.Input-msg {
-	width: 343px;
-	height: 135px !important;
-	resize: none;
-	font-family: 'Balsamiq Sans', cursive;
-	border-color: #969696 !important;
-	border: #969696 !important;
-	outline: none !important;
-	background-color: #d4d4d4;
-	border-radius: 12px 12px 12px 12px;
-	-moz-border-radius: 22px 22px 22px 22px;
-	margin-left: 51px;
-	font-size: 120%;
-	padding-right: 1.5rem;
-	padding-left: 1.5rem;
-	padding-top: 6px;
-	margin-top: -58px;
-	z-index: 1;
-}
-
-.Input-msg::placeholder {
-	color: rgb(168, 164, 164);
-	font-family: 'Dubai regular';
-}
-
-.Input-msg::-webkit-scrollbar {
-	display: none;
-}
-
 .firstRowText {
 	color: #efebeb;
 	color: white;
@@ -105,76 +92,89 @@
 	margin-bottom: 2px;
 }
 
-.logoCloud {
-	height: 157px;
-	border-radius: 200px 200px 200px 200px;
-	-moz-border-radius: 200px 200px 200px 200px;
-	-webkit-border-radius: 200px 200px 200px 200px;
-	border: 5px solid #000000;
+.contenedolsito {
+	display: flex;
+	justify-content: center;
+	min-height: 80vh;
+	min-width: 100vw;
+	background: #fff;
 }
-
-.sombra_perfil {
-	background-color: #00000021;
-	width: 163px;
-	height: 9px;
-	margin: 25px;
-	border-radius: 50%;
+.box {
+	z-index: 1;
+	margin: 5px;
 }
-
+.nubes-bottom {
+	position: fixed;
+	display: flex;
+	justify-content: center;
+	z-index: -1;
+	margin-top: 56px;
+}
+.nubes1-bottom {
+	width: 89px;
+	height: 70px;
+	margin-left: 151px;
+}
+.nubes2-bottom {
+	width: 89px;
+	height: 70px;
+	transform: scaleX(-1);
+	margin-left: -16px;
+}
+.Input-msg {
+	width: 343px;
+	height: 135px !important;
+	resize: none;
+	font-family: 'Balsamiq Sans', cursive;
+	border-color: #969696 !important;
+	border: #969696 !important;
+	outline: none !important;
+	background-color: #d4d4d4;
+	border-radius: 12px 12px 12px 12px;
+	-moz-border-radius: 22px 22px 22px 22px;
+	font-size: 120%;
+	padding-right: 1.5rem;
+	padding-left: 1.5rem;
+	padding-top: 6px;
+	z-index: 1;
+}
+._btn-tq {
+	font-family: 'Nunito', sans-serif;
+	text-transform: none;
+	border-radius: 1000px;
+	background-color: #00909e;
+	width: 0px;
+	height: 35px;
+	border-radius: 10px 78px 78px 0px;
+	-moz-border-radius: 10px 78px 78px 0px;
+	-webkit-border-radius: 10px 78px 78px 0px;
+	border: 0px solid #000000;
+	transition: 300ms;
+	color: transparent;
+}
+.nubes-bottom2 {
+	display: flex;
+	position: fixed;
+	justify-content: center;
+	margin-left: -55px;
+	margin-top: -27px;
+}
+.nubes1-bottom2 {
+	width: 89px;
+	height: 70px;
+}
 .sombra_textarea {
 	background-color: #00000021;
 	width: 317px;
 	height: 6px;
 	border-radius: 50%;
+	margin-top: 43px;
+	margin-left: -22px;
+	z-index: -1;
 }
-
-.Desing {
+.prueba {
 	display: flex;
-	justify-content: center;
 	align-items: center;
-}
-
-.nube {
-	width: 80px;
-    height: 55px;
-    z-index: 1;
-    margin-top: -28px;
-    margin-left: -104px;
-    position: absolute;
-}
-@media only screen and (max-width: 760px) {
-	
-
-}
-@media only screen and (max-width: 573px) {
-	.contenedor{
-		margin: 0;
-		height: 295px;
-		background-size: 101% 217px;
-	}
-	.nubes2{
-		height:55px;
-		margin-left: 52px;
-		margin-top: -31px;
-
-	}
-	.logoCloud{
-		width: 104px;
-		height: 104px;
-	}
-	.user {
-		font-size: 197%;
-		margin-top: 0;
-	}
-	.Input-msg {
-		width: 252px;
-	}
-	.main{
-		background:	linear-gradient(to top, white 74.4%, rgba(246,246,246,0.81) 62%, rgba(237,237,237,1) 497%);
-	}
-	.sombra_perfil {
-		margin: 0px;
-		margin-top: 25px;
-	}
-
+	justify-content: center;
+	margin-top: 74px;
 }

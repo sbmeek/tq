@@ -7,7 +7,7 @@ export const MsgSent = () => {
 	return (
 		<div
 			style={{
-				minHeight: '89.9vh',
+				minHeight: '100vh',
 				display: 'flex',
 				justifyContent: 'center',
 				alignItems: 'center',
