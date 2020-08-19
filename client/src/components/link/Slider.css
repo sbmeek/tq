@@ -202,6 +202,7 @@
 	position: relative;
 	list-style: none;
 	width: 100%;
+	max-height: 333px;
 }
 
 :global .carousel .slider.animated {
@@ -317,24 +318,42 @@
 	opacity: 0;
 }
 
-@keyframes spinner {
-	to {
-		transform: rotate(360deg);
-	}
+.preloader {
+	display: flex;
+	justify-content: center;
+	height: 0;
+	padding-bottom: 57%;
+	width: 100%;
+	position: relative;
+	opacity: 1;
+	transition: opacity 250ms;
+	max-height: 333px;
 }
 
-.preloader:before {
-	content: '';
-	box-sizing: border-box;
+.img-placeholder {
+	filter: blur(10px);
+	opacity: 1;
+	width: 100%;
+	display: block;
 	position: absolute;
-	top: 50%;
-	left: 50%;
-	width: 20px;
-	height: 20px;
-	margin-top: -10px;
-	margin-left: -10px;
-	border-radius: 50%;
-	border: 2px solid #ccc;
-	border-top-color: #000;
-	animation: spinner 0.6s linear infinite;
+	transition: opacity 400ms;
+}
+
+.preloader.disabled > .img-placeholder {
+    opacity: 0;
+}
+
+.imgFt1,
+img.img-placeholder ~ img{
+    min-height: 333px;
+}
+
+@media only screen and (max-width: 593px){
+    .preloader.mobilePlaceholder{
+        padding-bottom: 0 !important;
+        height: 100% !important;
+    }
+    .imgFt1{
+        min-height: 100% !important;
+    }
 }
