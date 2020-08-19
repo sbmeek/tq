@@ -77,7 +77,7 @@ export default function App() {
 								needsRenderTime={false}
 							/>
 							<AuthRoute
-								needsRenderTime={false}
+								needsRenderTime={true}
 								path="/link"
 								component={UserLink}
 								redirectTo="/"

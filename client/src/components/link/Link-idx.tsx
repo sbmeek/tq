@@ -7,10 +7,11 @@ import Modal from './Modal'
 import './Link-idx.css'
 
 export default function LinkIdx() {
-	const inputLink = useRef<HTMLInputElement>(null)
-	const { user } = useSelector((store: RootStateOrAny) => store.auth)
-	const [name, setName] = useState('')
-	const [link, setLink] = useState('')
+	const inputLink = useRef<HTMLInputElement>(null);
+	const { user } = useSelector((store: RootStateOrAny) => store.auth);
+	const [name, setName] = useState('');
+    const [link, setLink] = useState('');
+    const [showPlaceholder, setShowPlaceholder] = useState(false);
 	const [showCopiedLinkMsg, setShowCopiedLinkMsg] = useState(false);
 	const [showModal, setShowModal] = useState(false)
 	const btnLink = useRef(null)
@@ -23,14 +24,14 @@ export default function LinkIdx() {
 	} = useContext(InitContext)
 
 	useEffect(() => {
-		const setAsRendered = {
-			type: ActionEnum.SET_IS_RENDERED,
-			payload: { isRendered: true },
-		}
-		window.addEventListener('load', () => {
-            dispatch(setAsRendered)
-        })
-	}, [dispatch])
+        if(showPlaceholder){
+            console.log('load');
+            dispatch({
+                type: ActionEnum.SET_IS_RENDERED,
+                payload: { isRendered: true },
+            })
+        }
+	}, [dispatch, showPlaceholder])
 
 	useEffect(() => {
 		(async () => {
@@ -50,7 +51,7 @@ export default function LinkIdx() {
 	return (
 		<div styleName="container">
 			<div>
-				<Slider />
+				<Slider setShowPlaceholder={setShowPlaceholder} />
 			</div>
 			<div>
 				<div styleName="col">

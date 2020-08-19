@@ -11,7 +11,11 @@ import './Slider.css'
 // Number of images that have already loaded
 let n = 0;
 
-function Slider() {
+interface IProps{
+    setShowPlaceholder: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+function Slider({ setShowPlaceholder }: IProps) {
 	const [imagesLoaded, setImagesLoaded] = useState(false)
     const [placeholderLoaded, setPlaceholderLoaded] = useState(false)
 
@@ -46,7 +50,7 @@ function Slider() {
                     styleName="img-placeholder"
                     alt="placeholder"
                     onTransitionEnd={preloaderTransitionEndHandler}
-                    onLoad={() => setPlaceholderLoaded(true)}
+                    onLoad={() => { setPlaceholderLoaded(true); setShowPlaceholder(true);}}
                 />
                 <img
                     src={ft1}
