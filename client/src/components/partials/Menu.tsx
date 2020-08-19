@@ -39,7 +39,8 @@ export default function Menu<T extends { isUserNew: boolean }>({
 		>
 			<div
 				styleName={`overlay ${showMenu && !enoughSpace ? 'active' : ''}`}
-				onClick={toggleMenuActivation}
+                onClick={toggleMenuActivation}
+                onTouchStartCapture={toggleMenuActivation}
 			></div>
 			<div>
 				<button
