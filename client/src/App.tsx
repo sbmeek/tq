@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { useSelector, RootStateOrAny } from 'react-redux'
-import io from 'socket.io-client'
 import './App.css'
 
 import Main from './components/main/Main-idx'
@@ -14,7 +13,7 @@ import UserLink from './components/link/Link-idx'
 import TemplateMSG from './components/inb/Template'
 import Msg from './components/sendMsg/Msg-idx'
 import Loader from './components/partials/Loader'
-import { InitContext, ActionEnum } from './global/context/InitContext'
+import { InitContext } from './global/context/InitContext'
 import Menu from './components/partials/Menu'
 
 export default function App() {
@@ -22,26 +21,12 @@ export default function App() {
 	const { isStatus500, isLoaded, user } = useSelector(
 		(store: RootStateOrAny) => store.auth
 	)
-	let {
-		state: { socket },
-		dispatch,
-	} = useContext(InitContext)
+	let { state: { socket } } = useContext(InitContext)
 
 	useEffect(() => {
-        if(user === null) return;
-        if (user.username !== undefined) {
-            socket.disconnect();
-			dispatch({
-				action: ActionEnum.SET_SOCKET,
-				payload: {
-					socket: io({
-						forceNew: true,
-						query: { username: user.username },
-					}),
-				},
-			})
-		}
-	}, [user, dispatch, socket])
+        if(user !== undefined)
+            socket.emit('tq:init-user', { username: user.username })
+	}, [user, socket])
 
 	useEffect(() => {
 		setTimeout(() => {

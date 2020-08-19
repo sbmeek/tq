@@ -15,7 +15,7 @@ interface IContextAction {
 }
 
 const initialState: IContextState = {
-	socket: io({ forceNew: true }),
+	socket: io(),
 	isRendered: false,
 	lang: en,
 }
@@ -51,7 +51,7 @@ function reducer(state: IContextState, action: IContextAction) {
 }
 
 export default function <T extends { children: ReactNode }>({ children }: T) {
-	const [state, dispatch] = useReducer(reducer, initialState)
+    const [state, dispatch] = useReducer(reducer, initialState)
 
 	useEffect(() => {
 		dispatch({

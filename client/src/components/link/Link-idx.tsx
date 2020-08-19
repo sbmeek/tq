@@ -25,7 +25,6 @@ export default function LinkIdx() {
 
 	useEffect(() => {
         if(showPlaceholder){
-            console.log('load');
             dispatch({
                 type: ActionEnum.SET_IS_RENDERED,
                 payload: { isRendered: true },
