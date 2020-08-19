@@ -39,7 +39,7 @@ export const MsgSent = () => {
 						style={{ background: 'none', margin: '3px' }}
 					>
 						{' '}
-						<p>envia otro mensaje</p>
+						<p styleName="send-again">envia otro mensaje</p>
 					</button>
 				</div>
 			</div>

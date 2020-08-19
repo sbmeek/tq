@@ -15,6 +15,7 @@ import Msg from './components/sendMsg/Msg-idx'
 import Loader from './components/partials/Loader'
 import { InitContext } from './global/context/InitContext'
 import Menu from './components/partials/Menu'
+import Terms from 'components/terms/Terms'
 
 export default function App() {
 	const [isUserNew, setIsUserNew] = useState(false)
@@ -73,6 +74,7 @@ export default function App() {
 								component={TemplateMSG}
 								redirectTo="/"
 							/>
+                            <Route path="/terms" component={Terms}/>
 							<Route exact path="/:username" component={Msg} />
 							<Route path="*">
 								<Error404 />
