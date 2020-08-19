@@ -15,9 +15,10 @@ export const addUser = (username: string, socketId: string) => {
 }
 
 export const removeUser = (username: string, socketId: string) => {
-    const tempUser = onlineUsers.get(username);
-    onlineUsers.get(username)?.delete(socketId);
-    if(tempUser !== undefined && tempUser!.size === 0) onlineUsers.delete(username);
+    if(onlineUsers.has(username)){
+        onlineUsers.get(username)!.delete(socketId);
+        if(onlineUsers.get(username)!.size === 0) onlineUsers.delete(username);
+    }
     console.log(onlineUsers)
 }
 
