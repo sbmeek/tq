@@ -5,6 +5,7 @@ const Loader = () => {
 	return (
 		<div styleName="v-v">
 			<svg
+                styleName="svg-loader"
 				width="100%"
 				height="100%"
 				viewBox="0 0 2048 2048"

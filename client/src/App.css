@@ -72,4 +72,5 @@ input[type="button"] {
 
 svg circle, svg line, svg path, svg polygon, svg rect {
     shape-rendering: geometricprecision;
+    pointer-events: none;
 }

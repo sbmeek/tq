@@ -1,15 +1,15 @@
-import React, { MouseEvent, useState, useRef, useEffect } from 'react'
+import React, { MouseEvent, useState, useRef } from 'react'
 import html2canvas from 'html2canvas'
 import './Answer.css'
 
 export default function Answer<
 	T extends {
-		opened: boolean
-		setOpened: Function
-		form: HTMLFormElement
-		templateQuestion: HTMLDivElement
+		opened: boolean;
+		setOpened: Function;
+		form: HTMLFormElement;
+        templateQuestion: HTMLDivElement;
 	}
->({ opened, setOpened, form, templateQuestion }: T) {
+>({ opened, setOpened, form, templateQuestion}: T) {
 	const [templateImg, setTemplateImg] = useState('')
 	const ansImg = useRef<HTMLImageElement>(null)
 
@@ -22,28 +22,27 @@ export default function Answer<
 		form.dispatchEvent(new Event('submit', { cancelable: true }))
 	}
 
-	useEffect(() => {
-		ansImg.current!.src = templateImg;
-	}, [templateImg])
-
 	const convertTemplate = async () => {
-		if (templateQuestion === null) return
+        if (templateQuestion === null) return
 		const cnv = await html2canvas(templateQuestion)
 		const img = cnv.toDataURL('image/png')
 		if (process.env.NODE_ENV === 'development') console.log(img)
-		setTemplateImg(img)
+        setTemplateImg(img)
+        ansImg.current!.src = img;
+        templateQuestion.style.borderRadius = "20px";
 	}
-
+    
 	const openImage = async () => {
+        templateQuestion.style.borderRadius = "0";
 		await convertTemplate();
-		const w = window.open() as Window;
+        const w = window.open() as Window;
 		w.document.body.setAttribute(
 			'style',
 			'min-width:100vw;min-height:100vh;display:flex;align-items:center;justify-content:center;flex-direction:column;margin:0;padding:0;'
 		)
 		w.document.body.innerHTML = `<h1>temp img - TQ</h1>${
 			ansImg.current!.outerHTML
-		}`
+        }`
 	}
 
 	return (
