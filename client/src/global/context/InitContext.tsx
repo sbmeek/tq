@@ -15,7 +15,7 @@ interface IContextAction {
 }
 
 const initialState: IContextState = {
-	socket: io('http://localhost:2017/', { forceNew: true }),
+	socket: io({ forceNew: true }),
 	isRendered: false,
 	lang: en,
 }

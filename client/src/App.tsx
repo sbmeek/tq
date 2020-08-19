@@ -34,7 +34,7 @@ export default function App() {
 			dispatch({
 				action: ActionEnum.SET_SOCKET,
 				payload: {
-					socket: io('/', {
+					socket: io({
 						forceNew: true,
 						query: { username: user.username },
 					}),
