@@ -3,17 +3,18 @@ import flecha from '../../assets/images/flecha-roja.png'
 import menulog from '../../assets/images/menu-logo.png'
 import FirstTimeModal from './FirstTimeModal'
 import './Menu.css'
+import { Link } from 'react-router-dom'
 
 export default function Menu<T extends { isUserNew: boolean }>({
-	isUserNew
+	isUserNew,
 }: T) {
 	const [showMenu, setShowMenu] = useState(false)
 	const [enoughSpace, setEnoughSpace] = useState(false)
 	const [showNewUserModal, setShowNewUserModal] = useState(false)
 
-    useEffect(() => {
-        setShowNewUserModal(isUserNew);
-    }, [isUserNew])
+	useEffect(() => {
+		setShowNewUserModal(isUserNew)
+	}, [isUserNew])
 
 	useEffect(() => {
 		handleSpace()
@@ -39,8 +40,8 @@ export default function Menu<T extends { isUserNew: boolean }>({
 		>
 			<div
 				styleName={`overlay ${showMenu && !enoughSpace ? 'active' : ''}`}
-                onClick={toggleMenuActivation}
-                onTouchStartCapture={toggleMenuActivation}
+				onClick={toggleMenuActivation}
+				onTouchStartCapture={toggleMenuActivation}
 			></div>
 			<div>
 				<button
@@ -56,16 +57,20 @@ export default function Menu<T extends { isUserNew: boolean }>({
 							<h1>Menu</h1>
 						</div>
 						<div styleName="btn-container">
-							<button styleName="sidebar-button">
-								<i>i</i>
-								<span>Inicio</span>
-							</button>
+							<Link to="/Link">
+								<button styleName="sidebar-button">
+									<i>i</i>
+									<span>Inicio</span>
+								</button>
+							</Link>
 						</div>
 						<div styleName="btn-container">
-							<button styleName="sidebar-button">
-								<i>i</i>
-								<span>Bandeja</span>
-							</button>
+							<Link to="/messages">
+								<button styleName="sidebar-button">
+									<i>i</i>
+									<span>Bandeja</span>
+								</button>
+							</Link>
 						</div>
 						<div styleName="btn-container">
 							<button styleName="sidebar-button">
@@ -80,7 +85,11 @@ export default function Menu<T extends { isUserNew: boolean }>({
 							</button>
 						</div>
 						<div styleName="terms-container">
-							<button styleName="btn-terms">Terminos y Condiciones</button>
+							<a href="/terms">
+								<button styleName="btn-terms">
+									Términos y Condiciones
+								</button>
+							</a>
 						</div>
 					</div>
 				</div>

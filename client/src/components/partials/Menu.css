@@ -175,6 +175,10 @@
     align-items: flex-end;
     justify-content: flex-end;
 }
+.btn-container>a{
+	text-decoration: none;
+	display: contents;
+}
 
 .sidebar-button {
     display: flex;
