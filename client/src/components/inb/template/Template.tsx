@@ -9,11 +9,11 @@ import React, {
 } from 'react'
 import { useLocation, Link } from 'react-router-dom'
 import parse from 'html-react-parser'
-import { InitContext } from '../../global/context/InitContext'
+import { InitContext } from 'global/context/InitContext'
 import styles from './Template.css'
-import BgColors from './TemplateOpts/BgColors'
-import Labels from './TemplateOpts/Labels'
-import ReplyingModal from './ReplyingModal'
+import BgColors from './templateOpts/BgColors'
+import Labels from './templateOpts/Labels'
+import ReplyingModal from '../replyingModal/ReplyingModal'
 
 interface IOptsVisibility {
 	bgColorsOptShown: boolean
@@ -33,12 +33,8 @@ export default function Template() {
 	const [optsVisibility, setOptsVisibility] = useState<IOptsVisibility>(
 		InitialStateOptsVisibility
 	)
-	const [isPlaceholderVisible, setIsPlaceholderVisible] = useState<boolean>(
-		true
-	)
-	const {
-		state: { socket },
-	} = useContext(InitContext)
+	const { state: { socket } } = useContext(InitContext)
+	const [isPlaceholderVisible, setIsPlaceholderVisible] = useState(true)
 	const templateQuestion = useRef<HTMLDivElement>(null)
 	const templateAnswer = useRef<HTMLDivElement>(null)
 	const templateQuestionContainer = useRef<HTMLDivElement>(null)

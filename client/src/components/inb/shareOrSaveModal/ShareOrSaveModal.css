@@ -1,0 +1,50 @@
+
+.overlay{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 34;
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100vw;
+    min-height: 100vh;
+    background: rgba(0, 0, 0, .8);
+    transition: opacity 250ms;
+}
+
+.share-save-modal{
+    position: absolute;
+    display: flex;
+    background: #fff;
+    border-radius: 25px;
+    opacity: 0;
+    flex-direction: column;
+    z-index: 35;
+}
+
+.share-save-modal.active{
+    opacity: 1;
+}
+
+.share-save-modal>h2{
+    color: #1b1b1b;
+    font-family: 'NunitoBold';
+    text-align: center;
+}
+
+._btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    background: var(--tq-red-00);
+    color: #fff;
+    cursor: pointer;
+    border-radius: 20px;
+    width: 30%;
+    min-width: 250px;
+    min-height: 49px;
+    padding: 5px;
+    margin: 10px;
+}

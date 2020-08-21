@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch, RootStateOrAny } from 'react-redux'
-import Inbox from './Inbox'
+import Inbox from './mainInbox/Inbox'
 import { InitContext } from '../../global/context/InitContext'
 import { useContext } from 'react'
 import { setUserMessagesAction } from '../../global/ducks/authDucks'

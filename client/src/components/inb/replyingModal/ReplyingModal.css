@@ -36,8 +36,7 @@
     opacity: 0;
 }
 
-.overlay.active>.confirm-container,
-.overlay.active>.share-save-modal{
+.overlay.active>.confirm-container{
     opacity: 1;
 }
 
@@ -122,37 +121,6 @@
     color: rgb(73, 73, 73);
     font-size: .8rem;
     padding: 8px 15px;
-}
-
-.share-save-modal{
-    position: absolute;
-    display: flex;
-    background: #fff;
-    border-radius: 25px;
-    opacity: 0;
-    flex-direction: column;
-}
-
-.share-save-modal>h2{
-    color: #1b1b1b;
-    font-family: 'NunitoBold';
-    text-align: center;
-}
-
-._btn{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1rem;
-    background: var(--tq-red-00);
-    color: #fff;
-    cursor: pointer;
-    border-radius: 20px;
-    width: 30%;
-    min-width: 250px;
-    min-height: 49px;
-    padding: 5px;
-    margin: 10px;
 }
 
 .ans-img{

@@ -1,10 +1,11 @@
-import React, { useState, useContext, MouseEvent } from 'react'
-import { useHistory } from 'react-router-dom'
+import React, { useState, useContext, MouseEvent, useEffect } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import './Inbox.css'
-import icon from '../../assets/images/icon.png'
-import { InitContext } from '../../global/context/InitContext'
+import icon from 'assets/images/icon.png'
+import { InitContext } from 'global/context/InitContext'
 import parse from 'html-react-parser'
 import SimpleBar from 'simplebar-react'
+import ShareOrSaveModal from '../shareOrSaveModal/ShareOrSaveModal'
 
 export default function Inbox<
 	T extends {
@@ -13,12 +14,23 @@ export default function Inbox<
 	}
 >({ messages, answeredMsgs }: T) {
 	const [actualTab, setActualTab] = useState('msg')
+	const [showShareOrSaveModal, setShowShareOrSaveModal] = useState(false)
 	const history = useHistory()
+	const location = useLocation()
 	const {
 		state: {
 			lang: { Inbox: lang },
 		},
 	} = useContext(InitContext)
+
+	useEffect(() => {
+		let locationState = location.state as any
+		if (locationState === undefined) {
+			setShowShareOrSaveModal(false)
+			return
+		}
+		setShowShareOrSaveModal(locationState['showShareOrSaveModal'])
+	}, [])
 
 	const handleTabClick = (e: MouseEvent<HTMLButtonElement>) => {
 		const targetElement = e.target as HTMLButtonElement
@@ -26,7 +38,7 @@ export default function Inbox<
 		setActualTab(id === 'msg-tab' || id === '' ? 'msg' : 'ans')
 	}
 
-	const handleMsgClick = (_e: MouseEvent<HTMLDivElement>, _msgId: string) => {
+	const handleMsgClick = (_e: MouseEvent, _msgId: string) => {
 		const actualMsg = messages.filter((m) => m._id === _msgId)[0]
 		history.push({
 			pathname: '/message',
@@ -36,8 +48,14 @@ export default function Inbox<
 
 	return (
 		<div styleName="main-container">
+			{showShareOrSaveModal && (
+				<ShareOrSaveModal
+                    showShareOrSaveModal={showShareOrSaveModal}
+                    setShowShareOrSaveModal={setShowShareOrSaveModal}
+				/>
+			)}
 			<div styleName="inbox-container" id="inb-cont">
-				<h4>
+				<div styleName="inbox-title">
 					<div styleName="inbox-icon">
 						<img
 							className="responsive-image"
@@ -46,9 +64,9 @@ export default function Inbox<
 							draggable="false"
 						/>
 					</div>
-					<span>{lang['Title']}</span>
-				</h4>
-				<div>
+					<h4>{lang['Title']}</h4>
+				</div>
+				<div styleName="inbox-tabs-container">
 					<button
 						id="msg-tab"
 						styleName={`inbox-tab-msgs ${

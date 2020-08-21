@@ -11,7 +11,7 @@
 	min-height: 90vh !important;
 }
 
-.inbox-container > h4 {
+.inbox-title{
 	display: inline-flex;
 	color: var(--tq-red-00);
 	margin: 25px 13px;
@@ -19,20 +19,11 @@
 	justify-content: center;
 }
 
-.inbox-container > h4 > i {
-	font-size: 44px;
-}
-
-.inbox-container > h4 > span {
+.inbox-title > h4 {
 	padding-left: 25px;
     font-weight: 600;
     font-size: 2.8em;
     font-family: 'Nunito', sans-serif; 
-}
-
-.inbox-container > div {
-	display: flex;
-	justify-content: space-between;
 }
 
 .inbox-icon {
@@ -51,6 +42,11 @@
 .inbox-icon > img {
 	height: 35px;
 	width: 32px;
+}
+
+.inbox-tabs-container{
+	display: flex;
+	justify-content: space-between;
 }
 
 .inbox-tab-msgs,
