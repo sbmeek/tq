@@ -140,7 +140,7 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background: var(--tq-red-03);
+	background: var(--tq-red-00);
 	text-overflow: ellipsis;
 	color: #fff;
 	margin-bottom: 5px;

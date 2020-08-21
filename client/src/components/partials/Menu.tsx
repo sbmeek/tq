@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import flecha from '../../assets/images/flecha-roja.png'
 import menulog from '../../assets/images/menu-logo.png'
-import FirstTimeModal from './FirstTimeModal'
+import FirstTimeHelpBox from './FirstTimeHelpBox'
 import './Menu.css'
 import { Link } from 'react-router-dom'
 
@@ -94,7 +94,7 @@ export default function Menu<T extends { isUserNew: boolean }>({
 					</div>
 				</div>
 			</div>
-			<FirstTimeModal active={showNewUserModal} />
+			<FirstTimeHelpBox active={showNewUserModal} />
 		</div>
 	)
 }

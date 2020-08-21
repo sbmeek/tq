@@ -3,11 +3,6 @@
 	flex-direction: column;
 }
 
-@font-face {
-	font-family: Nunito;
-	src: url(../../assets/fonts/Nunito-ExtraBold.ttf);
-}
-
 .main {
 	display: flex;
 	align-items: center;

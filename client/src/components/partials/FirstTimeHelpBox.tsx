@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import './FirstTimeModal.css';
+import './FirstTimeHelpBox.css';
 import { InitContext } from 'global/context/InitContext';
 
 export default function FirstTimeModal<T extends { active: boolean }>({ active }: T) {

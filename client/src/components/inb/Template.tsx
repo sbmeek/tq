@@ -13,7 +13,7 @@ import { InitContext } from '../../global/context/InitContext'
 import styles from './Template.css'
 import BgColors from './TemplateOpts/BgColors'
 import Labels from './TemplateOpts/Labels'
-import AnswerOverlay from './Answer'
+import ReplyingModal from './ReplyingModal'
 
 interface IOptsVisibility {
 	bgColorsOptShown: boolean
@@ -25,7 +25,7 @@ export default function Template() {
 	const [answer, setAnswer] = useState<string>('')
 	const [showLabel, setShowLabel] = useState<boolean>(false)
 	const [actualMsg, setActualMsg] = useState<ITQMessage>()
-    const [isAnswerOverlayOpened, setIsAnswerOverlayOpened] = useState(false)
+    const [isReplyingModalOpened, setIsReplyingModalOpened] = useState(false)
 	const InitialStateOptsVisibility: IOptsVisibility = {
 		bgColorsOptShown: false,
 		labelsOptShown: false,
@@ -160,14 +160,14 @@ export default function Template() {
 					</Link>
 					<button
 						styleName="template-btn-share"
-						onClick={() => setIsAnswerOverlayOpened(!isAnswerOverlayOpened)}
+						onClick={() => setIsReplyingModalOpened(!isReplyingModalOpened)}
 					>
 						⇨
 					</button>
 				</div>
-				<AnswerOverlay
-					opened={isAnswerOverlayOpened}
-					setOpened={setIsAnswerOverlayOpened}
+				<ReplyingModal
+					opened={isReplyingModalOpened}
+					setOpened={setIsReplyingModalOpened}
 					form={form.current as HTMLFormElement}
                     templateQuestion={templateQuestionContainer.current as HTMLDivElement}
 				/>
