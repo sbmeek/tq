@@ -46,7 +46,8 @@
 
 .inbox-tabs-container{
 	display: flex;
-	justify-content: space-between;
+    justify-content: space-between;
+    margin-bottom: 3px;
 }
 
 .inbox-tab-msgs,
@@ -182,10 +183,10 @@
 		max-height: 46vh;
     }
     .inbox-tab-msgs{
-        border-radius: 12px 0 0 12px;
+        border-radius: 20px 0 0 20px;
     }
     .ans-tab{
-        border-radius: 0 12px 12px 0;
+        border-radius: 0 20px 20px 0;
     }
     .inbox-tab {
 		margin-bottom: 3px;
@@ -250,7 +251,8 @@
 	max-width: 100%;
 	max-height: 100%;
 	scrollbar-width: none;
-	-ms-overflow-style: none;
+    -ms-overflow-style: none;
+    border-radius: 20px;
 }
 
 :global .simplebar-content-wrapper::-webkit-scrollbar,
