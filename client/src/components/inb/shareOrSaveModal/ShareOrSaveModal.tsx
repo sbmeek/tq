@@ -1,6 +1,13 @@
 import React, { useState, useEffect, MouseEvent } from 'react'
 import './ShareOrSaveModal.css'
 import { useHistory } from 'react-router'
+import whatsapp from 'assets/images/share-icons/whatsapp.svg'
+import facebook from 'assets/images/share-icons/facebook.svg'
+import instagram from 'assets/images/share-icons/instagram.svg'
+import youtube from 'assets/images/share-icons/youtube.svg'
+import share from 'assets/images/share-icons/share.svg'
+import other from 'assets/images/share-icons/other.svg'
+import descargar from 'assets/images/share-icons/descargar.svg'
 
 export default function ShareOrSaveModal<
 	T extends {
@@ -43,10 +50,39 @@ export default function ShareOrSaveModal<
 			<div
 				styleName={`share-save-modal ${showShareOrSaveModal ? 'active' : ''}`}
 			>
-				<h2>Haz respondido! :D</h2>
-				<button styleName="_btn" onClick={() => openImage!()}>
-					img
+				<h1>share or save the image.</h1>
+				<div styleName="share">
+					<button styleName="whatsapp">
+						<img src={whatsapp} alt="share"/>
+						<img src={share} styleName="hover-share" alt="on-share"/>
+
+					</button>
+					<button styleName="facebook">
+						<img src={facebook}  alt="share" />
+						<img src={share} styleName="hover-share" alt="on-share"/>
+					</button>
+					<button styleName="instagram">
+						<img src={instagram} alt="share"/>
+						<img src={share} styleName="hover-share" alt="on-share"/>
+					</button>
+					<button styleName="youtube">
+						<img src={youtube} alt="share"/>
+						<img src={share} styleName="hover-share" alt="on-share"/>
+					</button>
+				</div>
+				<button styleName="_btn" > 
+				<h3>Other...</h3>
+				<img src={other} alt="on-other" />
+				<img src={other} alt="on-other" />
 				</button>
+				<button styleName="_btn" onClick={() => openImage!()}>
+					<h3>save</h3>
+					<img src={descargar} alt="on-save"/>
+				</button>
+				<button styleName="close">
+					<span>close</span>
+					<span>X</span>
+					</button>
 			</div>
 		</div>
 	)
