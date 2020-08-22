@@ -68,12 +68,12 @@
     
 }
 ._btn:hover>h3{
-    transform: translateX(-190px);
+    transform: translateX(190px);
 
 }
 ._btn>img{
     position: absolute;
-    transform: translateX(120px);
+    transform: translateX(-120px);
     transition: transform 150ms ease-out, opacity 200ms;
     width: 40px;
     height: 20px;
@@ -111,13 +111,13 @@
         COLOR: WHITE;
     font: normal normal bold 13px/26px Nunito;
     position: absolute;
-    transform: translateX(120px);
+    transform: translateX(-120px);
     transition: transform 150ms ease-out, opacity 200ms;
     width: 10px;
     opacity: 0;
     }
     .close:hover>span:nth-child(1){
-        transform: translateX(-120px);
+        transform: translateX(120px);
     }
     .close:hover>span:nth-child(2){
         transform: translateX(0);
@@ -187,14 +187,14 @@
 }
 .hover-share{
     position: absolute;
-    transform: translateX(120px);
+    transform: translateX(-120px);
     transition: transform 150ms ease-out, opacity 200ms;
     width: 10px;
     font-size: 2rem;
     opacity: 0;
 }
 .share>button:hover>img{
-    transform: translateX(-120px);
+    transform: translateX(120px);
 }
 .share>button:hover>.hover-share{
     transform: translateX(0);
