@@ -116,6 +116,24 @@ export default function TemplateEditor({
         setAnswer(_ans+'</div>');
 	}
 
+	const editorKeyDownHandler = (e: React.KeyboardEvent) => {
+		if (!e.ctrlKey) return
+		switch (e.key) {
+			case 'b':
+				e.preventDefault()
+				CustomEditor.toggleBoldMark(editor)
+				break
+			case 'u':
+				e.preventDefault()
+				CustomEditor.toggleUnderlineMark(editor)
+				break
+			case 'i':
+				e.preventDefault()
+				CustomEditor.toggleItalicMark(editor)
+				break
+		}
+	}
+
 	const renderLeaf = useCallback((props: any) => {
 		return <Leaf {...props} />
 	}, [])
@@ -176,6 +194,7 @@ export default function TemplateEditor({
 									<Editable
 										placeholder={lang['InputAnswerPlaceholder']}
 										renderLeaf={renderLeaf}
+										onKeyDown={editorKeyDownHandler}
 										autoComplete="off"
 										spellCheck="false"
 										autoFocus={true}
