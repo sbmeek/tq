@@ -1,36 +1,47 @@
 import React, {
 	useState,
-	MouseEvent,
-	KeyboardEvent,
 	useRef,
-	FormEvent,
+	useMemo,
+	useCallback,
+	useContext,
 } from 'react'
 import '../Template.css'
 import './TemplateEditor.css'
 import BgColors from '../templateOpts/BgColors'
 import Labels from '../templateOpts/Labels'
-import textIcon from 'assets/images/templateEditor-icons/text-icon.svg';
+import textIcon from 'assets/images/templateEditor-icons/text-icon.svg'
+import {
+	createEditor,
+	Transforms,
+	Editor,
+	Text,
+	Node as SlateNode,
+} from 'slate'
+import { Slate, Editable, withReact, ReactEditor } from 'slate-react'
+import { InitContext } from 'global/context/InitContext'
 
 interface IProps {
 	answer: string
-    form: React.RefObject<HTMLFormElement>
-    label: React.RefObject<HTMLDivElement>
+	form: React.RefObject<HTMLFormElement>
+	label: React.RefObject<HTMLDivElement>
 	setAnswer: React.Dispatch<React.SetStateAction<string>>
-    setShowLabel: React.Dispatch<React.SetStateAction<boolean>>
-    handleFormSubmit: (e: FormEvent<HTMLFormElement>) => void
-    templateQuestionContainer: HTMLDivElement | null
+	setShowLabel: React.Dispatch<React.SetStateAction<boolean>>
+	handleFormSubmit: (e: React.FormEvent<HTMLFormElement>) => void
+	templateQuestionContainer: HTMLDivElement | null
 }
 
 export default function TemplateEditor({
-    form,
-    label,
+	form,
+	label,
 	answer,
 	setAnswer,
-    setShowLabel,
-    handleFormSubmit,
-    templateQuestionContainer,
+	setShowLabel,
+	handleFormSubmit,
+	templateQuestionContainer,
 }: IProps) {
-	const [isPlaceholderVisible, setIsPlaceholderVisible] = useState(true)
+	const {
+		lang: { TemplateEditor: lang },
+	} = useContext(InitContext).state
 	const InitialStateOptsVisibility: { [key: string]: boolean } = {
 		bgColorsOptShown: false,
 		labelsOptShown: false,
@@ -38,8 +49,14 @@ export default function TemplateEditor({
 	const [optsVisibility, setOptsVisibility] = useState(
 		InitialStateOptsVisibility
 	)
-	const ansInput = useRef<HTMLDivElement>(null)
 	const optsSwipe = useRef<HTMLDivElement>(null)
+	const editor = useMemo(() => withReact(createEditor()), [])
+	const [editorVal, setEditorVal] = useState<any[]>([
+		{
+			type: 'paragraph',
+			children: [{ text: '' }],
+		},
+	])
 
 	const getDesiredOpt = (_id: string) => {
 		switch (_id) {
@@ -52,7 +69,7 @@ export default function TemplateEditor({
 		}
 	}
 
-	const toggleOptSwipe = (e: MouseEvent<HTMLButtonElement>) => {
+	const toggleOptSwipe = (e: React.MouseEvent<HTMLButtonElement>) => {
 		const targetElement = e.target as HTMLButtonElement
 		const optSwp = optsSwipe.current!
 		let _dsrdOpt = getDesiredOpt(targetElement.id)
@@ -82,24 +99,26 @@ export default function TemplateEditor({
 		setOptsVisibility(_optsVisibility)
 	}
 
-	const handleInput = (e: KeyboardEvent<HTMLDivElement>) => {
-		const targetElement = e.currentTarget as HTMLDivElement
-		const { textContent: ansVal } = targetElement
-		setIsPlaceholderVisible(ansVal!.length < 1)
-		setAnswer(targetElement.innerHTML)
+	const handleEditorChange = (value: SlateNode[]) => {
+		setEditorVal(value)
+		serialize(value[0])
 	}
 
-	const handleBtnFormatClick = (e: MouseEvent<HTMLButtonElement>) => {
-		const targetElement = e.target as HTMLButtonElement
-		const { parentElement: target } = targetElement
-		formatAnswer(target!.title.toLowerCase())
+	const serialize = (node: SlateNode) => {
+		if (Text.isText(node)) {
+			return setAnswer(node.text)
+		}
+        let _ans = '<div>'
+        node.children.map((n: SlateNode) => {
+            _ans += `<span style="font-weight: ${n.bold ? 'bold' : 'normal'};textDecorationLine:${n.underline ? 'underline' : 'none'};fontStyle:${n.italic ? 'italic' : 'normal'}">${n.text}</span>`
+            return _ans;
+        })
+        setAnswer(_ans+'</div>');
 	}
 
-	const formatAnswer = (cmd: string) => {
-		document.execCommand(cmd, false, '')
-		setAnswer(ansInput.current!.innerHTML)
-		ansInput.current!.focus()
-	}
+	const renderLeaf = useCallback((props: any) => {
+		return <Leaf {...props} />
+	}, [])
 
 	return (
 		<div styleName="answer-editor">
@@ -114,24 +133,30 @@ export default function TemplateEditor({
 							<button
 								title="Bold"
 								type="button"
-								onClick={handleBtnFormatClick}
-								data-cmd="b"
+								onClick={(e: React.MouseEvent) => {
+									e.preventDefault()
+									CustomEditor.toggleBoldMark(editor)
+								}}
 							>
 								<i className="material-icons">format_bold</i>
 							</button>
 							<button
 								title="Italic"
 								type="button"
-								onClick={handleBtnFormatClick}
-								data-cmd="i"
+								onClick={(e: React.MouseEvent) => {
+									e.preventDefault()
+									CustomEditor.toggleItalicMark(editor)
+								}}
 							>
 								<i className="material-icons">format_italic</i>
 							</button>
 							<button
 								title="Underline"
 								type="button"
-								onClick={handleBtnFormatClick}
-								data-cmd="u"
+								onClick={(e: React.MouseEvent) => {
+									e.preventDefault()
+									CustomEditor.toggleUnderlineMark(editor)
+								}}
 							>
 								<i className="material-icons">format_underlined</i>
 							</button>
@@ -143,23 +168,22 @@ export default function TemplateEditor({
 					<div styleName="input-answer-container">
 						<div styleName="input-answer-inner-container">
 							<div>
-								<div
-									style={{
-										visibility: isPlaceholderVisible ? 'visible' : 'hidden',
-									}}
-									styleName="input-answer-placeholder"
+								<Slate
+									editor={editor}
+									value={editorVal}
+									onChange={handleEditorChange}
 								>
-									Escribe tu respuesta...
-								</div>
-								<div
-									styleName="input-answer tq-scrollbar"
-									data-name="ans-msg"
-									onInput={handleInput}
-									data-value={answer}
-									contentEditable
-									ref={ansInput}
-									spellCheck="false"
-								></div>
+									<Editable
+										placeholder={lang['InputAnswerPlaceholder']}
+										renderLeaf={renderLeaf}
+										autoComplete="off"
+										spellCheck="false"
+										autoFocus={true}
+										data-value={answer}
+										data-name="ans-msg"
+										styleName="input-answer tq-scrollbar"
+									/>
+								</Slate>
 							</div>
 						</div>
 					</div>
@@ -167,7 +191,7 @@ export default function TemplateEditor({
 				<div styleName="answer-options-container">
 					<div styleName="answer-options tq-scrollbar">
 						<button type="button" onClick={toggleOptSwipe} id="text">
-                            <img src={textIcon} alt="text icon" />
+							<img src={textIcon} alt="text icon" />
 						</button>
 						<button type="button" onClick={toggleOptSwipe} id="bg-colors">
 							S
@@ -193,9 +217,7 @@ export default function TemplateEditor({
 							height: optsVisibility.bgColorsOptShown ? '100%' : '0',
 						}}
 					>
-						<BgColors
-							templateQuestionContainer={templateQuestionContainer!}
-						/>
+						<BgColors templateQuestionContainer={templateQuestionContainer!} />
 					</div>
 					<div
 						style={{
@@ -208,4 +230,74 @@ export default function TemplateEditor({
 			</form>
 		</div>
 	)
+}
+
+const Leaf = (props: any) => {
+	return (
+		<span
+			{...props.attributes}
+			style={{
+				fontWeight: props.leaf.bold ? 'bold' : 'normal',
+				textDecorationLine: props.leaf.underline ? 'underline' : 'none',
+				fontStyle: props.leaf.italic ? 'italic' : 'normal',
+			}}
+		>
+			{props.children}
+		</span>
+	)
+}
+
+const CustomEditor = {
+	isBoldMarkActive(editor: Editor & ReactEditor) {
+		const [match] = Editor.nodes(editor, {
+			match: (n) => n.bold === true,
+			universal: true,
+		})
+
+		return !!match
+	},
+
+	isUnderlineMarkActive(editor: Editor & ReactEditor) {
+		const [match] = Editor.nodes(editor, {
+			match: (n) => n.underline === true,
+		})
+		return match
+	},
+
+	isItalicMarkActive(editor: Editor & ReactEditor) {
+		const [match] = Editor.nodes(editor, {
+			match: (n) => n.italic === true,
+		})
+		return match
+	},
+
+	toggleBoldMark(editor: Editor & ReactEditor) {
+		const isActive = CustomEditor.isBoldMarkActive(editor)
+		Transforms.setNodes(
+			editor,
+			{ bold: isActive ? null : true },
+			{ match: (n) => Text.isText(n), split: true }
+		)
+		ReactEditor.focus(editor)
+	},
+
+	toggleUnderlineMark(editor: Editor & ReactEditor) {
+		const isActive = CustomEditor.isUnderlineMarkActive(editor)
+		Transforms.setNodes(
+			editor,
+			{ underline: isActive ? false : true },
+			{ match: (n) => Text.isText(n), split: true }
+		)
+		ReactEditor.focus(editor)
+	},
+
+	toggleItalicMark(editor: Editor & ReactEditor) {
+		const isActive = CustomEditor.isItalicMarkActive(editor)
+		Transforms.setNodes(
+			editor,
+			{ italic: isActive ? false : true },
+			{ match: (n) => Text.isText(n), split: true }
+		)
+		ReactEditor.focus(editor)
+	},
 }

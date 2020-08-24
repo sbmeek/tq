@@ -24,5 +24,8 @@ export default {
     },
     Menu: {
         ModalForNewUsers: "Did you know this is a menu?"
+    },
+    TemplateEditor: {
+        InputAnswerPlaceholder: "Type your answer..."
     }
 }
