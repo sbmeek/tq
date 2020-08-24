@@ -107,15 +107,15 @@ export default function TemplateEditor({
 	}
 
 	return (
-		<div styleName="template-answer">
+		<div styleName="answer-editor">
 			<form
-				styleName="template-answer-form-container"
+				styleName="answer-editor-container"
 				onSubmit={handleFormSubmit}
 				ref={form}
 			>
 				<div>
-					<div styleName="template-answer-btns-format-container">
-						<div styleName="template-answer-btns-format">
+					<div styleName="answer-btns-format-container">
+						<div styleName="answer-btns-format">
 							<button
 								title="Bold"
 								type="button"
@@ -145,19 +145,19 @@ export default function TemplateEditor({
 							<i className="material-icons">emoji_emotions</i>
 						</button>
 					</div>
-					<div styleName="template-input-answer-container">
-						<div styleName="template-input-answer-inner-container">
+					<div styleName="input-answer-container">
+						<div styleName="input-answer-inner-container">
 							<div>
 								<div
 									style={{
 										visibility: isPlaceholderVisible ? 'visible' : 'hidden',
 									}}
-									styleName="template-input-answer-placeholder"
+									styleName="input-answer-placeholder"
 								>
 									Escribe tu respuesta...
 								</div>
 								<div
-									styleName="template-input-answer tq-scrollbar"
+									styleName="input-answer tq-scrollbar"
 									data-name="ans-msg"
 									onInput={handleInput}
 									data-value={answer}
@@ -169,8 +169,8 @@ export default function TemplateEditor({
 						</div>
 					</div>
 				</div>
-				<div styleName="template-answer-options-container">
-					<div styleName="template-answer-options tq-scrollbar">
+				<div styleName="answer-options-container">
+					<div styleName="answer-options tq-scrollbar">
 						<button type="button" onClick={toggleOptSwipe} id="text">
                             <img src={textIcon} alt="text icon" />
 						</button>
@@ -190,7 +190,7 @@ export default function TemplateEditor({
 				</div>
 				<div
 					ref={optsSwipe}
-					styleName="template-answer-opts-menu"
+					styleName="answer-opts-menu"
 					className="opts-swipe_inactv"
 				>
 					<div

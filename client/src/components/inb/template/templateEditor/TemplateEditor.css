@@ -1,4 +1,4 @@
-.template-answer {
+.answer-editor {
 	display: flex;
 	align-items: flex-end;
 	background: var(--tq-bg-00);
@@ -9,51 +9,51 @@
 	overflow: hidden;
 }
 
-.template-answer-form-container {
+.answer-editor-container {
 	display: grid;
 	grid-template-rows: minmax(51%, 63%) 34%;
 	height: 90%;
 	position: relative;
 }
 
-.template-answer-form-container > div:nth-child(1) {
+.answer-editor-container > div:nth-child(1) {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 }
 
-.template-answer-btns-format-container {
+.answer-btns-format-container {
 	display: flex;
 	justify-content: space-between;
 	align-items: flex-end;
 	padding: 0 16px;
 }
 
-.template-answer-btns-format-container > button,
-.template-answer-btns-format > button {
+.answer-btns-format-container > button,
+.answer-btns-format > button {
 	cursor: pointer;
 	background-color: transparent;
 	color: var(--tq-gray-00);
 }
 
-.template-answer-btns-format-container > button:hover,
-.template-answer-btns-format > button:hover {
+.answer-btns-format-container > button:hover,
+.answer-btns-format > button:hover {
 	color: var(--tq-gray-02);
 }
 
-.template-answer-btns-format {
+.answer-btns-format {
 	display: flex;
 	width: 38%;
 	justify-content: space-around;
 }
 
-.template-input-answer-container {
+.input-answer-container {
 	display: flex;
 	justify-content: center;
 	position: relative;
 }
 
-.template-input-answer-inner-container {
+.input-answer-inner-container {
 	display: flex;
 	align-items: center;
 	max-width: 212.44px !important;
@@ -61,7 +61,7 @@
 	font-size: 14px !important;
 }
 
-.template-input-answer-inner-container > div {
+.input-answer-inner-container > div {
 	display: flex;
 	align-items: center;
 	box-sizing: border-box;
@@ -82,12 +82,12 @@
 	overflow-y: auto;
 }
 
-.template-input-answer-inner-container > div:hover,
-.template-input-answer-inner-container > div:focus {
+.input-answer-inner-container > div:hover,
+.input-answer-inner-container > div:focus {
 	background-color: var(--tq-gray-01) !important;
 }
 
-.template-input-answer {
+.input-answer {
 	min-width: 0;
 	min-height: 0;
 	font-size: 14px !important;
@@ -103,7 +103,7 @@
 	box-shadow: none !important;
 }
 
-.template-input-answer-placeholder {
+.input-answer-placeholder {
 	color: var(--tq-input-placeholder);
 	font-size: 15px;
 	line-height: 20px;
@@ -118,7 +118,7 @@
 	user-select: none;
 }
 
-.template-answer-options-container {
+.answer-options-container {
 	display: flex;
 	align-self: flex-end;
 	max-height: fit-content;
@@ -130,7 +130,7 @@
 	border-radius: 0 0 10px 10px;
 }
 
-.template-answer-options {
+.answer-options {
 	display: flex;
 	margin: 0px 15px 6px 15px;
 	overflow-x: auto;
@@ -139,11 +139,11 @@
 	border-radius: 38px;
 }
 
-.template-answer-options > button:first-child {
+.answer-options > button:first-child {
 	background: var(--tq-gray-00);
 }
 
-.template-answer-options > button {
+.answer-options > button {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -158,16 +158,16 @@
     z-index: 1;
 }
 
-.template-answer-options > button > img{
+.answer-options > button > img{
     width: 100%;
 }
 
-.template-answer-options > button > *{
+.answer-options > button > *{
     pointer-events: none;
 }
 
-.template-answer-options > button:active,
-.template-answer-options > button:first-child:active {
+.answer-options > button:active,
+.answer-options > button:first-child:active {
 	animation: jump 1s;
 }
 
@@ -189,7 +189,7 @@
 	}
 }
 
-.template-answer-opts-menu {
+.answer-opts-menu {
 	position: absolute;
 	top: 84%;
 	width: 98%;
@@ -208,7 +208,7 @@
 	transition: transform 500ms;
 }
 
-.template-answer-opts-menu > div {
+.answer-opts-menu > div {
 	transition: height 250ms ease-out;
 	overflow: hidden;
 }
