@@ -157,7 +157,7 @@ export default function TemplateEditor({
 									Escribe tu respuesta...
 								</div>
 								<div
-									styleName="template-input-answer template-input-answer-sb"
+									styleName="template-input-answer tq-scrollbar"
 									data-name="ans-msg"
 									onInput={handleInput}
 									data-value={answer}
@@ -170,7 +170,7 @@ export default function TemplateEditor({
 					</div>
 				</div>
 				<div styleName="template-answer-options-container">
-					<div styleName="template-answer-options template-answer-options-sb">
+					<div styleName="template-answer-options tq-scrollbar">
 						<button type="button" onClick={toggleOptSwipe} id="text">
                             <img src={textIcon} alt="text icon" />
 						</button>

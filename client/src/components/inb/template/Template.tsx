@@ -68,18 +68,14 @@ export default function Template() {
 	}
 
 	return (
-		<div
-			styleName="template-container"
-			id="tmpt-cont"
-			onClick={toggleLabelHandler}
-		>
+		<div styleName="container" onClick={toggleLabelHandler}>
 			<div>
-				<div styleName="template-head-btns">
-					<Link to="/messages" styleName="template-btn-back">
+				<div styleName="head-btns">
+					<Link to="/messages" styleName="btn-back">
 						<i className="material-icons">keyboard_backspace</i>
 					</Link>
 					<button
-						styleName="template-btn-share"
+						styleName="btn-share"
 						onClick={() => setIsReplyingModalOpened(!isReplyingModalOpened)}
 					>
 						⇨
@@ -102,13 +98,13 @@ export default function Template() {
 				/>
 			</div>
 			<div
-				styleName="template-question-container"
+				styleName="question-container"
 				ref={templateQuestionContainer}
 				className="d-text-select"
 			>
 				<div
-					styleName={`template-question-label ${
-						showLabel ? 'template-question-label-active' : ''
+					styleName={`question-label ${
+						showLabel ? 'question-label-active' : ''
 					}`}
 					ref={label}
 					onMouseEnter={toggleLabelHandler}
@@ -116,10 +112,10 @@ export default function Template() {
 				<div styleName="remove-label-box" onClick={() => setShowLabel(false)}>
 					✕
 				</div>
-				<div styleName="template-question" ref={templateQuestion}>
+				<div styleName="question" ref={templateQuestion}>
 					""
 				</div>
-				<div styleName="template-answer-from-question" ref={templateAnswer}>
+				<div styleName="answer" ref={templateAnswer}>
 					<div>{parse(answer)}</div>
 				</div>
 			</div>
