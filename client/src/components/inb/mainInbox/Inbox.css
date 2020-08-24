@@ -158,7 +158,8 @@
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
-	text-align: center;
+    text-align: center;
+    list-style: none;
 }
 
 @media only screen and (min-width: 600px) {
