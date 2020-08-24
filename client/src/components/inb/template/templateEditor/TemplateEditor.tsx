@@ -91,11 +91,6 @@ export default function TemplateEditor({
 
 	const handleBtnFormatClick = (e: MouseEvent<HTMLButtonElement>) => {
 		const targetElement = e.target as HTMLButtonElement
-		const sel = window.getSelection()
-		console.log(
-			sel!.getRangeAt(0).commonAncestorContainer.parentElement,
-			sel?.toString()
-		)
 		const { parentElement: target } = targetElement
 		formatAnswer(target!.title.toLowerCase())
 	}

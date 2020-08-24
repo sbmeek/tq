@@ -82,12 +82,13 @@
     opacity: 0;
     transition: opacity 150ms;
 	font-size: .8em;
-	cursor: pointer !important;
+	cursor: default;
 }
 
-.question-label.remove-label ~ .remove-label-box,
+.question-label.remove-label-active ~ .remove-label-box,
 .question-label-active{
-	opacity: 1;
+    opacity: 1;
+    cursor: pointer !important;
 }
 
 .question {

@@ -30,7 +30,7 @@ export default function Inbox<
 			return
 		}
 		setShowShareOrSaveModal(locationState['showShareOrSaveModal'])
-	}, [])
+	}, [location.state])
 
 	const handleTabClick = (e: MouseEvent<HTMLButtonElement>) => {
 		const targetElement = e.target as HTMLButtonElement

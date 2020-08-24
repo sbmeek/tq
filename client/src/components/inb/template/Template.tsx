@@ -53,15 +53,15 @@ export default function Template() {
 		const targetElement = e.target as HTMLDivElement
 		if (
 			label.current!.classList.contains(
-				styles['template-question-label-active']
+				styles['question-label-active']
 			)
 		) {
 			switch (e.type) {
 				case 'mouseenter':
-					targetElement.classList.add(styles['remove-label'])
+					targetElement.classList.add(styles['remove-label-active'])
 					break
 				case 'click':
-					label.current!.classList.remove(styles['remove-label'])
+					label.current!.classList.remove(styles['remove-label-active'])
 					break
 			}
 		}
