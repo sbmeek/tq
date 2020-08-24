@@ -17,7 +17,8 @@
 
 .bg-color > div{
 	width: 100%;
-	height: 100%;
+    height: 100%;
+    pointer-events: none;
 }
 
 .bg-color,
@@ -30,6 +31,7 @@
 .bg-color:nth-child(1) > div {
 	background: #f0210f;
 }
+
 .bg-color:nth-child(2) > div {
 	background: #40265f;
 }
@@ -39,18 +41,23 @@
 .bg-color:nth-child(4) > div {
 	background: #10244f;
 }
+
 .bg-color:nth-child(5) > div {
 	background: #90564f;
 }
+
 .bg-color:nth-child(6) > div {
 	background: #94124f;
 }
+
 .bg-color:nth-child(7) > div {
 	background: #91221f;
 }
+
 .bg-color:nth-child(8) > div {
 	background: #50278f;
 }
+
 .bg-color:nth-child(9) > div {
 	background: #60257f;
 }
