@@ -64,7 +64,10 @@ export default function Inbox<
 							draggable="false"
 						/>
 					</div>
-					<h4>{lang['Title']}</h4>
+					<div styleName="title-inner-container">
+						<h4>{lang['Title']}</h4>
+						<div styleName="sombra-title"></div>
+					</div>
 				</div>
 				<div styleName="inbox-tabs-container">
 					<button
@@ -85,7 +88,7 @@ export default function Inbox<
 								messages.length < 1 && answeredMsgs.length < 1 ? 'no-msgs' : ''
 							}`}
 						>
-							{messages.length}
+							<span>{messages.length}</span>
 						</div>
 					</button>
 					<button
