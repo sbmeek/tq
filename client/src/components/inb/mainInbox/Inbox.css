@@ -20,11 +20,12 @@
 }
 
 .sombra-title {
- 	background-color: #00000057;
-	width: 163px;
-	height: 9px;
-	margin: 15px;
-	border-radius: 50%;
+    background-color: rgba(0, 0, 0, .25);
+    width: 163px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 40px;
+    margin-top: 5px;
 }
 
 .title-inner-container{
@@ -48,7 +49,8 @@
 	-webkit-border-radius: 30px;
 	border: 0px solid #000000;
 	width: 62px;
-	height: 61px;
+    height: 61px;
+    margin-right: -20px;
 }
 
 .inbox-icon > img {
@@ -68,9 +70,10 @@
     align-items: center;
     justify-content: space-evenly;
     font: normal normal bold 20px Nunito;
-    height: 40.9px;
-	width: 42%;
-	transition: background 150ms;
+    height: 47px;
+    width: 40%;
+    min-width: 150px;
+    transition: background 150ms;
 }
 
 .inbox-tab-msgs:focus,
@@ -84,12 +87,13 @@
 }
 
 .ans-tab {
-    margin-left: 3px;
+    margin-left: 5px;
     color: #fff;
     cursor: pointer;
     border-radius: 0;
     letter-spacing: 0px;
     background: var(--tq-bg-00);
+    border-radius: 25px 50px 50px 25px;
 }
 
 .selected-tab {
@@ -99,12 +103,14 @@
 }
 
 .inbox-tab-msgs {
+    justify-content: center !important;
     letter-spacing: 0px;
     margin: 0;
     color: #fff;
     cursor: pointer;
     border-radius: 0;
     background: var(--tq-bg-00);
+    border-radius: 50px 25px 25px 50px;
 }
 
 .inbox-tab-msgs.no-msgs,
@@ -125,6 +131,7 @@
     justify-content: center;
     color: var(--tq-red-02);
     font-size: 12px !important;
+    margin-left: 5px;
 }
 
 .new-msgs-number::before{
@@ -179,11 +186,11 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background: #3b3b3b;
+	background: var(--tq-dark-gray-01);
 	text-overflow: ellipsis;
 	color: #fff;
 	margin-top: 5px;
-	min-height: 47px;
+	min-height: 60px;
     font-weight: 700;
     width: 100%;
     padding: 14px;
@@ -213,7 +220,7 @@
 		justify-content: center;
 	}
 	.inbox-container {
-		max-width: 383px;
+		max-width: 500px;
 		min-width: initial;
 		width: 100%;
 		background: transparent;
@@ -221,13 +228,7 @@
 	.inbox-msgs-container,
 	.answered-msgs-container {
 		min-width: 100%;
-		max-height: 46vh;
-	}
-	.inbox-tab-msgs {
-		border-radius: 50px 25px 25px 50px;
-	}
-	.ans-tab {
-		border-radius: 25px 50px 50px 25px;
+		max-height: 59vh;
 	}
 	.inbox-tab {
 		margin-bottom: 3px;
@@ -265,7 +266,7 @@
 	right: 0;
 	width: auto !important;
 	height: auto !important;
-	min-height: 46vh;
+	min-height: 59vh;
 	z-index: 0;
 }
 
@@ -281,9 +282,9 @@
 	padding: 0;
 	margin: 0;
     -webkit-overflow-scrolling: touch;
-    border-radius: 60px;
+    border-radius: 50px;
     background: var(--tq-bg-00);
-    padding: 21px 23px;
+    padding: 30px 33px;
 }
 
 :global .simplebar-content{
@@ -402,7 +403,9 @@
 
 :global .simplebar-track.simplebar-vertical {
 	top: 0;
-	width: 11px;
+    width: 11px;
+    max-height: 80%;
+    margin: 22px 0 25px 0;
 }
 
 :global
