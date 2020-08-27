@@ -18,15 +18,16 @@
 }
 .nubes-top {
 	display: flex;
-	justify-content: center;
-	position: fixed;
-	align-items: flex-end;
+justify-content: space-between;
+position: fixed;
+align-items: flex-end;
+margin: -37px;
+margin-right: 57px;
 }
 .nubes2-top {
 	width: 89px;
 	height: 70px;
 	transform: scaleX(-1);
-	margin: -41px;
 	z-index: 1;
 	margin-left: 100px;
 	position: absolute;
@@ -36,7 +37,6 @@
 	width: 80px;
 	height: 55px;
 	z-index: 1;
-	margin-top: -39px;
 	margin-left: -123px;
 	position: absolute;
 	transform: scaleX(-1);

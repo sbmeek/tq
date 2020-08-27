@@ -3,7 +3,6 @@ import React, {
 	useContext,
 	MouseEvent,
 	useEffect,
-	useRef,
 } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
 import styles from './Inbox.css'
