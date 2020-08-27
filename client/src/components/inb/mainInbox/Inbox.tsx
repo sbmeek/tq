@@ -1,6 +1,12 @@
-import React, { useState, useContext, MouseEvent, useEffect } from 'react'
+import React, {
+	useState,
+	useContext,
+	MouseEvent,
+	useEffect,
+	useRef,
+} from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
-import './Inbox.css'
+import styles from './Inbox.css'
 import icon from 'assets/images/icon.png'
 import { InitContext } from 'global/context/InitContext'
 import parse from 'html-react-parser'
@@ -22,6 +28,7 @@ export default function Inbox<
 			lang: { Inbox: lang },
 		},
 	} = useContext(InitContext)
+	let openedMsgElement: HTMLDivElement
 
 	useEffect(() => {
 		let locationState = location.state as any
@@ -38,20 +45,37 @@ export default function Inbox<
 		setActualTab(id === 'msg-tab' || id === '' ? 'msg' : 'ans')
 	}
 
-	const handleMsgClick = (_e: MouseEvent, _msgId: string) => {
-		const actualMsg = messages.filter((m) => m._id === _msgId)[0]
+	const handleMsgClick = (e: MouseEvent<HTMLDivElement>) => {
+		const targetElement = e.target as HTMLDivElement
+		if (targetElement.classList.contains(styles['opened'])) {
+			removeMsgOpenedStyle(targetElement)
+		} else {
+			if (openedMsgElement !== undefined) {
+				removeMsgOpenedStyle(openedMsgElement)
+			}
+			targetElement.classList.add(styles['opened'])
+		}
+		openedMsgElement = targetElement
+	}
+
+	const handleAnswerMsgClick = (_e: MouseEvent, msgId: string) => {
+		const actualMsg = messages.filter((m) => m._id === msgId)[0]
 		history.push({
 			pathname: '/message',
 			state: { actualMsg },
 		})
 	}
 
+	const removeMsgOpenedStyle = (targetElement: HTMLDivElement) => {
+		targetElement.classList.remove(styles['opened'])
+	}
+
 	return (
 		<div styleName="main-container">
 			{showShareOrSaveModal && (
 				<ShareOrSaveModal
-                    showShareOrSaveModal={showShareOrSaveModal}
-                    setShowShareOrSaveModal={setShowShareOrSaveModal}
+					showShareOrSaveModal={showShareOrSaveModal}
+					setShowShareOrSaveModal={setShowShareOrSaveModal}
 				/>
 			)}
 			<div styleName="inbox-container" id="inb-cont">
@@ -108,11 +132,32 @@ export default function Inbox<
 							<SimpleBar>
 								{messages.map((msg) => (
 									<div
-										onClick={(e) => handleMsgClick(e, msg._id)}
+										onClick={(e) => handleMsgClick(e)}
 										key={msg._id}
-										styleName="inbox-msg"
+										styleName="msg-container"
 									>
-										<li className={msg._id}>"{msg.content}"</li>
+										<div>
+											<span styleName="sender-name">An&oacute;nimo</span>
+											<button styleName="btn-report">
+												<span role="img" aria-label="warn emoji">
+													⚠️
+												</span>
+											</button>
+										</div>
+										<li styleName="msg-li">
+											<span styleName="msg-content">"{msg.content}"</span>
+											<button styleName="btn-delete">
+												<span role="img" aria-label="delete emoji">
+													🗑️
+												</span>
+											</button>
+										</li>
+										<button
+											styleName="msg-btn-answer"
+											onClick={(e) => handleAnswerMsgClick(e, msg._id)}
+										>
+											Answer
+										</button>
 									</div>
 								))}
 							</SimpleBar>
@@ -125,8 +170,12 @@ export default function Inbox<
 					<ul styleName="answered-msgs-container">
 						<SimpleBar>
 							{answeredMsgs.map((msg) => (
-								<div key={msg._id} styleName="inbox-msg">
-									<li className={msg._id}>
+								<div
+									key={msg._id}
+									styleName="msg-container"
+									style={{ padding: '0' }}
+								>
+									<li styleName="msg-li">
 										"{msg.content}"<br />
 										<i>ans: {parse(msg.answer as string)}</i>
 									</li>
