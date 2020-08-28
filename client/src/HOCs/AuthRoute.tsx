@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from 'react'
 import { Route, Redirect } from 'react-router-dom'
 import { useSelector, RootStateOrAny } from 'react-redux'
-import Loader from '../components/partials/Loader'
+import Loader from '../components/partials/loader/Loader'
 import { InitContext, ActionEnum } from '../global/context/InitContext'
 import IPropsHOCs from './IPropsHOCs'
 

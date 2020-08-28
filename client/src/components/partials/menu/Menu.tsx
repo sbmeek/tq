@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import flecha from '../../assets/images/flecha-roja.png'
-import menulog from '../../assets/images/menu-logo.png'
-import FirstTimeHelpBox from './FirstTimeHelpBox'
+import flecha from 'assets/images/flecha-roja.png'
+import menulog from 'assets/images/menu-logo.png'
+import FirstTimeHelpBox from '../firstTimeHelpBox/FirstTimeHelpBox'
+import RegisterModal from '../registerModal/RegisterModal'
 import './Menu.css'
 import { Link } from 'react-router-dom'
 
@@ -11,6 +12,7 @@ export default function Menu<T extends { isUserNew: boolean }>({
 	const [showMenu, setShowMenu] = useState(false)
 	const [enoughSpace, setEnoughSpace] = useState(false)
 	const [showNewUserModal, setShowNewUserModal] = useState(false)
+	const [showRegisterModal, setShowRegisterModal] = useState(false)
 
 	useEffect(() => {
 		setShowNewUserModal(isUserNew)
@@ -29,6 +31,10 @@ export default function Menu<T extends { isUserNew: boolean }>({
 	const toggleMenuActivation = () => {
 		if (showNewUserModal) setShowNewUserModal(false)
 		setShowMenu(!showMenu)
+	}
+
+	const handleRegisterClick = () => {
+		setShowRegisterModal(true)
 	}
 
 	return (
@@ -73,9 +79,9 @@ export default function Menu<T extends { isUserNew: boolean }>({
 							</Link>
 						</div>
 						<div styleName="btn-container">
-							<button styleName="sidebar-button">
+							<button styleName="sidebar-button" onClick={handleRegisterClick}>
 								<i>i</i>
-								<span>TQ</span>
+								<span>Registrar</span>
 							</button>
 						</div>
 						<div styleName="btn-container">
@@ -86,15 +92,17 @@ export default function Menu<T extends { isUserNew: boolean }>({
 						</div>
 						<div styleName="terms-container">
 							<a href="/terms">
-								<button styleName="btn-terms">
-									Términos y Condiciones
-								</button>
+								<button styleName="btn-terms">Términos y Condiciones</button>
 							</a>
 						</div>
 					</div>
 				</div>
 			</div>
 			<FirstTimeHelpBox active={showNewUserModal} />
+			<RegisterModal
+				opened={showRegisterModal}
+				setOpened={setShowRegisterModal}
+			/>
 		</div>
 	)
 }

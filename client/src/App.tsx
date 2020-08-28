@@ -12,9 +12,9 @@ import UnauthRoute from 'HOCs/UnauthRoute'
 import UserLink from 'components/link/Link-idx'
 import TemplateMSG from 'components/inb/template/Template'
 import Msg from 'components/sendMsg/Msg-idx'
-import Loader from 'components/partials/Loader'
+import Loader from 'components/partials/loader/Loader'
 import { InitContext } from 'global/context/InitContext'
-import Menu from 'components/partials/Menu'
+import Menu from 'components/partials/menu/Menu'
 import Terms from 'components/terms/Terms'
 
 export default function App() {
