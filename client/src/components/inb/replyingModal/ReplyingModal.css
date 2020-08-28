@@ -14,13 +14,13 @@
     min-height: 100vh;
     opacity: 0;
     background: rgba(0, 0, 0, .8);
-    transition: opacity 250ms;
 }
 
 .overlay.active{
     height: auto;
     opacity: 1;
     z-index: 34;
+    transition: opacity 250ms;
 }
 
 .confirm-container{
