@@ -20,7 +20,27 @@ export default function RegisterModal<
 				id="overlay"
 			>
 				<div styleName="container">
-					<h2>la vaina</h2>
+					<h1>Registrar nombre TQ</h1>
+					<div styleName="inputs-registro">
+						<label>Nombre tq</label>
+						<input styleName="input"></input>
+						<label>correo electronico </label>
+						<input styleName="input"></input>
+						<label>contraseña</label>
+						<input styleName="input" type="password"></input>
+						<label>confirmacion de contraseña</label>
+						<input styleName="input" type="password"></input>
+					</div>
+					<div styleName="buttons">
+						<button styleName="cancel">
+							<span>Cancel</span>
+							<span>X</span>
+						</button>
+						<button styleName="crear">
+							<span>Crear cuenta</span>
+							<span>⇨</span>
+						</button>
+					</div>
 				</div>
 			</div>
 		</div>
