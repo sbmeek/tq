@@ -26,14 +26,14 @@
 .container-menu {
 	position: fixed;
     left: 0;
-    padding: 20px 0;
     transition: opacity 2s linear;
     z-index: 16;
     width: 100%;
 }
 
 .container-menu > div:nth-child(2) {
-	z-index: 16;
+    z-index: 16;
+    margin-top: 20px;
 }
 
 .btn-menu {

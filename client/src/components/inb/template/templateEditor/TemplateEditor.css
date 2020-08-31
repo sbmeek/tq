@@ -212,3 +212,12 @@
 	transition: height 250ms ease-out;
 	overflow: hidden;
 }
+
+/* Emoji Mart */
+:global .emoji-mart-scroll {
+    height: 180px !important;
+}
+/* 
+:global .emoji-mart-emoji {
+    height: 20px;
+} */

@@ -19,6 +19,8 @@ import {
 } from 'slate'
 import { Slate, Editable, withReact, ReactEditor } from 'slate-react'
 import { InitContext } from 'global/context/InitContext'
+import { Picker, BaseEmoji } from 'emoji-mart'
+import 'emoji-mart/css/emoji-mart.css'
 
 interface IProps {
 	answer: string
@@ -39,6 +41,7 @@ export default function TemplateEditor({
 	handleFormSubmit,
 	templateQuestionContainer,
 }: IProps) {
+	const [showEmojiPicker, setShowEmojiPicker] = useState(false)
 	const {
 		lang: { TemplateEditor: lang },
 	} = useContext(InitContext).state
@@ -50,10 +53,10 @@ export default function TemplateEditor({
 		InitialStateOptsVisibility
 	)
 	const optsSwipe = useRef<HTMLDivElement>(null)
+	const emojiPicker = useRef<Picker>(null)
 	const editor = useMemo(() => withReact(createEditor()), [])
 	const [editorVal, setEditorVal] = useState<any[]>([
 		{
-			type: 'paragraph',
 			children: [{ text: '' }],
 		},
 	])
@@ -108,12 +111,13 @@ export default function TemplateEditor({
 		if (Text.isText(node)) {
 			return setAnswer(node.text)
 		}
-        let _ans = '<div>'
-        node.children.map((n: SlateNode) => {
-            _ans += `<span style="font-weight: ${n.bold ? 'bold' : 'normal'};textDecorationLine:${n.underline ? 'underline' : 'none'};fontStyle:${n.italic ? 'italic' : 'normal'}">${n.text}</span>`
-            return _ans;
-        })
-        setAnswer(_ans+'</div>');
+		let _ans = '<div>'
+		node.children.map((n: SlateNode) => {
+			// prettier-ignore
+			_ans += `<span style="font-weight: ${n.bold ? 'bold' : 'normal'};textDecorationLine:${n.underline ? 'underline' : 'none'};fontStyle:${n.italic ? 'italic' : 'normal'}">${n.text}</span>`
+			return _ans
+		})
+		setAnswer(_ans + '</div>')
 	}
 
 	const editorKeyDownHandler = (e: React.KeyboardEvent) => {
@@ -138,116 +142,144 @@ export default function TemplateEditor({
 		return <Leaf {...props} />
 	}, [])
 
+	const insertEmoji = (emojiData: BaseEmoji) => {
+		editor.insertText(emojiData.native)
+		ReactEditor.focus(editor)
+	}
+
 	return (
-		<div styleName="answer-editor">
-			<form
-				styleName="answer-editor-container"
-				onSubmit={handleFormSubmit}
-				ref={form}
-			>
-				<div>
-					<div styleName="answer-btns-format-container">
-						<div styleName="answer-btns-format">
+		<>
+			<Picker
+				showPreview={false}
+				showSkinTones={false}
+				onSelect={(e: BaseEmoji) => insertEmoji(e)}
+				set="apple"
+				theme="dark"
+				style={{
+                    opacity: showEmojiPicker ? '1' : '0',
+                    zIndex: showEmojiPicker ? 4 : -1,
+					position: 'absolute',
+					top: '1%',
+					height: '267px',
+					transition: 'opacity 150ms',
+				}}
+				ref={emojiPicker}
+			/>
+			<div styleName="answer-editor">
+				<form
+					styleName="answer-editor-container"
+					onSubmit={handleFormSubmit}
+					ref={form}
+				>
+					<div>
+						<div styleName="answer-btns-format-container">
+							<div styleName="answer-btns-format">
+								<button
+									title="Bold"
+									type="button"
+									onClick={(e: React.MouseEvent) => {
+										e.preventDefault()
+										CustomEditor.toggleBoldMark(editor)
+									}}
+								>
+									<i className="material-icons">format_bold</i>
+								</button>
+								<button
+									title="Italic"
+									type="button"
+									onClick={(e: React.MouseEvent) => {
+										e.preventDefault()
+										CustomEditor.toggleItalicMark(editor)
+									}}
+								>
+									<i className="material-icons">format_italic</i>
+								</button>
+								<button
+									title="Underline"
+									type="button"
+									onClick={(e: React.MouseEvent) => {
+										e.preventDefault()
+										CustomEditor.toggleUnderlineMark(editor)
+									}}
+								>
+									<i className="material-icons">format_underlined</i>
+								</button>
+							</div>
 							<button
-								title="Bold"
 								type="button"
-								onClick={(e: React.MouseEvent) => {
-									e.preventDefault()
-									CustomEditor.toggleBoldMark(editor)
-								}}
+								onClick={() => setShowEmojiPicker(!showEmojiPicker)}
 							>
-								<i className="material-icons">format_bold</i>
-							</button>
-							<button
-								title="Italic"
-								type="button"
-								onClick={(e: React.MouseEvent) => {
-									e.preventDefault()
-									CustomEditor.toggleItalicMark(editor)
-								}}
-							>
-								<i className="material-icons">format_italic</i>
-							</button>
-							<button
-								title="Underline"
-								type="button"
-								onClick={(e: React.MouseEvent) => {
-									e.preventDefault()
-									CustomEditor.toggleUnderlineMark(editor)
-								}}
-							>
-								<i className="material-icons">format_underlined</i>
+								<i className="material-icons">emoji_emotions</i>
 							</button>
 						</div>
-						<button type="button">
-							<i className="material-icons">emoji_emotions</i>
-						</button>
-					</div>
-					<div styleName="input-answer-container">
-						<div styleName="input-answer-inner-container">
-							<div>
-								<Slate
-									editor={editor}
-									value={editorVal}
-									onChange={handleEditorChange}
-								>
-									<Editable
-										placeholder={lang['InputAnswerPlaceholder']}
-										renderLeaf={renderLeaf}
-										onKeyDown={editorKeyDownHandler}
-										autoComplete="off"
-										spellCheck="false"
-										autoFocus={true}
-										data-value={answer}
-										data-name="ans-msg"
-										styleName="input-answer tq-scrollbar"
-									/>
-								</Slate>
+						<div styleName="input-answer-container">
+							<div styleName="input-answer-inner-container">
+								<div>
+									<Slate
+										editor={editor}
+										value={editorVal}
+										onChange={handleEditorChange}
+									>
+										<Editable
+											placeholder={lang['InputAnswerPlaceholder']}
+											renderLeaf={renderLeaf}
+											onKeyDown={editorKeyDownHandler}
+											autoComplete="off"
+											spellCheck="false"
+											autoFocus={true}
+											data-value={answer}
+											data-name="ans-msg"
+											styleName="input-answer tq-scrollbar"
+										/>
+									</Slate>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<div styleName="answer-options-container">
-					<div styleName="answer-options tq-scrollbar">
-						<button type="button" onClick={toggleOptSwipe} id="text">
-							<img src={textIcon} alt="text icon" />
-						</button>
-						<button type="button" onClick={toggleOptSwipe} id="bg-colors">
-							S
-						</button>
-						<button type="button" onClick={toggleOptSwipe} id="labels">
-							P
-						</button>
-						<button type="button" onClick={toggleOptSwipe}>
-							M
-						</button>
-						<button type="button" onClick={toggleOptSwipe}>
-							R
-						</button>
-					</div>
-				</div>
-				<div
-					ref={optsSwipe}
-					styleName="answer-opts-menu"
-					className="opts-swipe_inactv"
-				>
-					<div
-						style={{
-							height: optsVisibility.bgColorsOptShown ? '100%' : '0',
-						}}
-					>
-						<BgColors templateQuestionContainer={templateQuestionContainer!} />
+					<div styleName="answer-options-container">
+						<div styleName="answer-options tq-scrollbar">
+							<button type="button" onClick={toggleOptSwipe} id="text">
+								<img src={textIcon} alt="text icon" />
+							</button>
+							<button type="button" onClick={toggleOptSwipe} id="bg-colors">
+								S
+							</button>
+							<button type="button" onClick={toggleOptSwipe} id="labels">
+								P
+							</button>
+							<button type="button" onClick={toggleOptSwipe}>
+								M
+							</button>
+							<button type="button" onClick={toggleOptSwipe}>
+								R
+							</button>
+						</div>
 					</div>
 					<div
-						style={{
-							height: optsVisibility.labelsOptShown ? '100%' : '0',
-						}}
+						ref={optsSwipe}
+						styleName="answer-opts-menu"
+						className="opts-swipe_inactv"
 					>
-						<Labels label={label.current!} setShowLabel={setShowLabel} />
+						<div
+							style={{
+								height: optsVisibility.bgColorsOptShown ? '100%' : '0',
+							}}
+						>
+							<BgColors
+								templateQuestionContainer={templateQuestionContainer!}
+							/>
+						</div>
+						<div
+							style={{
+								height: optsVisibility.labelsOptShown ? '100%' : '0',
+							}}
+						>
+							<Labels label={label.current!} setShowLabel={setShowLabel} />
+						</div>
 					</div>
-				</div>
-			</form>
-		</div>
+				</form>
+			</div>
+		</>
 	)
 }
 
