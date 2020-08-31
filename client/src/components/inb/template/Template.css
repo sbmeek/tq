@@ -61,8 +61,8 @@
 	width: 36px;
     border-radius: 10px;
     font-size: 1.3rem;
-	background: var(--tq-input-placeholder);
-	transition: opacity 250ms, height 100ms;
+    background: var(--tq-gray-00);
+    transition: opacity 250ms, height 100ms;
 }
 
 .remove-label-box{
@@ -78,7 +78,7 @@
     border-radius: 8px;
     color: #fff;
     background: rgb(245, 46, 46);
-    box-shadow: 0 0 3px 1px#000;
+    box-shadow: 0 0 2px 0.1px #000;
     opacity: 0;
     transition: opacity 150ms;
 	font-size: .8em;
