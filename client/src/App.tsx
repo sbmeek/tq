@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useEffect, useContext } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { useSelector, RootStateOrAny } from 'react-redux'
 import './App.css'
@@ -18,7 +18,6 @@ import Menu from 'components/partials/menu/Menu'
 import Terms from 'components/terms/Terms'
 
 export default function App() {
-	const [isUserNew, setIsUserNew] = useState(false)
 	const { isStatus500, isLoaded, user } = useSelector(
 		(store: RootStateOrAny) => store.auth
 	)
@@ -29,15 +28,6 @@ export default function App() {
             socket.emit('tq:init-user', { username: user.username })
 	}, [user, socket])
 
-	useEffect(() => {
-		setTimeout(() => {
-			if (!localStorage.getItem('sbm-tq-ft')) {
-				setIsUserNew(true)
-				localStorage.setItem('sbm-tq-ft', '1')
-			}
-		}, 1000)
-	}, [])
-
 	if (!isStatus500) {
 		if (!isLoaded) {
 			return <Loader />
@@ -46,7 +36,7 @@ export default function App() {
 				<>
 					<Router>
 						<Route path="/">
-							<Menu isUserNew={isUserNew} />
+							<Menu />
 						</Route>
 						<Switch>
 							<UnauthRoute

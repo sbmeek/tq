@@ -20,7 +20,7 @@
 .container-menu,
 .sidebar {
 	height: 100%;
-    max-height: 1vh;
+    max-height: 0.001vh;
 }
 
 .container-menu {

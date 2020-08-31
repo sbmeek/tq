@@ -6,17 +6,24 @@ import RegisterModal from '../registerModal/RegisterModal'
 import './Menu.css'
 import { Link } from 'react-router-dom'
 
-export default function Menu<T extends { isUserNew: boolean }>({
-	isUserNew,
-}: T) {
+export default function Menu() {
+	const [isUserNew, setIsUserNew] = useState(true)
+	const [showNewUserModal, setShowNewUserModal] = useState(false)
 	const [showMenu, setShowMenu] = useState(false)
 	const [enoughSpace, setEnoughSpace] = useState(false)
-	const [showNewUserModal, setShowNewUserModal] = useState(false)
 	const [showRegisterModal, setShowRegisterModal] = useState(false)
 
 	useEffect(() => {
-		setShowNewUserModal(isUserNew)
-	}, [isUserNew])
+		setTimeout(() => {
+			if (!localStorage.getItem('sbm-tq-ft')) {
+                setIsUserNew(true)
+                setShowNewUserModal(true)
+				localStorage.setItem('sbm-tq-ft', '1')
+			}else{
+                setIsUserNew(false)
+            }
+		}, 1000)
+	}, [])
 
 	useEffect(() => {
 		handleSpace()
@@ -98,7 +105,7 @@ export default function Menu<T extends { isUserNew: boolean }>({
 					</div>
 				</div>
 			</div>
-			<FirstTimeHelpBox active={showNewUserModal} />
+			{isUserNew && <FirstTimeHelpBox active={showNewUserModal} />}
 			<RegisterModal
 				opened={showRegisterModal}
 				setOpened={setShowRegisterModal}
