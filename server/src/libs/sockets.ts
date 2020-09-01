@@ -7,6 +7,10 @@ import { sendMessage, answerMessage } from './message.utils'
 export const onlineUsers = new Map<string, Set<string>>()
 let conns = 0
 
+/**
+ * Adds an user to the online users list.
+ * Or a connection to an user's list.
+ */
 export const addUser = (username: string, socketId: string) => {
 	onlineUsers.has(username)
 		? onlineUsers.get(username)?.add(socketId)
@@ -14,6 +18,10 @@ export const addUser = (username: string, socketId: string) => {
 	console.log(onlineUsers)
 }
 
+/**
+ * Removes an user from the online users list. 
+ * Or a connection from an user's list.
+ */
 export const removeUser = (username: string, socketId: string) => {
 	if (onlineUsers.has(username)) {
 		onlineUsers.get(username)!.delete(socketId)
@@ -47,7 +55,7 @@ io.on('connection', async (socket) => {
 	socket.on('disconnect', () => {
 		conns--
 		console.log('\x1b[31m%s\x1b[0m', `Disconnection | Socket ID: ${socket.id}`)
-        console.log(`Connections: ${conns}`)
+		console.log(`Connections: ${conns}`)
 		removeUser(socket.handshake.query.username, socket.id)
 	})
 })

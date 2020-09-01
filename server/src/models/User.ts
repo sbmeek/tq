@@ -2,8 +2,8 @@ import { Schema, Document, model } from 'mongoose';
 import bcrypt from 'bcrypt';
 
 type uSchemaType = {
-    compareKey: Function;
-    hashKey: Function;
+    compareKeyOrPwd: CallableFunction;
+    hashKeyOrPwd: CallableFunction;
 }
 
 export interface IMsg { 
@@ -16,10 +16,12 @@ export interface IMsg {
 export interface IUser extends Document, uSchemaType{
     username: string;
     enteredname: string;
-    key: string;
+    isPermanentAccount: boolean;
+    keyOrPwd: string;
+    email?: string;
     createdAt: Date;
-    willExpireAt: Date;
-    expired: boolean;
+    willExpireAt?: Date;
+    expired?: boolean;
     messages: IMsg[];
     _doc?: any;
 }
@@ -42,35 +44,31 @@ const uSchema = new Schema({
 		type: String,
 		required: true,
 		unique: true,
-	},
-	key: {
-		type: String,
-		required: true,
-	},
+    },
+    email: {
+        type: String,
+        unique: true
+    },
+    isPermanentAccount:{ type: Boolean },
+    keyOrPwd: { type: String },
 	createdAt: {
 		type: Date,
 		default: new Date(),
 		required: true,
 	},
-	willExpireAt: {
-		type: Date,
-		required: true,
-	},
-	expired: {
-		type: Boolean,
-		required: true,
-	},
+	willExpireAt: { type: Date },
+	expired: { type: Boolean },
 	messages: [msgSchema],
 })
 
-uSchema.methods.compareKey = async (DBkey: string, LSkey: string) => {
-	return await bcrypt.compare(DBkey, LSkey)
+uSchema.methods.compareKey = async (DBKeyOrPwd: string, KeyOrPwd: string) => {
+	return await bcrypt.compare(DBKeyOrPwd, KeyOrPwd)
 }
 
-uSchema.methods.hashKey = async (key: string) => {
+uSchema.methods.hashKeyOrPwd = async (keyOrPwd: string) => {
 	try {
 		const salt = await bcrypt.genSalt(10)
-		const hash = await bcrypt.hash(key, salt)
+		const hash = await bcrypt.hash(keyOrPwd, salt)
 		return hash
 	} catch (error) {
 		console.error(error)

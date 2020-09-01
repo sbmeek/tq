@@ -1,24 +1,21 @@
-import Agenda from 'agenda';
-import User from 'models/User';
+import Agenda from 'agenda'
+import User from 'models/User'
 const instance = require('../database').instance
 
 interface IExpired {
-    Expired?: { username: string }, 
-    [index: number]: any 
+	Expired?: { username: string }
+	[index: number]: any
 }
 
 export const checkExpirations = async () => {
 	const uList = await User.find()
 	uList.length > 0
-		? console.log(
-				'\x1b[33m%s\x1b[0m',
-				`\nValidating users expirations (${new Date().toISOString()})`
-		  )
+		? console.log('\x1b[33m%s\x1b[0m', `\nValidating users expirations (${new Date().toISOString()})`)
 		: 0
-	let expired: IExpired = {};
-	let notExpired: IExpired = {};
+	const expired: IExpired = {}
+	const notExpired: IExpired = {}
 	uList.forEach(async (user, idx) => {
-		let expireDate = new Date(user.willExpireAt)
+		const expireDate = new Date(user.willExpireAt as Date)
 		if (Date.now() >= expireDate.getTime()) {
 			expired[idx] = { Expired: user.username }
 			user.expired = true
@@ -61,14 +58,15 @@ export const setExpirationDate = async (_id: string) => {
 }
 
 export const getExpirationDate = () => {
-	let today = new Date()
-	let expireDate = new Date()
+	const today = new Date()
+	const expireDate = new Date()
 	expireDate.setDate(today.getDate() + 4)
 	expireDate.setHours(0, 0, 0, 0)
 	return expireDate
 }
 
-//\t Define agenda and job
+//\ t Define agenda and job
+// And check temp users expirations
 const agenda = new Agenda({ mongo: instance })
 agenda.define(
 	'set expired',

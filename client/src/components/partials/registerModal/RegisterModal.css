@@ -93,7 +93,7 @@
 
 .input {
 	background: var(--tq-gray-01);
-	width: 306px;
+	width: 93%;
 	height: 47px;
 	border-radius: 20px;
 	margin-bottom: 14px;
@@ -120,10 +120,11 @@ input:focus {
 }
 
 .buttons {
-	width: 561px;
+	width: 95%;
 	height: 60px;
 	display: flex;
-	align-items: center;
+    align-items: center;
+    justify-content: space-around;
 }
 
 .cancel {
@@ -131,11 +132,10 @@ input:focus {
 	justify-content: center;
 	align-items: center;
 	background: var(--tq-red-03);
-	width: 157px;
+	width: 45%;
 	height: 42px;
 	color: #fff;
 	border-radius: 25px;
-	margin: 6px;
 	transition: transform 100ms, background 150ms, opacity 150ms;
 	font: normal normal bold 20px/26px Nunito;
 	overflow: hidden;
@@ -167,7 +167,7 @@ input:focus {
 	justify-content: center;
 	align-items: center;
 	background: var(--tq-blue-01);
-	width: 157px;
+	width: 45%;
 	color: #fff;
 	height: 42px;
 	border-radius: 25px;

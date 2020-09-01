@@ -1,7 +1,9 @@
 import { Router, Request, Response } from 'express';
 import passport from 'passport';
 import JWT from 'jsonwebtoken';
+import User from 'models/User'
 import { setExpirationDate } from 'libs/user-expirations';
+import runValidators from 'libs/account-validations'
 const { SESSION_SECRET } = process.env;
 const router = Router();
 
@@ -29,7 +31,7 @@ router.post('/auth', (req: Request, res: Response, next) => {
 	})(req, res, next)
 })
 
-router.get('/logout', (req: any, res, next) => {
+router.get('/logout', (req: Request, res, next) => {
 	passport.authenticate('jwt', { session: false }, (_err, user) => {
 		if (!user) res.json({ authenticated: false, success: false })
 		else {
@@ -53,6 +55,30 @@ router.get('/authenticated', (req, res, next) => {
 			})
 		}
 	})(req, res, next)
+})
+
+router.post('/join', async (req, res) => {
+    try {
+        const { body: data } = req;
+        const validator = await runValidators(data)
+        if(validator.ok){
+            const user = new User({
+                ...data,
+                enteredname: data.username,
+                username: data.username.toLowerCase(),
+                isPermanentAccount: true 
+            });
+            user.keyOrPwd = await user.hashKeyOrPwd(data.pwd);
+            console.log(user)
+            user.save();
+            res.json({ ok: true })
+        }
+        else{
+            res.json({ ...validator })
+        }
+    } catch (error) {
+        console.error(error)
+    }
 })
 
 router.use((_req, res) => {
