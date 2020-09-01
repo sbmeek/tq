@@ -18,6 +18,7 @@ export interface IUser extends Document, uSchemaType{
     enteredname: string;
     isPermanentAccount: boolean;
     keyOrPwd: string;
+    key?: string;
     email?: string;
     createdAt: Date;
     willExpireAt?: Date;
@@ -51,6 +52,7 @@ const uSchema = new Schema({
     },
     isPermanentAccount:{ type: Boolean },
     keyOrPwd: { type: String },
+    key: { type: String },
 	createdAt: {
 		type: Date,
 		default: new Date(),
@@ -61,7 +63,7 @@ const uSchema = new Schema({
 	messages: [msgSchema],
 })
 
-uSchema.methods.compareKey = async (DBKeyOrPwd: string, KeyOrPwd: string) => {
+uSchema.methods.compareKeyOrPwd = async (DBKeyOrPwd: string, KeyOrPwd: string) => {
 	return await bcrypt.compare(DBKeyOrPwd, KeyOrPwd)
 }
 

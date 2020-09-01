@@ -6,7 +6,7 @@ import React, {
 	FormEvent,
 	FocusEvent,
 	KeyboardEvent,
-	ChangeEvent
+	ChangeEvent,
 } from 'react'
 import { useDispatch } from 'react-redux'
 import axios from 'axios'
@@ -18,7 +18,6 @@ import { InitContext, ActionEnum } from '../../global/context/InitContext'
 import arrow from '../../assets/images/icons/icons-main/icon-arrow.svg'
 import Help from '../../assets/images/icons/icons-main/icon-help.svg'
 import info from '../../assets/images/icons/icons-main/icon-info.svg'
-
 
 const A = new Alert()
 
@@ -44,16 +43,13 @@ function Main() {
 	} = useContext(InitContext)
 
 	useEffect(() => {
-		let font = `1rem 'buttons'`
 		;(document as any).fonts.ready.then(function () {
-			
-				setTimeout(() => {
-					dispatchInit({
-						type: ActionEnum.SET_IS_RENDERED,
-						payload: { isRendered: true },
-					})
-				}, 500)
-			
+			setTimeout(() => {
+				dispatchInit({
+					type: ActionEnum.SET_IS_RENDERED,
+					payload: { isRendered: true },
+				})
+			}, 500)
 		})
 	}, [dispatchInit])
 
@@ -72,10 +68,12 @@ function Main() {
 				data.key = localStorage.getItem(data._id) as string
 				socket.emit('tq:login', data)
 			}
-			socket.once('tq:login', async function <T extends {
-				key: string
-				expired: boolean
-			}>(res: T) {
+			socket.once('tq:login', async function <
+				T extends {
+					key: string
+					expired: boolean
+				}
+			>(res: T) {
 				if (res.expired) {
 					A.trigger(`${lang['AlertUserExpired']}.`, {
 						btnHTML:
@@ -105,8 +103,8 @@ function Main() {
 	}
 
 	const formatVal = (val: string): string => {
-		let l = val.length;
-		return (val!.slice(0, l - (l - 20)) as string)
+		let l = val.length
+		return val!.slice(0, l - (l - 20)) as string
 	}
 
 	const handleFieldChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -132,9 +130,15 @@ function Main() {
 				<img styleName="_tq-logo" src={logo} draggable="false" alt="logo" />
 				<div styleName="main-elements-container">
 					<div styleName="field-tq">
-						<div styleName={`${inputMode ? 'input-mode' : ''}`} style={{
-                            boxShadow: `${showSubmitBtn ? 'none' : '0px 3.2px 0px 2.2px #01636d' }`
-                        }} tabIndex={-1}>
+						<div
+							styleName={`${inputMode ? 'input-mode' : ''}`}
+							style={{
+								boxShadow: `${
+									showSubmitBtn ? 'none' : '0px 3.2px 0px 2.2px #01636d'
+								}`,
+							}}
+							tabIndex={-1}
+						>
 							<textarea
 								value={username}
 								id="usrTQ"
@@ -149,24 +153,24 @@ function Main() {
 								spellCheck="false"
 								autoComplete="off"
 								maxLength={20}
-								placeholder={!inputMode ? lang['InputPlaceholder'] : ""}
+								placeholder={!inputMode ? lang['InputPlaceholder'] : ''}
 							></textarea>
 							{showSubmitBtn && (
 								<button type="submit" styleName="main-btn">
-									<img src={arrow} alt="arrow"/>
+									<img src={arrow} alt="arrow" />
 								</button>
 							)}
 						</div>
 						<div>
 							<button type="button" styleName="_btn-tq">
 								{lang['BtnInfo']}
-								
-								<img src={info} alt="arrow"/>
+
+								<img src={info} alt="arrow" />
 							</button>
 							<button type="button" styleName="_btn-tq">
 								{lang['BtnHelp']}
-							
-								<img src={Help} alt="arrow"/>
+
+								<img src={Help} alt="arrow" />
 							</button>
 						</div>
 					</div>

@@ -36,10 +36,12 @@ passport.use(
 			passwordField: 'tqpwd',
 		},
 		async (tquser: string, tqpwd: string, done: CallableFunction) => {
-			tquser = tquser.toLowerCase()
+            tquser = tquser.toLowerCase()
+            console.log(tqpwd)
 			try {
-				const user = (await User.findOne({ username: tquser })) as IUser
-				if (await user.compareKeyOrPwd(user.keyOrPwd, tqpwd)) {
+                const user = (await User.findOne({ username: tquser })) as IUser
+                console.log(await user.compareKeyOrPwd(user.keyOrPwd || user.key, tqpwd))
+				if (await user.compareKeyOrPwd(user.keyOrPwd || user.key, tqpwd)) {
 					done(null, user)
 				} else {
 					done(null, false)
@@ -60,7 +62,7 @@ export const userExists = async (data: IUser, socket: Socket) => {
 
 export const userLogin = async (data: IUser & { key: string }, socket: Socket) => {
 	const user = (await User.findById(data._id)) as IUser
-	user.keyOrPwd = data.key
+	user.key = user.keyOrPwd = data.key
 	if (!user.expired) {
 		socket.emit('tq:login', user)
 		addUser(user.username, socket.id)
