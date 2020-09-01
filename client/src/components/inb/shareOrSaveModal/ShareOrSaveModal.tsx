@@ -1,13 +1,13 @@
 import React, { useState, useEffect, MouseEvent } from 'react'
 import './ShareOrSaveModal.css'
 import { useHistory } from 'react-router'
-import whatsapp from 'assets/images/share-icons/whatsapp.svg'
-import facebook from 'assets/images/share-icons/facebook.svg'
-import instagram from 'assets/images/share-icons/instagram.svg'
-import youtube from 'assets/images/share-icons/youtube.svg'
-import share from 'assets/images/share-icons/share.svg'
-import other from 'assets/images/share-icons/other.svg'
-import descargar from 'assets/images/share-icons/descargar.svg'
+import whatsapp from 'assets/images/icons/share-icons/whatsapp.svg'
+import facebook from 'assets/images/icons/share-icons/facebook.svg'
+import instagram from 'assets/images/icons/share-icons/instagram.svg'
+import youtube from 'assets/images/icons/share-icons/youtube.svg'
+import share from 'assets/images/icons/share-icons/share.svg'
+import other from 'assets/images/icons/share-icons/other.svg'
+import descargar from 'assets/images/icons/share-icons/descargar.svg'
 
 export default function ShareOrSaveModal<
 	T extends {

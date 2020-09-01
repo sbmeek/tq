@@ -139,6 +139,10 @@
 	box-shadow: 0px 5.4px #01636d;
     cursor: pointer;
 }
+.main-btn > img{
+	width: 24px;
+	margin: -4px;
+}
 
 .field-tq>div:nth-child(2) {
 	margin-top: 15px;
@@ -172,14 +176,8 @@
 	transition: ease-in 0.22s;
 }
 
-._btn-tq > i{
+._btn-tq > img{
 	margin-left: 2px;
+	width: 14px;
 }
 
-button,
-button > i {
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-}

@@ -3,7 +3,8 @@ import './Signup.css'
 import Axios from 'axios'
 import { Link } from 'react-router-dom'
 import { InitContext } from 'global/context/InitContext'
-
+import account from 'assets/images/icons/share-icons/icon-account.svg'
+import x from 'assets/images/icons/share-icons/icon-x.svg'
 export default function Signup() {
     const [fields, setFields] = useState({})
     const { AuthModal: { Signup: lang } } = useContext(InitContext).state.lang
@@ -63,12 +64,12 @@ export default function Signup() {
 				<div styleName="buttons">
 					<button styleName="cancel">
 						<span>{lang['BtnCancel']}</span>
-						<span>X</span>
+						<img src={x} alt="cancel" />
 					</button>
 
 					<button styleName="crear">
 						<span>{lang['BtnCreateAccount']}</span>
-						<span>⇨</span>
+						<img src={account} alt="account" />
 					</button>
 				</div>
                 <Link to="/terms" styleName="terms">{lang['TermsNConditions']}</Link>

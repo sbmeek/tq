@@ -15,6 +15,10 @@ import logo from '../../assets/images/ltqrNEW.png'
 import './Main-idx.css'
 import { getAuthInfoAction } from '../../global/ducks/authDucks'
 import { InitContext, ActionEnum } from '../../global/context/InitContext'
+import arrow from '../../assets/images/icons/icons-main/icon-arrow.svg'
+import Help from '../../assets/images/icons/icons-main/icon-help.svg'
+import info from '../../assets/images/icons/icons-main/icon-info.svg'
+
 
 const A = new Alert()
 
@@ -40,17 +44,16 @@ function Main() {
 	} = useContext(InitContext)
 
 	useEffect(() => {
-		let font = `1rem 'Material Icons'`
+		let font = `1rem 'buttons'`
 		;(document as any).fonts.ready.then(function () {
-			if ((document as any).fonts.check(font)) {
-				tqField.current!.style.fontFamily = `'Nunito', sans-serif`
+			
 				setTimeout(() => {
 					dispatchInit({
 						type: ActionEnum.SET_IS_RENDERED,
 						payload: { isRendered: true },
 					})
 				}, 500)
-			}
+			
 		})
 	}, [dispatchInit])
 
@@ -150,18 +153,20 @@ function Main() {
 							></textarea>
 							{showSubmitBtn && (
 								<button type="submit" styleName="main-btn">
-									{'>'}
+									<img src={arrow} alt="arrow"/>
 								</button>
 							)}
 						</div>
 						<div>
 							<button type="button" styleName="_btn-tq">
 								{lang['BtnInfo']}
-								<i className="material-icons">info</i>
+								
+								<img src={info} alt="arrow"/>
 							</button>
 							<button type="button" styleName="_btn-tq">
 								{lang['BtnHelp']}
-								<i className="material-icons">help</i>
+							
+								<img src={Help} alt="arrow"/>
 							</button>
 						</div>
 					</div>

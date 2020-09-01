@@ -2,6 +2,8 @@ import React, { useState, useContext } from 'react'
 import './Login.css'
 import Axios from 'axios'
 import { InitContext } from 'global/context/InitContext'
+import account from 'assets/images/icons/share-icons/icon-account.svg'
+import x from 'assets/images/icons/share-icons/icon-x.svg'
 
 export default function Login() {
     
@@ -49,12 +51,12 @@ export default function Login() {
 				<div styleName="btns-container">
 					<button styleName="btn-cancel">
 						<span>{lang['BtnCancel']}</span>
-						<span>X</span>
+						<img src={x} alt="cancel" />
 					</button>
 
 					<button styleName="btn-login">
 						<span>{lang['BtnLogin']}</span>
-						<span>⇨</span>
+						<img src={account} alt="account" />
 					</button>
 				</div>
 			</form>

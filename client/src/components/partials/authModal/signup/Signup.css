@@ -51,17 +51,18 @@
 	transition: transform 150ms ease-out;
 }
 
-.cancel > span:nth-child(2) {
+.cancel > img {
 	position: absolute;
 	transition: transform 150ms ease-out, opacity 200ms;
 	opacity: 0;
+	width: 22px;
 }
 
 .cancel:hover > span:nth-child(1) {
 	transform: translateX(120px);
 }
 
-.cancel:hover > span:nth-child(2) {
+.cancel:hover > img{
 	transform: translateX(0);
 	opacity: 1;
 }
@@ -86,7 +87,7 @@
 	transition: transform 150ms ease-out;
 }
 
-.crear > span:nth-child(2) {
+.crear > img {
 	position: absolute;
 	transition: transform 150ms ease-out, opacity 200ms;
 	opacity: 0;
@@ -96,7 +97,7 @@
 	transform: translateX(130px);
 }
 
-.crear:hover > span:nth-child(2) {
+.crear:hover >img {
 	transform: translateX(0);
 	opacity: 1;
 }

@@ -1,8 +1,8 @@
 import React, { useState, useContext } from 'react'
 import './AuthModal.css'
 import Signup from './signup/Signup'
-import facebookLogo from 'assets/images/share-icons/facebook.svg'
-import googleLogo from 'assets/images/share-icons/google.svg'
+import facebookLogo from 'assets/images/icons/share-icons/facebook.svg'
+import googleLogo from 'assets/images/icons/share-icons/google.svg'
 import Login from './login/Login'
 import { InitContext } from 'global/context/InitContext'
 

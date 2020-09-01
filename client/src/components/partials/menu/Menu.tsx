@@ -5,7 +5,9 @@ import FirstTimeHelpBox from '../firstTimeHelpBox/FirstTimeHelpBox'
 import RegisterModal from '../authModal/AuthModal'
 import './Menu.css'
 import { Link } from 'react-router-dom'
-
+import home from '../../../assets/images/icons/icons-menu/icon-home.svg'
+import cloud from '../../../assets/images/icons/icons-menu/icon-cloud.svg'
+import account from '../../../assets/images/icons/icons-menu/icon-account.svg'
 export default function Menu() {
 	const [isUserNew, setIsUserNew] = useState(true)
 	const [showNewUserModal, setShowNewUserModal] = useState(false)
@@ -72,7 +74,7 @@ export default function Menu() {
 						<div styleName="btn-container">
 							<Link to="/Link">
 								<button styleName="sidebar-button">
-									<i>i</i>
+									<img src={home} alt="home"/>
 									<span>Inicio</span>
 								</button>
 							</Link>
@@ -80,14 +82,14 @@ export default function Menu() {
 						<div styleName="btn-container">
 							<Link to="/messages">
 								<button styleName="sidebar-button">
-									<i>i</i>
+								<img src={cloud} alt="home"/>
 									<span>Bandeja</span>
 								</button>
 							</Link>
 						</div>
 						<div styleName="btn-container">
 							<button styleName="sidebar-button" onClick={handleRegisterClick}>
-								<i>i</i>
+							<img src={account} alt="home"/>
 								<span>Auth</span>
 							</button>
 						</div>
