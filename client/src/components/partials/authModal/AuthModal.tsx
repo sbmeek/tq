@@ -57,7 +57,6 @@ export default function AuthModal<
 											<hr></hr>{lang['LoginWith'].replace('{OAuth}', 'Facebook')}
 										</span>
 									</button>
-									<div styleName="sombra-buttons"></div>
 								</div>
 							</div>
 						</div>

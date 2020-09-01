@@ -107,7 +107,8 @@
 	display: flex;
 	align-items: center;
 	flex-direction: column;
-	margin: 5px;
+    margin: 5px;
+    position: relative;
 }
 
 .google {
@@ -202,11 +203,13 @@
 	background: #0a5aa1;
 }
 
-.sombra-buttons {
-	background-color: #00000021;
-	width: 163px;
-	height: 9px;
-	margin: 22px;
-	border-radius: 50%;
-	margin-bottom: -41px;
+.buttons-sign::after{
+    content: '';
+    background-color: var(--tq-gray-03);
+    width: 155px;
+    height: 9px;
+    border-radius: 50%;
+    position: absolute;
+    top: 125%;
+    left: 35px;
 }
