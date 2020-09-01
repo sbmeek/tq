@@ -27,5 +27,29 @@ export default {
     },
     TemplateEditor: {
         InputAnswerPlaceholder: "Type your answer..."
+    },
+    AuthModal: {
+        FormSignupTitle: "Create your account",
+        FormLoginTitle: "Log in",
+        LoginWith: "Sign in with {OAuth}",
+        FormSignupFooter: "Already have an account?",
+        FormSignupFooterToggler: "Sign up",
+        FormLoginFooter: "Not registered yet?",
+        FormLoginFooterToggler: "Log in",
+        Signup: {
+            Username: "Username",
+            Email: "Email address",
+            Pwd: "Password",
+            ConfirmPwd: "Confirm",
+            BtnCreateAccount: "Create account",
+            BtnCancel: "Cancel",
+            TermsNConditions: "Terms and conditions"
+        },
+        Login: {
+            UsernameOrEmail: "Username or email",
+            Pwd: "Password",
+            BtnLogin: "Log in",
+            BtnCancel: "Cancel"
+        }
     }
 }

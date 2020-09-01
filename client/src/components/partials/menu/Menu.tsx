@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import flecha from 'assets/images/flecha-roja.png'
 import menulog from 'assets/images/menu-logo.png'
 import FirstTimeHelpBox from '../firstTimeHelpBox/FirstTimeHelpBox'
-import RegisterModal from '../registerModal/RegisterModal'
+import RegisterModal from '../authModal/AuthModal'
 import './Menu.css'
 import { Link } from 'react-router-dom'
 
@@ -88,7 +88,7 @@ export default function Menu() {
 						<div styleName="btn-container">
 							<button styleName="sidebar-button" onClick={handleRegisterClick}>
 								<i>i</i>
-								<span>Registrar</span>
+								<span>Auth</span>
 							</button>
 						</div>
 						<div styleName="btn-container">

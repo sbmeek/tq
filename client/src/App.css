@@ -47,7 +47,6 @@ input[type='search'] {
 	appearance: none;
 	-moz-appearance: none;
 	-webkit-appearance: none;
-	box-shadow: none;
 }
 
 body {
@@ -79,8 +78,7 @@ body {
     z-index: 0;
 }
 
-button:focus,
-input[type="button"] {
+:focus{
     outline: none !important;
 }
 
