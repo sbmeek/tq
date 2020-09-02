@@ -1,36 +1,32 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import styles from './AuthTester.css'
 import logo from 'assets/images/ltqrNEW.png'
 import { LoaderEye } from 'components/partials/loader/Loader'
 import Axios from 'axios'
+import { InitContext, ActionEnum } from 'global/context/InitContext'
 
 let timerID: NodeJS.Timeout
 
-export default function ValdTester<
-	T extends {
-		setIsTester: React.Dispatch<React.SetStateAction<boolean>>
-	}
->({ setIsTester }: T) {
+export const checkTst = async (val: string | 'tq_check_tst_init') => {
+    const res = await Axios.post('/user/tst_check', {
+        enteredKey: val,
+    })
+    return res.data.isTester;
+}
+
+export default function ValdTester() {
     const [isLoading, setIsLoading] = useState(false)
-    const [isCodeValid, setIsCodeValid] = useState(false);
-    
-    useEffect(() => {
-        setIsTester(isCodeValid)
-    }, [isCodeValid, setIsTester])
+    const { dispatch } = useContext(InitContext)
 
     useEffect(() => {
         (async () => {
             const isTester = await checkTst('tq_check_tst_init');
-            setIsCodeValid(isTester);
+            dispatch({
+                type: ActionEnum.SET_IS_TESTER,
+                payload: { isTester },
+            })
         })();
-    }, [])
-
-    const checkTst = async (val: string | 'tq_check_tst_init') => {
-        const res = await Axios.post('/user/tst_check', {
-            enteredKey: val,
-        })
-        return res.data.isTester;
-    }
+    }, [dispatch])
 
 	const handleKeyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const targetElement = e.target as HTMLInputElement
@@ -41,10 +37,17 @@ export default function ValdTester<
 				setTimeout(async () => {
                     const isTester = await checkTst(targetElement.value);
 					if (!isTester) {
-						targetElement.parentElement!.classList.add(styles['errored'])
+                        targetElement.parentElement!.classList.add(styles['errored'])
+                        dispatch({
+                            type: ActionEnum.SET_IS_TESTER,
+                            payload: { isTester: false },
+                        })
                     } 
                     else {
-						setIsCodeValid(true)
+                        dispatch({
+                            type: ActionEnum.SET_IS_TESTER,
+                            payload: { isTester: true },
+                        })
 					}
 					setIsLoading(false)
 				}, 800)

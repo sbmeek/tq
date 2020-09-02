@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useState } from 'react'
+import React, { useEffect, useContext } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { useSelector, RootStateOrAny } from 'react-redux'
 import './App.css'
@@ -24,9 +24,8 @@ export default function App() {
 	const { isStatus500, isLoaded, user } = useSelector(
 		(store: RootStateOrAny) => store.auth
 	)
-	let { socket } = useContext(InitContext).state
-	const testing = true //process.env.NODE_ENV === 'production'
-	const [isTester, setIsTester] = useState(false)
+	let { socket, isTester } = useContext(InitContext).state
+	const testing = true
 
 	useEffect(() => {
 		if (user !== undefined)
@@ -42,7 +41,7 @@ export default function App() {
 					{!testing ? (
 						<RqqtComp />
 					) : !isTester ? (
-						<AuthTester setIsTester={setIsTester} />
+						<AuthTester />
 					) : (
 						<RqqtComp />
 					)}

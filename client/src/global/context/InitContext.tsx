@@ -2,11 +2,13 @@ import React, { createContext, useReducer, useEffect, ReactNode } from 'react'
 import io from 'socket.io-client'
 import en from '../../lang/en'
 import es from '../../lang/es'
+import { checkTst } from 'AuthTester'
 
 interface IContextState {
 	socket: SocketIOClientStatic['Socket']
 	isRendered: boolean
-	lang: object
+    lang: object
+    isTester: boolean
 }
 
 interface IContextAction {
@@ -17,13 +19,15 @@ interface IContextAction {
 const initialState: IContextState = {
 	socket: io(),
 	isRendered: false,
-	lang: en,
+    lang: en,
+    isTester: false
 }
 
 export enum ActionEnum {
 	SET_IS_RENDERED = 'SET_IS_RENDERED',
     SET_LANG = 'SET_LANG',
-    SET_SOCKET = 'SET_SOCKET'
+    SET_SOCKET = 'SET_SOCKET',
+    SET_IS_TESTER = 'SET_IS_TESTER'
 }
 
 export const InitContext = createContext<any>({ state: initialState })
@@ -44,7 +48,12 @@ function reducer(state: IContextState, action: IContextAction) {
 			return {
 				...state,
 				lang: action.payload.lang,
-			}
+            }
+        case ActionEnum.SET_IS_TESTER:
+            return {
+                ...state,
+                isTester: action.payload.isTester
+            }
 		default:
 			return state
 	}
@@ -58,6 +67,16 @@ export default function <T extends { children: ReactNode }>({ children }: T) {
 			type: ActionEnum.SET_LANG,
 			payload: { lang: gsetLang() },
 		})
+    }, [])
+    
+    useEffect(() => {
+        (async () => {
+            dispatch({
+                type: ActionEnum.SET_IS_TESTER,
+                payload: { isTester: await checkTst('tq:init-user') },
+            })
+        })();
+		
 	}, [])
 
 	const gsetLang = () => {

@@ -6,6 +6,7 @@ import Slider from './Slider'
 import Modal from './Modal'
 import './Link-idx.css'
 import copy from 'assets/images/icons/icons-inbox/icon-link.svg'
+import tqIcon from 'assets/images/msg/PerfilTQ.png'
 
 export default function LinkIdx() {
 	const inputLink = useRef<HTMLInputElement>(null);
@@ -103,7 +104,7 @@ export default function LinkIdx() {
 					<Link to="/messages" styleName="a_btn-tq">
 						<button type="button" styleName="_btn-tq">
 							{lang['BtnInbox']}
-							<i className="material-icons right">inbox</i>
+							<img src={tqIcon} alt="logo"/>
 						</button>
 					</Link>
 				</div>

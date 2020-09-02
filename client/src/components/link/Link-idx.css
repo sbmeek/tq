@@ -77,6 +77,13 @@
 	transition: ease-in 0.22s;
 	cursor: pointer;
 }
+._btn-tq>img{
+	width: 33px;
+	margin-left: 7px;
+}
+._btn-tq:hover>img{
+	filter: invert(30%);
+}
 
 .col-inner-container {
 	position: relative;
