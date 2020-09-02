@@ -8,24 +8,26 @@ import { Link } from 'react-router-dom'
 import home from '../../../assets/images/icons/icons-menu/icon-home.svg'
 import cloud from '../../../assets/images/icons/icons-menu/icon-cloud.svg'
 import account from '../../../assets/images/icons/icons-menu/icon-account.svg'
+import { useSelector, RootStateOrAny } from 'react-redux'
 
 export default function Menu() {
-
 	const [isUserNew, setIsUserNew] = useState(true)
 	const [showNewUserModal, setShowNewUserModal] = useState(false)
 	const [showMenu, setShowMenu] = useState(false)
 	const [enoughSpace, setEnoughSpace] = useState(false)
 	const [showRegisterModal, setShowRegisterModal] = useState(false)
 
+    const { isAuthenticated } = useSelector((state: RootStateOrAny) => state.auth)
+    
 	useEffect(() => {
 		setTimeout(() => {
 			if (!localStorage.getItem('sbm-tq-ft')) {
-                setIsUserNew(true)
-                setShowNewUserModal(true)
+				setIsUserNew(true)
+				setShowNewUserModal(true)
 				localStorage.setItem('sbm-tq-ft', '1')
-			}else{
-                setIsUserNew(false)
-            }
+			} else {
+				setIsUserNew(false)
+			}
 		}, 1000)
 	}, [])
 
@@ -69,14 +71,18 @@ export default function Menu() {
 					<img src={menulog} alt="menu logo" />
 				</button>
 				<div styleName={`sidebar ${showMenu ? 'active' : ''}`}>
-					<div>
+					<div
+						style={{
+							gridTemplateRows: `2.3fr repeat(${isAuthenticated ? '3' : '4'}, 1fr) 5fr`,
+						}}
+					>
 						<div styleName="sidebar-title">
 							<h1>Menu</h1>
 						</div>
 						<div styleName="btn-container">
 							<Link to="/Link">
 								<button styleName="sidebar-button">
-									<img src={home} alt="home"/>
+									<img src={home} alt="home" />
 									<span>Inicio</span>
 								</button>
 							</Link>
@@ -84,17 +90,20 @@ export default function Menu() {
 						<div styleName="btn-container">
 							<Link to="/messages">
 								<button styleName="sidebar-button">
-								<img src={cloud} alt="home"/>
+									<img src={cloud} alt="home" />
 									<span>Bandeja</span>
 								</button>
 							</Link>
 						</div>
-						<div styleName="btn-container">
-							<button styleName="sidebar-button" onClick={handleRegisterClick}>
-							<img src={account} alt="home"/>
-								<span>Auth</span>
-							</button>
-						</div>
+						{
+                            !isAuthenticated &&
+                            <div styleName="btn-container">
+                                <button styleName="sidebar-button" onClick={handleRegisterClick}>
+                                    <img src={account} alt="home" />
+                                    <span>Auth</span>
+                                </button>
+						    </div>
+                        }
 						<div styleName="btn-container">
 							<button styleName="sidebar-button">
 								<i>i</i>
@@ -112,8 +121,8 @@ export default function Menu() {
 			{isUserNew && <FirstTimeHelpBox active={showNewUserModal} />}
 			<RegisterModal
 				opened={showRegisterModal}
-                setOpened={setShowRegisterModal}
-                setShowMenu={setShowMenu}
+				setOpened={setShowRegisterModal}
+				setShowMenu={setShowMenu}
 			/>
 		</div>
 	)

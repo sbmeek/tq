@@ -21,11 +21,13 @@ export default function App() {
 	const { isStatus500, isLoaded, user } = useSelector(
 		(store: RootStateOrAny) => store.auth
 	)
-	let { state: { socket } } = useContext(InitContext)
+	let {
+		state: { socket },
+	} = useContext(InitContext)
 
 	useEffect(() => {
-        if(user !== undefined)
-            socket.emit('tq:init-user', { username: user.username })
+		if (user !== undefined)
+			socket.emit('tq:init-user', { username: user.username })
 	}, [user, socket])
 
 	if (!isStatus500) {
@@ -33,45 +35,43 @@ export default function App() {
 			return <Loader />
 		} else {
 			return (
-				<>
-					<Router>
-						<Route path="/">
-							<Menu />
+				<Router>
+					<Route path="/">
+						<Menu />
+					</Route>
+					<Switch>
+						<UnauthRoute
+							needsRenderTime={window.navigator.onLine}
+							exact
+							path="/"
+							component={Main}
+							redirectTo="/link"
+						/>
+						<AuthRoute
+							path="/messages"
+							component={Inbx}
+							redirectTo="/"
+							needsRenderTime={false}
+						/>
+						<AuthRoute
+							needsRenderTime={true}
+							path="/link"
+							component={UserLink}
+							redirectTo="/"
+						/>
+						<AuthRoute
+							needsRenderTime={false}
+							path="/message"
+							component={TemplateMSG}
+							redirectTo="/"
+						/>
+						<Route path="/terms" component={Terms} />
+						<Route exact path="/:username" component={Msg} />
+						<Route path="*">
+							<Error404 />
 						</Route>
-						<Switch>
-							<UnauthRoute
-								needsRenderTime={window.navigator.onLine}
-								exact
-								path="/"
-								component={Main}
-								redirectTo="/link"
-							/>
-							<AuthRoute
-								path="/messages"
-								component={Inbx}
-								redirectTo="/"
-								needsRenderTime={false}
-							/>
-							<AuthRoute
-								needsRenderTime={true}
-								path="/link"
-								component={UserLink}
-								redirectTo="/"
-							/>
-							<AuthRoute
-								needsRenderTime={false}
-								path="/message"
-								component={TemplateMSG}
-								redirectTo="/"
-							/>
-                            <Route path="/terms" component={Terms}/>
-							<Route exact path="/:username" component={Msg} />
-							<Route path="*">
-								<Error404 />
-							</Route>
-						</Switch>
-					</Router>
-				</>
+					</Switch>
+				</Router>
 			)
 		}
 	} else return <Error500 />
