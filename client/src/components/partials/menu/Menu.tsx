@@ -5,10 +5,13 @@ import FirstTimeHelpBox from '../firstTimeHelpBox/FirstTimeHelpBox'
 import RegisterModal from '../authModal/AuthModal'
 import './Menu.css'
 import { Link } from 'react-router-dom'
-import home from '../../../assets/images/icons/icons-menu/icon-home.svg'
-import cloud from '../../../assets/images/icons/icons-menu/icon-cloud.svg'
-import account from '../../../assets/images/icons/icons-menu/icon-account.svg'
-import { useSelector, RootStateOrAny } from 'react-redux'
+import home from 'assets/images/icons/icons-menu/icon-home.svg'
+import cloud from 'assets/images/icons/icons-menu/icon-cloud.svg'
+import account from 'assets/images/icons/icons-menu/icon-account.svg'
+import tqIcon from 'assets/images/msg/PerfilTQ.png'
+import { useSelector, RootStateOrAny, useDispatch } from 'react-redux'
+import { getAuthInfoAction } from 'global/ducks/authDucks'
+import Axios from 'axios'
 
 export default function Menu() {
 	const [isUserNew, setIsUserNew] = useState(true)
@@ -17,7 +20,8 @@ export default function Menu() {
 	const [enoughSpace, setEnoughSpace] = useState(false)
 	const [showRegisterModal, setShowRegisterModal] = useState(false)
 
-    const { isAuthenticated } = useSelector((state: RootStateOrAny) => state.auth)
+	const { isAuthenticated } = useSelector((state: RootStateOrAny) => state.auth)
+    const dispatch = useDispatch()
     
 	useEffect(() => {
 		setTimeout(() => {
@@ -50,6 +54,14 @@ export default function Menu() {
 		setShowRegisterModal(true)
 	}
 
+	const handleLogoutClick = async () => {
+		const res = await Axios.post('/user/logout')
+		if (res.data.ok) {
+			setShowMenu(false)
+			dispatch(getAuthInfoAction())
+		}
+    }
+
 	return (
 		<div
 			styleName="container-menu"
@@ -71,11 +83,7 @@ export default function Menu() {
 					<img src={menulog} alt="menu logo" />
 				</button>
 				<div styleName={`sidebar ${showMenu ? 'active' : ''}`}>
-					<div
-						style={{
-							gridTemplateRows: `2.3fr repeat(${isAuthenticated ? '3' : '4'}, 1fr) 5fr`,
-						}}
-					>
+					<div>
 						<div styleName="sidebar-title">
 							<h1>Menu</h1>
 						</div>
@@ -95,22 +103,32 @@ export default function Menu() {
 								</button>
 							</Link>
 						</div>
-						{
-                            !isAuthenticated &&
-                            <div styleName="btn-container">
-                                <button styleName="sidebar-button" onClick={handleRegisterClick}>
-                                    <img src={account} alt="home" />
-                                    <span>Auth</span>
-                                </button>
-						    </div>
-                        }
-						<div styleName="btn-container">
-							<button styleName="sidebar-button">
-								<i>i</i>
-								<span>SB Meek</span>
-							</button>
-						</div>
-						<div styleName="terms-container">
+						{!isAuthenticated && (
+							<div styleName="btn-container">
+								<button
+									styleName="sidebar-button"
+									onClick={handleRegisterClick}
+								>
+									<img src={account} alt="home" />
+									<span>Auth</span>
+								</button>
+							</div>
+						)}
+						{isAuthenticated && (
+							<div styleName="btn-container">
+								<button styleName="sidebar-button" onClick={handleLogoutClick}>
+									<img src={account} alt="home" />
+									<span>Log out</span>
+								</button>
+							</div>
+						)}
+						<div styleName="footer-container">
+							<div styleName="btn-container sbmeek-container">
+								<button styleName="sidebar-button sbmeek">
+									<img src={tqIcon} alt="tq-fav" />
+									<span>SB Meek</span>
+								</button>
+							</div>
 							<a href="/terms">
 								<button styleName="btn-terms">Términos y Condiciones</button>
 							</a>

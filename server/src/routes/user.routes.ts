@@ -31,12 +31,12 @@ router.post('/auth', (req: Request, res: Response, next) => {
 	})(req, res, next)
 })
 
-router.get('/logout', (req: Request, res, next) => {
+router.post('/logout', (req: Request, res, next) => {
 	passport.authenticate('jwt', { session: false }, (_err, user) => {
-		if (!user) res.json({ authenticated: false, success: false })
+		if (!user) res.json({ authenticated: false, ok: false })
 		else {
 			req.proc.reset();
-			res.json({ username: '', success: true })
+			res.json({ username: '', ok: true })
 		}
 	})(req, res, next)
 })
