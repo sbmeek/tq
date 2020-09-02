@@ -30,11 +30,16 @@
 	font-family: 'Nunito', sans-serif;
 	text-transform: none;
 	border-radius: 1000px;
-	background-color: #9e0004;
+	background-color:var(--tq-red-00);
 	color: #fff;
 	width: 102px;
 	height: 36px;
+	transition: ease-in-out 0.22s;
 	box-shadow: 0.2px 4px 0px 0px rgb(88, 0, 3);
+}
+._btn-tq:hover {
+	background-color:var(--tq-red-01);
+	transition: ease-in 0.22s;
 }
 .perfil {
 	background-color: #c3c3c321;
