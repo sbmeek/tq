@@ -8,15 +8,17 @@ import x from 'assets/images/icons/share-icons/icon-x.svg'
 import { LoaderEye } from 'components/partials/loader/Loader'
 
 import './Signup.css'
-export default function Signup<T extends { 
-    setShowSignedupComp: React.Dispatch<React.SetStateAction<boolean>> 
-}>({ setShowSignedupComp }: T) {
-
+export default function Signup<
+	T extends {
+		setShowSignedupComp: React.Dispatch<React.SetStateAction<boolean>>
+		setShowLogin: React.Dispatch<React.SetStateAction<boolean>>
+	}
+>({ setShowLogin, setShowSignedupComp }: T) {
 	const [fields, setFields] = useState<{ [key: string]: string }>({})
 	const [focusedFieldId, setFocusedFieldId] = useState('')
 	const [isFocusedFieldLoading, setIsFocusedFieldLoading] = useState(false)
 	const [isFieldErrored, setIsFieldErrored] = useState(false)
-    const [validFields, setValidFields] = useState<{ [key: string]: boolean }>({})
+	const [validFields, setValidFields] = useState<{ [key: string]: boolean }>({})
 
 	const { Signup: lang } = useContext(InitContext).state.lang.AuthModal
 	let timerID: NodeJS.Timeout
@@ -77,16 +79,16 @@ export default function Signup<T extends {
 						isErrored = fields!.pwd !== targetElement.value
 						setIsFieldErrored(isErrored)
 						break
-                }
+				}
 				if (isErrored) {
 					if (validFields[targetElement.id] !== undefined) {
-                        delete validFields[targetElement.id]
-                        setValidFields(validFields)
+						delete validFields[targetElement.id]
+						setValidFields(validFields)
 					}
 					targetElement.setAttribute('data-is-valid', 'false')
 				} else {
 					setFocusedFieldId(document.activeElement!.id || '')
-                    setValidFields({ ...validFields, [targetElement.id]: true })
+					setValidFields({ ...validFields, [targetElement.id]: true })
 					targetElement.setAttribute('data-is-valid', 'true')
 				}
 				setIsFocusedFieldLoading(false)
@@ -99,8 +101,9 @@ export default function Signup<T extends {
 		e.preventDefault()
 		try {
 			const res = await Axios.post('/user/join', fields)
-            const { ok } = res.data
-            setShowSignedupComp(ok as boolean)
+			const { ok } = res.data
+			setShowSignedupComp(ok as boolean)
+			setShowLogin(ok as boolean)
 		} catch (error) {
 			console.error(error)
 		}

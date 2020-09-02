@@ -50,6 +50,11 @@ export default {
                 emailHelpMsg: 'Remember to enter a valid email as we will send you a verification code that way your account will be safer.',
                 pwdHelpMsg: 'The password must have a minimum of 8 characters, at least a capital letter and a lower case one.',
                 cpwdHelpMsg: 'AYDIMIMADRE! Como que la confirmacion y la contraseña no se parecen D:'
+            },
+            Signedup: {
+                title: "You have successfully registered",
+                helpText: "Next step is verify your email address, for that you must log in to your email address account and click the link that we've just sent.",
+                logInBtn: "Log in"
             }
         },
         Login: {

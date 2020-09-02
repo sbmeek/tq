@@ -25,7 +25,7 @@ export default function App() {
 		(store: RootStateOrAny) => store.auth
 	)
 	let { socket, isTester } = useContext(InitContext).state
-	const testing = true
+	const testing = process.env.NODE_ENV === "production"
 
 	useEffect(() => {
 		if (user !== undefined)

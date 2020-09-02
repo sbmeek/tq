@@ -10,9 +10,9 @@ import tqLogo from 'assets/images/ltqrNEW.png'
 
 export default function AuthModal<
 	T extends {
-		opened: boolean;
-        setOpened: React.Dispatch<React.SetStateAction<boolean>>;
-        setShowMenu: React.Dispatch<React.SetStateAction<boolean>>;
+		opened: boolean
+		setOpened: React.Dispatch<React.SetStateAction<boolean>>
+		setShowMenu: React.Dispatch<React.SetStateAction<boolean>>
 	}
 >({ opened, setOpened, setShowMenu }: T) {
 	const { AuthModal: lang } = useContext(InitContext).state.lang
@@ -61,11 +61,14 @@ export default function AuthModal<
 										<Login
 											errMsg={errMsg}
 											setErrMsg={setErrMsg}
-                                            setIsModalOpened={setOpened}
-                                            setShowMenu={setShowMenu}
+											setIsModalOpened={setOpened}
+											setShowMenu={setShowMenu}
 										/>
 									) : (
-										<Signup setShowSignedupComp={setShowSignedupComp} />
+										<Signup
+											setShowSignedupComp={setShowSignedupComp}
+											setShowLogin={setShowLogin}
+										/>
 									)}
 									<div styleName="separador">
 										<hr></hr>
@@ -121,6 +124,8 @@ function Signedup<
 		setShowSignedupComp: React.Dispatch<React.SetStateAction<boolean>>
 	}
 >({ setShowLogin, setShowSignedupComp }: T) {
+	const { Signedup: lang } = useContext(InitContext).state.lang.AuthModal.Signup
+
 	const handleClick = () => {
 		setShowLogin(true)
 		setShowSignedupComp(false)
@@ -130,9 +135,10 @@ function Signedup<
 		<div styleName="signedup-container">
 			<img styleName="tqlogo" src={tqLogo} alt="tq logo" />
 			<div styleName="toggler-container">
-				<h1>Te haz registrado exitosamente</h1>
+				<h1>{lang['title']}</h1>
+				<p>{lang['helpText']}</p>
 				<div styleName="login-arrow-container" onClick={handleClick}>
-					<span styleName="toggler">Log in</span>
+					<span styleName="toggler">{lang['logInBtn']}</span>
 					<img src={arrow} alt="arrow" styleName="arrow" />
 				</div>
 			</div>

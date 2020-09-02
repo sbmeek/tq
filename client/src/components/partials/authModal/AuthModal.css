@@ -233,7 +233,7 @@
     position: relative;
     width: 500px;
     height: auto;
-    top: -20px;
+    top: -15px;
 }
 
 .toggler-container{
@@ -242,9 +242,14 @@
     align-items: center;
     justify-content: space-around;
     width: 100%;
-    height: 25%;
     position: relative;
-    top: -25px;
+    top: -15px;
+}
+
+.toggler-container>p{
+    max-width: 410px;
+    font-size: 16px;
+    font-family: NunitoBold;
 }
 
 .arrow {

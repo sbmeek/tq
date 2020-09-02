@@ -49,6 +49,11 @@ export default {
                 emailHelpMsg: 'Recuerde ingresar un email válido ya que le enviaremos un código de verificación de esa manera su cuenta será más segura.',
                 pwdHelpMsg: 'La contraseña debe contener mínimo 8 caracteres, al menos una letra mayúscula y una minúscula.',
                 cpwdHelpMsg: 'AYDIMIMADRE! Como que la confirmacion y la contraseña no se parecen D:'
+            },
+            Signedup: {
+                title: "Te haz registrado exitosamente",
+                helpText: "El próximo paso es verificar su correo electrónico, debe ingresar a su cuenta de email y acceder al enlace que le hemos enviado.",
+                logInBtn: "Iniciar sesión"
             }
         },
         Login: {
