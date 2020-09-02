@@ -4,7 +4,7 @@ import favicon from 'serve-favicon'
 import path from 'path'
 import cors from 'cors'
 import userRoutes from './routes/user.routes'
-import session from 'client-sessions'
+import sessions from 'client-sessions'
 import helmet from 'helmet'
 require('dotenv').config()
 
@@ -21,11 +21,8 @@ app.set('favicon', path.join(__dirname, '../favicon.ico'))
 app.set('json spaces', 2)
 
 // Middlewares
-app.use(helmet());
-app.use(favicon(app.get('favicon')))
-app.use(cors( { origin: 'http://127.0.0.1:3000' } ))
 app.use(
-	session({
+	sessions({
 		cookieName: 'proc',
 		secret: SESSION_SECRET as string,
 		duration: 24 * 60 * 60 * 1000,
@@ -35,6 +32,20 @@ app.use(
 		},
 	})
 )
+app.use(
+	sessions({
+		cookieName: 'tst',
+		secret: SESSION_SECRET as string,
+		duration: 24 * 60 * 60 * 1000,
+		cookie: {
+            httpOnly: true,
+			secure: false,
+		},
+	})
+)
+app.use(helmet());
+app.use(favicon(app.get('favicon')))
+app.use(cors( { origin: 'http://127.0.0.1:3000' } ))
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 app.use(morgan('dev'))

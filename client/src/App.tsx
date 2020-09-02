@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react'
+import React, { useEffect, useContext, useState } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { useSelector, RootStateOrAny } from 'react-redux'
 import './App.css'
@@ -17,13 +17,16 @@ import { InitContext } from 'global/context/InitContext'
 import Menu from 'components/partials/menu/Menu'
 import Terms from 'components/terms/Terms'
 
+//Test Comp
+import AuthTester from './AuthTester'
+
 export default function App() {
 	const { isStatus500, isLoaded, user } = useSelector(
 		(store: RootStateOrAny) => store.auth
 	)
-	let {
-		state: { socket },
-	} = useContext(InitContext)
+	let { socket } = useContext(InitContext).state
+	const testing = true //process.env.NODE_ENV === 'production'
+	const [isTester, setIsTester] = useState(false)
 
 	useEffect(() => {
 		if (user !== undefined)
@@ -35,44 +38,58 @@ export default function App() {
 			return <Loader />
 		} else {
 			return (
-				<Router>
-					<Route path="/">
-						<Menu />
-					</Route>
-					<Switch>
-						<UnauthRoute
-							needsRenderTime={window.navigator.onLine}
-							exact
-							path="/"
-							component={Main}
-							redirectTo="/link"
-						/>
-						<AuthRoute
-							path="/messages"
-							component={Inbx}
-							redirectTo="/"
-							needsRenderTime={false}
-						/>
-						<AuthRoute
-							needsRenderTime={true}
-							path="/link"
-							component={UserLink}
-							redirectTo="/"
-						/>
-						<AuthRoute
-							needsRenderTime={false}
-							path="/message"
-							component={TemplateMSG}
-							redirectTo="/"
-						/>
-						<Route path="/terms" component={Terms} />
-						<Route exact path="/:username" component={Msg} />
-						<Route path="*">
-							<Error404 />
-						</Route>
-					</Switch>
-				</Router>
+				<>
+					{!testing ? (
+						<RqqtComp />
+					) : !isTester ? (
+						<AuthTester setIsTester={setIsTester} />
+					) : (
+						<RqqtComp />
+					)}
+				</>
 			)
 		}
 	} else return <Error500 />
+}
+
+const RqqtComp = () => {
+	return (
+		<Router>
+			<Route path="/">
+				<Menu />
+			</Route>
+			<Switch>
+				<UnauthRoute
+					needsRenderTime={window.navigator.onLine}
+					exact
+					path="/"
+					component={Main}
+					redirectTo="/link"
+				/>
+				<AuthRoute
+					path="/messages"
+					component={Inbx}
+					redirectTo="/"
+					needsRenderTime={false}
+				/>
+				<AuthRoute
+					needsRenderTime={true}
+					path="/link"
+					component={UserLink}
+					redirectTo="/"
+				/>
+				<AuthRoute
+					needsRenderTime={false}
+					path="/message"
+					component={TemplateMSG}
+					redirectTo="/"
+				/>
+				<Route path="/terms" component={Terms} />
+				<Route exact path="/:username" component={Msg} />
+				<Route path="*">
+					<Error404 />
+				</Route>
+			</Switch>
+		</Router>
+	)
 }

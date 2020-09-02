@@ -5,12 +5,20 @@ declare namespace Express {
         proc: { 
             proc: string | undefined; 
             reset: Function 
-        }
+        };
+        tst: { 
+            tst: string | undefined; 
+            reset: Function 
+        };
     }
     export interface Response {
         proc: { 
             proc: string | undefined; 
             reset: Function 
-        }
+        };
+        tst: { 
+            tst: string | undefined; 
+            reset: Function 
+        };
     }
 }
