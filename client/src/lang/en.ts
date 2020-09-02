@@ -30,6 +30,7 @@ export default {
     },
     AuthModal: {
         FormSignupTitle: "Create your account",
+        FormSignupSubtitle: "Did you know that you can press TAB to change field?",
         FormLoginTitle: "Log in",
         LoginWith: "Sign in with {OAuth}",
         FormSignupFooter: "Already have an account?",
@@ -43,7 +44,13 @@ export default {
             ConfirmPwd: "Confirm",
             BtnCreateAccount: "Create account",
             BtnCancel: "Cancel",
-            TermsNConditions: "Terms and conditions"
+            TermsNConditions: "Terms and conditions",
+            FieldHelper: {
+                usernameHelpMsg: 'The username must have at least 3 characters, and can only have letters and numbers.',
+                emailHelpMsg: 'Remember to enter a valid email as we will send you a verification code that way your account will be safer.',
+                pwdHelpMsg: 'The password must have a minimum of 8 characters, at least a capital letter and a lower case one.',
+                cpwdHelpMsg: 'AYDIMIMADRE! Como que la confirmacion y la contraseña no se parecen D:'
+            }
         },
         Login: {
             UsernameOrEmail: "Username or email",

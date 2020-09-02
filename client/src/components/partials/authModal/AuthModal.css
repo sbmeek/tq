@@ -60,7 +60,10 @@
 
 .container > h1 {
 	margin-bottom: 12px;
-	font-size: 31px;
+    font-size: 31px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .toggler {

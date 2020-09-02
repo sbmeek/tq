@@ -81,6 +81,10 @@ router.post('/join', async (req, res) => {
     }
 })
 
+router.post('/signup-check', () => {
+
+})
+
 router.use((_req, res) => {
 	res.status(404).json({
 		error: 8,

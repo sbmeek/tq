@@ -7,16 +7,15 @@
 	min-height: 100vh;
 }
 
-.svg-loader {
+:global .tq-loader-eye {
 	margin: 0 auto;
 	width: 20%;
 	height: 20%;
-	min-width: 129.5px;
-	min-height: 150.1px;
-	animation: vuelta 730ms linear 50ms infinite;
+    animation: loaderEyeAnim 730ms linear 50ms infinite;
+    min-height: 0.1px;
 }
 
-@keyframes vuelta {
+:global @keyframes loaderEyeAnim {
 	0% {
 		transform: rotate(0deg);
 	}

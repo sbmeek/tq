@@ -86,3 +86,9 @@ svg circle, svg line, svg path, svg polygon, svg rect {
     shape-rendering: geometricprecision;
     pointer-events: none;
 }
+
+small {
+    color: var(--tq-gray-00);
+    font-family: 'NunitoBold';
+    font-size: 13px;
+}

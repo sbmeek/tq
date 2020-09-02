@@ -2,8 +2,13 @@
 	width: 320px;
 }
 
-.inputs-registro > label {
-	padding-left: 21px;
+.field-container > label {
+	padding-left: 16px;
+}
+
+.field-container > label::after{
+    content: ' *';
+    color: var(--tq-red-03);
 }
 
 .input {
@@ -18,7 +23,8 @@
 	font: normal normal bold 20px/26px Nunito;
 }
 
-.input:hover {
+.input:hover,
+.input:focus {
 	opacity: 1;
 	background: var(--tq-gray-03);
 }
@@ -82,6 +88,11 @@
 	position: relative;
 }
 
+.crear:disabled {
+    opacity: 0.6;
+    filter: grayscale(.55);
+}
+
 .crear > span:nth-child(1) {
 	display: block;
 	transition: transform 150ms ease-out;
@@ -93,15 +104,77 @@
 	opacity: 0;
 }
 
-.crear:hover > span:nth-child(1) {
+.crear:hover:not(:disabled) > span:nth-child(1) {
 	transform: translateX(130px);
 }
 
-.crear:hover >img {
+.crear:hover:not(:disabled) > img {
 	transform: translateX(0);
 	opacity: 1;
 }
 
 .terms{
     margin-left: 6px;
+}
+
+.field-container{
+    position: relative;
+}
+
+.info-box{
+    position: absolute;
+    width: 260px;
+    height: 80px;
+    background: var(--tq-blue-00);
+    top: 96%;
+    left: 4%;
+    border-radius: 30px;
+    font-size: 13px;
+    padding: 13px;
+    color: #fff;
+    animation: toggleHelpBox 200ms;
+    display: flex;
+    opacity: 1;
+    z-index: 2;
+    transition: background 150ms;
+}
+
+.info-box.box-errored{
+    background: var(--tq-red-00);
+}
+
+@keyframes toggleHelpBox {
+    0%{
+        opacity: 0;
+    }
+    1%{
+        display: flex;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+.info-box::after{
+    content: '';
+    display: block;
+    position: absolute;
+    left: 10%;
+    top: -23%;
+    border-top: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-left: 10px solid transparent;
+    border-bottom: 10px solid var(--tq-blue-00);
+    transition: background 150ms;
+}
+
+.info-box.box-errored::after{
+    border-bottom: 10px solid var(--tq-red-00);
+}
+
+.container-eye-loader{
+    position: absolute;
+    z-index: 2;
+    left: 80%;
+    top: 36%;
 }

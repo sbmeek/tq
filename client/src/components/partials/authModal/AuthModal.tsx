@@ -12,18 +12,18 @@ export default function AuthModal<
 		setOpened: React.Dispatch<React.SetStateAction<boolean>>
 	}
 >({ opened, setOpened }: T) {
-    const { AuthModal: lang } = useContext(InitContext).state.lang
+	const { AuthModal: lang } = useContext(InitContext).state.lang
 
 	const [showLogin, setShowLogin] = useState(true)
 
 	const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
 		const targetElement = e.target as HTMLDivElement
 		if (targetElement.id === 'overlay') setOpened(!opened)
-    }
-    
-    const handleSignLoginClick = () => {
-        setShowLogin(!showLogin)
-    }
+	}
+
+	const handleSignLoginClick = () => {
+		setShowLogin(!showLogin)
+	}
 
 	return (
 		<div>
@@ -35,10 +35,21 @@ export default function AuthModal<
 				<div
 					styleName="container"
 					style={{
-						height: showLogin ? '376px' : '536px',
+						height: showLogin ? '376px' : '556px',
 					}}
 				>
-					<h1>{showLogin ? lang['FormLoginTitle'] : lang['FormSignupTitle']}</h1>
+					<h1>
+						{showLogin ? (
+							lang['FormLoginTitle']
+						) : (
+							<>
+								{lang['FormSignupTitle']}
+								<small>
+									{lang['FormSignupSubtitle']}
+								</small>
+							</>
+						)}
+					</h1>
 					<div styleName="inputs-and-buttons">
 						<div styleName="inputs-and-sign-container">
 							{showLogin ? <Login /> : <Signup />}
@@ -48,13 +59,15 @@ export default function AuthModal<
 									<button styleName="google">
 										<img src={googleLogo} alt="google logo" />
 										<span>
-											<hr></hr>{lang['LoginWith'].replace('{OAuth}', 'Google')}
+											<hr></hr>
+											{lang['LoginWith'].replace('{OAuth}', 'Google')}
 										</span>
 									</button>
 									<button styleName="facebook">
 										<img src={facebookLogo} alt="facebook logo" />
 										<span>
-											<hr></hr>{lang['LoginWith'].replace('{OAuth}', 'Facebook')}
+											<hr></hr>
+											{lang['LoginWith'].replace('{OAuth}', 'Facebook')}
 										</span>
 									</button>
 								</div>
@@ -62,13 +75,15 @@ export default function AuthModal<
 						</div>
 					</div>
 					<span
-                        style={{
-                            margin: showLogin ? '30px' : '10px'
-                        }}
-                    >
+						style={{
+							margin: showLogin ? '30px' : '14px',
+						}}
+					>
 						{showLogin ? lang['FormLoginFooter'] : lang['FormSignupFooter']}{' '}
 						<span styleName="toggler" onClick={handleSignLoginClick}>
-                            {showLogin ? lang['FormSignupFooterToggler'] : lang['FormLoginFooterToggler']}
+							{showLogin
+								? lang['FormSignupFooterToggler']
+								: lang['FormLoginFooterToggler']}
 						</span>
 					</span>
 				</div>

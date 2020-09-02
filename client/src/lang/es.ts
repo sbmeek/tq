@@ -29,6 +29,7 @@ export default {
     },
     AuthModal: {
         FormSignupTitle: "Crea tu cuenta",
+        FormSignupSubtitle: "¿Sabías que puedes presionar TAB para cambiar de campo?",
         FormLoginTitle: "Inicia sesión",
         LoginWith: "Regístrate con {OAuth}",
         FormSignupFooter: "¿Ya tienes una cuenta?",
@@ -42,7 +43,13 @@ export default {
             ConfirmPwd: "Confirmación",
             BtnCreateAccount: "Crear cuenta",
             BtnCancel: "Cancelar",
-            TermsNConditions: "Términos y condiciones"
+            TermsNConditions: "Términos y condiciones",
+            FieldHelper: {
+                usernameHelpMsg: "El nombre de usuario debe contener más de 3 caracteres y solo puede contener letras y numeros.",
+                emailHelpMsg: 'Recuerde ingresar un email válido ya que le enviaremos un código de verificación de esa manera su cuenta será más segura.',
+                pwdHelpMsg: 'La contraseña debe contener mínimo 8 caracteres, al menos una letra mayúscula y una minúscula.',
+                cpwdHelpMsg: 'AYDIMIMADRE! Como que la confirmacion y la contraseña no se parecen D:'
+            }
         },
         Login: {
             UsernameOrEmail: "Nombre de usuario o email",
