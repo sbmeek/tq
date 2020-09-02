@@ -12,6 +12,9 @@ import styles from './Template.css'
 import ReplyingModal from '../replyingModal/ReplyingModal'
 import TemplateEditor from './templateEditor/TemplateEditor'
 import { InitContext } from 'global/context/InitContext'
+import arrowanswer from 'assets/images/icons/icons-inbox/icon-arrow-answer.svg'
+import arrowexit from 'assets/images/icons/icons-inbox/icon-exit.svg'
+
 
 export default function Template() {
 	const [answer, setAnswer] = useState<string>('')
@@ -72,13 +75,13 @@ export default function Template() {
 			<div>
 				<div styleName="head-btns">
 					<Link to="/messages" styleName="btn-back">
-						<i className="material-icons">keyboard_backspace</i>
+						<img src={arrowexit} alt="arrow"/>
 					</Link>
 					<button
 						styleName="btn-share"
 						onClick={() => setIsReplyingModalOpened(!isReplyingModalOpened)}
 					>
-						⇨
+						<img src={arrowanswer} alt="arrow"/>
 					</button>
 				</div>
 				<ReplyingModal

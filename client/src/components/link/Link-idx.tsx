@@ -5,6 +5,7 @@ import { InitContext, ActionEnum } from '../../global/context/InitContext'
 import Slider from './Slider'
 import Modal from './Modal'
 import './Link-idx.css'
+import copy from 'assets/images/icons/icons-inbox/icon-link.svg'
 
 export default function LinkIdx() {
 	const inputLink = useRef<HTMLInputElement>(null);
@@ -70,7 +71,7 @@ export default function LinkIdx() {
 								:
 								<>
 									{lang['BtnCopyLink']}
-									<i className="material-icons right">link</i>
+									<img src={copy} alt="copy"/>
 								</> 
 							}
 						</button>

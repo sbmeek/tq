@@ -11,6 +11,9 @@ import { InitContext } from 'global/context/InitContext'
 import parse from 'html-react-parser'
 import SimpleBar from 'simplebar-react'
 import ShareOrSaveModal from '../shareOrSaveModal/ShareOrSaveModal'
+import report from 'assets/images/icons/icons-inbox/icon-report.png'
+import delet from 'assets/images/icons/icons-inbox/icon-delete.png'
+import arrowanswer from 'assets/images/icons/icons-inbox/icon-arrow-answer.svg'
 
 export default function Inbox<
 	T extends {
@@ -138,24 +141,22 @@ export default function Inbox<
 										<div>
 											<span styleName="sender-name">An&oacute;nimo</span>
 											<button styleName="btn-report">
-												<span role="img" aria-label="warn emoji">
-													⚠️
-												</span>
+												<img src={report}  alt="report"/>
 											</button>
 										</div>
 										<li styleName="msg-li">
 											<span styleName="msg-content">"{msg.content}"</span>
 											<button styleName="btn-delete">
-												<span role="img" aria-label="delete emoji">
-													🗑️
-												</span>
+												<img src={delet} alt="delete"/>
 											</button>
 										</li>
 										<button
 											styleName="msg-btn-answer"
 											onClick={(e) => handleAnswerMsgClick(e, msg._id)}
 										>
-											Answer
+											<span>answer</span>
+											<img src={arrowanswer} alt="arrow"/>
+
 										</button>
 									</div>
 								))}

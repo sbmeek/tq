@@ -9,7 +9,11 @@ import '../Template.css'
 import './TemplateEditor.css'
 import BgColors from '../templateOpts/BgColors'
 import Labels from '../templateOpts/Labels'
-import textIcon from 'assets/images/templateEditor-icons/text-icon.svg'
+import textIcon from 'assets/images/icons/templateEditor-icons/text-icon.svg'
+import stickers from 'assets/images/icons/templateEditor-icons/icon-stickers-minol.svg'
+import labelicon from 'assets/images/icons/templateEditor-icons/icon-labels-btn.svg'
+import bg from 'assets/images/icons/templateEditor-icons/icon-background-btn.svg'
+import org from 'assets/images/icons/templateEditor-icons/icon-organization-btn.svg'
 import {
 	createEditor,
 	Transforms,
@@ -242,16 +246,18 @@ export default function TemplateEditor({
 								<img src={textIcon} alt="text icon" />
 							</button>
 							<button type="button" onClick={toggleOptSwipe} id="bg-colors">
-								S
+							<img src={bg} alt="icon" />
 							</button>
 							<button type="button" onClick={toggleOptSwipe} id="labels">
-								P
+
+							<img src={labelicon} alt=" icon" />
+
 							</button>
 							<button type="button" onClick={toggleOptSwipe}>
-								M
+							<img src={stickers} alt="icon" />
 							</button>
 							<button type="button" onClick={toggleOptSwipe}>
-								R
+							<img src={org} alt="icon" />
 							</button>
 						</div>
 					</div>

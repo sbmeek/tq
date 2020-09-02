@@ -255,15 +255,15 @@
     left: 92.8%;
 }
 
-.btn-report>span,
-.btn-delete>span{
+.btn-report>img,
+.btn-delete>img{
     color: #fff;
-    font-size: 23px;
+    width: 17px;
 }
 
 .btn-report:hover,
 .btn-delete:hover{
-    color: #d4d4d4;
+   filter: invert(50%);
 }
 
 .msg-container.opened>div:nth-child(1),
@@ -301,14 +301,37 @@
 }
 
 .msg-container.opened>.msg-btn-answer{
-    background: var(--tq-gray-00);
-    width: 100%;
-    left: 0;
-    top: calc(100% - 26px);
-    height: 28px;
-    color: #fff;
-    border-radius: 0 0 10px 10px;
-    cursor: pointer;
+	background: var(--tq-gray-00);
+	width: 100%;
+	left: 0;
+	top: calc(100% - 26px);
+	height: 28px;
+	color: #fff;
+	border-radius: 0 0 10px 10px;
+	cursor: pointer;
+	justify-content: center;
+	display: flex;
+	align-items: center;
+}
+.msg-container.opened>.msg-btn-answer>span{
+	display: block;
+	transition: transform 150ms ease-out;
+
+}
+.msg-container.opened>.msg-btn-answer> img{
+	position: absolute;
+	transition: transform 150ms ease-out, opacity 200ms;
+	opacity: 0;
+	width: 22px;
+
+}
+.msg-container.opened>.msg-btn-answer:hover>span{
+	transform: translateX(500px);
+}
+.msg-container.opened>.msg-btn-answer:hover>img{
+	transform: translateX(0);
+	opacity: 1;
+
 }
 
 .msg-container.opened>.msg-btn-answer:hover{

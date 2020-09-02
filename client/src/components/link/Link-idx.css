@@ -82,9 +82,12 @@
 	position: relative;
 }
 
-.btn-waves-effect-waves-light > i {
-	font-size: 2rem !important;
+.btn-waves-effect-waves-light > img {
+	width: 33px;
 	margin-left: 7px;
+}
+.btn-waves-effect-waves-light:hover > img {
+	filter: invert(50%);
 }
 
 .btn-waves-effect-waves-light {

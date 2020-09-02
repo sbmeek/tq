@@ -1,7 +1,7 @@
 .answer-editor {
 	display: flex;
 	align-items: flex-end;
-	background: var(--tq-bg-00);
+	background: var(--tq-dark-gray-02);
 	width: 226px;
 	height: 425px;
 	margin-top: 10px;
@@ -19,7 +19,7 @@
 .answer-editor-container > div:nth-child(1) {
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	justify-content: flex-end;
 }
 
 .answer-btns-format-container {
@@ -69,7 +69,7 @@
 	font-size: 15px;
 	font-weight: 400;
 	line-height: 20px;
-	min-height: 37px;
+	min-height: 150px;
 	color: #fff;
 	border: none !important;
 	background-color: var(--tq-gray-00) !important;
@@ -127,7 +127,7 @@
 	overflow-y: hidden;
 	z-index: 3;
 	background: var(--tq-bg-00);
-	border-radius: 0 0 10px 10px;
+	border-radius: 29px 29px 10px 10px;
 }
 
 .answer-options {
@@ -160,6 +160,9 @@
 
 .answer-options > button > img{
     width: 100%;
+}
+.answer-options > button:hover > img{
+	transform: scale(1.1);
 }
 
 .answer-options > button > *{
