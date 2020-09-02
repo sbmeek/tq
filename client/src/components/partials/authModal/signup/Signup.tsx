@@ -8,12 +8,16 @@ import x from 'assets/images/icons/share-icons/icon-x.svg'
 import { LoaderEye } from 'components/partials/loader/Loader'
 
 import './Signup.css'
-export default function Signup() {
+export default function Signup<T extends { 
+    setShowSignedupComp: React.Dispatch<React.SetStateAction<boolean>> 
+}>({ setShowSignedupComp }: T) {
+
 	const [fields, setFields] = useState<{ [key: string]: string }>({})
 	const [focusedFieldId, setFocusedFieldId] = useState('')
 	const [isFocusedFieldLoading, setIsFocusedFieldLoading] = useState(false)
 	const [isFieldErrored, setIsFieldErrored] = useState(false)
-	const [validFields, setValidFields] = useState<{ [key: string]: boolean }>({})
+    const [validFields, setValidFields] = useState<{ [key: string]: boolean }>({})
+
 	const { Signup: lang } = useContext(InitContext).state.lang.AuthModal
 	let timerID: NodeJS.Timeout
 
@@ -95,7 +99,8 @@ export default function Signup() {
 		e.preventDefault()
 		try {
 			const res = await Axios.post('/user/join', fields)
-			console.log(res.data);
+            const { ok } = res.data
+            setShowSignedupComp(ok as boolean)
 		} catch (error) {
 			console.error(error)
 		}
