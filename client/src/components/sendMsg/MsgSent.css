@@ -14,13 +14,14 @@
 .H3 {
 	font-family: 'Nunito', sans-serif;
 	color: #ffff;
-	font-size: -webkit-xxx-large ;
+	font-size: 27px ;
+	margin: 12px;
 
 }
 .H3-2 {
 	font-family: Nunito, sans-serif;
 	color: #ffff;
-	font-size: -webkit-xxx-large;
+	font-size: 20px;
 	margin-top: -15px;
 }
 
@@ -39,7 +40,7 @@
 	background-color: #c3c3c321;
 	width: 163px;
 	height: 9px;
-	margin-top: 15px;
+	margin: 15px;
 	border-radius: 50%;
 	display: flex;
 	flex-direction: column;
