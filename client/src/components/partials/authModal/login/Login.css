@@ -18,9 +18,23 @@
 	font: normal normal bold 20px/26px Nunito;
 }
 
+.input-pwd{
+    margin-bottom: 7px !important;
+}
+
 .input:hover {
 	opacity: 1;
 	background: var(--tq-gray-03);
+}
+
+.err-msg{
+    padding-left: 11px;
+    font-size: 13px;
+    max-width: 90%;
+    flex-wrap: nowrap;
+    display: inline-flex;
+    overflow-wrap: anywhere;
+    color: var(--tq-red-01);
 }
 
 .btns-container {

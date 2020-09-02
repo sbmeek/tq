@@ -63,8 +63,10 @@ const uSchema = new Schema({
 	messages: [msgSchema],
 })
 
-uSchema.methods.compareKeyOrPwd = async (DBKeyOrPwd: string, KeyOrPwd: string) => {
-	return await bcrypt.compare(DBKeyOrPwd, KeyOrPwd)
+uSchema.methods.compareKeyOrPwd = async (DBKeyOrPwd: string, KeyOrPwd: string, isPermanentAccount: boolean) => {
+    console.log(DBKeyOrPwd, KeyOrPwd, isPermanentAccount)
+    if(isPermanentAccount) return await bcrypt.compare(KeyOrPwd, DBKeyOrPwd)
+    else return await bcrypt.compare(DBKeyOrPwd, KeyOrPwd)
 }
 
 uSchema.methods.hashKeyOrPwd = async (keyOrPwd: string) => {

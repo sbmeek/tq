@@ -1,14 +1,31 @@
-const { useBabelRc, override, useEslintRc, adjustStyleLoaders, addWebpackModuleRule } = require('customize-cra')
+const { useBabelRc, override, useEslintRc, adjustStyleLoaders, addWebpackModuleRule, addWebpackPlugin } = require('customize-cra')
+const webpack = require('webpack');
+const dotenv = require('dotenv');
 
 module.exports = override(
     useBabelRc(),
     useEslintRc(),
+    addWebpackPlugin(() => {
+
+        const env = dotenv.config().parsed;
+
+        const envKeys = Object.keys(env).reduce((prev, next) => {
+            prev[`process.env.${next}`] = JSON.stringify(env[next]);
+            return prev;
+        }, {});
+
+        return {
+            plugins: [
+                new webpack.DefinePlugin(envKeys)
+            ]
+        };
+    }),
     addWebpackModuleRule({
         test: /emoji-mart.css$/,
         use: [
             {
                 loader: require.resolve('style-loader'),
-                options: { 
+                options: {
                     attributes: { type: 'text/css' }
                 }
             },
@@ -36,7 +53,7 @@ module.exports = override(
                 ),
             },
         }
-        if(loader.test.toString() == /emoji-mart.css$/){
+        if (loader.test.toString() == /emoji-mart.css$/) {
             delete loader.exclude
             css.options = {
                 modules: {

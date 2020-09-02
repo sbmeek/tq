@@ -10,14 +10,16 @@ import tqLogo from 'assets/images/ltqrNEW.png'
 
 export default function AuthModal<
 	T extends {
-		opened: boolean
-		setOpened: React.Dispatch<React.SetStateAction<boolean>>
+		opened: boolean;
+        setOpened: React.Dispatch<React.SetStateAction<boolean>>;
+        setShowMenu: React.Dispatch<React.SetStateAction<boolean>>;
 	}
->({ opened, setOpened }: T) {
+>({ opened, setOpened, setShowMenu }: T) {
 	const { AuthModal: lang } = useContext(InitContext).state.lang
 
 	const [showSignedupComp, setShowSignedupComp] = useState(false)
 	const [showLogin, setShowLogin] = useState(true)
+	const [errMsg, setErrMsg] = useState('')
 
 	const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
 		const targetElement = e.target as HTMLDivElement
@@ -56,7 +58,12 @@ export default function AuthModal<
 							<div styleName="inputs-and-buttons">
 								<div styleName="inputs-and-sign-container">
 									{showLogin ? (
-										<Login />
+										<Login
+											errMsg={errMsg}
+											setErrMsg={setErrMsg}
+                                            setIsModalOpened={setOpened}
+                                            setShowMenu={setShowMenu}
+										/>
 									) : (
 										<Signup setShowSignedupComp={setShowSignedupComp} />
 									)}
@@ -83,7 +90,9 @@ export default function AuthModal<
 							</div>
 							<span
 								style={{
-									margin: showLogin ? '30px' : '14px',
+									position: 'absolute',
+									top: showLogin ? '85%' : '93%',
+									marginTop: errMsg.length > 0 ? '20px' : '0',
 								}}
 							>
 								{showLogin ? lang['FormLoginFooter'] : lang['FormSignupFooter']}{' '}
@@ -95,7 +104,10 @@ export default function AuthModal<
 							</span>
 						</Fragment>
 					) : (
-						<Signedup setShowSignedupComp={setShowSignedupComp} setShowLogin={setShowLogin} />
+						<Signedup
+							setShowSignedupComp={setShowSignedupComp}
+							setShowLogin={setShowLogin}
+						/>
 					)}
 				</div>
 			</div>
@@ -104,26 +116,22 @@ export default function AuthModal<
 }
 
 function Signedup<
-    T extends { 
-        setShowLogin: React.Dispatch<React.SetStateAction<boolean>>;
-        setShowSignedupComp: React.Dispatch<React.SetStateAction<boolean>>;
-    }
+	T extends {
+		setShowLogin: React.Dispatch<React.SetStateAction<boolean>>
+		setShowSignedupComp: React.Dispatch<React.SetStateAction<boolean>>
+	}
 >({ setShowLogin, setShowSignedupComp }: T) {
-
-    const handleClick = () => {
-        setShowLogin(true);
-        setShowSignedupComp(false)
-    }
+	const handleClick = () => {
+		setShowLogin(true)
+		setShowSignedupComp(false)
+	}
 
 	return (
 		<div styleName="signedup-container">
 			<img styleName="tqlogo" src={tqLogo} alt="tq logo" />
 			<div styleName="toggler-container">
 				<h1>Te haz registrado exitosamente</h1>
-				<div
-					styleName="login-arrow-container"
-					onClick={handleClick}
-				>
+				<div styleName="login-arrow-container" onClick={handleClick}>
 					<span styleName="toggler">Log in</span>
 					<img src={arrow} alt="arrow" styleName="arrow" />
 				</div>

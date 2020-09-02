@@ -11,13 +11,13 @@ import React, {
 import { useDispatch } from 'react-redux'
 import axios from 'axios'
 import Alert from '../partials/Alert'
-import logo from '../../assets/images/ltqrNEW.png'
+import logo from 'assets/images/ltqrNEW.png'
 import './Main-idx.css'
-import { getAuthInfoAction } from '../../global/ducks/authDucks'
-import { InitContext, ActionEnum } from '../../global/context/InitContext'
-import arrow from '../../assets/images/icons/icons-main/icon-arrow.svg'
-import Help from '../../assets/images/icons/icons-main/icon-help.svg'
-import info from '../../assets/images/icons/icons-main/icon-info.svg'
+import { getAuthInfoAction } from 'global/ducks/authDucks'
+import { InitContext, ActionEnum } from 'global/context/InitContext'
+import arrow from 'assets/images/icons/icons-main/icon-arrow.svg'
+import Help from 'assets/images/icons/icons-main/icon-help.svg'
+import info from 'assets/images/icons/icons-main/icon-info.svg'
 
 const A = new Alert()
 

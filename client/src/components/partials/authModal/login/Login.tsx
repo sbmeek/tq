@@ -4,12 +4,25 @@ import Axios from 'axios'
 import { InitContext } from 'global/context/InitContext'
 import account from 'assets/images/icons/share-icons/icon-account.svg'
 import x from 'assets/images/icons/share-icons/icon-x.svg'
+import { useDispatch } from 'react-redux'
+import { getAuthInfoAction } from 'global/ducks/authDucks'
 
-export default function Login() {
+export default function Login<T extends {
+    errMsg: string;
+    setErrMsg: React.Dispatch<React.SetStateAction<string>>;
+    setIsModalOpened: React.Dispatch<React.SetStateAction<boolean>>
+    setShowMenu: React.Dispatch<React.SetStateAction<boolean>>
+}>({ errMsg, setErrMsg, setIsModalOpened, setShowMenu }: T) {
+	const {
+		AuthModal: { Login: lang },
+	} = useContext(InitContext).state.lang
+
+	const [fields, setFields] = useState({
+		usernameOrEmail: '',
+		pwd: '',
+    })
     
-    const { AuthModal: { Login: lang } } = useContext(InitContext).state.lang
-
-    const [fields, setFields] = useState({})
+    const dispatch = useDispatch();
 
 	const handleFieldChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const targetElement = e.target as HTMLInputElement
@@ -19,34 +32,46 @@ export default function Login() {
 	const handleFormSubmit = async (e: React.FormEvent) => {
 		e.preventDefault()
 		try {
-			const res = await Axios.post('/user/login', fields)
-			console.log(res.data)
+			const res = await Axios.post(
+				`/user/auth?tquser=${fields.usernameOrEmail}&tqpwd=${fields.pwd}`,
+				fields
+            )
+
+            if(!res.data.ok){
+                setErrMsg('Credenciales incorrectas, verifique e intentelo de nuevo.')
+            }
+            else {
+                setIsModalOpened(false)
+                setShowMenu(false)
+                dispatch(getAuthInfoAction())
+            }
 		} catch (error) {
 			console.error(error)
 		}
 	}
 
-    return (
-        <div>
+	return (
+		<div>
 			<form onSubmit={handleFormSubmit}>
 				<div styleName="inputs-registro">
-                    <label>{lang['UsernameOrEmail']}</label>
+					<label>{lang['UsernameOrEmail']}</label>
 					<input
 						type="text"
 						autoFocus
 						onChange={handleFieldChange}
-						id="username"
+						id="usernameOrEmail"
 						styleName="input"
 					/>
 
 					<label>{lang['Pwd']}</label>
 					<input
 						onChange={handleFieldChange}
-						styleName="input"
+						styleName="input input-pwd"
 						type="password"
 						id="pwd"
 					/>
 
+					<span styleName="err-msg">{errMsg}</span>
 				</div>
 				<div styleName="btns-container">
 					<button styleName="btn-cancel">
@@ -61,5 +86,5 @@ export default function Login() {
 				</div>
 			</form>
 		</div>
-    )
+	)
 }

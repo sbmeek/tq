@@ -8,7 +8,9 @@ import { Link } from 'react-router-dom'
 import home from '../../../assets/images/icons/icons-menu/icon-home.svg'
 import cloud from '../../../assets/images/icons/icons-menu/icon-cloud.svg'
 import account from '../../../assets/images/icons/icons-menu/icon-account.svg'
+
 export default function Menu() {
+
 	const [isUserNew, setIsUserNew] = useState(true)
 	const [showNewUserModal, setShowNewUserModal] = useState(false)
 	const [showMenu, setShowMenu] = useState(false)
@@ -110,7 +112,8 @@ export default function Menu() {
 			{isUserNew && <FirstTimeHelpBox active={showNewUserModal} />}
 			<RegisterModal
 				opened={showRegisterModal}
-				setOpened={setShowRegisterModal}
+                setOpened={setShowRegisterModal}
+                setShowMenu={setShowMenu}
 			/>
 		</div>
 	)

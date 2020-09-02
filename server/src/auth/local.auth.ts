@@ -36,13 +36,24 @@ passport.use(
 			passwordField: 'tqpwd',
 		},
 		async (tquser: string, tqpwd: string, done: CallableFunction) => {
-            tquser = tquser.toLowerCase()
-            console.log(tqpwd)
+            console.log(tquser, tqpwd)
+			tquser = tquser.toLowerCase()
 			try {
-                const user = (await User.findOne({ username: tquser })) as IUser
-                console.log(await user.compareKeyOrPwd(user.keyOrPwd || user.key, tqpwd))
-				if (await user.compareKeyOrPwd(user.keyOrPwd || user.key, tqpwd)) {
-					done(null, user)
+				const user = (await User.findOne({
+					$or: [{ username: tquser }, { email: tquser }],
+				})) as IUser
+				if (user !== null) {
+					if (
+						await user.compareKeyOrPwd(
+							user.keyOrPwd || user.key,
+							tqpwd,
+							user.isPermanentAccount
+						)
+					) {
+						done(null, user)
+					} else {
+						done(null, false)
+					}
 				} else {
 					done(null, false)
 				}
@@ -60,7 +71,10 @@ export const userExists = async (data: IUser, socket: Socket) => {
 	socket.emit('tq:exists', user)
 }
 
-export const userLogin = async (data: IUser & { key: string }, socket: Socket) => {
+export const userLogin = async (
+	data: IUser & { key: string },
+	socket: Socket
+) => {
 	const user = (await User.findById(data._id)) as IUser
 	user.key = user.keyOrPwd = data.key
 	if (!user.expired) {
@@ -80,8 +94,8 @@ export const userRegister = async function <T extends { tquser: string }>(
 		keyOrPwd: key,
 		createdAt: new Date(),
 		willExpireAt: getExpirationDate(),
-        expired: false,
-        isPermanentAccount: false
+		expired: false,
+		isPermanentAccount: false,
 	})
 	key = await user.hashKeyOrPwd(user.keyOrPwd)
 	const savedUser = await user.save()

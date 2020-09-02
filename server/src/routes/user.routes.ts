@@ -26,7 +26,7 @@ router.post('/auth', (req: Request, res: Response, next) => {
 			const { _id, enteredname } = user
             const token = signToken(_id)
 			req.proc!.proc = token;
-			res.status(200).json({ authenticated: true, enteredname })
+			res.status(200).json({ authenticated: true, enteredname, ok: true })
 		}
 	})(req, res, next)
 })
@@ -69,7 +69,6 @@ router.post('/join', async (req, res) => {
                 isPermanentAccount: true 
             });
             user.keyOrPwd = await user.hashKeyOrPwd(data.pwd);
-            console.log(user)
             user.save();
             res.json({ ok: true })
         }
@@ -79,10 +78,6 @@ router.post('/join', async (req, res) => {
     } catch (error) {
         console.error(error)
     }
-})
-
-router.post('/signup-check', () => {
-
 })
 
 router.use((_req, res) => {
