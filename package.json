@@ -10,6 +10,7 @@
         "i-server": "cd server && npm install",
         "b-server": "cd server && npm run build",
         "b-client": "cd client && npm run build",
+        "root-build": "concurrently -n \"server-build,client-build,merge\" -c 'green,blue,orange' \"cd server && npm run build\" \"cd client && npm run build\" \"git checkout prod && git merge origin/master\"",
         "heroku-prebuild": "npm run i-server",
         "heroku-postinstall": "npm run b-server && npm run b-client",
         "heroku-postbuild": "npm run i-client",
