@@ -32,88 +32,90 @@ export default function AuthModal<
 
 	return (
 		<div>
-			<div
-				onClick={handleOverlayClick}
-				styleName={`overlay ${opened ? 'active' : ''}`}
-				id="overlay"
-			>
-				<div
-					styleName="container"
-					style={{
-						height: showLogin ? '376px' : '556px',
-					}}
-				>
-					{!showSignedupComp ? (
-						<Fragment>
-							<h1>
-								{showLogin ? (
-									lang['FormLoginTitle']
-								) : (
-									<>
-										{lang['FormSignupTitle']}
-										<small>{lang['FormSignupSubtitle']}</small>
-									</>
-								)}
-							</h1>
-							<div styleName="inputs-and-buttons">
-								<div styleName="inputs-and-sign-container">
-									{showLogin ? (
-										<Login
-											errMsg={errMsg}
-											setErrMsg={setErrMsg}
-											setIsModalOpened={setOpened}
-											setShowMenu={setShowMenu}
-										/>
-									) : (
-										<Signup
-											setShowSignedupComp={setShowSignedupComp}
-											setShowLogin={setShowLogin}
-										/>
-									)}
-									<div styleName="separador">
-										<hr></hr>
-										<div styleName="buttons-sign">
-											<button styleName="google">
-												<img src={googleLogo} alt="google logo" />
-												<span>
-													<hr></hr>
-													{lang['LoginWith'].replace('{OAuth}', 'Google')}
-												</span>
-											</button>
-											<button styleName="facebook">
-												<img src={facebookLogo} alt="facebook logo" />
-												<span>
-													<hr></hr>
-													{lang['LoginWith'].replace('{OAuth}', 'Facebook')}
-												</span>
-											</button>
-										</div>
-									</div>
-								</div>
-							</div>
-							<span
-								style={{
-									position: 'absolute',
-									top: showLogin ? '85%' : '93%',
-									marginTop: errMsg.length > 0 ? '20px' : '0',
-								}}
-							>
-								{showLogin ? lang['FormLoginFooter'] : lang['FormSignupFooter']}{' '}
-								<span styleName="toggler" onClick={handleSignLoginClick}>
-									{showLogin
-										? lang['FormSignupFooterToggler']
-										: lang['FormLoginFooterToggler']}
-								</span>
-							</span>
-						</Fragment>
-					) : (
-						<Signedup
-							setShowSignedupComp={setShowSignedupComp}
-							setShowLogin={setShowLogin}
-						/>
-					)}
-				</div>
-			</div>
+            {opened &&
+                <div
+                    onClick={handleOverlayClick}
+                    styleName={`overlay ${opened ? 'active' : ''}`}
+                    id="overlay"
+                >
+                    <div
+                        styleName="container"
+                        style={{
+                            height: showLogin ? '376px' : '556px',
+                        }}
+                    >
+                        {!showSignedupComp ? (
+                            <Fragment>
+                                <h1>
+                                    {showLogin ? (
+                                        lang['FormLoginTitle']
+                                    ) : (
+                                        <>
+                                            {lang['FormSignupTitle']}
+                                            <small>{lang['FormSignupSubtitle']}</small>
+                                        </>
+                                    )}
+                                </h1>
+                                <div styleName="inputs-and-buttons">
+                                    <div styleName="inputs-and-sign-container">
+                                        {showLogin ? (
+                                            <Login
+                                                errMsg={errMsg}
+                                                setErrMsg={setErrMsg}
+                                                setIsModalOpened={setOpened}
+                                                setShowMenu={setShowMenu}
+                                            />
+                                        ) : (
+                                            <Signup
+                                                setShowSignedupComp={setShowSignedupComp}
+                                                setShowLogin={setShowLogin}
+                                            />
+                                        )}
+                                        <div styleName="separador">
+                                            <hr></hr>
+                                            <div styleName="buttons-sign">
+                                                <button styleName="google">
+                                                    <img src={googleLogo} alt="google logo" />
+                                                    <span>
+                                                        <hr></hr>
+                                                        {lang['LoginWith'].replace('{OAuth}', 'Google')}
+                                                    </span>
+                                                </button>
+                                                <button styleName="facebook">
+                                                    <img src={facebookLogo} alt="facebook logo" />
+                                                    <span>
+                                                        <hr></hr>
+                                                        {lang['LoginWith'].replace('{OAuth}', 'Facebook')}
+                                                    </span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <span
+                                    style={{
+                                        position: 'absolute',
+                                        top: showLogin ? '85%' : '93%',
+                                        marginTop: errMsg.length > 0 ? '20px' : '0',
+                                    }}
+                                >
+                                    {showLogin ? lang['FormLoginFooter'] : lang['FormSignupFooter']}{' '}
+                                    <span styleName="toggler" onClick={handleSignLoginClick}>
+                                        {showLogin
+                                            ? lang['FormSignupFooterToggler']
+                                            : lang['FormLoginFooterToggler']}
+                                    </span>
+                                </span>
+                            </Fragment>
+                        ) : (
+                            <Signedup
+                                setShowSignedupComp={setShowSignedupComp}
+                                setShowLogin={setShowLogin}
+                            />
+                        )}
+                    </div>
+                </div>
+            }
 		</div>
 	)
 }

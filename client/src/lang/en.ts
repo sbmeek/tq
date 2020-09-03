@@ -63,5 +63,12 @@ export default {
             BtnLogin: "Log in",
             BtnCancel: "Cancel"
         }
+    },
+    VerifyAccount: {
+        TitleIsVerificationOk: "Confirmation completed",
+        TitleIsVerificationNotOk: "There is a problem",
+        TextIsVerificationOk: "Now you can log into your account.",
+        TextIsVerificationNotOk: "The link is invalid. It looks like you have already confirmed your email if so it is not needed that you do it again.",
+        LogInBtn: "Log in"
     }
 }

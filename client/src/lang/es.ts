@@ -62,5 +62,12 @@ export default {
             BtnLogin: "Acceder",
             BtnCancel: "Cancelar"
         }
+    },
+    VerifyAccount: {
+        TitleIsVerificationOk: "Confirmación completada",
+        TitleIsVerificationNotOk: "Hubo un problema",
+        TextIsVerificationOk: "Ahora puede acceder a su cuenta.",
+        TextIsVerificationNotOk: "El enlace es inválido. Al parecer ya ha confirmado su correo electrónico, si es así no es necesario que lo haga de nuevo.",
+        LogInBtn: "Iniciar sesión"
     }
 }

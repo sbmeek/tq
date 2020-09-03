@@ -8,10 +8,10 @@ interface IExpired {
 }
 
 export const checkExpirations = async () => {
-	const uList = await User.find()
+    const uList = await User.find({ isPermanentAccount: false })
 	uList.length > 0
 		? console.log('\x1b[33m%s\x1b[0m', `\nValidating users expirations (${new Date().toISOString()})`)
-		: 0
+        : 0
 	const expired: IExpired = {}
 	const notExpired: IExpired = {}
 	uList.forEach(async (user, idx) => {
@@ -32,7 +32,8 @@ export const checkExpirations = async () => {
 	console.log('\x1b[31m%s\x1b[0m', `\nExpired users`)
 	console.table(expired!)
 	console.log('\x1b[34m%s\x1b[0m', `\nActive users`)
-	console.table(notExpired!)
+    console.table(notExpired!)
+    
 }
 
 export const setExpirationDate = async (_id: string) => {

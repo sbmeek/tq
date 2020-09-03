@@ -16,6 +16,7 @@ import Loader from 'components/partials/loader/Loader'
 import { InitContext } from 'global/context/InitContext'
 import Menu from 'components/partials/menu/Menu'
 import Terms from 'components/terms/Terms'
+import VerifyAccount from 'components/verifyAccount/VerifyAccount'
 
 //Test Comp
 import AuthTester from './AuthTester'
@@ -83,6 +84,7 @@ const RqqtComp = () => {
 					component={TemplateMSG}
 					redirectTo="/"
 				/>
+                <Route path="/account/verify" component={VerifyAccount} />
 				<Route path="/terms" component={Terms} />
 				<Route exact path="/:username" component={Msg} />
 				<Route path="*">

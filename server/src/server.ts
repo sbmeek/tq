@@ -27,7 +27,7 @@ app.use(
 		secret: SESSION_SECRET as string,
 		duration: 24 * 60 * 60 * 1000,
 		cookie: {
-            httpOnly: true,
+			httpOnly: true,
 			secure: false,
 		},
 	})
@@ -38,14 +38,14 @@ app.use(
 		secret: SESSION_SECRET as string,
 		duration: 24 * 60 * 60 * 1000,
 		cookie: {
-            httpOnly: true,
+			httpOnly: true,
 			secure: false,
 		},
 	})
 )
-app.use(helmet());
+app.use(helmet())
 app.use(favicon(app.get('favicon')))
-app.use(cors( { origin: 'http://127.0.0.1:3000' } ))
+app.use(cors({ origin: 'http://127.0.0.1:3000' }))
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 app.use(morgan('dev'))
@@ -57,4 +57,4 @@ export const server = app.listen(app.get('port'), () =>
 	console.log('\x1b[32m%s\x1b[0m', `Server running :${app.get('port')}`)
 )
 
-require('./libs/sockets')
+require('./utils/sockets')

@@ -2,10 +2,12 @@ import { Router, Request, Response } from 'express'
 import passport from 'passport'
 import JWT from 'jsonwebtoken'
 import User from 'models/User'
-import { setExpirationDate } from 'libs/user-expirations'
-import runValidators from 'libs/account-validations'
+import { setExpirationDate } from 'utils/user-expirations'
+import runValidators from 'utils/account-validations'
 import { v4 as uuid } from 'uuid'
-const { SESSION_SECRET } = process.env
+import { sendEmailConfirmationCode } from 'utils/account.utils'
+import { AES as crypt, enc } from 'crypto-js'
+const { SESSION_SECRET, EPROC_KEY } = process.env
 const router = Router()
 
 const signToken = (iis: string, userId: string) => {
@@ -16,7 +18,7 @@ const signToken = (iis: string, userId: string) => {
 		},
 		SESSION_SECRET as string,
 		{ expiresIn: '1h' }
-    )
+	)
 }
 
 router.post('/auth', (req: Request, res: Response, next) => {
@@ -69,9 +71,11 @@ router.post('/join', async (req, res) => {
 				enteredname: data.username,
 				username: data.username.toLowerCase(),
 				isPermanentAccount: true,
+				isEmailVerified: false,
 			})
 			user.keyOrPwd = await user.hashKeyOrPwd(data.pwd)
 			user.save()
+			sendEmailConfirmationCode(req, user)
 			res.json({ ok: true })
 		} else {
 			res.json({ ...validator })
@@ -81,31 +85,55 @@ router.post('/join', async (req, res) => {
 	}
 })
 
+router.post('/verifyEmailKey', async (req, res) => {
+	const { encToken } = req.body
+	try {
+		const bytes = crypt.decrypt(encToken, EPROC_KEY as string)
+		const decToken = JSON.parse(bytes.toString(enc.Utf8))
+		const tokenObj = JWT.verify(decToken.token, EPROC_KEY as string) as any
+		const user = await User.findOne({ email: tokenObj.em })
+
+		if (user?.emailConfirmationCode === tokenObj.ky) {
+			if (!user?.isEmailVerified) {
+				await user?.updateOne({ $set: { isEmailVerified: true } })
+				res.json({ wasEmailVerified: true, ok: true })
+			} else {
+				res.json({ ok: false })
+			}
+		} else {
+			res.json({ wasEmailVerified: false, ok: false })
+		}
+	} catch (error) {
+		res.json({
+			wasEmailVerified: false,
+			ok: false,
+			stack: process.env.NODE_ENV === 'development' ? error.stack : '_',
+		})
+	}
+})
+
 router.post('/tst_check', (req: Request, res: Response) => {
-    const { enteredKey } = req.body
-    if(enteredKey === 'tq_check_tst_init'){
-        if(req.tst.tst === undefined){
-            res.json({ isTester: false })
-        }
-        else {
-            const tokenObj = (JWT.verify(req.tst.tst, SESSION_SECRET as string) as any);
-            if(tokenObj){
-                if(Date.now() / 1000 < tokenObj.exp){
-                    res.json({ isTester: true })
-                }else{
-                    req.tst.reset();
-                    res.json({ isTester: false })
-                }
-            }
-        }
-    }
-	else if (enteredKey === '722d316') {
-        req.tst.tst = signToken('tst', uuid())
+	const { enteredKey } = req.body
+	if (enteredKey === 'tq_check_tst_init') {
+		if (req.tst.tst === undefined) {
+			res.json({ isTester: false })
+		} else {
+			const tokenObj = JWT.verify(req.tst.tst, SESSION_SECRET as string) as any
+			if (tokenObj) {
+				if (Date.now() / 1000 < tokenObj.exp) {
+					res.json({ isTester: true })
+				} else {
+					req.tst.reset()
+					res.json({ isTester: false })
+				}
+			}
+		}
+	} else if (enteredKey === '722d316') {
+		req.tst.tst = signToken('tst', uuid())
 		res.json({ isTester: true })
-    }
-    else {
+	} else {
 		res.json({ isTester: false })
-    }
+	}
 })
 
 router.use((_req, res) => {
