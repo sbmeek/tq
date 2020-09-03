@@ -36,8 +36,10 @@ io.on('connection', async (socket) => {
 	console.log(`Connections: ${conns}`)
 
 	socket.on('tq:init-user', (data) => {
-		const { username } = data
+        const { username } = data
+        
 		if (username !== undefined) {
+            console.log(username)
 			socket.handshake.query.username = username
 			addUser(username, socket.id)
 		}

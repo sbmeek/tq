@@ -55,7 +55,11 @@ app.use('/user', userRoutes)
 
 // Static files
 if(process.env.NODE_ENV === 'production'){
-    app.use(express.static(path.resolve(path.join('..', 'client', 'build'))))
+    const clientBuildPath = path.resolve(path.join('..', 'client', 'build'));
+    app.use(express.static(clientBuildPath))
+    app.get('*', (_req, res) => {
+        res.sendFile(path.join(clientBuildPath, 'index.html'))
+    })
 }
 
 export const server = app.listen(app.get('port'), () =>

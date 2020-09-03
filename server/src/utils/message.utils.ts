@@ -17,10 +17,9 @@ export const sendMessage = async function <
 				},
 			},
 			{ new: true }
-		)
-        console.log(_tempUser!.messages)
+        )
         const userSockets = onlineUsers.get(username);
-        for(let e of userSockets!){
+        for(const e of userSockets!){
             io.to(e).emit('msg:new', _tempUser!.messages)
         }
 		socket.emit('msg:send', { success: true, sent: true })

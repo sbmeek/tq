@@ -48,10 +48,7 @@ const uSchema = new Schema({
 		required: true,
 		unique: true,
 	},
-	email: {
-		type: String,
-		unique: true,
-	},
+	email: { type: String },
 	emailConfirmationCode: { type: String },
 	isEmailVerified: { type: Boolean },
 	isPermanentAccount: { type: Boolean },
