@@ -10,7 +10,9 @@
         "i-server": "cd server && npm install",
         "b-server": "cd server && npm run build",
         "b-client": "cd client && npm run build",
-        "heroku-postbuild": "npm run b-server && npm run i-server && npm run b-client && npm run i-client",
+        "heroku-prebuild": "npm run i-server",
+        "heroku-postinstall": "npm run b-server && npm run b-client",
+        "heroku-postbuild": "npm run i-client",
         "start": "cd server && npm start"
 	},
 	"repository": {
@@ -26,7 +28,6 @@
 	"homepage": "https://github.com/SBMeek/tq#readme",
 	"devDependencies": {
 		"concurrently": "^5.2.0",
-		"prettier": "2.0.5",
-		"typescript": "^3.9.7"
+		"prettier": "2.0.5"
 	}
 }
