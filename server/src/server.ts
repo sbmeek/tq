@@ -53,6 +53,11 @@ app.use(morgan('dev'))
 // Routes
 app.use('/user', userRoutes)
 
+// Static files
+if(process.env.NODE_ENV === 'production'){
+    app.use(express.static('../../client/build'))
+}
+
 export const server = app.listen(app.get('port'), () =>
 	console.log('\x1b[32m%s\x1b[0m', `Server running :${app.get('port')}`)
 )

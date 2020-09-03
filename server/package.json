@@ -7,7 +7,10 @@
 		"dev": "cross-env NODE_PATH=./dist tsc-watch --onSuccess \"node ./dist/server.js\"",
 		"tsn": "NODE_PATH=./src nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec 'ts-node' src/server.ts",
 		"start": "NODE_PATH=./dist node ./dist/server.js",
-		"build": "tsc"
+        "build": "tsc",
+        "i-client": "cd .. && cd client && npm install", 
+        "b-client": "cd .. && cd client && npm run build",
+        "heroku-postbuild": "npm run build && npm run i-client && npm run b-client"
 	},
 	"repository": {
 		"type": "git",
