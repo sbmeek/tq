@@ -71,7 +71,7 @@ export default function LinkIdx() {
 								</>
 								:
 								<>
-									{lang['BtnCopyLink']}
+									<span> {lang['BtnCopyLink']} </span>
 									<img src={copy} alt="copy"/>
 								</> 
 							}
@@ -103,7 +103,7 @@ export default function LinkIdx() {
 				<div styleName="col">
 					<Link to="/messages" styleName="a_btn-tq">
 						<button type="button" styleName="_btn-tq">
-							{lang['BtnInbox']}
+							<span>{lang['BtnInbox']}</span>
 							<img src={tqIcon} alt="logo"/>
 						</button>
 					</Link>
