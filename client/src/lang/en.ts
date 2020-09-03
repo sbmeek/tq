@@ -58,6 +58,8 @@ export default {
             }
         },
         Login: {
+            CredentialsErrMsg: "Incorrect credentials, check and try again.",
+            EmailNotVerified: "Your credentials are correct, but we need you to confirm your email before logging in.",
             UsernameOrEmail: "Username or email",
             Pwd: "Password",
             BtnLogin: "Log in",

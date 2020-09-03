@@ -4,6 +4,7 @@ import { useLocation } from 'react-router'
 import './VerifyAccount.css'
 import arrow from 'assets/images/flecha-roja.png'
 import { InitContext } from 'global/context/InitContext'
+import { Link } from 'react-router-dom'
 
 
 export default function VerifyAccount() {
@@ -44,7 +45,7 @@ export default function VerifyAccount() {
                     {
                         isVerificationOk &&
                         <div styleName="login-arrow-container">
-                            <span styleName="toggler">{lang['LogInBtn']}</span>
+                            <Link to="/?opt=show-login" styleName="toggler">{lang['LogInBtn']}</Link>
                             <img src={arrow} alt="arrow" styleName="arrow" />
                         </div>
                     }

@@ -72,7 +72,6 @@ uSchema.methods.compareKeyOrPwd = async (
 	KeyOrPwd: string,
 	isPermanentAccount: boolean
 ) => {
-	console.log(DBKeyOrPwd, KeyOrPwd, isPermanentAccount)
 	if (isPermanentAccount) return await bcrypt.compare(KeyOrPwd, DBKeyOrPwd)
 	else return await bcrypt.compare(DBKeyOrPwd, KeyOrPwd)
 }

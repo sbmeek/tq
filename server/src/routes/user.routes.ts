@@ -23,14 +23,20 @@ const signToken = (iis: string, userId: string) => {
 
 router.post('/auth', (req: Request, res: Response, next) => {
 	passport.authenticate('local', { session: false }, (err, user) => {
-		if (err) console.error(err)
-		if (!user) {
+		if (err !== null && err.emailNotVerified) {
+            res.json({ 
+                authenticated: false, 
+                ok: false,
+                emailNotVerified: true 
+            })
+		}
+		else if (!user) {
 			res.json({ ok: false })
 		} else {
 			const { _id, enteredname } = user
 			const token = signToken('proc', _id)
 			req.proc!.proc = token
-			res.status(200).json({ authenticated: true, enteredname, ok: true })
+			res.json({ authenticated: true, enteredname, ok: true })
 		}
 	})(req, res, next)
 })

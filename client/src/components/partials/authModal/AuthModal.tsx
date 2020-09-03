@@ -1,4 +1,4 @@
-import React, { useState, useContext, Fragment } from 'react'
+import React, { useState, useContext, Fragment, useEffect } from 'react'
 import './AuthModal.css'
 import Signup from './signup/Signup'
 import facebookLogo from 'assets/images/icons/share-icons/facebook.svg'
@@ -12,14 +12,14 @@ export default function AuthModal<
 	T extends {
 		opened: boolean
 		setOpened: React.Dispatch<React.SetStateAction<boolean>>
-		setShowMenu: React.Dispatch<React.SetStateAction<boolean>>
+        setShowMenu: React.Dispatch<React.SetStateAction<boolean>>
 	}
 >({ opened, setOpened, setShowMenu }: T) {
 	const { AuthModal: lang } = useContext(InitContext).state.lang
 
 	const [showSignedupComp, setShowSignedupComp] = useState(false)
 	const [showLogin, setShowLogin] = useState(true)
-	const [errMsg, setErrMsg] = useState('')
+    const [errMsg, setErrMsg] = useState('')
 
 	const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
 		const targetElement = e.target as HTMLDivElement

@@ -36,7 +36,6 @@ passport.use(
 			passwordField: 'tqpwd',
 		},
 		async (tquser: string, tqpwd: string, done: CallableFunction) => {
-            console.log(tquser, tqpwd)
 			tquser = tquser.toLowerCase()
 			try {
 				const user = (await User.findOne({
@@ -50,7 +49,11 @@ passport.use(
 							user.isPermanentAccount
 						)
 					) {
-						done(null, user)
+                        if(user.isPermanentAccount && !user.isEmailVerified){
+                            done({ emailNotVerified: true }, false)
+                            return;
+                        }
+                        done(null, user)
 					} else {
 						done(null, false)
 					}

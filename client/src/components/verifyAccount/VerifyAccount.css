@@ -67,10 +67,10 @@
     filter: drop-shadow(0px 0px 1px black) contrast(5.5) invert(.97) saturate(1) sepia(0.001) brightness(.9);
 }
 
-.login-arrow-container:hover>span{
+.login-arrow-container:hover>.toggler{
 	color: var(--tq-blue-02);
 }
 
-.login-arrow-container>span{
+.login-arrow-container>.toggler{
     font-size: 35px;
 }

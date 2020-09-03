@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react'
 import flecha from 'assets/images/flecha-roja.png'
 import menulog from 'assets/images/menu-logo.png'
 import FirstTimeHelpBox from '../firstTimeHelpBox/FirstTimeHelpBox'
-import RegisterModal from '../authModal/AuthModal'
+import AuthModal from '../authModal/AuthModal'
 import './Menu.css'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import home from 'assets/images/icons/icons-menu/icon-home.svg'
 import cloud from 'assets/images/icons/icons-menu/icon-cloud.svg'
 import account from 'assets/images/icons/icons-menu/icon-account.svg'
@@ -18,11 +18,21 @@ export default function Menu() {
 	const [showNewUserModal, setShowNewUserModal] = useState(false)
 	const [showMenu, setShowMenu] = useState(false)
 	const [enoughSpace, setEnoughSpace] = useState(false)
-	const [showRegisterModal, setShowRegisterModal] = useState(false)
-
+    const [showAuthModal, setShowAuthModal] = useState(false)
+    
 	const { isAuthenticated } = useSelector((state: RootStateOrAny) => state.auth)
     const dispatch = useDispatch()
+
+    const location = useLocation();
     
+    useEffect(() => {
+        const params = new URLSearchParams(location.search)
+        let opt = params.get('opt') || '';
+        if(opt === 'show-login'){
+            setShowAuthModal(true)
+        }
+    }, [location.search])
+
 	useEffect(() => {
 		setTimeout(() => {
 			if (!localStorage.getItem('sbm-tq-ft')) {
@@ -51,7 +61,7 @@ export default function Menu() {
 	}
 
 	const handleRegisterClick = () => {
-		setShowRegisterModal(true)
+		setShowAuthModal(true)
 	}
 
 	const handleLogoutClick = async () => {
@@ -137,10 +147,10 @@ export default function Menu() {
 				</div>
 			</div>
 			{isUserNew && <FirstTimeHelpBox active={showNewUserModal} />}
-			<RegisterModal
-				opened={showRegisterModal}
-				setOpened={setShowRegisterModal}
-				setShowMenu={setShowMenu}
+			<AuthModal
+				opened={showAuthModal}
+				setOpened={setShowAuthModal}
+                setShowMenu={setShowMenu}
 			/>
 		</div>
 	)

@@ -37,8 +37,11 @@ export default function Login<T extends {
 				fields
             )
 
-            if(!res.data.ok){
-                setErrMsg('Credenciales incorrectas, verifique e intentelo de nuevo.')
+            if(res.data.emailNotVerified){
+                setErrMsg(lang['EmailNotVerified'])
+            }
+            else if(!res.data.ok){
+                setErrMsg(lang['CredentialsErrMsg'])
             }
             else {
                 setIsModalOpened(false)
