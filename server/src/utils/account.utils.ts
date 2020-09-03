@@ -35,7 +35,7 @@ export const sendEmailConfirmationCode = async (
             const encToken = crypt.encrypt(JSON.stringify({ token }), EPROC_KEY as string).toString();
 
             const href = process.env.NODE_ENV === 'production' ? origin as string : 'http://localhost:3000/';
-            console.log(href)
+            
 			const mailOptions: SendMailOptions = {
 				to: user.email,
 				from: G_MAIL_ACCOUNT,
