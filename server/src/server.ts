@@ -12,7 +12,7 @@ const { SESSION_SECRET } = process.env
 const app = express()
 require('./database') // Establishes db connection
 import(
-	path.join(__dirname, 'libs', 'user-expirations')
+	path.join(__dirname, 'utils', 'user-expirations')
 ).then((userExpirations) => userExpirations.checkExpirations()) // Defines and starts agenda (job: check user expirations at 00:00 daily)
 
 // Settings

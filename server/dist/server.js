@@ -35,7 +35,7 @@ require('dotenv').config();
 const { SESSION_SECRET } = process.env;
 const app = express_1.default();
 require('./database'); // Establishes db connection
-Promise.resolve().then(() => __importStar(require(path_1.default.join(__dirname, 'libs', 'user-expirations')))).then((userExpirations) => userExpirations.checkExpirations()); // Defines and starts agenda (job: check user expirations at 00:00 daily)
+Promise.resolve().then(() => __importStar(require(path_1.default.join(__dirname, 'utils', 'user-expirations')))).then((userExpirations) => userExpirations.checkExpirations()); // Defines and starts agenda (job: check user expirations at 00:00 daily)
 // Settings
 app.set('port', process.env.PORT || 2017);
 app.set('favicon', path_1.default.join(__dirname, '../favicon.ico'));
