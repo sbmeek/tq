@@ -1,4 +1,4 @@
-import React, { useState, useContext, Fragment, useEffect } from 'react'
+import React, { useState, useContext, Fragment } from 'react'
 import './AuthModal.css'
 import Signup from './signup/Signup'
 import facebookLogo from 'assets/images/icons/share-icons/facebook.svg'

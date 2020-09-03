@@ -34,6 +34,8 @@ export const sendEmailConfirmationCode = async (
 
             const encToken = crypt.encrypt(JSON.stringify({ token }), EPROC_KEY as string).toString();
 
+            const href = process.env.NODE_ENV === 'production' ? origin as string : 'http://localhost:3000/';
+            console.log(href)
 			const mailOptions: SendMailOptions = {
 				to: user.email,
 				from: G_MAIL_ACCOUNT,
@@ -45,7 +47,7 @@ export const sendEmailConfirmationCode = async (
                     <h4>Ahora confirme su cuenta</h4>
                     <p>Haz click en "Continuar" para confirmar tu cuenta, bienvenido a nuestra plataforma.</p>
                     <div style="text-align: right;">
-                        <a href="${origin}account/verify?t=${encodeURIComponent(encToken)}">Continuar</a>
+                        <a href="${href}account/verify?t=${encodeURIComponent(encToken)}">Continuar</a>
                     </div>
                 </div>
             </div>

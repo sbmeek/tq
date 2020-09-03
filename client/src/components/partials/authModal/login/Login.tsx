@@ -7,12 +7,14 @@ import x from 'assets/images/icons/share-icons/icon-x.svg'
 import { useDispatch } from 'react-redux'
 import { getAuthInfoAction } from 'global/ducks/authDucks'
 
-export default function Login<T extends {
-    errMsg: string;
-    setErrMsg: React.Dispatch<React.SetStateAction<string>>;
-    setIsModalOpened: React.Dispatch<React.SetStateAction<boolean>>
-    setShowMenu: React.Dispatch<React.SetStateAction<boolean>>
-}>({ errMsg, setErrMsg, setIsModalOpened, setShowMenu }: T) {
+export default function Login<
+	T extends {
+		errMsg: string
+		setErrMsg: React.Dispatch<React.SetStateAction<string>>
+		setIsModalOpened: React.Dispatch<React.SetStateAction<boolean>>
+		setShowMenu: React.Dispatch<React.SetStateAction<boolean>>
+	}
+>({ errMsg, setErrMsg, setIsModalOpened, setShowMenu }: T) {
 	const {
 		AuthModal: { Login: lang },
 	} = useContext(InitContext).state.lang
@@ -20,9 +22,9 @@ export default function Login<T extends {
 	const [fields, setFields] = useState({
 		usernameOrEmail: '',
 		pwd: '',
-    })
-    
-    const dispatch = useDispatch();
+	})
+
+	const dispatch = useDispatch()
 
 	const handleFieldChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const targetElement = e.target as HTMLInputElement
@@ -35,19 +37,18 @@ export default function Login<T extends {
 			const res = await Axios.post(
 				`/user/auth?tquser=${fields.usernameOrEmail}&tqpwd=${fields.pwd}`,
 				fields
-            )
+			)
 
-            if(res.data.emailNotVerified){
-                setErrMsg(lang['EmailNotVerified'])
-            }
-            else if(!res.data.ok){
-                setErrMsg(lang['CredentialsErrMsg'])
-            }
-            else {
-                setIsModalOpened(false)
-                setShowMenu(false)
-                dispatch(getAuthInfoAction())
-            }
+			if (res.data.emailNotVerified) {
+				setErrMsg(lang['EmailNotVerified'])
+			} else if (!res.data.ok) {
+				setErrMsg(lang['CredentialsErrMsg'])
+			} else {
+				setErrMsg('')
+				setIsModalOpened(false)
+				setShowMenu(false)
+				dispatch(getAuthInfoAction())
+			}
 		} catch (error) {
 			console.error(error)
 		}
