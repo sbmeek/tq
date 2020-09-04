@@ -59,14 +59,14 @@
 	max-height: 25px;
 	margin: 11px -20.8px 0 0;
 	cursor: pointer;
-	transition: transform 600ms;
+	transition: transform 500ms;
 }
 
 .btn-menu > img:nth-child(2) {
 	max-width: 83px;
 	max-height: 83px;
 	cursor: pointer;
-	transition: transform 600ms;
+	transition: transform 300ms;
 }
 
 .btn-menu.active {
@@ -117,7 +117,7 @@
 }
 
 .sidebar.active {
-	transform: translateX(-55%) !important;
+	transform: translateX(-88%) !important;
 	opacity: 1 !important;
 }
 

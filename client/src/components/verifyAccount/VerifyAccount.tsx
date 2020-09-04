@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react'
 import Axios from 'axios'
 import { useLocation } from 'react-router'
 import './VerifyAccount.css'
-import arrow from 'assets/images/flecha-roja.png'
+import arrow from 'assets/images/left-arrow.svg'
 import { InitContext } from 'global/context/InitContext'
 import { Link } from 'react-router-dom'
 

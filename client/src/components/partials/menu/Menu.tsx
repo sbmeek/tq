@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import flecha from 'assets/images/flecha-roja.png'
-import menulog from 'assets/images/menu-logo.png'
+import flecha from 'assets/images/left-arrow.svg'
+import menulog from 'assets/images/menu-tq.svg'
 import FirstTimeHelpBox from '../firstTimeHelpBox/FirstTimeHelpBox'
 import AuthModal from '../authModal/AuthModal'
 import './Menu.css'

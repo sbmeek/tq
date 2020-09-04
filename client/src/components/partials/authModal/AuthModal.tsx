@@ -5,7 +5,7 @@ import facebookLogo from 'assets/images/icons/share-icons/facebook.svg'
 import googleLogo from 'assets/images/icons/share-icons/google.svg'
 import Login from './login/Login'
 import { InitContext } from 'global/context/InitContext'
-import arrow from 'assets/images/flecha-roja.png'
+import arrow from 'assets/images/left-arrow.svg'
 import tqLogo from 'assets/images/ltqrNEW.png'
 
 export default function AuthModal<
