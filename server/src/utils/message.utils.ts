@@ -17,11 +17,13 @@ export const sendMessage = async function <
 				},
 			},
 			{ new: true }
-        )
-        const userSockets = onlineUsers.get(username);
-        for(const e of userSockets!){
-            io.to(e).emit('msg:new', _tempUser!.messages)
-        }
+		)
+		const userSockets = onlineUsers.get(username)
+		if (userSockets !== undefined) {
+			for (const e of userSockets!) {
+				io.to(e).emit('msg:new', _tempUser!.messages)
+			}
+		}
 		socket.emit('msg:send', { success: true, sent: true })
 	} catch (error) {
 		console.error(error)

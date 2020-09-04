@@ -1,6 +1,6 @@
 {
 	"name": "tq",
-	"version": "1.0.0",
+	"version": "0.8.0",
 	"description": "<p align=\"center\">\r   <img src=\"https://avatars0.githubusercontent.com/t/3800248?s=280&v=4\" title=\"TQ\"/>\r </p>\r </br>",
 	"main": "index.js",
 	"scripts": {
@@ -10,9 +10,9 @@
         "i-server": "cd server && npm install",
         "b-server": "cd server && npm run build",
         "b-client": "cd client && npm run build",
-        "prod": "git checkout prod && git merge master && concurrently -n \"server-build,client-build\" -c 'green,blue' \"cd server && npm run build\" \"cd client && npm run build\"",
+        "build": "npm run b-server && npm run b-client",
+        "prod": "git checkout prod && git merge master",
         "heroku-prebuild": "npm run i-server",
-        "heroku-postinstall": "npm run b-server && npm run b-client",
         "heroku-postbuild": "npm run i-client",
         "start": "cd server && npm start"
 	},

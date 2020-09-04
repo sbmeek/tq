@@ -39,7 +39,6 @@ io.on('connection', async (socket) => {
         const { username } = data
         
 		if (username !== undefined) {
-            console.log(username)
 			socket.handshake.query.username = username
 			addUser(username, socket.id)
 		}
