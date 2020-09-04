@@ -146,12 +146,12 @@
 	justify-content: center;
 	align-items: center;
     padding-left: 80px;
-	font-size: 1.8rem;
 }
 
 .sidebar-title>h1{
     position: absolute;
     top: 22px;
+    font-size: 58px;
 }
 
 .btn-container{
@@ -241,5 +241,5 @@
 	border-radius: 50px 0px 0px 265px;
     background: var(--tq-red-03) 0% 0% no-repeat padding-box;
     color: #fff;
-    font-size: 1.8em;
+    font-size: 25px;
 }
