@@ -14,13 +14,22 @@
 	height: 0;
 	opacity: 0;
 	background: rgba(0, 0, 0, 0.8);
-    transition: opacity 250ms;
 }
 
 .overlay.active {
+    animation: enableOverlay 300ms;
 	height: 100vh;
 	opacity: 1;
 	z-index: 34;
+}
+
+@keyframes enableOverlay {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
 }
 
 .container {
@@ -32,7 +41,6 @@
 	color: #1b1b1b;
 	border-radius: 20px;
 	padding: 20px 40px 0 40px;
-	opacity: 0;
 	display: flex;
 	justify-content: flex-end;
     align-items: flex-end;
@@ -50,7 +58,6 @@
 }
 
 .overlay.active > .container {
-	opacity: 1;
 	display: flex;
 	justify-content: unset;
 	align-items: center;
