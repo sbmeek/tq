@@ -155,7 +155,11 @@ export default function Signup<
         e.preventDefault()
         if(getNumberOfValidFields() < 4) return;
 		try {
-			const res = await Axios.post('/user/join', fields)
+            const values: { [key:string]: string } = {};
+            for(let f in fields){
+                values[f] = fields[f].value
+            }
+			const res = await Axios.post('/user/join', values)
 			const { ok } = res.data
 			setShowSignedupComp(ok as boolean)
 			setShowLogin(ok as boolean)
