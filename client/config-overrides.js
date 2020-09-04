@@ -1,50 +1,18 @@
-const { useBabelRc, override, useEslintRc, adjustStyleLoaders, addWebpackModuleRule, addWebpackPlugin } = require('customize-cra')
-const webpack = require('webpack');
-const dotenv = require('dotenv');
+const {
+    useBabelRc,
+    override,
+    adjustStyleLoaders,
+    addPostcssPlugins
+} = require('customize-cra')
 
 module.exports = override(
+    addPostcssPlugins([require('postcss-nested')({}), require('postcss-global-nested')({})]),
     useBabelRc(),
-    useEslintRc(),
-    addWebpackPlugin(() => {
-
-        const env = dotenv.config().parsed;
-
-        const envKeys = Object.keys(env).reduce((prev, next) => {
-            prev[`process.env.${next}`] = JSON.stringify(env[next]);
-            return prev;
-        }, {});
-
-        return {
-            plugins: [
-                new webpack.DefinePlugin(envKeys)
-            ]
-        };
-    }),
-    addWebpackModuleRule({
-        test: /emoji-mart.css$/,
-        use: [
-            {
-                loader: require.resolve('style-loader'),
-                options: {
-                    attributes: { type: 'text/css' }
-                }
-            },
-            {
-                loader: require.resolve('css-loader'),
-                options: {
-                    modules: {
-                        localIdentName: '[local]',
-                    },
-                    onlyLocals: true
-                }
-            },
-        ],
-    }),
     adjustStyleLoaders((loader) => {
         const { use: [, css] } = loader;
 
         /* eslint eqeqeq: "off" */
-        loader.exclude = /node_modules/;
+        loader.exclude = /emoji-mart$/;
         css.options = {
             modules: {
                 localIdentName: (process.env.NODE_ENV === 'development'
@@ -53,13 +21,5 @@ module.exports = override(
                 ),
             },
         }
-        if (loader.test.toString() == /emoji-mart.css$/) {
-            delete loader.exclude
-            css.options = {
-                modules: {
-                    localIdentName: '[local]',
-                },
-            }
-        }
-    })
+    }),
 )

@@ -24,7 +24,7 @@ import {
 import { Slate, Editable, withReact, ReactEditor } from 'slate-react'
 import { InitContext } from 'global/context/InitContext'
 import { Picker, BaseEmoji } from 'emoji-mart'
-import 'emoji-mart/css/emoji-mart.css'
+// import 'emoji-mart/css/emoji-mart.css'
 
 interface IProps {
 	answer: string
@@ -45,20 +45,18 @@ export default function TemplateEditor({
 	handleFormSubmit,
 	templateQuestionContainer,
 }: IProps) {
-	const [showEmojiPicker, setShowEmojiPicker] = useState(false)
-	const {
-		lang: { TemplateEditor: lang },
-	} = useContext(InitContext).state
-	const InitialStateOptsVisibility: { [key: string]: boolean } = {
+	const InitialOptsVisibility: { [key: string]: boolean } = {
 		bgColorsOptShown: false,
 		labelsOptShown: false,
 	}
-	const [optsVisibility, setOptsVisibility] = useState(
-		InitialStateOptsVisibility
-	)
+	const [optsVisibility, setOptsVisibility] = useState(InitialOptsVisibility)
+	const [showEmojiPicker, setShowEmojiPicker] = useState(false)
 	const optsSwipe = useRef<HTMLDivElement>(null)
 	const emojiPicker = useRef<Picker>(null)
 	const editor = useMemo(() => withReact(createEditor()), [])
+	const {
+		lang: { TemplateEditor: lang },
+	} = useContext(InitContext).state
 	const [editorVal, setEditorVal] = useState<any[]>([
 		{
 			children: [{ text: '' }],
@@ -82,20 +80,19 @@ export default function TemplateEditor({
 		let _dsrdOpt = getDesiredOpt(targetElement.id)
 		let desiredOpt = Object.keys(_dsrdOpt)[0]
 		let _optsVisibility = {
-			...InitialStateOptsVisibility,
+			...InitialOptsVisibility,
 			[Object.keys(_dsrdOpt)[0]]: true,
 		}
 
-		if (targetElement.id === 'text')
-			_optsVisibility = InitialStateOptsVisibility
+		if (targetElement.id === 'text') _optsVisibility = InitialOptsVisibility
 
 		if (optSwp!.classList.contains('opts-swipe_actv')) {
 			if (optsVisibility[desiredOpt]) {
 				optSwp.classList.remove('opts-swipe_actv')
-				_optsVisibility = InitialStateOptsVisibility
+				_optsVisibility = InitialOptsVisibility
 			} else {
 				_optsVisibility = {
-					...InitialStateOptsVisibility,
+					...InitialOptsVisibility,
 					[Object.keys(_dsrdOpt)[0]]: true,
 				}
 			}
@@ -157,16 +154,16 @@ export default function TemplateEditor({
 				showPreview={false}
 				showSkinTones={false}
 				onSelect={(e: BaseEmoji) => insertEmoji(e)}
-				set="apple"
+				native
 				theme="dark"
 				style={{
-                    opacity: showEmojiPicker ? '1' : '0',
-                    zIndex: showEmojiPicker ? 4 : -1,
+					opacity: showEmojiPicker ? '1' : '0',
+					zIndex: showEmojiPicker ? 35 : -1,
 					position: 'absolute',
-					top: '1%',
-					height: '267px',
-					transition: 'opacity 150ms',
+					top: '0%',
+					height: '245px',
 				}}
+				emojiSize={20}
 				ref={emojiPicker}
 			/>
 			<div styleName="answer-editor">
@@ -211,7 +208,10 @@ export default function TemplateEditor({
 							</div>
 							<button
 								type="button"
-								onClick={() => setShowEmojiPicker(!showEmojiPicker)}
+                                onClick={() => setShowEmojiPicker(!showEmojiPicker)}
+                                style={{
+                                    color: showEmojiPicker ?  'ButtonHighlight' : 'var(--tq-gray-00)'
+                                }}
 							>
 								<i className="material-icons">emoji_emotions</i>
 							</button>
@@ -246,18 +246,16 @@ export default function TemplateEditor({
 								<img src={textIcon} alt="text icon" />
 							</button>
 							<button type="button" onClick={toggleOptSwipe} id="bg-colors">
-							<img src={bg} alt="icon" />
+								<img src={bg} alt="icon" />
 							</button>
 							<button type="button" onClick={toggleOptSwipe} id="labels">
-
-							<img src={labelicon} alt=" icon" />
-
+								<img src={labelicon} alt=" icon" />
 							</button>
 							<button type="button" onClick={toggleOptSwipe}>
-							<img src={stickers} alt="icon" />
+								<img src={stickers} alt="icon" />
 							</button>
 							<button type="button" onClick={toggleOptSwipe}>
-							<img src={org} alt="icon" />
+								<img src={org} alt="icon" />
 							</button>
 						</div>
 					</div>

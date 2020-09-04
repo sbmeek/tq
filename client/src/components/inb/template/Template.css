@@ -51,10 +51,6 @@
 	font-size: 46px;
 }
 
-.btn-back:focus {
-	background: none;
-}
-
 .question-container {
 	position: relative;
 	background: rgb(255, 72, 72);
