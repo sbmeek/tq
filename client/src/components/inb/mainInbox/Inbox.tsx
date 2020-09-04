@@ -1,9 +1,4 @@
-import React, {
-	useState,
-	useContext,
-	MouseEvent,
-	useEffect,
-} from 'react'
+import React, { useState, useContext, MouseEvent, useEffect } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
 import styles from './Inbox.css'
 import icon from 'assets/images/icon.png'
@@ -13,7 +8,6 @@ import SimpleBar from 'simplebar-react'
 import ShareOrSaveModal from '../shareOrSaveModal/ShareOrSaveModal'
 import report from 'assets/images/icons/icons-inbox/icon-report.png'
 import delet from 'assets/images/icons/icons-inbox/icon-delete.png'
-import arrowanswer from 'assets/images/icons/icons-inbox/icon-arrow-answer.svg'
 
 export default function Inbox<
 	T extends {
@@ -141,13 +135,13 @@ export default function Inbox<
 										<div>
 											<span styleName="sender-name">An&oacute;nimo</span>
 											<button styleName="btn-report">
-												<img src={report}  alt="report"/>
+												<img src={report} alt="report" />
 											</button>
 										</div>
 										<li styleName="msg-li">
 											<span styleName="msg-content">"{msg.content}"</span>
 											<button styleName="btn-delete">
-												<img src={delet} alt="delete"/>
+												<img src={delet} alt="delete" />
 											</button>
 										</li>
 										<button
@@ -155,8 +149,6 @@ export default function Inbox<
 											onClick={(e) => handleAnswerMsgClick(e, msg._id)}
 										>
 											<span>answer</span>
-											<img src={arrowanswer} alt="arrow"/>
-
 										</button>
 									</div>
 								))}

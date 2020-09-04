@@ -200,13 +200,14 @@
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
     border: 0px solid #000000;
-	transition: ease-in-out 0.22s;
+	transition: border-radius 200ms cubic-bezier(0, 0.44, 0.98, 1.45), height 200ms;
     position: relative;
 }
+
 .msg-container:hover {
-	transform: scale(1.1);
-	transition: ease-in 0.22s;
+    border-radius: 20px;
 }
+
 .msg-container:nth-last-child(1) {
 	margin-bottom: 0 !important;
 }
@@ -225,6 +226,7 @@
 .msg-container.opened{
     height: 100px !important;
 }
+
 .msg-container.opened:hover{
 	transform: none;
 }
@@ -306,19 +308,24 @@
     opacity: .6;
 }
 
+.msg-btn-answer{
+    background: var(--tq-gray-00);
+    color: #fff;
+}
+
 .msg-container.opened>.msg-btn-answer{
-	background: var(--tq-gray-00);
 	width: 100%;
 	left: 0;
 	top: calc(100% - 26px);
 	height: 28px;
-	color: #fff;
 	border-radius: 0 0 10px 10px;
 	cursor: pointer;
 	justify-content: center;
 	display: flex;
-	align-items: center;
+    align-items: center;
+    transition: background 150ms;
 }
+
 .msg-container.opened>.msg-btn-answer>span{
 	display: block;
 	transition: transform 150ms ease-out;
@@ -331,17 +338,8 @@
 	width: 22px;
 
 }
-.msg-container.opened>.msg-btn-answer:hover>span{
-	transform: translateX(500px);
-}
-.msg-container.opened>.msg-btn-answer:hover>img{
-	transform: translateX(0);
-	opacity: 1;
-
-}
 
 .msg-container.opened>.msg-btn-answer:hover{
-    transition: background 150ms;
     background: var(--tq-gray-02) !important;
 }
 
