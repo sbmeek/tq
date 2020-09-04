@@ -67,6 +67,7 @@ export default function AuthModal<
                                             />
                                         ) : (
                                             <Signup
+                                                setOpened={setOpened}
                                                 setShowSignedupComp={setShowSignedupComp}
                                                 setShowLogin={setShowLogin}
                                             />

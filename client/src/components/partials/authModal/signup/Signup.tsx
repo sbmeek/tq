@@ -1,27 +1,64 @@
-import React, { useState, useContext, useEffect, useCallback } from 'react'
+import React, {
+	useState,
+	useContext,
+	useEffect,
+	useCallback,
+	useRef,
+} from 'react'
 import Axios from 'axios'
 import { Link } from 'react-router-dom'
 import { InitContext } from 'global/context/InitContext'
 import parse from 'html-react-parser'
 import account from 'assets/images/icons/share-icons/icon-account.svg'
-import x from 'assets/images/icons/share-icons/icon-x.svg'
+import xIcon from 'assets/images/icons/share-icons/icon-x.svg'
+import errorIcon from 'assets/images/icons/icons-signup/error-icon.svg'
+import okIcon from 'assets/images/icons/icons-signup/ok-icon.svg'
 import { LoaderEye } from 'components/partials/loader/Loader'
-
 import './Signup.css'
+
 export default function Signup<
 	T extends {
 		setShowSignedupComp: React.Dispatch<React.SetStateAction<boolean>>
-		setShowLogin: React.Dispatch<React.SetStateAction<boolean>>
+        setShowLogin: React.Dispatch<React.SetStateAction<boolean>>
+        setOpened: React.Dispatch<React.SetStateAction<boolean>>
 	}
->({ setShowLogin, setShowSignedupComp }: T) {
-	const [fields, setFields] = useState<{ [key: string]: string }>({})
+>({ setShowLogin, setShowSignedupComp, setOpened: setShowAuthModal }: T) {
+	const [fields, setFields] = useState<{
+		[key: string]: {
+			value: string
+			valid: boolean | null
+			loading: boolean
+			timerID: NodeJS.Timeout | null
+		}
+	}>({
+		username: {
+			value: '',
+			valid: null,
+			loading: false,
+			timerID: null,
+		},
+		email: {
+			value: '',
+			valid: null,
+			loading: false,
+			timerID: null,
+		},
+		pwd: {
+			value: '',
+			valid: null,
+			loading: false,
+			timerID: null,
+		},
+		cpwd: {
+			value: '',
+			valid: null,
+			loading: false,
+			timerID: null,
+		},
+	})
 	const [focusedFieldId, setFocusedFieldId] = useState('')
-	const [isFocusedFieldLoading, setIsFocusedFieldLoading] = useState(false)
-	const [isFieldErrored, setIsFieldErrored] = useState(false)
-	const [validFields, setValidFields] = useState<{ [key: string]: boolean }>({})
-
 	const { Signup: lang } = useContext(InitContext).state.lang.AuthModal
-	let timerID: NodeJS.Timeout
+	const btnCreate = useRef<HTMLButtonElement>(null)
 
 	const isEmail = (email: string) => {
 		const regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -53,52 +90,70 @@ export default function Signup<
 	const handleFieldChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const targetElement = e.target as HTMLInputElement
 		const val = targetElement.value
+		const id = targetElement.id
 
-		if (isFieldErrored || isFocusedFieldLoading) {
-			clearTimeout(timerID)
-		}
-
-		if (targetElement.value) {
-			setIsFocusedFieldLoading(true)
-			timerID = setTimeout(async () => {
+		clearTimeout(fields[id].timerID as NodeJS.Timeout)
+		if (val) {
+			setFields((fields) => ({
+				...fields,
+				[id]: { ...fields[id], value: val, loading: true },
+			}))
+			fields[id].timerID = setTimeout(async () => {
 				let isErrored = true
-				switch (targetElement.id) {
+				switch (id) {
 					case 'username':
 						isErrored = await valdUsername(val)
-						setIsFieldErrored(isErrored)
 						break
 					case 'email':
 						isErrored = isEmail(val)
-						setIsFieldErrored(isErrored)
 						break
 					case 'pwd':
 						isErrored = validatePwd(val)
-						setIsFieldErrored(isErrored)
 						break
 					case 'cpwd':
-						isErrored = fields!.pwd !== targetElement.value
-						setIsFieldErrored(isErrored)
+						isErrored = fields!.pwd.value !== val
 						break
 				}
-				if (isErrored) {
-					if (validFields[targetElement.id] !== undefined) {
-						delete validFields[targetElement.id]
-						setValidFields(validFields)
-					}
-					targetElement.setAttribute('data-is-valid', 'false')
-				} else {
-					setFocusedFieldId(document.activeElement!.id || '')
-					setValidFields({ ...validFields, [targetElement.id]: true })
-					targetElement.setAttribute('data-is-valid', 'true')
-				}
-				setIsFocusedFieldLoading(false)
+				targetElement.setAttribute('data-is-valid', !isErrored + '')
+				setFields((fields) => ({
+					...fields,
+					[id]: {
+						...fields[id],
+						valid: !isErrored,
+						loading: false,
+					},
+				}))
 			}, 800)
+		} else {
+			setFields((fields) => ({
+				...fields,
+				[id]: {
+					...fields[focusedFieldId],
+					valid: null,
+					value: val,
+					loading: false,
+				},
+			}))
 		}
-		setFields({ ...fields, [targetElement.id]: targetElement.value })
 	}
 
+	useEffect(() => {
+		btnCreate.current!.disabled = getNumberOfValidFields() < 4
+	})
+
+    const getNumberOfValidFields = () => {
+        let validFields = 0
+		for (let f in fields) {
+			if (fields[f].valid) {
+				validFields++
+			}
+        }
+        return validFields;
+    }
+
 	const handleFormSubmit = async (e: React.FormEvent) => {
-		e.preventDefault()
+        e.preventDefault()
+        if(getNumberOfValidFields() < 4) return;
 		try {
 			const res = await Axios.post('/user/join', fields)
 			const { ok } = res.data
@@ -110,11 +165,12 @@ export default function Signup<
 	}
 
 	const handleFieldFocus = (e: React.FocusEvent<HTMLInputElement>) => {
-		if (isFieldErrored || isFocusedFieldLoading) {
-			return
-		}
 		setFocusedFieldId(e.target.id)
-	}
+    }
+    
+    const handleBtnCancelClick = () => {
+        setShowAuthModal(false);
+    }
 
 	return (
 		<div>
@@ -127,17 +183,26 @@ export default function Signup<
 							onFocus={handleFieldFocus}
 							onChange={handleFieldChange}
 							id="username"
-							styleName="input"
+							styleName="field"
 							autoComplete="off"
 							spellCheck="false"
+							value={fields['username'].value}
 						/>
-						{focusedFieldId === 'username' && isFocusedFieldLoading && (
-							<div styleName="container-eye-loader">
+						<div styleName="container-field-icon">
+							{fields['username'].loading ? (
 								<LoaderEye size={'3%'} />
-							</div>
-						)}
-						{focusedFieldId === 'username' && (
-							<FieldHelper fieldId="username" isFieldErrored={isFieldErrored} />
+							) : (
+								fields['username'].valid !== null && (
+									<img
+										styleName="field-icon"
+										src={fields['username'].valid ? okIcon : errorIcon}
+										alt="field icon"
+									/>
+								)
+							)}
+						</div>
+						{focusedFieldId === 'username' && !fields['username'].valid && (
+							<FieldHelper fieldId="username" />
 						)}
 					</div>
 					<div styleName="field-container">
@@ -145,67 +210,81 @@ export default function Signup<
 						<input
 							onChange={handleFieldChange}
 							onFocus={handleFieldFocus}
-							styleName="input"
+							styleName="field"
 							type="email"
 							id="email"
 							autoComplete="off"
 							spellCheck="false"
+							value={fields['email'].value}
 						/>
-						{focusedFieldId === 'email' && isFocusedFieldLoading && (
-							<div styleName="container-eye-loader">
+						<div styleName="container-field-icon">
+							{fields['email'].loading ? (
 								<LoaderEye size={'3%'} />
-							</div>
-						)}
-						{focusedFieldId === 'email' && (
-							<FieldHelper fieldId="email" isFieldErrored={isFieldErrored} />
-						)}
+							) : fields['email'].valid !== null ? (
+								<img
+									styleName="field-icon"
+									src={fields['email'].valid ? okIcon : errorIcon}
+									alt="field icon"
+								/>
+							) : null}
+						</div>
+						{focusedFieldId === 'email' && !fields['email'].valid && <FieldHelper fieldId="email" />}
 					</div>
 					<div styleName="field-container">
 						<label>{lang['Pwd']}</label>
 						<input
 							onChange={handleFieldChange}
 							onFocus={handleFieldFocus}
-							styleName="input"
+							styleName="field"
 							type="password"
 							id="pwd"
+							value={fields['pwd'].value}
 						/>
-						{focusedFieldId === 'pwd' && isFocusedFieldLoading && (
-							<div styleName="container-eye-loader">
+						<div styleName="container-field-icon">
+							{fields['pwd'].loading ? (
 								<LoaderEye size={'3%'} />
-							</div>
-						)}
-						{focusedFieldId === 'pwd' && (
-							<FieldHelper fieldId="pwd" isFieldErrored={isFieldErrored} />
-						)}
+							) : fields['pwd'].valid !== null ? (
+								<img
+									styleName="field-icon"
+									src={fields['pwd'].valid ? okIcon : errorIcon}
+									alt="field icon"
+								/>
+							) : null}
+						</div>
+						{focusedFieldId === 'pwd' && !fields['pwd'].valid && <FieldHelper fieldId="pwd" />}
 					</div>
 					<div styleName="field-container">
 						<label>{lang['ConfirmPwd']}</label>
 						<input
 							onChange={handleFieldChange}
 							onFocus={handleFieldFocus}
-							styleName="input"
+							styleName="field"
 							type="password"
 							id="cpwd"
+							value={fields['cpwd'].value}
 						/>
-						{focusedFieldId === 'cpwd' && isFocusedFieldLoading && (
-							<div styleName="container-eye-loader">
+						<div styleName="container-field-icon">
+							{fields['cpwd'].loading ? (
 								<LoaderEye size={'3%'} />
-							</div>
+							) : fields['cpwd'].valid !== null ? (
+								<img
+									styleName="field-icon"
+									src={fields['cpwd'].valid ? okIcon : errorIcon}
+									alt="field icon"
+								/>
+							) : null}
+						</div>
+						{focusedFieldId === 'cpwd' && !fields['cpwd'].valid && (
+							<FieldHelper fieldId="cpwd" />
 						)}
-						{focusedFieldId === 'cpwd' && isFieldErrored ? (
-							<FieldHelper fieldId="cpwd" isFieldErrored={isFieldErrored} />
-						) : null}
 					</div>
 				</div>
 				<div styleName="buttons">
-					<button styleName="cancel">
+					<button styleName="btn-cancel" onMouseDown={handleBtnCancelClick}>
 						<span>{lang['BtnCancel']}</span>
-						<img src={x} alt="cancel" />
+						<img src={xIcon} alt="cancel" />
 					</button>
-					<button
-						disabled={isFieldErrored || Object.keys(validFields).length !== 4}
-						styleName="crear"
-					>
+					<button styleName="btn-create-account" ref={btnCreate} disabled>
 						<span>{lang['BtnCreateAccount']}</span>
 						<img src={account} alt="account" />
 					</button>
@@ -218,14 +297,13 @@ export default function Signup<
 	)
 }
 
-function FieldHelper<T extends { fieldId: string; isFieldErrored: boolean }>({
-	fieldId,
-	isFieldErrored,
-}: T) {
+function FieldHelper<T extends { fieldId: string }>({ fieldId }: T) {
 	const [msg, setMsg] = useState('')
+
 	const { FieldHelper: lang } = useContext(
 		InitContext
 	).state.lang.AuthModal.Signup
+
 	const getFieldInfo = useCallback(() => {
 		switch (fieldId) {
 			case 'username':
@@ -245,9 +323,5 @@ function FieldHelper<T extends { fieldId: string; isFieldErrored: boolean }>({
 		setMsg(getFieldInfo())
 	}, [getFieldInfo])
 
-	return (
-		<div styleName={`info-box ${isFieldErrored ? 'box-errored' : ''}`}>
-			{parse(msg)}
-		</div>
-	)
+	return <div styleName="info-box">{parse(msg)}</div>
 }
