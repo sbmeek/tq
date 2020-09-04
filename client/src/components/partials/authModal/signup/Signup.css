@@ -115,6 +115,13 @@
 
 .terms{
     margin-left: 6px;
+    color: var(--tq-blue-01);
+    text-decoration: none;
+    transition: color 100ms;
+}
+
+.terms:hover {
+    color: var(--tq-blue-02);
 }
 
 .field-container{
