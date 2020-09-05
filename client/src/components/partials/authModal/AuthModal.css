@@ -85,8 +85,9 @@
 }
 
 .container > span {
-	margin: 10px;
+	margin: 10px !important;
 	color: var(--tq-gray-02);
+	display: flex;
 }
 
 .inputs-and-buttons > a {
@@ -102,16 +103,21 @@
 .inputs-and-sign-container {
 	display: flex;
 }
+.separador-container{
+	display: flex;
+	align-items: center;
+}
 
 .separador {
 	display: flex;
 	align-items: center;
+	flex-direction: column;
 }
 
 .separador > hr {
 	width: 1px;
 	background: var(--tq-gray-03);
-	height: 133px;
+	height: 103px;
 }
 
 .buttons-sign {
@@ -292,4 +298,50 @@
 
 .login-arrow-container>span{
     font-size: 35px;
+}
+@media only screen and (max-width: 600px){
+	.container{
+		width: 345px;
+		max-height: 539px;
+		height: 539px;
+	}
+	.inputs-and-sign-container{
+		flex-direction: column;
+	}
+	.buttons-sign{
+		flex-direction: row;
+		width: 285px;
+	}
+	.separador-container{
+		display: block;
+	}
+	.separador{
+		display: flex;
+       justify-content: flex-start;
+	 align-items: center;
+	 flex-direction: row;
+	  width: 307px;
+	  margin-bottom: -8px;
+	}
+	.separador > hr {
+		height: 1px;
+      width: 150px;
+	  background: #bbbfbe;
+	  
+	}
+	.separador > span{
+		margin-left: 10px;
+        margin-right: 10px;
+	}
+	.buttons-sign::after{
+		visibility: hidden;
+	}
+	.container > h1> small{
+		visibility: hidden;
+	}
+	.container> h1{
+		margin-bottom: 0px;
+		height: 49px;
+	}
+
 }

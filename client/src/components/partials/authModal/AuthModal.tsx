@@ -72,8 +72,12 @@ export default function AuthModal<
                                                 setShowLogin={setShowLogin}
                                             />
                                         )}
-                                        <div styleName="separador">
+                                        <div styleName="separador-container" >
+                                            <div styleName="separador">
                                             <hr></hr>
+                                            <span>or</span>
+                                            <hr></hr>
+                                            </div>
                                             <div styleName="buttons-sign">
                                                 <button styleName="google">
                                                     <img src={googleLogo} alt="google logo" />

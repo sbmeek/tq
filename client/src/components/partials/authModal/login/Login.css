@@ -115,3 +115,9 @@
 	transform: translateX(0);
 	opacity: 1;
 }
+@media only screen and (max-width: 600px){
+	.input {
+		margin-bottom: 0px;
+		height: 39px;
+	}
+}
