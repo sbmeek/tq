@@ -6,7 +6,7 @@ import React, {
 	useContext,
 } from 'react'
 import '../Template.css'
-import './TemplateEditor.css'
+import styles from './TemplateEditor.css'
 import BgColors from '../templateOpts/BgColors'
 import Labels from '../templateOpts/Labels'
 import textIcon from 'assets/images/icons/templateEditor-icons/text-icon.svg'
@@ -24,7 +24,6 @@ import {
 import { Slate, Editable, withReact, ReactEditor } from 'slate-react'
 import { InitContext } from 'global/context/InitContext'
 import { Picker, BaseEmoji } from 'emoji-mart'
-// import 'emoji-mart/css/emoji-mart.css'
 
 interface IProps {
 	answer: string
@@ -45,13 +44,13 @@ export default function TemplateEditor({
 	handleFormSubmit,
 	templateQuestionContainer,
 }: IProps) {
-	const InitialOptsVisibility: { [key: string]: boolean } = {
-		bgColorsOptShown: false,
-		labelsOptShown: false,
+	const InitialEditorToolsState: { [key: string]: boolean } = {
+		showBgColorsTool: false,
+		showLabelsTool: false,
 	}
-	const [optsVisibility, setOptsVisibility] = useState(InitialOptsVisibility)
+	const [toolsVisibility, setToolsVisibility] = useState(InitialEditorToolsState)
 	const [showEmojiPicker, setShowEmojiPicker] = useState(false)
-	const optsSwipe = useRef<HTMLDivElement>(null)
+	const editorToolsContainer = useRef<HTMLDivElement>(null)
 	const emojiPicker = useRef<Picker>(null)
 	const editor = useMemo(() => withReact(createEditor()), [])
 	const {
@@ -63,44 +62,57 @@ export default function TemplateEditor({
 		},
 	])
 
-	const getDesiredOpt = (_id: string) => {
-		switch (_id) {
-			case 'bg-colors':
-				return { bgColorsOptShown: true }
-			case 'labels':
-				return { labelsOptShown: true }
-			default:
-				return {}
-		}
-	}
-
-	const toggleOptSwipe = (e: React.MouseEvent<HTMLButtonElement>) => {
+	const toggleEditorTool = (e: React.MouseEvent<HTMLButtonElement>) => {
 		const targetElement = e.target as HTMLButtonElement
-		const optSwp = optsSwipe.current!
-		let _dsrdOpt = getDesiredOpt(targetElement.id)
-		let desiredOpt = Object.keys(_dsrdOpt)[0]
-		let _optsVisibility = {
-			...InitialOptsVisibility,
-			[Object.keys(_dsrdOpt)[0]]: true,
-		}
+        const editorToolsCurr = editorToolsContainer.current!
+        
+		let clickedTool = (() => {
+			switch (targetElement.id) {
+				case 'bg-colors':
+					return 'showBgColorsTool'
+				case 'labels':
+					return 'showLabelsTool'
+				default:
+					return ''
+			}
+		})()
 
-		if (targetElement.id === 'text') _optsVisibility = InitialOptsVisibility
+		let _editorToolsVisibility = {
+			...InitialEditorToolsState,
+			[clickedTool]: true,
+        }
+        
+        let optsActvClassName = styles['opts-swipe_actv'];
 
-		if (optSwp!.classList.contains('opts-swipe_actv')) {
-			if (optsVisibility[desiredOpt]) {
-				optSwp.classList.remove('opts-swipe_actv')
-				_optsVisibility = InitialOptsVisibility
+		if (editorToolsCurr!.classList.contains(optsActvClassName)) {
+            /*
+                If the clicked option is already being shown:
+                    The tools editor container will be hidden 
+                    and the toolsVisibility state will be set to default.
+
+                If not (In the else statement) the toolsVisibility state will be set
+                    to default but with the clicked tool as true.
+            */
+			if (toolsVisibility[clickedTool]) {
+				editorToolsCurr.classList.remove(optsActvClassName)
+				_editorToolsVisibility = InitialEditorToolsState
 			} else {
-				_optsVisibility = {
-					...InitialOptsVisibility,
-					[Object.keys(_dsrdOpt)[0]]: true,
+				_editorToolsVisibility = {
+					...InitialEditorToolsState,
+					[clickedTool]: true,
 				}
 			}
 		} else {
-			optSwp.classList.toggle('opts-swipe_actv')
+			editorToolsCurr.classList.add(optsActvClassName)
 		}
-		if (targetElement.id === 'text') optSwp.classList.remove('opts-swipe_actv')
-		setOptsVisibility(_optsVisibility)
+
+		//If the T(ext) option is clicked the default page will be shown
+		if (targetElement.id === 'text') {
+			_editorToolsVisibility = InitialEditorToolsState
+			editorToolsCurr.classList.remove(optsActvClassName)
+		}
+
+		setToolsVisibility(_editorToolsVisibility)
 	}
 
 	const handleEditorChange = (value: SlateNode[]) => {
@@ -208,10 +220,12 @@ export default function TemplateEditor({
 							</div>
 							<button
 								type="button"
-                                onClick={() => setShowEmojiPicker(!showEmojiPicker)}
-                                style={{
-                                    color: showEmojiPicker ?  'ButtonHighlight' : 'var(--tq-gray-00)'
-                                }}
+								onClick={() => setShowEmojiPicker(!showEmojiPicker)}
+								style={{
+									color: showEmojiPicker
+										? 'ButtonHighlight'
+										: 'var(--tq-gray-00)',
+								}}
 							>
 								<i className="material-icons">emoji_emotions</i>
 							</button>
@@ -242,31 +256,30 @@ export default function TemplateEditor({
 					</div>
 					<div styleName="answer-options-container">
 						<div styleName="answer-options tq-scrollbar">
-							<button type="button" onClick={toggleOptSwipe} id="text">
+							<button type="button" onClick={toggleEditorTool} id="text">
 								<img src={textIcon} alt="text icon" />
 							</button>
-							<button type="button" onClick={toggleOptSwipe} id="bg-colors">
+							<button type="button" onClick={toggleEditorTool} id="bg-colors">
 								<img src={bg} alt="icon" />
 							</button>
-							<button type="button" onClick={toggleOptSwipe} id="labels">
+							<button type="button" onClick={toggleEditorTool} id="labels">
 								<img src={labelicon} alt=" icon" />
 							</button>
-							<button type="button" onClick={toggleOptSwipe}>
+							<button type="button" onClick={toggleEditorTool}>
 								<img src={stickers} alt="icon" />
 							</button>
-							<button type="button" onClick={toggleOptSwipe}>
+							<button type="button" onClick={toggleEditorTool}>
 								<img src={org} alt="icon" />
 							</button>
 						</div>
 					</div>
 					<div
-						ref={optsSwipe}
+						ref={editorToolsContainer}
 						styleName="answer-opts-menu"
-						className="opts-swipe_inactv"
 					>
 						<div
 							style={{
-								height: optsVisibility.bgColorsOptShown ? '100%' : '0',
+								height: toolsVisibility.showBgColorsTool ? '100%' : '0',
 							}}
 						>
 							<BgColors
@@ -275,7 +288,7 @@ export default function TemplateEditor({
 						</div>
 						<div
 							style={{
-								height: optsVisibility.labelsOptShown ? '100%' : '0',
+								height: toolsVisibility.showLabelsTool ? '100%' : '0',
 							}}
 						>
 							<Labels label={label.current!} setShowLabel={setShowLabel} />
