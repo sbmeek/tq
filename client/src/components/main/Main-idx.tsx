@@ -10,7 +10,6 @@ import React, {
 } from 'react'
 import { useDispatch } from 'react-redux'
 import axios from 'axios'
-import Alert from '../partials/Alert'
 import logo from 'assets/images/ltqrNEW.png'
 import './Main-idx.css'
 import { getAuthInfoAction } from 'global/ducks/authDucks'
@@ -19,7 +18,7 @@ import arrow from 'assets/images/icons/icons-main/icon-arrow.svg'
 import Help from 'assets/images/icons/icons-main/icon-help.svg'
 import info from 'assets/images/icons/icons-main/icon-info.svg'
 
-const A = new Alert()
+
 
 type DataType = {
 	_id: string
@@ -75,10 +74,7 @@ function Main() {
 				}
 			>(res: T) {
 				if (res.expired) {
-					A.trigger(`${lang['AlertUserExpired']}.`, {
-						btnHTML:
-							'<button id="btn-ok" class="btn red darken-4 waves-light waves-effect" onclick="A.ok()">Ok</button>',
-					})
+	
 					return 0
 				}
 				const keyVal = res.key != null ? res.key : 'err'
@@ -92,11 +88,6 @@ function Main() {
 				const data = await resp.data
 				if (data.authenticated) {
 					dispatchAuth(getAuthInfoAction())
-				} else {
-					A.trigger(`${lang['AlertUserNotAvailable']}.`, {
-						btnHTML:
-							'<button id="btn-ok" class="btn red darken-4 waves-light waves-effect" onclick="A.ok()">Ok</button>',
-					})
 				}
 			})
 		})
