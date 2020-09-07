@@ -19,7 +19,13 @@ export default {
 		NoMessagesInfo: 'Aún no hay nada aquí :(',
 		Title: 'Bandeja',
 		MsgTab: 'Mensajes',
-		AnsTab: 'Respondidos',
+        AnsTab: 'Respondidos',
+        ReplyingModal: {
+            Title: "¿Estás seguro que deseas responder este mensaje?",
+            BtnCancel: "Cancelar",
+            BtnAnswer: "Responder",
+            Note: "Nota: Una vez que la respuesta ha sido enviada no podrá ser editada."
+        }  
     },
     Menu: {
         ModalForNewUsers: "¿Sabías que esto es un menú?"

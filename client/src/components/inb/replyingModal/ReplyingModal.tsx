@@ -1,7 +1,8 @@
-import React, { MouseEvent, useState, useRef } from 'react'
+import React, { MouseEvent, useState, useRef, useContext } from 'react'
 import './ReplyingModal.css'
 import { useHistory } from 'react-router'
 import html2canvas from 'html2canvas'
+import { InitContext } from 'global/context/InitContext'
 
 export default function Answer<
 	T extends {
@@ -11,6 +12,7 @@ export default function Answer<
 		templateQuestion: HTMLDivElement
 	}
 >({ opened, setOpened, form, templateQuestion }: T) {
+    const { ReplyingModal: lang } = useContext(InitContext).state.lang.Inbox
     const [templateImg, setTemplateImg] = useState('')
     const ansImg = useRef<HTMLImageElement>(null)
     const history = useHistory();
@@ -56,25 +58,25 @@ export default function Answer<
 				id="overlay"
 			>
                 <div styleName="confirm-container">
-                    <h2>Are you sure you want to send this message?</h2>
+                    <h2>{lang['Title']}</h2>
                     <div styleName="btns-container">
                         <button
                             styleName="modal-confirm-btn btn-cancel"
                             onClick={() => setOpened(!opened)}
                         >
-                            <span styleName="btn-primary-txt">Cancel</span>
+                            <span styleName="btn-primary-txt">{lang['BtnCancel']}</span>
                             <span styleName="hover-txt">X</span>
                         </button>
                         <button
                             styleName="modal-confirm-btn btn-answer"
                             onClick={handleAnswerClick}
                         >
-                            <span styleName="btn-primary-txt">Answer</span>
+                            <span styleName="btn-primary-txt">{lang['BtnAnswer']}</span>
                             <span styleName="hover-txt">{'>'}</span>
                         </button>
                     </div>
                     <small styleName="confirm-note">
-                        Note: If this message is replied, it cannot be edited.
+                        {lang['Note']}
                     </small>
                 </div>
 			</div>
