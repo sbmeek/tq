@@ -406,7 +406,6 @@
 		left: 0;
 		bottom: 0;
 		right: 0;
-		padding: 0;
 		margin: 0;
 		-webkit-overflow-scrolling: touch;
 		border-radius: 50px;
@@ -587,4 +586,21 @@
 		scrollbar-width: none;
 		-ms-overflow-style: none;
 	}
+	@media only screen and (max-width: 600px) {
+		.inbox-tab-msgs.not-answered-msgs {
+			width: 91% !important;
+		}
+		.simplebar-offset {
+			margin: 1.5px;
+			padding: 18px 16px;
+			border-radius: 47px;
+		}
+	
+	}
 }
+@media only screen and (max-width: 600px) {
+	.inbox-tab-msgs.not-answered-msgs {
+		width: 91% !important;
+	}
+}
+

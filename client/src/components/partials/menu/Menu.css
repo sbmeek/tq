@@ -145,7 +145,7 @@
 	color: var(--tq-red-03);
 	justify-content: center;
 	align-items: center;
-    padding-left: 80px;
+    padding-left: 26%;
 }
 
 .sidebar-title>h1{
@@ -242,4 +242,13 @@
     background: var(--tq-red-03) 0% 0% no-repeat padding-box;
     color: #fff;
     font-size: 25px;
+}
+@media only screen and (max-width: 600px) {
+    .btn-menu > img:nth-child(2) {
+        min-width: 63px;
+        min-height: 63px;
+    }
+    .btn-menu > img:nth-child(1) {
+        width: 36px;
+    }
 }
