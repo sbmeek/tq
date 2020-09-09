@@ -20,6 +20,7 @@ export interface IUser extends Document, uSchemaType {
 	keyOrPwd: string
 	key?: string
 	email?: string
+	authMethod?: 'google' | 'facebook' //if null; it'll be local/tq
 	emailConfirmationCode?: string
 	isEmailVerified?: boolean
 	createdAt: Date
@@ -52,6 +53,7 @@ const uSchema = new Schema({
 	emailConfirmationCode: { type: String },
 	isEmailVerified: { type: Boolean },
 	isPermanentAccount: { type: Boolean },
+	authMethod: { type: String },
 	keyOrPwd: { type: String },
 	key: { type: String },
 	createdAt: {

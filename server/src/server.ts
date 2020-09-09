@@ -45,7 +45,7 @@ app.use(
 )
 app.use(helmet())
 app.use(favicon(app.get('favicon')))
-app.use(cors({ origin: 'http://127.0.0.1:3000' }))
+app.use(cors({ origin: ['http://127.0.0.1:3000', 'http://localhost:3000'] }))
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 app.use(morgan('dev'))
@@ -54,12 +54,12 @@ app.use(morgan('dev'))
 app.use('/user', userRoutes)
 
 // Static files
-if(process.env.NODE_ENV === 'production'){
-    const clientBuildPath = path.resolve(path.join('..', 'client', 'build'));
-    app.use(express.static(clientBuildPath))
-    app.get('*', (_req, res) => {
-        res.sendFile(path.join(clientBuildPath, 'index.html'))
-    })
+if (process.env.NODE_ENV === 'production') {
+	const clientBuildPath = path.resolve(path.join('..', 'client', 'build'))
+	app.use(express.static(clientBuildPath))
+	app.get('*', (_req, res) => {
+		res.sendFile(path.join(clientBuildPath, 'index.html'))
+	})
 }
 
 export const server = app.listen(app.get('port'), () =>

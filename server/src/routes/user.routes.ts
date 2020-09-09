@@ -6,11 +6,12 @@ import { setExpirationDate } from 'utils/user-expirations'
 import runValidators from 'utils/account-validations'
 import { v4 as uuid } from 'uuid'
 import { sendEmailConfirmationCode } from 'utils/account.utils'
+import googleAuth from 'auth/google.auth'
 import { AES as crypt, enc } from 'crypto-js'
 const { SESSION_SECRET, EPROC_KEY } = process.env
 const router = Router()
 
-const signToken = (iis: string, userId: string) => {
+export const signToken = (iis: string, userId: string) => {
 	return JWT.sign(
 		{
 			iis,
@@ -24,13 +25,12 @@ const signToken = (iis: string, userId: string) => {
 router.post('/auth', (req: Request, res: Response, next) => {
 	passport.authenticate('local', { session: false }, (err, user) => {
 		if (err !== null && err.emailNotVerified) {
-            res.json({ 
-                authenticated: false, 
-                ok: false,
-                emailNotVerified: true 
-            })
-		}
-		else if (!user) {
+			res.json({
+				authenticated: false,
+				ok: false,
+				emailNotVerified: true,
+			})
+		} else if (!user) {
 			res.json({ ok: false })
 		} else {
 			const { _id, enteredname } = user
@@ -117,6 +117,8 @@ router.post('/verifyEmailKey', async (req, res) => {
 		})
 	}
 })
+
+router.post('/auth/google', googleAuth)
 
 router.post('/tst_check', (req: Request, res: Response) => {
 	const { enteredKey } = req.body
