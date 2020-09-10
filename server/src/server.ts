@@ -51,7 +51,7 @@ app.use(helmet.contentSecurityPolicy({
         imgSrc: ["'self'", "data:", "https://www.facebook.com/"],
         styleSrc: ["'self'", "'unsafe-inline'"],
         objectSrc: ["'none'"],
-        scriptSrc: ["'self'", "https://connect.facebook.net/", "https://apis.google.com/"],
+        scriptSrc: ["'self'", "'unsafe-inline'", "https://connect.facebook.net/", "https://apis.google.com/"],
     }
 }))
 app.use(favicon(app.get('favicon')))
