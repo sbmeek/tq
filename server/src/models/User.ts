@@ -2,8 +2,12 @@ import { Schema, Document, model } from 'mongoose'
 import bcrypt from 'bcrypt'
 
 type uSchemaType = {
-	compareKeyOrPwd: CallableFunction
-	hashKeyOrPwd: CallableFunction
+	compareKeyOrPwd: (
+		DBKeyOrPwd: string,
+		KeyOrPwd: string,
+		isPermanentAccount: boolean
+	) => Promise<boolean>
+	hashKeyOrPwd: (keyOrPwd: string) => Promise<string>
 }
 
 export interface IMsg {

@@ -16,6 +16,7 @@
 		"postcss-nested": "^4.2.3",
 		"react": "^16.13.1",
 		"react-dom": "^16.13.1",
+		"react-facebook-login": "^4.1.1",
 		"react-google-login": "^5.1.21",
 		"react-redux": "^7.2.0",
 		"react-responsive-carousel": "^3.2.9",
@@ -32,7 +33,7 @@
 		"un": "0.0.0"
 	},
 	"scripts": {
-		"start": "cross-env BROWSER=none react-app-rewired start",
+		"start": "cross-env HTTPS=true BROWSER=none react-app-rewired start",
 		"build": "cross-env GENERATE_SOURCEMAP=false INLINE_RUNTIME_CHUNK=false react-app-rewired build",
 		"test": "react-app-rewired test",
 		"eject": "react-scripts eject"
@@ -62,6 +63,7 @@
 		"@types/react": "^16.9.46",
 		"@types/react-css-modules": "^4.6.2",
 		"@types/react-dom": "^16.9.8",
+		"@types/react-facebook-login": "^4.1.2",
 		"@types/react-redux": "^7.1.9",
 		"@types/react-router-dom": "^5.1.5",
 		"@types/socket.io-client": "^1.4.33",

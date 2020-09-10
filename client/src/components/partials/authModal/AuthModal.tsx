@@ -7,10 +7,12 @@ import Login from './login/Login'
 import { InitContext } from 'global/context/InitContext'
 import arrow from 'assets/images/left-arrow.svg'
 import tqLogo from 'assets/images/ltqrNEW.png'
-import GoogleLogin from 'react-google-login'
+import GoogleLogin, { GoogleLoginResponse } from 'react-google-login'
 import Axios from 'axios'
 import { useDispatch } from 'react-redux'
 import { getAuthInfoAction } from 'global/ducks/authDucks'
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
+import { ReactFacebookLoginInfo } from 'react-facebook-login'
 
 export default function AuthModal<
 	T extends {
@@ -34,22 +36,36 @@ export default function AuthModal<
 		setShowLogin(!showLogin)
 	}
 
-	const handleGoogleAuth = async (response: any) => {
-		if(response.tokenId){
-            const res = await Axios.post('/user/auth/google', {
-                tokenId: response.tokenId,
+	const handleGoogleAuth = async (response: GoogleLoginResponse) => {
+		if (response.tokenId) {
+			const res = await Axios.post('/user/auth/google', {
+				tokenId: response.tokenId,
             })
 
-            if (res.data.emailNotVerified) {
-                setErrMsg(lang['EmailNotVerified'])
-            } else if (!res.data.ok) {
-                setErrMsg(lang['CredentialsErrMsg'])
-            } else {
-                setErrMsg('')
-                setOpened(false)
-                setShowMenu(false)
-                dispatch(getAuthInfoAction())
-            }
+            if (!res.data.ok) {
+				setErrMsg(lang['CredentialsErrMsg'])
+			} else {
+				setErrMsg('')
+				setOpened(false)
+				setShowMenu(false)
+				dispatch(getAuthInfoAction())
+			}
+		}
+	}
+
+	const handleFacebookAuth = async (response: ReactFacebookLoginInfo) => {
+        const { accessToken, id: userId } = response;
+        if(response.accessToken){
+            const res = await Axios.post('/user/auth/facebook', { accessToken, userId })
+            
+            if (!res.data.ok) {
+				setErrMsg(lang['CredentialsErrMsg'])
+			} else {
+				setErrMsg('')
+				setOpened(false)
+				setShowMenu(false)
+				dispatch(getAuthInfoAction())
+			}
         }
 	}
 
@@ -126,21 +142,38 @@ export default function AuthModal<
 															</span>
 														</button>
 													)}
-													onSuccess={handleGoogleAuth}
+													onSuccess={(res) =>
+														handleGoogleAuth(res as GoogleLoginResponse)
+													}
 													onFailure={handleGoogleAuth}
 												/>
-												<button styleName="facebook">
-													<img src={facebookLogo} alt="facebook logo" />
-													<span>
-														<hr></hr>
-														{showLogin
-															? lang['LoginWith'].replace('{OAuth}', 'Facebook')
-															: lang['SignupWith'].replace(
-																	'{OAuth}',
-																	'Facebook'
-															  )}
-													</span>
-												</button>
+												<FacebookLogin
+													appId={process.env.REACT_APP_F_APP_ID as string}
+                                                    callback={handleFacebookAuth}
+                                                    autoLoad={false}
+                                                    fields="id,name,email"
+													render={(renderProps: any) => (
+														<button
+															onClick={renderProps.onClick}
+															disabled={renderProps.isDisabled}
+															styleName="facebook"
+														>
+															<img src={facebookLogo} alt="facebook logo" />
+															<span>
+																<hr></hr>
+																{showLogin
+																	? lang['LoginWith'].replace(
+																			'{OAuth}',
+																			'Facebook'
+																	  )
+																	: lang['SignupWith'].replace(
+																			'{OAuth}',
+																			'Facebook'
+																	  )}
+															</span>
+														</button>
+													)}
+												></FacebookLogin>
 											</div>
 										</div>
 									</div>
@@ -153,7 +186,8 @@ export default function AuthModal<
 								>
 									{showLogin
 										? lang['FormLoginFooter']
-										: lang['FormSignupFooter']}{'   '}
+										: lang['FormSignupFooter']}
+									{'   '}
 									<span styleName="toggler" onClick={handleSignLoginClick}>
 										{showLogin
 											? lang['FormSignupFooterToggler']
