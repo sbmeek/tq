@@ -46,10 +46,10 @@ app.use(
 app.use(helmet())
 app.use(helmet.contentSecurityPolicy({
     directives: {
-        defaultSrc: ["'self'"],
-        styleSrc: ["'self'", "https://fonts.googleapis.com/icon?family=Material+Icons"],
+        defaultSrc: ["'self'", "https://accounts.google.com/"],
+        styleSrc: ["'self'", "'unsafe-inline'"],
         objectSrc: ["'none'"],
-        scriptSrc: ["'self'", "https://connect.facebook.net/en_US/sdk.js", "https://apis.google.com/js/api.js"],
+        scriptSrc: ["'self'", "https://connect.facebook.net/", "https://apis.google.com/"],
     }
 }))
 app.use(favicon(app.get('favicon')))
