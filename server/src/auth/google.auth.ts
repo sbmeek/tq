@@ -24,9 +24,9 @@ export default async (req: Request, res: Response) => {
                     username: username!.toLowerCase(),
                     isPermanentAccount: true,
                     isEmailVerified: email_verified,
-                    keyOrPwd: uuid(),
                     authMethod: 'google'
                 })
+                user.keyOrPwd = await user.hashKeyOrPwd(uuid())
                 await user.save()
             }
             const { enteredname } = user
@@ -44,7 +44,7 @@ export default async (req: Request, res: Response) => {
         console.error(error)
         res.status(500).json({
             ok: false,
-            error: process.env.NODE_ENV === 'production' ? error.stack : 'Bv'
+            error: process.env.NODE_ENV === 'development' ? error.stack : 'Bv'
         })
     }
 }

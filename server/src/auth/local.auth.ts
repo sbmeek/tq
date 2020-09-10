@@ -44,7 +44,7 @@ passport.use(
 				if (user !== null) {
 					if (
 						await user.compareKeyOrPwd(
-							user.keyOrPwd || user.key,
+							(user.keyOrPwd || user.key) as string,
 							tqpwd,
 							user.isPermanentAccount
 						)

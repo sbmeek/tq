@@ -44,8 +44,16 @@ app.use(
 	})
 )
 app.use(helmet())
+app.use(helmet.contentSecurityPolicy({
+    directives: {
+        defaultSrc: ["'self'"],
+        styleSrc: ["'self'", "https://fonts.googleapis.com/icon?family=Material+Icons"],
+        objectSrc: ["'none'"],
+        scriptSrc: ["'self'", "https://connect.facebook.net/en_US/sdk.js", "https://apis.google.com/js/api.js"],
+    }
+}))
 app.use(favicon(app.get('favicon')))
-app.use(cors({ origin: ['http://127.0.0.1:3000', 'http://localhost:3000'] }))
+app.use(cors({ origin: ['http://127.0.0.1:3000', 'https://127.0.0.1:3000'] }))
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 app.use(morgan('dev'))

@@ -8,6 +8,7 @@ import { v4 as uuid } from 'uuid'
 import { sendEmailConfirmationCode } from 'utils/account.utils'
 import googleAuth from 'auth/google.auth'
 import { AES as crypt, enc } from 'crypto-js'
+import facebookAuth from 'auth/facebook.auth'
 const { SESSION_SECRET, EPROC_KEY } = process.env
 const router = Router()
 
@@ -119,6 +120,7 @@ router.post('/verifyEmailKey', async (req, res) => {
 })
 
 router.post('/auth/google', googleAuth)
+router.post('/auth/facebook', facebookAuth)
 
 router.post('/tst_check', (req: Request, res: Response) => {
 	const { enteredKey } = req.body
