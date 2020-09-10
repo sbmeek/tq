@@ -30,12 +30,6 @@ export default function () {
 						<a href="/">
 							<button styleName="__btn-tq">
 								Inicio
-								<i
-									className="material-icons"
-									style={{ marginLeft: '3px' }}
-								>
-									home
-								</i>
 							</button>
 						</a>
 					</div>

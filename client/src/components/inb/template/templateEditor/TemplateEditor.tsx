@@ -195,7 +195,7 @@ export default function TemplateEditor({
 										CustomEditor.toggleBoldMark(editor)
 									}}
 								>
-									<i className="material-icons">format_bold</i>
+									B
 								</button>
 								<button
 									title="Italic"
@@ -205,7 +205,7 @@ export default function TemplateEditor({
 										CustomEditor.toggleItalicMark(editor)
 									}}
 								>
-									<i className="material-icons">format_italic</i>
+									I
 								</button>
 								<button
 									title="Underline"
@@ -215,7 +215,7 @@ export default function TemplateEditor({
 										CustomEditor.toggleUnderlineMark(editor)
 									}}
 								>
-									<i className="material-icons">format_underlined</i>
+									U
 								</button>
 							</div>
 							<button
@@ -227,7 +227,7 @@ export default function TemplateEditor({
 										: 'var(--tq-gray-00)',
 								}}
 							>
-								<i className="material-icons">emoji_emotions</i>
+								😀
 							</button>
 						</div>
 						<div styleName="input-answer-container">

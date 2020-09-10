@@ -141,7 +141,6 @@ function Success({ username, socket }: any) {
 												styleName="_btn-tq"
 											>
 												-3
-												<i className="material-icons right"></i>
 											</button>
 										</div>
 										<div styleName="nubes-bottom2">
