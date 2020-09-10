@@ -20,7 +20,7 @@ export default function AuthModal<
 	}
 >({ opened, setOpened, setShowMenu }: T) {
 	const { AuthModal: lang } = useContext(InitContext).state.lang
-    const dispatch = useDispatch();
+	const dispatch = useDispatch()
 	const [showSignedupComp, setShowSignedupComp] = useState(false)
 	const [showLogin, setShowLogin] = useState(true)
 	const [errMsg, setErrMsg] = useState('')
@@ -35,19 +35,23 @@ export default function AuthModal<
 	}
 
 	const handleGoogleAuth = async (response: any) => {
-        const res = await Axios.post('/user/auth/google', { tokenId: response.tokenId });
-        
-        if (res.data.emailNotVerified) {
-            setErrMsg(lang['EmailNotVerified'])
-        } else if (!res.data.ok) {
-            setErrMsg(lang['CredentialsErrMsg'])
-        } else {
-            setErrMsg('')
-            setOpened(false)
-            setShowMenu(false)
-            dispatch(getAuthInfoAction())
+		if(response.tokenId){
+            const res = await Axios.post('/user/auth/google', {
+                tokenId: response.tokenId,
+            })
+
+            if (res.data.emailNotVerified) {
+                setErrMsg(lang['EmailNotVerified'])
+            } else if (!res.data.ok) {
+                setErrMsg(lang['CredentialsErrMsg'])
+            } else {
+                setErrMsg('')
+                setOpened(false)
+                setShowMenu(false)
+                dispatch(getAuthInfoAction())
+            }
         }
-    }
+	}
 
 	return (
 		<div>
@@ -100,32 +104,41 @@ export default function AuthModal<
 											<div styleName="buttons-sign">
 												<GoogleLogin
 													clientId={process.env.REACT_APP_G_CLIENT_ID as string}
-													render={
-														(renderProps => (
-                                                            <button 
-                                                                styleName="google"
-                                                                onClick={renderProps.onClick}
-                                                                disabled={renderProps.disabled}
-                                                            >
-																<img src={googleLogo} alt="google logo" />
-																<span>
-																	<hr></hr>
-																	{lang['LoginWith'].replace(
-																		'{OAuth}',
-																		'Google'
-																	)}
-																</span>
-															</button>
-														))
-                                                    }
-                                                    onSuccess={handleGoogleAuth}
-                                                    onFailure={handleGoogleAuth}
+													render={(renderProps) => (
+														<button
+															styleName="google"
+															onClick={renderProps.onClick}
+															disabled={renderProps.disabled}
+														>
+															<img src={googleLogo} alt="google logo" />
+															<span>
+																<hr></hr>
+
+																{showLogin
+																	? lang['LoginWith'].replace(
+																			'{OAuth}',
+																			'Google'
+																	  )
+																	: lang['SignupWith'].replace(
+																			'{OAuth}',
+																			'Google'
+																	  )}
+															</span>
+														</button>
+													)}
+													onSuccess={handleGoogleAuth}
+													onFailure={handleGoogleAuth}
 												/>
 												<button styleName="facebook">
 													<img src={facebookLogo} alt="facebook logo" />
 													<span>
 														<hr></hr>
-														{lang['LoginWith'].replace('{OAuth}', 'Facebook')}
+														{showLogin
+															? lang['LoginWith'].replace('{OAuth}', 'Facebook')
+															: lang['SignupWith'].replace(
+																	'{OAuth}',
+																	'Facebook'
+															  )}
 													</span>
 												</button>
 											</div>
@@ -135,13 +148,12 @@ export default function AuthModal<
 								<span
 									style={{
 										position: 'absolute',
-										top: showLogin ? '85%' : '93%',
-										marginTop: errMsg.length > 0 ? '20px' : '0',
+										top: showLogin ? '89%' : '93%',
 									}}
 								>
 									{showLogin
 										? lang['FormLoginFooter']
-										: lang['FormSignupFooter']}{' '}
+										: lang['FormSignupFooter']}{'   '}
 									<span styleName="toggler" onClick={handleSignLoginClick}>
 										{showLogin
 											? lang['FormSignupFooterToggler']

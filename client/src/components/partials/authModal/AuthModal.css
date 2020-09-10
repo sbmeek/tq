@@ -78,6 +78,7 @@
     text-decoration: none;
     cursor: pointer;
     transition: color 150ms;
+    margin-left: 4px;
 }
 
 .toggler:hover {
@@ -85,7 +86,6 @@
 }
 
 .container > span {
-	margin: 10px !important;
 	color: var(--tq-gray-02);
 	display: flex;
 }
