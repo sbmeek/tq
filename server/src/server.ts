@@ -47,6 +47,8 @@ app.use(helmet())
 app.use(helmet.contentSecurityPolicy({
     directives: {
         defaultSrc: ["'self'", "https://accounts.google.com/"],
+        connectSrc: ["'self'", "https://graph.facebook.com/"],
+        imgSrc: ["'self'", "https://www.facebook.com/"],
         styleSrc: ["'self'", "'unsafe-inline'"],
         objectSrc: ["'none'"],
         scriptSrc: ["'self'", "https://connect.facebook.net/", "https://apis.google.com/"],
