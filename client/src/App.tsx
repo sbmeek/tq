@@ -12,14 +12,16 @@ import UnauthRoute from 'HOCs/UnauthRoute'
 import UserLink from 'components/link/Link-idx'
 import TemplateMSG from 'components/inb/template/Template'
 import Msg from 'components/sendMsg/Msg-idx'
-import Loader from 'components/partials/loader/Loader'
 import { InitContext } from 'global/context/InitContext'
 import Menu from 'components/partials/menu/Menu'
 import Terms from 'components/terms/Terms'
 import VerifyAccount from 'components/verifyAccount/VerifyAccount'
 
-//Test Comp
 import AuthTester from './AuthTester'
+
+const loader = document.querySelector('#_l');
+
+const hideLoader = () => loader?.classList.add('rem')
 
 export default function App() {
 	const { isStatus500, isLoaded, user } = useSelector(
@@ -34,9 +36,8 @@ export default function App() {
 	}, [user, socket])
 
 	if (!isStatus500) {
-		if (!isLoaded) {
-			return <Loader />
-		} else {
+		if (isLoaded) {
+            hideLoader();
 			return (
 				<>
 					{!testing ? (
@@ -48,7 +49,7 @@ export default function App() {
 					)}
 				</>
 			)
-		}
+		} else return <div></div>
 	} else return <Error500 />
 }
 

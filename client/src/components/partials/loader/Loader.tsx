@@ -3,7 +3,7 @@ import './Loader.css'
 
 const Loader = () => {
 	return (
-		<div styleName="v-v">
+		<div className="loader-container">
 			<LoaderEye size={'20%'} />
 		</div>
 	)
@@ -12,7 +12,7 @@ const Loader = () => {
 export function LoaderEye<T extends {
     size: '3%' | '20%'
 }>({ size }: T) {
-
+    const width = size === '20%' ? '129.5px' : size === '3%' ? '30px' : '30%';
 	return (
 		<svg
             className="tq-loader-eye"
@@ -28,7 +28,8 @@ export function LoaderEye<T extends {
 				{
                     width: size,
                     height: size,
-                    minWidth: size === '20%' ? '129.5px' : size === '3%' ? '30px' : '30%',
+                    maxWidth: width,
+                    minWidth: width,
 					fillRule: 'evenodd',
 					clipRule: 'evenodd',
 					strokeLinejoin: 'round',
