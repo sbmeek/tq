@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect, useRef } from 'react'
+import React, { useState, useContext, useRef } from 'react'
 import Axios from 'axios'
 import account from 'assets/images/icons/share-icons/icon-account.svg'
 import x from 'assets/images/icons/share-icons/icon-x.svg'
