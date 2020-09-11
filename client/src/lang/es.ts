@@ -66,6 +66,7 @@ export default {
         Login: {
             UsernameOrEmail: "Nombre de usuario o email",
             CredentialsErrMsg: "Credenciales incorrectas, verifique e intentelo de nuevo.",
+            EmptyFieldsErrMsg: "No llenó todos los campos.",
             EmailNotVerified: "Ha digitado sus credenciales correctamente, pero necesitamos que confirme su correo electrónico antes de iniciar sesión.",
             Pwd: "Contraseña",
             BtnLogin: "Acceder",

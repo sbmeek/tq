@@ -28,12 +28,24 @@
 
 .err-msg{
     padding-left: 11px;
-    font-size: 13px;
-    max-width: 90%;
+    font-size: 15px;
+    max-width: 100%;
     flex-wrap: nowrap;
     display: inline-flex;
+    justify-content: center;
     overflow-wrap: anywhere;
     color: var(--tq-red-01);
+    width: 100%;
+    margin: 5px 0;
+}
+
+.err-msg.toggleErrMsg{
+    animation: showErrMsg 250ms;
+}
+
+@keyframes showErrMsg {
+    0%{ opacity: 0; }
+    100%{ opacity: 1; }
 }
 
 .btns-container {

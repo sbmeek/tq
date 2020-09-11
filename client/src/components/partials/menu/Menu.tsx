@@ -19,7 +19,7 @@ export default function Menu() {
 	const [showNewUserModal, setShowNewUserModal] = useState(false)
 	const [showMenu, setShowMenu] = useState(false)
 	const [enoughSpace, setEnoughSpace] = useState(false)
-    const [showAuthModal, setShowAuthModal] = useState(false)
+    const [showAuthModal, setShowAuthModal] = useState(true)
     const [isMobile, setIsMobile] = useState(false);
     
 	const { isAuthenticated } = useSelector((state: RootStateOrAny) => state.auth)
