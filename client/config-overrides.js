@@ -6,7 +6,11 @@ const {
 } = require('customize-cra')
 
 module.exports = override(
-    addPostcssPlugins([require('postcss-nested')({}), require('postcss-global-nested')({})]),
+    addPostcssPlugins([
+        require('autoprefixer')({}),
+        require('postcss-nested')({}), 
+        require('postcss-global-nested')({}) 
+    ]),
     useBabelRc(),
     adjustStyleLoaders((loader) => {
         const { use: [, css] } = loader;
