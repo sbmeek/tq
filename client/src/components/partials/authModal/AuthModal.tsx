@@ -1,38 +1,50 @@
-import React, { useState, useContext, Fragment } from 'react'
-import './AuthModal.css'
+import React, { useState, useContext, useRef } from 'react'
 import Signup from './signup/Signup'
 import facebookLogo from 'assets/images/icons/share-icons/facebook.svg'
 import googleLogo from 'assets/images/icons/share-icons/google.svg'
 import Login from './login/Login'
-import { InitContext } from 'global/context/InitContext'
 import arrow from 'assets/images/left-arrow.svg'
 import tqLogo from 'assets/images/ltqrNEW.png'
-import GoogleLogin, { GoogleLoginResponse } from 'react-google-login'
 import Axios from 'axios'
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
+import GoogleLogin, { GoogleLoginResponse } from 'react-google-login'
+import { ReactFacebookLoginInfo } from 'react-facebook-login'
+import { InitContext } from 'global/context/InitContext'
 import { useDispatch } from 'react-redux'
 import { getAuthInfoAction } from 'global/ducks/authDucks'
-import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
-import { ReactFacebookLoginInfo } from 'react-facebook-login'
+
+import styles from './AuthModal.css'
 
 export default function AuthModal<
 	T extends {
 		opened: boolean
+		isMobile: boolean
 		setOpened: React.Dispatch<React.SetStateAction<boolean>>
 		setShowMenu: React.Dispatch<React.SetStateAction<boolean>>
 	}
->({ opened, setOpened, setShowMenu }: T) {
-	const { AuthModal: lang } = useContext(InitContext).state.lang
-	const dispatch = useDispatch()
-	const [showSignedupComp, setShowSignedupComp] = useState(false)
-	const [showLogin, setShowLogin] = useState(true)
+>({ opened, isMobile, setOpened, setShowMenu }: T) {
 	const [errMsg, setErrMsg] = useState('')
+	const [showLogin, setShowLogin] = useState(true)
+	const [showSignedupComp, setShowSignedupComp] = useState(false)
+
+	const { AuthModal: lang } = useContext(InitContext).state.lang
+	const mainInnerContainer = useRef<HTMLDivElement>(null)
+
+	const dispatch = useDispatch()
 
 	const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
 		const targetElement = e.target as HTMLDivElement
-		if (targetElement.id === 'overlay') setOpened(!opened)
+		if (targetElement.id === 'overlay' && !isMobile) setOpened(!opened)
 	}
 
-	const handleSignLoginClick = () => {
+	const handleTogglerClick = () => {
+		const mainInnerContainerCurr = mainInnerContainer.current!
+		if (isMobile) {
+			mainInnerContainerCurr.classList.add(styles['toggleContent'])
+			mainInnerContainerCurr.onanimationend = () => {
+				mainInnerContainerCurr.classList.remove(styles['toggleContent'])
+			}
+		}
 		setShowLogin(!showLogin)
 	}
 
@@ -40,9 +52,9 @@ export default function AuthModal<
 		if (response.tokenId) {
 			const res = await Axios.post('/user/auth/google', {
 				tokenId: response.tokenId,
-            })
+			})
 
-            if (!res.data.ok) {
+			if (!res.data.ok) {
 				setErrMsg(lang['CredentialsErrMsg'])
 			} else {
 				setErrMsg('')
@@ -54,11 +66,14 @@ export default function AuthModal<
 	}
 
 	const handleFacebookAuth = async (response: ReactFacebookLoginInfo) => {
-        const { accessToken, id: userId } = response;
-        if(response.accessToken){
-            const res = await Axios.post('/user/auth/facebook', { accessToken, userId })
-            
-            if (!res.data.ok) {
+		const { accessToken, id: userId } = response
+		if (response.accessToken) {
+			const res = await Axios.post('/user/auth/facebook', {
+				accessToken,
+				userId,
+			})
+
+			if (!res.data.ok) {
 				setErrMsg(lang['CredentialsErrMsg'])
 			} else {
 				setErrMsg('')
@@ -66,7 +81,7 @@ export default function AuthModal<
 				setShowMenu(false)
 				dispatch(getAuthInfoAction())
 			}
-        }
+		}
 	}
 
 	return (
@@ -84,13 +99,17 @@ export default function AuthModal<
 						}}
 					>
 						{!showSignedupComp ? (
-							<Fragment>
-								<h1>
+							<div styleName="inner-container" ref={mainInnerContainer}>
+								<h1
+									aria-labelledby={showLogin ? 'login-title' : 'signup-title'}
+								>
 									{showLogin ? (
 										lang['FormLoginTitle']
 									) : (
 										<>
-											{lang['FormSignupTitle']}
+											{!isMobile
+												? lang['FormSignupTitle']
+												: lang['FormSignupFooterToggler']}
 											<small>{lang['FormSignupSubtitle']}</small>
 										</>
 									)}
@@ -114,7 +133,7 @@ export default function AuthModal<
 										<div styleName="separador-container">
 											<div styleName="separador">
 												<hr></hr>
-												<span>or</span>
+												<span>Or</span>
 												<hr></hr>
 											</div>
 											<div styleName="buttons-sign">
@@ -122,7 +141,7 @@ export default function AuthModal<
 													clientId={process.env.REACT_APP_G_CLIENT_ID as string}
 													render={(renderProps) => (
 														<button
-															styleName="google"
+															styleName="btn-oauth google"
 															onClick={renderProps.onClick}
 															disabled={renderProps.disabled}
 														>
@@ -149,14 +168,14 @@ export default function AuthModal<
 												/>
 												<FacebookLogin
 													appId={process.env.REACT_APP_F_APP_ID as string}
-                                                    callback={handleFacebookAuth}
-                                                    autoLoad={false}
-                                                    fields="id,name,email"
+													callback={handleFacebookAuth}
+													autoLoad={false}
+													fields="id,name,email"
 													render={(renderProps: any) => (
 														<button
 															onClick={renderProps.onClick}
 															disabled={renderProps.isDisabled}
-															styleName="facebook"
+															styleName="btn-oauth facebook"
 														>
 															<img src={facebookLogo} alt="facebook logo" />
 															<span>
@@ -180,21 +199,25 @@ export default function AuthModal<
 								</div>
 								<span
 									style={{
-										position: 'absolute',
-										top: showLogin ? '89%' : '93%',
+										marginTop:
+											!isMobile && showLogin
+												? '20px'
+												: !isMobile && !showLogin
+												? '10px'
+												: '0',
 									}}
 								>
 									{showLogin
 										? lang['FormLoginFooter']
 										: lang['FormSignupFooter']}
 									{'   '}
-									<span styleName="toggler" onClick={handleSignLoginClick}>
+									<span styleName="toggler" onClick={handleTogglerClick}>
 										{showLogin
 											? lang['FormSignupFooterToggler']
 											: lang['FormLoginFooterToggler']}
 									</span>
 								</span>
-							</Fragment>
+							</div>
 						) : (
 							<Signedup
 								setShowSignedupComp={setShowSignedupComp}

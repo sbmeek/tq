@@ -1,11 +1,12 @@
 import React, { useState, useContext } from 'react'
-import './Login.css'
 import Axios from 'axios'
-import { InitContext } from 'global/context/InitContext'
 import account from 'assets/images/icons/share-icons/icon-account.svg'
 import x from 'assets/images/icons/share-icons/icon-x.svg'
+import { InitContext } from 'global/context/InitContext'
 import { useDispatch } from 'react-redux'
 import { getAuthInfoAction } from 'global/ducks/authDucks'
+
+import './Login.css'
 
 export default function Login<
 	T extends {
@@ -54,31 +55,40 @@ export default function Login<
 		}
 	}
 
+	const handleBtnCancelClick = () => {
+		setIsModalOpened(false)
+		setErrMsg('')
+	}
+
 	return (
 		<div>
 			<form onSubmit={handleFormSubmit}>
 				<div styleName="inputs-registro">
-					<label>{lang['UsernameOrEmail']}</label>
-					<input
-						type="text"
-						autoFocus
-						onChange={handleFieldChange}
-						id="usernameOrEmail"
-						styleName="input"
-					/>
+					<div styleName="group">
+						<label>{lang['UsernameOrEmail']}</label>
+						<input
+							type="text"
+							autoFocus
+							onChange={handleFieldChange}
+							id="usernameOrEmail"
+							styleName="input"
+						/>
+					</div>
 
-					<label>{lang['Pwd']}</label>
-					<input
-						onChange={handleFieldChange}
-						styleName="input input-pwd"
-						type="password"
-						id="pwd"
-					/>
+					<div styleName="group">
+						<label>{lang['Pwd']}</label>
+						<input
+							onChange={handleFieldChange}
+							styleName="input input-pwd"
+							type="password"
+							id="pwd"
+						/>
+					</div>
 
 					<span styleName="err-msg">{errMsg}</span>
 				</div>
 				<div styleName="btns-container">
-					<button styleName="btn-cancel">
+					<button styleName="btn-cancel" onMouseDown={handleBtnCancelClick}>
 						<span>{lang['BtnCancel']}</span>
 						<img src={x} alt="cancel" />
 					</button>

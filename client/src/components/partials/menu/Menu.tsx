@@ -3,15 +3,16 @@ import flecha from 'assets/images/left-arrow.svg'
 import menulog from 'assets/images/menu-tq.svg'
 import FirstTimeHelpBox from '../firstTimeHelpBox/FirstTimeHelpBox'
 import AuthModal from '../authModal/AuthModal'
-import './Menu.css'
-import { Link, useLocation } from 'react-router-dom'
 import home from 'assets/images/icons/icons-menu/icon-home.svg'
 import cloud from 'assets/images/icons/icons-menu/icon-cloud.svg'
 import account from 'assets/images/icons/icons-menu/icon-account.svg'
 import tqIcon from 'assets/images/msg/PerfilTQ.png'
+import Axios from 'axios'
+import { Link, useLocation } from 'react-router-dom'
 import { useSelector, RootStateOrAny, useDispatch } from 'react-redux'
 import { getAuthInfoAction } from 'global/ducks/authDucks'
-import Axios from 'axios'
+
+import './Menu.css'
 
 export default function Menu() {
 	const [isUserNew, setIsUserNew] = useState(true)
@@ -19,12 +20,23 @@ export default function Menu() {
 	const [showMenu, setShowMenu] = useState(false)
 	const [enoughSpace, setEnoughSpace] = useState(false)
     const [showAuthModal, setShowAuthModal] = useState(false)
+    const [isMobile, setIsMobile] = useState(false);
     
 	const { isAuthenticated } = useSelector((state: RootStateOrAny) => state.auth)
     const dispatch = useDispatch()
 
     const location = useLocation();
     
+    const checkScreenSize = () => {
+        setIsMobile(document.documentElement.clientWidth <= 600);
+    }
+
+    useEffect(() => {
+        checkScreenSize()
+        window.addEventListener('resize', checkScreenSize)
+        return () => window.removeEventListener('resize', checkScreenSize)
+    }, [])
+
     useEffect(() => {
         const params = new URLSearchParams(location.search)
         let opt = params.get('opt') || '';
@@ -60,8 +72,9 @@ export default function Menu() {
 		setShowMenu(!showMenu)
 	}
 
-	const handleRegisterClick = () => {
-		setShowAuthModal(true)
+	const handleAuthClick = () => {
+        setShowMenu(false)
+        setShowAuthModal(true)
 	}
 
 	const handleLogoutClick = async () => {
@@ -117,7 +130,7 @@ export default function Menu() {
 							<div styleName="btn-container">
 								<button
 									styleName="sidebar-button"
-									onClick={handleRegisterClick}
+									onClick={handleAuthClick}
 								>
 									<img src={account} alt="home" />
 									<span>Auth</span>
@@ -151,6 +164,7 @@ export default function Menu() {
 				opened={showAuthModal}
 				setOpened={setShowAuthModal}
                 setShowMenu={setShowMenu}
+                isMobile={isMobile}
 			/>
 		</div>
 	)

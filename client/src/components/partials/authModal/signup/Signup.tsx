@@ -6,14 +6,15 @@ import React, {
 	useRef,
 } from 'react'
 import Axios from 'axios'
-import { Link } from 'react-router-dom'
-import { InitContext } from 'global/context/InitContext'
 import parse from 'html-react-parser'
 import account from 'assets/images/icons/share-icons/icon-account.svg'
 import xIcon from 'assets/images/icons/share-icons/icon-x.svg'
 import errorIcon from 'assets/images/icons/icons-signup/error-icon.svg'
 import okIcon from 'assets/images/icons/icons-signup/ok-icon.svg'
+import { InitContext } from 'global/context/InitContext'
+import { Link } from 'react-router-dom'
 import { LoaderEye } from 'components/partials/loader/Loader'
+
 import './Signup.css'
 
 export default function Signup<

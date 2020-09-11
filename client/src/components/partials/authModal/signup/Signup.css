@@ -17,7 +17,6 @@
 	height: 47px;
 	border-radius: 20px;
 	margin-bottom: 14px;
-	transition: 200ms;
 	padding: 0 50px 0 18px;
 	color: #fff;
 	font: normal normal bold 20px/26px Nunito;
@@ -182,10 +181,41 @@
     width: 25px;
     margin-top: 4px;
 }
-@media only screen and (max-width: 600px){
+
+@media (max-width: 600px){
+
+    .inputs-registro{
+        width: 100%;
+    }
+
 	.field{
-		margin-bottom: 0px;
-		height: 47px;
-	}
-	
+		margin-bottom: 10px;
+        height: 42px;
+        width: 100%;
+    }
+
+    .field-container{
+        width: 100%;
+    }
+    
+    .buttons{
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .buttons>button{
+        max-width: 210px;
+        height: 44px;
+    }
+
+    .field-container > label::after{
+        content: '';
+    }
+    
+}
+
+@media (max-width: 330px){
+    .buttons>*>*{
+        font-size: 16px;
+    }
 }
