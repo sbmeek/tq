@@ -1,5 +1,5 @@
 .curtain {
-	min-height: 100vh;
+	min-height: 100%;
 	background: #ccc;
 	display: flex;
 	align-items: flex-end;

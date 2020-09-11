@@ -8,6 +8,15 @@ import * as serviceWorker from './serviceWorker'
 
 const store = generateStore()
 
+const reactRoot = document.querySelector('#react-root')
+function calcVH() {
+    var vH = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+    reactRoot!.setAttribute("style", "height:" + vH + "px;");
+}
+
+calcVH();
+window.addEventListener('onorientationchange', calcVH, true);
+
 ReactDOM.render(
 	<React.StrictMode>
 		<Provider store={store}>
@@ -16,7 +25,7 @@ ReactDOM.render(
 			</InitProvider>
 		</Provider>
 	</React.StrictMode>,
-	document.getElementById('react-root')
+	reactRoot
 )
 
 // If you want your app to work offline and load faster, you can change

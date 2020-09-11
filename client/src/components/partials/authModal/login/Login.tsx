@@ -68,7 +68,6 @@ export default function Login<
 						<label>{lang['UsernameOrEmail']}</label>
 						<input
 							type="text"
-							autoFocus
 							onChange={handleFieldChange}
 							id="usernameOrEmail"
 							styleName="input"

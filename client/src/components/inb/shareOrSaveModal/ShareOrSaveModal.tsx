@@ -26,7 +26,7 @@ export default function ShareOrSaveModal<
 		const w = window.open() as Window
 		w.document.body.setAttribute(
 			'style',
-			'min-width:100vw;min-height:100vh;display:flex;align-items:center;justify-content:center;flex-direction:column;margin:0;padding:0;'
+			'min-width:100vw;min-height:100%;display:flex;align-items:center;justify-content:center;flex-direction:column;margin:0;padding:0;'
 		)
 		w.document.body.innerHTML = `<h1>temp img - TQ</h1>
         <img src="${imgdata}" />`
