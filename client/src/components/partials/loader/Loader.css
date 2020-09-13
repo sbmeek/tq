@@ -14,7 +14,6 @@
 		animation: loaderEyeAnim 730ms linear 50ms infinite;
 		width: 20%;
 		height: 20%;
-		min-height: 0.1px;
 	}
 }
 

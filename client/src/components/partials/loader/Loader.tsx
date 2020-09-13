@@ -12,7 +12,7 @@ const Loader = () => {
 export function LoaderEye<T extends {
     size: '3%' | '20%'
 }>({ size }: T) {
-    const width = size === '20%' ? '79.5px' : size === '3%' ? '30px' : '30%';
+    const wh = size === '20%' ? '79.5px' : size === '3%' ? '30px' : '30%';
 	return (
 		<svg
             className="tq-loader-eye"
@@ -28,8 +28,10 @@ export function LoaderEye<T extends {
 				{
                     width: size,
                     height: size,
-                    maxWidth: width,
-                    minWidth: width,
+                    maxWidth: wh,
+					minWidth: wh,
+					minHeight: wh,
+					maxHeight: wh,
 					fillRule: 'evenodd',
 					clipRule: 'evenodd',
 					strokeLinejoin: 'round',

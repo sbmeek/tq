@@ -15,7 +15,6 @@ import { InitContext } from 'global/context/InitContext'
 import arrowanswer from 'assets/images/icons/icons-inbox/icon-arrow-answer.svg'
 import arrowexit from 'assets/images/icons/icons-inbox/icon-exit.svg'
 
-
 export default function Template() {
 	const [answer, setAnswer] = useState<string>('')
 	const [showLabel, setShowLabel] = useState<boolean>(false)

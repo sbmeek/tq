@@ -1,9 +1,15 @@
 .inputs-registro {
 	width: 320px;
+	height: 174px;
 }
 
 .group > label {
 	padding-left: 21px;
+	font-size: 16px;
+}
+
+.group:nth-child(1){
+	height: 83px;
 }
 
 .input {

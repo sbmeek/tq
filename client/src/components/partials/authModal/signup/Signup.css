@@ -3,7 +3,8 @@
 }
 
 .field-container > label {
-	padding-left: 16px;
+    padding-left: 16px;
+    font-size: 16px;
 }
 
 .field-container > label::after{
@@ -117,6 +118,7 @@
     color: var(--tq-blue-01);
     text-decoration: none;
     transition: color 100ms;
+    font-size: 16px;
 }
 
 .terms:hover {
@@ -125,6 +127,7 @@
 
 .field-container{
     position: relative;
+    height: 83px;
 }
 
 .info-box{
@@ -171,15 +174,21 @@
 }
 
 .container-field-icon{
-    position: absolute;
     z-index: 2;
-    left: 80%;
-    top: 36%;
+    height: 60%;
 }
 
+.loader-eye-container{
+    top: 26px;
+}
+
+.loader-eye-container,
 .container-field-icon > .field-icon{
     width: 25px;
     margin-top: 4px;
+    position: absolute;
+    left: 82%;
+    height: 40px;
 }
 
 @media (max-width: 600px){

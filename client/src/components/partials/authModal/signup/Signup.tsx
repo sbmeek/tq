@@ -35,7 +35,7 @@ export default function Signup<
 		username: {
 			value: '',
 			valid: null,
-			loading: false,
+			loading: true,
 			timerID: null,
 		},
 		email: {
@@ -183,19 +183,21 @@ export default function Signup<
 				<div styleName="inputs-registro">
 					<div styleName="field-container">
 						<label>{lang['Username']}</label>
-						<input
-							type="text"
-							onFocus={handleFieldFocus}
-							onChange={handleFieldChange}
-							id="username"
-							styleName="field"
-							autoComplete="off"
-							spellCheck="false"
-							value={fields['username'].value}
-						/>
 						<div styleName="container-field-icon">
+							<input
+								type="text"
+								onFocus={handleFieldFocus}
+								onChange={handleFieldChange}
+								id="username"
+								styleName="field"
+								autoComplete="off"
+								spellCheck="false"
+								value={fields['username'].value}
+							/>
 							{fields['username'].loading ? (
-								<LoaderEye size={'3%'} />
+								<div styleName="loader-eye-container">
+									<LoaderEye size={'3%'} />
+								</div>
 							) : (
 								fields['username'].valid !== null && (
 									<img
