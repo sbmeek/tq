@@ -9,19 +9,16 @@ import Axios from 'axios'
 import parse from 'html-react-parser'
 import account from 'assets/images/icons/share-icons/icon-account.svg'
 import xIcon from 'assets/images/icons/share-icons/icon-x.svg'
-import errorIcon from 'assets/images/icons/icons-signup/error-icon.svg'
-import okIcon from 'assets/images/icons/icons-signup/ok-icon.svg'
 import { InitContext } from 'global/context/InitContext'
 import { Link } from 'react-router-dom'
-import { LoaderEye } from 'components/partials/loader/Loader'
 
 import './Signup.css'
 
 export default function Signup<
 	T extends {
 		setShowSignedupComp: React.Dispatch<React.SetStateAction<boolean>>
-        setShowLogin: React.Dispatch<React.SetStateAction<boolean>>
-        setOpened: React.Dispatch<React.SetStateAction<boolean>>
+		setShowLogin: React.Dispatch<React.SetStateAction<boolean>>
+		setOpened: React.Dispatch<React.SetStateAction<boolean>>
 	}
 >({ setShowLogin, setShowSignedupComp, setOpened: setShowAuthModal }: T) {
 	const [fields, setFields] = useState<{
@@ -35,7 +32,7 @@ export default function Signup<
 		username: {
 			value: '',
 			valid: null,
-			loading: true,
+			loading: false,
 			timerID: null,
 		},
 		email: {
@@ -142,24 +139,24 @@ export default function Signup<
 		btnCreate.current!.disabled = getNumberOfValidFields() < 4
 	})
 
-    const getNumberOfValidFields = () => {
-        let validFields = 0
+	const getNumberOfValidFields = () => {
+		let validFields = 0
 		for (let f in fields) {
 			if (fields[f].valid) {
 				validFields++
 			}
-        }
-        return validFields;
-    }
+		}
+		return validFields
+	}
 
 	const handleFormSubmit = async (e: React.FormEvent) => {
-        e.preventDefault()
-        if(getNumberOfValidFields() < 4) return;
+		e.preventDefault()
+		if (getNumberOfValidFields() < 4) return
 		try {
-            const values: { [key:string]: string } = {};
-            for(let f in fields){
-                values[f] = fields[f].value
-            }
+			const values: { [key: string]: string } = {}
+			for (let f in fields) {
+				values[f] = fields[f].value
+			}
 			const res = await Axios.post('/user/join', values)
 			const { ok } = res.data
 			setShowSignedupComp(ok as boolean)
@@ -171,11 +168,11 @@ export default function Signup<
 
 	const handleFieldFocus = (e: React.FocusEvent<HTMLInputElement>) => {
 		setFocusedFieldId(e.target.id)
-    }
-    
-    const handleBtnCancelClick = () => {
-        setShowAuthModal(false);
-    }
+	}
+
+	const handleBtnCancelClick = () => {
+		setShowAuthModal(false)
+	}
 
 	return (
 		<div>
@@ -183,31 +180,24 @@ export default function Signup<
 				<div styleName="inputs-registro">
 					<div styleName="field-container">
 						<label>{lang['Username']}</label>
-						<div styleName="container-field-icon">
-							<input
-								type="text"
-								onFocus={handleFieldFocus}
-								onChange={handleFieldChange}
-								id="username"
-								styleName="field"
-								autoComplete="off"
-								spellCheck="false"
-								value={fields['username'].value}
-							/>
-							{fields['username'].loading ? (
-								<div styleName="loader-eye-container">
-									<LoaderEye size={'3%'} />
-								</div>
-							) : (
-								fields['username'].valid !== null && (
-									<img
-										styleName="field-icon"
-										src={fields['username'].valid ? okIcon : errorIcon}
-										alt="field icon"
-									/>
-								)
-							)}
-						</div>
+						<input
+							type="text"
+							onFocus={handleFieldFocus}
+							onChange={handleFieldChange}
+							id="username"
+							styleName={`field ${
+								fields['username'].loading
+									? 'is-loading'
+									: fields['username'].valid === null
+									? ''
+									: fields['username'].valid
+									? 'is-valid'
+									: 'is-invalid'
+							}`}
+							autoComplete="off"
+							spellCheck="false"
+							value={fields['username'].value}
+						/>
 						{focusedFieldId === 'username' && !fields['username'].valid && (
 							<FieldHelper fieldId="username" />
 						)}
@@ -217,70 +207,65 @@ export default function Signup<
 						<input
 							onChange={handleFieldChange}
 							onFocus={handleFieldFocus}
-							styleName="field"
+							styleName={`field ${
+								fields['email'].loading
+									? 'is-loading'
+									: fields['email'].valid === null
+									? ''
+									: fields['email'].valid
+									? 'is-valid'
+									: 'is-invalid'
+							}`}
 							type="email"
 							id="email"
 							autoComplete="off"
 							spellCheck="false"
 							value={fields['email'].value}
 						/>
-						<div styleName="container-field-icon">
-							{fields['email'].loading ? (
-								<LoaderEye size={'3%'} />
-							) : fields['email'].valid !== null ? (
-								<img
-									styleName="field-icon"
-									src={fields['email'].valid ? okIcon : errorIcon}
-									alt="field icon"
-								/>
-							) : null}
-						</div>
-						{focusedFieldId === 'email' && !fields['email'].valid && <FieldHelper fieldId="email" />}
+						{focusedFieldId === 'email' && !fields['email'].valid && (
+							<FieldHelper fieldId="email" />
+						)}
 					</div>
 					<div styleName="field-container">
 						<label>{lang['Pwd']}</label>
 						<input
 							onChange={handleFieldChange}
 							onFocus={handleFieldFocus}
-							styleName="field"
+							styleName={`field ${
+								fields['pwd'].loading
+									? 'is-loading'
+									: fields['pwd'].valid === null
+									? ''
+									: fields['pwd'].valid
+									? 'is-valid'
+									: 'is-invalid'
+							}`}
 							type="password"
 							id="pwd"
 							value={fields['pwd'].value}
 						/>
-						<div styleName="container-field-icon">
-							{fields['pwd'].loading ? (
-								<LoaderEye size={'3%'} />
-							) : fields['pwd'].valid !== null ? (
-								<img
-									styleName="field-icon"
-									src={fields['pwd'].valid ? okIcon : errorIcon}
-									alt="field icon"
-								/>
-							) : null}
-						</div>
-						{focusedFieldId === 'pwd' && !fields['pwd'].valid && <FieldHelper fieldId="pwd" />}
+						{focusedFieldId === 'pwd' && !fields['pwd'].valid && (
+							<FieldHelper fieldId="pwd" />
+						)}
 					</div>
 					<div styleName="field-container">
 						<label>{lang['ConfirmPwd']}</label>
 						<input
 							onChange={handleFieldChange}
 							onFocus={handleFieldFocus}
-							styleName="field"
+							styleName={`field ${
+								fields['cpwd'].loading
+									? 'is-loading'
+									: fields['cpwd'].valid === null
+									? ''
+									: fields['cpwd'].valid
+									? 'is-valid'
+									: 'is-invalid'
+							}`}
 							type="password"
 							id="cpwd"
 							value={fields['cpwd'].value}
 						/>
-						<div styleName="container-field-icon">
-							{fields['cpwd'].loading ? (
-								<LoaderEye size={'3%'} />
-							) : fields['cpwd'].valid !== null ? (
-								<img
-									styleName="field-icon"
-									src={fields['cpwd'].valid ? okIcon : errorIcon}
-									alt="field icon"
-								/>
-							) : null}
-						</div>
 						{focusedFieldId === 'cpwd' && !fields['cpwd'].valid && (
 							<FieldHelper fieldId="cpwd" />
 						)}
