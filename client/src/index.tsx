@@ -10,12 +10,16 @@ const store = generateStore()
 
 const reactRoot = document.querySelector('#react-root')
 function calcVH() {
-    var vH = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-    reactRoot!.setAttribute("style", "height:" + vH + "px;");
+	var vH = Math.max(
+		document.documentElement.clientHeight,
+		window.innerHeight || 0
+	)
+	reactRoot!.setAttribute('style', 'height:' + vH + 'px;')
 }
 
-calcVH();
-window.addEventListener('onorientationchange', calcVH, true);
+calcVH()
+window.addEventListener('onorientationchange', calcVH, true)
+window.addEventListener('resize', calcVH, true)
 
 ReactDOM.render(
 	<React.StrictMode>
