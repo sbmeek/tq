@@ -263,6 +263,10 @@
 	top: -15px;
 }
 
+.toggler-container > h1{
+	font-size: 32px;
+}
+
 .toggler-container > p {
 	max-width: 410px;
 	font-size: 16px;
