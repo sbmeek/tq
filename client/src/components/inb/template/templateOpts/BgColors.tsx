@@ -41,6 +41,15 @@ export default function BgColors<
 			<div styleName="bg-color" style={{ background: "#60257f" }} onClick={bgColorClickHandler}>
 				<div></div>
 			</div>
+            <div styleName="bg-color" style={{ background: "#00812b" }} onClick={bgColorClickHandler}>
+				<div></div>
+			</div>
+            <div styleName="bg-color" style={{ background: "#0ed14f" }} onClick={bgColorClickHandler}>
+				<div></div>
+			</div>
+            <div styleName="bg-color" style={{ background: "#5eff00" }} onClick={bgColorClickHandler}>
+				<div></div>
+			</div>
 		</div>
 	)
 }

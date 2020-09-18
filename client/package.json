@@ -41,13 +41,19 @@
 	"eslintConfig": {
 		"extends": "react-app"
 	},
-	"browserslist": [
-		"> 0.3%",
-		"last 7 versions",
-		"Android >= 4",
-		"Firefox >= 20",
-		"iOS >= 8"
-	],
+	"browserslist": {
+        "production": [
+            "> 0.3%",
+            "last 7 versions",
+            "Android >= 4",
+            "Firefox >= 20",
+            "iOS >= 8"
+        ],
+        "development": [
+            "last 2 version",
+            "not dead"
+        ]
+    },
 	"devDependencies": {
 		"@testing-library/jest-dom": "^4.2.4",
 		"@testing-library/react": "^9.5.0",

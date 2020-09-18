@@ -14,6 +14,7 @@ import stickers from 'assets/images/icons/templateEditor-icons/icon-stickers-min
 import labelicon from 'assets/images/icons/templateEditor-icons/icon-labels-btn.svg'
 import bg from 'assets/images/icons/templateEditor-icons/icon-background-btn.svg'
 import org from 'assets/images/icons/templateEditor-icons/icon-organization-btn.svg'
+import xIcon from 'assets/images/icons/share-icons/icon-x.svg'
 import {
 	createEditor,
 	Transforms,
@@ -33,6 +34,8 @@ interface IProps {
 	setShowLabel: React.Dispatch<React.SetStateAction<boolean>>
 	handleFormSubmit: (e: React.FormEvent<HTMLFormElement>) => void
 	templateQuestionContainer: HTMLDivElement | null
+	isMobile: boolean
+	setShowMobileEditor: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export default function TemplateEditor({
@@ -43,49 +46,58 @@ export default function TemplateEditor({
 	setShowLabel,
 	handleFormSubmit,
 	templateQuestionContainer,
+	isMobile,
+	setShowMobileEditor,
 }: IProps) {
 	const InitialEditorToolsState: { [key: string]: boolean } = {
+		showTextTool: false,
 		showBgColorsTool: false,
 		showLabelsTool: false,
 	}
-	const [toolsVisibility, setToolsVisibility] = useState(InitialEditorToolsState)
+	const [showToolsContainer, setShowToolsContainer] = useState(false)
+	const [toolsVisibility, setToolsVisibility] = useState(
+		InitialEditorToolsState
+	)
+	const [shouldAnimToolToggle, setShouldAnimToolToggle] = useState(false)
 	const [showEmojiPicker, setShowEmojiPicker] = useState(false)
-	const editorToolsContainer = useRef<HTMLDivElement>(null)
-	const emojiPicker = useRef<Picker>(null)
 	const editor = useMemo(() => withReact(createEditor()), [])
-	const {
-		lang: { TemplateEditor: lang },
-	} = useContext(InitContext).state
-	const [editorVal, setEditorVal] = useState<any[]>([
-		{
-			children: [{ text: '' }],
-		},
-	])
+	const emojiPicker = useRef<Picker>(null)
+	const editorToolsContainer = useRef<HTMLDivElement>(null)
 
 	const toggleEditorTool = (e: React.MouseEvent<HTMLButtonElement>) => {
 		const targetElement = e.target as HTMLButtonElement
-        const editorToolsCurr = editorToolsContainer.current!
-        
+
 		let clickedTool = (() => {
 			switch (targetElement.id) {
 				case 'bg-colors':
 					return 'showBgColorsTool'
 				case 'labels':
 					return 'showLabelsTool'
+				case 'text':
+					return 'showTextTool'
 				default:
 					return ''
 			}
 		})()
 
+		for (let t in toolsVisibility) {
+			if (toolsVisibility[t] && t !== clickedTool && isMobile) {
+				setShouldAnimToolToggle(true)
+				editorToolsContainer.current!.addEventListener('animationend', (e) => {
+					if (e.animationName === styles['contToggleOpt']) {
+						setShouldAnimToolToggle(false)
+					}
+				})
+			}
+		}
+
 		let _editorToolsVisibility = {
 			...InitialEditorToolsState,
 			[clickedTool]: true,
-        }
-        
-        let optsActvClassName = styles['opts-swipe_actv'];
+		}
 
-		if (editorToolsCurr!.classList.contains(optsActvClassName)) {
-            /*
+		if (showToolsContainer) {
+			/*
                 If the clicked option is already being shown:
                     The tools editor container will be hidden 
                     and the toolsVisibility state will be set to default.
@@ -94,7 +106,7 @@ export default function TemplateEditor({
                     to default but with the clicked tool as true.
             */
 			if (toolsVisibility[clickedTool]) {
-				editorToolsCurr.classList.remove(optsActvClassName)
+				setShowToolsContainer(false)
 				_editorToolsVisibility = InitialEditorToolsState
 			} else {
 				_editorToolsVisibility = {
@@ -103,17 +115,167 @@ export default function TemplateEditor({
 				}
 			}
 		} else {
-			editorToolsCurr.classList.add(optsActvClassName)
+			setShowToolsContainer(true)
 		}
 
 		//If the T(ext) option is clicked the default page will be shown
-		if (targetElement.id === 'text') {
-			_editorToolsVisibility = InitialEditorToolsState
-			editorToolsCurr.classList.remove(optsActvClassName)
+		if (targetElement.id === 'text' && !isMobile) {
+			_editorToolsVisibility = { ...InitialEditorToolsState, showTextTool: true }
+			setShowToolsContainer(false)
 		}
 
 		setToolsVisibility(_editorToolsVisibility)
 	}
+
+	const insertEmoji = (emojiData: BaseEmoji) => {
+		editor.insertText(emojiData.native)
+		ReactEditor.focus(editor)
+	}
+
+	const hideMobileOpts = () => {
+		setShowToolsContainer(false)
+		setToolsVisibility(InitialEditorToolsState)
+		setShowMobileEditor(false)
+	}
+
+	return (
+		<>
+			<Picker
+				showPreview={false}
+				showSkinTones={false}
+				onSelect={(e: BaseEmoji) => insertEmoji(e)}
+				native
+				theme="dark"
+				style={{
+					opacity: showEmojiPicker ? '1' : '0',
+					zIndex: showEmojiPicker ? 35 : -1,
+					position: 'absolute',
+					top: '0%',
+					height: '245px',
+				}}
+				emojiSize={20}
+				ref={emojiPicker}
+			/>
+			<div styleName="answer-editor">
+				<form
+					styleName="answer-editor-container"
+					onSubmit={handleFormSubmit}
+					ref={form}
+				>
+					<TextEditor
+						editor={editor}
+						answer={answer}
+						showEmojiPicker={showEmojiPicker}
+						setAnswer={setAnswer}
+						setShowEmojiPicker={setShowEmojiPicker}
+					/>
+					<div styleName="answer-options-container">
+						<div styleName="answer-options tq-scrollbar">
+							{isMobile && (
+								<button type="button" onClick={hideMobileOpts}>
+									<img src={xIcon} alt="x icon" />
+								</button>
+							)}
+							<button
+								styleName={`${toolsVisibility.showTextTool ? 'active' : ''}`}
+								type="button"
+								onClick={toggleEditorTool}
+								id="text"
+								style={{ alignItems: 'center' }}
+							>
+								<img src={textIcon} alt="text icon" />
+							</button>
+							<button
+								styleName={`${
+									toolsVisibility.showBgColorsTool ? 'active' : ''
+								}`}
+								type="button"
+								onClick={toggleEditorTool}
+								id="bg-colors"
+							>
+								<img src={bg} alt="icon" />
+							</button>
+							<button
+								styleName={`${toolsVisibility.showLabelsTool ? 'active' : ''}`}
+								type="button"
+								onClick={toggleEditorTool}
+								id="labels"
+							>
+								<img src={labelicon} alt=" icon" />
+							</button>
+							<button type="button" onClick={toggleEditorTool}>
+								<img src={stickers} alt="icon" />
+							</button>
+							<button type="button" onClick={toggleEditorTool}>
+								<img src={org} alt="icon" />
+							</button>
+						</div>
+					</div>
+					<div
+						ref={editorToolsContainer}
+						styleName={`answer-opts-menu ${
+							showToolsContainer ? 'opts-swipe_actv' : ''
+						} ${shouldAnimToolToggle ? 'anim-tool-toggle' : ''}`}
+					>
+						{isMobile && (
+							<span styleName="opt-stick-container" onClick={hideMobileOpts}>
+								<span styleName="opt-stick"></span>
+							</span>
+						)}
+						<div
+							styleName={`${
+								toolsVisibility.showTextTool ? 'toggle-opt-anim' : ''
+							}`}
+						>
+							<TextEditor
+								editor={editor}
+								answer={answer}
+								showEmojiPicker={showEmojiPicker}
+								setAnswer={setAnswer}
+								setShowEmojiPicker={setShowEmojiPicker}
+							/>
+						</div>
+						<div
+							styleName={`${
+								toolsVisibility.showBgColorsTool ? 'toggle-opt-anim' : ''
+							}`}
+						>
+							<BgColors
+								templateQuestionContainer={templateQuestionContainer!}
+							/>
+						</div>
+						<div
+							styleName={`${
+								toolsVisibility.showLabelsTool ? 'toggle-opt-anim' : ''
+							}`}
+						>
+							<Labels label={label.current!} setShowLabel={setShowLabel} />
+						</div>
+					</div>
+				</form>
+			</div>
+		</>
+	)
+}
+
+function TextEditor<
+	T extends {
+		answer: string
+		editor: Editor & ReactEditor
+		setAnswer: React.Dispatch<React.SetStateAction<string>>
+		showEmojiPicker: boolean
+		setShowEmojiPicker: React.Dispatch<React.SetStateAction<boolean>>
+	}
+>({ answer, editor, setAnswer, showEmojiPicker, setShowEmojiPicker }: T) {
+	const {
+		lang: { TemplateEditor: lang },
+	} = useContext(InitContext).state
+
+	const [editorVal, setEditorVal] = useState<any[]>([
+		{
+			children: [{ text: '' }],
+		},
+	])
 
 	const handleEditorChange = (value: SlateNode[]) => {
 		setEditorVal(value)
@@ -155,148 +317,77 @@ export default function TemplateEditor({
 		return <Leaf {...props} />
 	}, [])
 
-	const insertEmoji = (emojiData: BaseEmoji) => {
-		editor.insertText(emojiData.native)
-		ReactEditor.focus(editor)
-	}
-
 	return (
-		<>
-			<Picker
-				showPreview={false}
-				showSkinTones={false}
-				onSelect={(e: BaseEmoji) => insertEmoji(e)}
-				native
-				theme="dark"
-				style={{
-					opacity: showEmojiPicker ? '1' : '0',
-					zIndex: showEmojiPicker ? 35 : -1,
-					position: 'absolute',
-					top: '0%',
-					height: '245px',
-				}}
-				emojiSize={20}
-				ref={emojiPicker}
-			/>
-			<div styleName="answer-editor">
-				<form
-					styleName="answer-editor-container"
-					onSubmit={handleFormSubmit}
-					ref={form}
-				>
-					<div>
-						<div styleName="answer-btns-format-container">
-							<div styleName="answer-btns-format">
-								<button
-									title="Bold"
-									type="button"
-									onClick={(e: React.MouseEvent) => {
-										e.preventDefault()
-										CustomEditor.toggleBoldMark(editor)
-									}}
-								>
-									B
-								</button>
-								<button
-									title="Italic"
-									type="button"
-									onClick={(e: React.MouseEvent) => {
-										e.preventDefault()
-										CustomEditor.toggleItalicMark(editor)
-									}}
-								>
-									I
-								</button>
-								<button
-									title="Underline"
-									type="button"
-									onClick={(e: React.MouseEvent) => {
-										e.preventDefault()
-										CustomEditor.toggleUnderlineMark(editor)
-									}}
-								>
-									U
-								</button>
-							</div>
-							<button
-								type="button"
-								onClick={() => setShowEmojiPicker(!showEmojiPicker)}
-								style={{
-									color: showEmojiPicker
-										? 'ButtonHighlight'
-										: 'var(--tq-gray-00)',
-								}}
-							>
-								😀
-							</button>
-						</div>
-						<div styleName="input-answer-container">
-							<div styleName="input-answer-inner-container">
-								<div>
-									<Slate
-										editor={editor}
-										value={editorVal}
-										onChange={handleEditorChange}
-									>
-										<Editable
-											placeholder={lang['InputAnswerPlaceholder']}
-											renderLeaf={renderLeaf}
-											onKeyDown={editorKeyDownHandler}
-											autoComplete="off"
-											spellCheck="false"
-											autoFocus={true}
-											data-value={answer}
-											data-name="ans-msg"
-											styleName="input-answer tq-scrollbar"
-										/>
-									</Slate>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div styleName="answer-options-container">
-						<div styleName="answer-options tq-scrollbar">
-							<button type="button" onClick={toggleEditorTool} id="text">
-								<img src={textIcon} alt="text icon" />
-							</button>
-							<button type="button" onClick={toggleEditorTool} id="bg-colors">
-								<img src={bg} alt="icon" />
-							</button>
-							<button type="button" onClick={toggleEditorTool} id="labels">
-								<img src={labelicon} alt=" icon" />
-							</button>
-							<button type="button" onClick={toggleEditorTool}>
-								<img src={stickers} alt="icon" />
-							</button>
-							<button type="button" onClick={toggleEditorTool}>
-								<img src={org} alt="icon" />
-							</button>
-						</div>
-					</div>
-					<div
-						ref={editorToolsContainer}
-						styleName="answer-opts-menu"
+		<div styleName="text-editor-container">
+			<div styleName="answer-btns-format-container">
+				<div styleName="answer-btns-format">
+					<button
+						title="Bold"
+						type="button"
+						onClick={(e: React.MouseEvent) => {
+							e.preventDefault()
+							CustomEditor.toggleBoldMark(editor)
+						}}
 					>
-						<div
-							style={{
-								height: toolsVisibility.showBgColorsTool ? '100%' : '0',
-							}}
-						>
-							<BgColors
-								templateQuestionContainer={templateQuestionContainer!}
-							/>
-						</div>
-						<div
-							style={{
-								height: toolsVisibility.showLabelsTool ? '100%' : '0',
-							}}
-						>
-							<Labels label={label.current!} setShowLabel={setShowLabel} />
-						</div>
-					</div>
-				</form>
+						B
+					</button>
+					<button
+						title="Italic"
+						type="button"
+						onClick={(e: React.MouseEvent) => {
+							e.preventDefault()
+							CustomEditor.toggleItalicMark(editor)
+						}}
+					>
+						I
+					</button>
+					<button
+						title="Underline"
+						type="button"
+						onClick={(e: React.MouseEvent) => {
+							e.preventDefault()
+							CustomEditor.toggleUnderlineMark(editor)
+						}}
+					>
+						U
+					</button>
+				</div>
+				<button
+					type="button"
+					onClick={() => setShowEmojiPicker(!showEmojiPicker)}
+					style={{
+						color: showEmojiPicker ? 'ButtonHighlight' : 'var(--tq-gray-00)',
+					}}
+				>
+					<span role="img" aria-label="glad">
+						😀
+					</span>
+				</button>
 			</div>
-		</>
+			<div styleName="input-answer-container">
+				<div styleName="input-answer-inner-container">
+					<div>
+						<Slate
+							editor={editor}
+							value={editorVal}
+							onChange={handleEditorChange}
+						>
+							<Editable
+								placeholder={lang['InputAnswerPlaceholder']}
+								renderLeaf={renderLeaf}
+								onKeyDown={editorKeyDownHandler}
+								autoComplete="off"
+								spellCheck="false"
+								autoFocus={true}
+								data-value={answer}
+								data-name="ans-msg"
+								styleName="input-answer tq-scrollbar"
+							/>
+						</Slate>
+					</div>
+				</div>
+			</div>
+		</div>
 	)
 }
 

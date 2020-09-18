@@ -5,7 +5,8 @@
 	align-content: flex-start;
 	width: 100%;
 	height: 100%;
-	padding-top: 32px;
+    padding-top: 32px;
+    max-width: 280px;
 }
 
 .bg-color {
@@ -60,4 +61,24 @@
 
 .bg-color:nth-child(9) > div {
 	background: #60257f;
+}
+
+.bg-color:nth-child(10) > div {
+	background: #00812b;
+}
+
+.bg-color:nth-child(11) > div {
+	background: #0ed14f;
+}
+
+.bg-color:nth-child(12) > div {
+	background: #5eff00;
+}
+
+@media (max-width: 490px){
+    .bg-colors-container{
+        width: 284px;
+        min-width: 284px;
+        max-width: -1px;
+    }
 }

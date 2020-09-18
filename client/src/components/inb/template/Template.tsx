@@ -20,6 +20,8 @@ export default function Template() {
 	const [showLabel, setShowLabel] = useState<boolean>(false)
 	const [actualMsg, setActualMsg] = useState<ITQMessage>()
 	const [isReplyingModalOpened, setIsReplyingModalOpened] = useState(false)
+	const [isMobile, setIsMobile] = useState(false)
+	const [showMobileEditor, setShowMobileEditor] = useState(false)
 	const templateQuestion = useRef<HTMLDivElement>(null)
 	const templateAnswer = useRef<HTMLDivElement>(null)
 	const templateQuestionContainer = useRef<HTMLDivElement>(null)
@@ -29,6 +31,16 @@ export default function Template() {
 	const {
 		state: { socket },
 	} = useContext(InitContext)
+
+	const checkScreenSize = () => {
+		setIsMobile(document.documentElement.clientWidth <= 490)
+	}
+
+	useEffect(() => {
+		checkScreenSize()
+		window.addEventListener('resize', checkScreenSize)
+		return () => window.removeEventListener('resize', checkScreenSize)
+	}, [])
 
 	useEffect(() => {
 		const msg = (location.state as any)['actualMsg'] as ITQMessage
@@ -53,11 +65,7 @@ export default function Template() {
 	const toggleLabelHandler = (e: MouseEvent<HTMLDivElement>) => {
 		e.stopPropagation()
 		const targetElement = e.target as HTMLDivElement
-		if (
-			label.current!.classList.contains(
-				styles['question-label-active']
-			)
-		) {
+		if (label.current!.classList.contains(styles['question-label-active'])) {
 			switch (e.type) {
 				case 'mouseenter':
 					targetElement.classList.add(styles['remove-label-active'])
@@ -74,13 +82,13 @@ export default function Template() {
 			<div>
 				<div styleName="head-btns">
 					<Link to="/messages" styleName="btn-back">
-						<img src={arrowexit} alt="arrow"/>
+						<img src={arrowexit} alt="arrow" />
 					</Link>
 					<button
 						styleName="btn-share"
 						onClick={() => setIsReplyingModalOpened(!isReplyingModalOpened)}
 					>
-						<img src={arrowanswer} alt="arrow"/>
+						<img src={arrowanswer} alt="arrow" />
 					</button>
 				</div>
 				<ReplyingModal
@@ -89,37 +97,70 @@ export default function Template() {
 					form={form.current as HTMLFormElement}
 					templateQuestion={templateQuestionContainer.current as HTMLDivElement}
 				/>
-				<TemplateEditor
-                    form={form}
-                    label={label}
-					answer={answer}
-                    setAnswer={setAnswer}
-                    setShowLabel={setShowLabel}
-                    handleFormSubmit={handleFormSubmit}
-                    templateQuestionContainer={templateQuestionContainer!.current}
-				/>
+				{!isMobile && (
+					<div styleName="editor-container">
+						<TemplateEditor
+							form={form}
+							label={label}
+							answer={answer}
+							setAnswer={setAnswer}
+							setShowLabel={setShowLabel}
+							handleFormSubmit={handleFormSubmit}
+							templateQuestionContainer={templateQuestionContainer!.current}
+							isMobile={isMobile}
+							setShowMobileEditor={setShowMobileEditor}
+						/>
+					</div>
+				)}
 			</div>
 			<div
 				styleName="question-container"
 				ref={templateQuestionContainer}
 				className="d-text-select"
 			>
-				<div
-					styleName={`question-label ${
-						showLabel ? 'question-label-active' : ''
-					}`}
-					ref={label}
-					onMouseEnter={toggleLabelHandler}
-				></div>
-				<div styleName="remove-label-box" onClick={() => setShowLabel(false)}>
-					✕
+				<div>
+					<div
+						styleName={`question-label ${
+							showLabel ? 'question-label-active' : ''
+						}`}
+						ref={label}
+						onMouseEnter={toggleLabelHandler}
+					></div>
+					<div styleName="remove-label-box" onClick={() => setShowLabel(false)}>
+						✕
+					</div>
+					<div styleName="question" ref={templateQuestion}>
+						""
+					</div>
+					<div styleName="answer" ref={templateAnswer}>
+						<div>{parse(answer)}</div>
+					</div>
 				</div>
-				<div styleName="question" ref={templateQuestion}>
-					""
-				</div>
-				<div styleName="answer" ref={templateAnswer}>
-					<div>{parse(answer)}</div>
-				</div>
+				{isMobile && (
+					<>
+						<button
+							onClick={() => setShowMobileEditor(true)}
+							styleName={`btn-toggle-editor-bar ${
+								!showMobileEditor ? 'show' : ''
+							}`}
+						>
+							L
+						</button>
+						<div styleName={`mobile-editor-container ${showMobileEditor ? 'show' : ''}`}>
+							<TemplateEditor
+								form={form}
+								label={label}
+								answer={answer}
+								setAnswer={setAnswer}
+								setShowLabel={setShowLabel}
+								isMobile={isMobile}
+								setShowMobileEditor={setShowMobileEditor}
+								handleFormSubmit={handleFormSubmit}
+								templateQuestionContainer={templateQuestionContainer!.current}
+							/>
+						</div>
+					</>
+				)}
 			</div>
 		</div>
 	)
