@@ -62,6 +62,17 @@ function reducer(state: IContextState, action: IContextAction) {
 export default function <T extends { children: ReactNode }>({ children }: T) {
     const [state, dispatch] = useReducer(reducer, initialState)
 
+    const gsetLang = () => {
+        const langPrefix = navigator.language.substring(0, 2);
+        document.documentElement.lang = langPrefix;
+		switch (langPrefix) {
+			case 'es':
+				return es
+			default:
+				return en
+		}
+	}
+
 	useEffect(() => {
 		dispatch({
 			type: ActionEnum.SET_LANG,
@@ -78,15 +89,6 @@ export default function <T extends { children: ReactNode }>({ children }: T) {
         })();
 		
 	}, [])
-
-	const gsetLang = () => {
-		switch (navigator.language.substring(0, 2)) {
-			case 'es':
-				return es
-			default:
-				return en
-		}
-	}
 
 	return state.socket !== null ? (
 		<InitContext.Provider
