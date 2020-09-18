@@ -15,6 +15,11 @@ export default {
 			'Tu link sirve para recibir <span style="color: var(--tq-red-03);">mensajes anónimos en bandeja</span>. Compártelo en tus <span style="color: var(--tq-red-03);">redes sociales</span>',
 		BtnLinkCopiedToClipboard: 'Link copiado',
 	},
+    MsgIdx: {
+        FirstRowText: "Te invitó a que le envíes un",
+        SecondRowText: "mensaje anónimo",
+        FieldPlaceholder: "Escribe tu mensaje"
+    },
 	Inbox: {
 		NoMessagesInfo: 'Aún no hay nada aquí :(',
 		Title: 'Bandeja',

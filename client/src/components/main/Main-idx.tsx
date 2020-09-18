@@ -18,8 +18,6 @@ import arrow from 'assets/images/icons/icons-main/icon-arrow.svg'
 import Help from 'assets/images/icons/icons-main/icon-help.svg'
 import info from 'assets/images/icons/icons-main/icon-info.svg'
 
-
-
 type DataType = {
 	_id: string
 	key: string

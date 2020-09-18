@@ -6,7 +6,7 @@ import Slider from './Slider'
 import Modal from './Modal'
 import './Link-idx.css'
 import copy from 'assets/images/icons/icons-inbox/icon-link.svg'
-import tqIcon from 'assets/images/msg/PerfilTQ.png'
+import tqIcon from 'assets/images/msg/profile-tq.png'
 
 export default function LinkIdx() {
 	const inputLink = useRef<HTMLInputElement>(null);

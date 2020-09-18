@@ -2,17 +2,17 @@ import React, {
 	useEffect,
 	useState,
 	useContext,
-	useRef,
 	ChangeEvent,
 	FormEvent,
 } from 'react'
 import MsgSent from './MsgSent'
 import Error404 from '../error/404'
-import './Msg.css'
-import logo from '../../assets/images/msg/PerfilTQ.png'
-import { InitContext } from '../../global/context/InitContext'
-import nubes1 from '../../assets/images/msg/nubes-azul.png'
-import nubes2 from '../../assets/images/msg/nubes-azul-2.png'
+import './Msg-idx.css'
+import logo from 'assets/images/msg/profile-tq.png'
+import { InitContext } from 'global/context/InitContext'
+import cloud1 from 'assets/images/msg/cloud.png'
+import cloud2 from 'assets/images/msg/cloud-2.png'
+import arrow from 'assets/images/icons/icons-main/icon-arrow.svg'
 
 type DataType = {
 	key?: string
@@ -24,14 +24,17 @@ export default function <
 	T extends { match: { params: P } },
 	P extends { username: string }
 >({ match: { params } }: T) {
-	const { state } = useContext(InitContext)
+	const {
+		socket,
+		lang: { MsgIdx: lang },
+	} = useContext(InitContext).state
 	const [userExists, setUserExists] = useState(true)
 	params.username = params.username.toLowerCase()
 
 	useEffect(() => {
-		if (state.socket !== undefined) {
-			state.socket.emit('tq:exists', { username: params.username })
-			state.socket.on('tq:exists', (data: DataType) => {
+		if (socket !== undefined) {
+			socket.emit('tq:exists', { username: params.username })
+			socket.on('tq:exists', (data: DataType) => {
 				if (data === null) {
 					setUserExists(false)
 				}
@@ -40,23 +43,29 @@ export default function <
 				}
 			})
 		}
-	}, [state.socket, params.username])
+	}, [socket, params.username])
 
 	return (
 		<>
 			{!userExists ? (
 				<Error404 />
 			) : (
-				<Success username={params.username} socket={state.socket} />
+				<Success username={params.username} socket={socket} lang={lang} />
 			)}
 		</>
 	)
 }
 
-function Success({ username, socket }: any) {
+function Success<
+	T extends {
+		username: string
+		socket: SocketIOClientStatic['Socket']
+		lang: { [key: string]: string }
+	}
+>({ username, socket, lang }: T) {
 	const [msg, setMsg] = useState('')
-	const [sent, setSent] = useState(false)
-	const btnSubmitMsg = useRef<HTMLButtonElement>(null)
+    const [sent, setSent] = useState(false)
+    const [showSubmitBtn, setShowSubmitBtn] = useState(false)
 
 	useEffect(() => {
 		if (socket !== undefined) {
@@ -83,81 +92,76 @@ function Success({ username, socket }: any) {
 	}
 
 	function shoot(val: string) {
-		const _btn = btnSubmitMsg.current!
 		let isMsgNotEmpty = val.length !== 0
-		_btn.style.width = isMsgNotEmpty ? '35px' : '0px'
-		_btn.style.color = isMsgNotEmpty ? 'white' : 'transparent'
+        setShowSubmitBtn(isMsgNotEmpty)
 	}
 
 	return (
-		<div>
-			<div>
-				{sent ? (
-					<MsgSent />
-				) : (
-					<form onSubmit={handleFormSubmit} styleName="curtain">
-						<div styleName="contenedolsito">
-							<div styleName="nubes-top">
-								<img src={nubes1} alt="nubes2-top" styleName="nubes2-top"></img>
-								<img src={nubes2} alt="nubes-top" styleName="nubes1-top"></img>
-							</div>
-							<div styleName="capa">
-								<div styleName="en-capa">
-									<div styleName="logo-div">
-										<img src={logo} alt="logo" styleName="logo" />
+		<div styleName="container">
+			{sent ? (
+				<MsgSent />
+			) : (
+				<form onSubmit={handleFormSubmit} styleName="curtain">
+					<div styleName="contenedolsito">
+						<div styleName="cloud-top-container">
+							<img src={cloud2} alt="cloud2-top" styleName="cloud2-top"></img>
+							<img src={cloud1} alt="cloud-top" styleName="cloud1-top"></img>
+						</div>
+						<div styleName="layer">
+							<div styleName="en-layer">
+								<div styleName="logo-div">
+									<img src={logo} alt="logo" styleName="logo" />
+								</div>
+								<div styleName="shadow_logo"></div>
+								<h3 styleName="user">{username}</h3>
+								<h5 styleName="firstRowText">{lang['FirstRowText']}</h5>
+								<h5 styleName="secondRowText">{lang['SecondRowText']}</h5>
+								<div styleName="box">
+									<div styleName="cloud-bottom1-container">
+										<img
+											src={cloud2}
+											alt="cloud2-bottom"
+											styleName="cloud2-bottom"
+										></img>
+										<img
+											src={cloud1}
+											alt="cloud-bottom"
+											styleName="cloud1-bottom"
+										></img>
 									</div>
-									<div styleName="sombra_perfil"></div>
-									<h3 styleName="user">{username}</h3>
-									<h5 styleName="firstRowText">te invitó a que le dejes un</h5>
-									<h5 styleName="secondRowText">Mensaje anonimo</h5>
-									<div styleName="box">
-										<div styleName="nubes-bottom">
-											<img
-												src={nubes2}
-												alt="nubes2-bottom"
-												styleName="nubes2-bottom"
-											></img>
-											<img
-												src={nubes1}
-												alt="nubes-bottom"
-												styleName="nubes1-bottom"
-											></img>
-										</div>
-										<div styleName="prueba">
-											<textarea
-												styleName="Input-msg"
-												data-type="text"
-												name="msg"
-												value={msg}
-												id="msg"
-												placeholder="Escribe tu mensaje"
-												onChange={handleInputChange}
-												autoComplete="off"
-											/>
-
-											<button
-												type="submit"
-												ref={btnSubmitMsg}
-												styleName="_btn-tq"
-											>
-												-3
-											</button>
-										</div>
-										<div styleName="nubes-bottom2">
-											<img
-												src={nubes1}
-												alt="nubes1-bottom2"
-												styleName="nubes1-bottom2"
-											></img>
-											<div styleName="sombra_textarea"></div>
-										</div>
+									<div styleName="input-container">
+										<textarea
+											styleName="input-msg"
+											data-type="text"
+											name="msg"
+											value={msg}
+											id="msg"
+											placeholder={lang["FieldPlaceholder"]}
+											onChange={handleInputChange}
+                                            autoComplete="off"
+                                            autoFocus
+                                            spellCheck={false}
+										/>
+										<button
+											type="submit"
+											styleName={`_btn-tq ${showSubmitBtn ? 'active' : ''}`}
+										>
+											<img src={arrow} alt="arrow icon"/>
+										</button>
+									</div>
+									<div styleName="cloud-bottom2-container">
+										<img
+											src={cloud1}
+											alt="cloud1-bottom2"
+											styleName="cloud1-bottom2"
+										></img>
 									</div>
 								</div>
 							</div>
 						</div>
-					</form>
-				)}
-			</div>
+					</div>
+				</form>
+			)}
 		</div>
 	)
 }

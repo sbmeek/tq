@@ -86,7 +86,7 @@ export default function Inbox<
 					</div>
 					<div styleName="title-inner-container">
 						<h4>{lang['Title']}</h4>
-						<div styleName="sombra-title"></div>
+						<div styleName="shadow-title"></div>
 					</div>
 				</div>
 				<div styleName="inbox-tabs-container">
