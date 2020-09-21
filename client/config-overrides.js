@@ -2,14 +2,23 @@ const {
     useBabelRc,
     override,
     adjustStyleLoaders,
-    addPostcssPlugins
+    addPostcssPlugins,
+    addWebpackModuleRule
 } = require('customize-cra')
 
 module.exports = override(
+    addWebpackModuleRule({
+        test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/, /\.svg$/],
+        loader: require.resolve('url-loader'),
+        options: {
+            limit: 10000,
+            name: 'static/media/[hash:8].[ext]',
+        },
+    }),
     addPostcssPlugins([
         require('autoprefixer')({}),
-        require('postcss-nested')({}), 
-        require('postcss-global-nested')({}) 
+        require('postcss-nested')({}),
+        require('postcss-global-nested')({})
     ]),
     useBabelRc(),
     adjustStyleLoaders((loader) => {
