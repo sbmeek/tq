@@ -184,7 +184,7 @@
 	border-radius: 10px 78px 78px 0px;
 	border: 0px solid #000000;
     color: transparent;
-    display: none;
+    
     place-items: center;
     position: absolute;
     left: 100%;
@@ -192,7 +192,7 @@
 
 ._btn-tq.active{
     animation: showSubmitBtn 200ms;
-    display: grid;
+    
 }
 
 @keyframes showSubmitBtn{
@@ -203,7 +203,8 @@
 
 ._btn-tq>img{
     height: auto;
-    width: 20px;
+	width: 26px;
+	margin: 11px;
 }
 
 .cloud-bottom2-container {

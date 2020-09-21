@@ -15,6 +15,11 @@ import labelicon from 'assets/images/icons/templateEditor-icons/icon-labels-btn.
 import bg from 'assets/images/icons/templateEditor-icons/icon-background-btn.svg'
 import org from 'assets/images/icons/templateEditor-icons/icon-organization-btn.svg'
 import xIcon from 'assets/images/icons/share-icons/icon-x.svg'
+import bold from 'assets/images/icons/templateEditor-icons/icons-message/icon-bold.svg'
+import Italic from 'assets/images/icons/templateEditor-icons/icons-message/icon-italic.svg'
+import strike from 'assets/images/icons/templateEditor-icons/icons-message/icon-strikethrough.svg'
+import underlined from 'assets/images/icons/templateEditor-icons/icons-message/icon-underlined.svg'
+import smile from 'assets/images/icons/templateEditor-icons/icons-message/iconfinder-Smile.svg'
 import {
 	createEditor,
 	Transforms,
@@ -329,7 +334,7 @@ function TextEditor<
 							CustomEditor.toggleBoldMark(editor)
 						}}
 					>
-						B
+						<img src={bold} styleName="editorelement" alt="editor"/>
 					</button>
 					<button
 						title="Italic"
@@ -339,7 +344,14 @@ function TextEditor<
 							CustomEditor.toggleItalicMark(editor)
 						}}
 					>
-						I
+						<img src={Italic} styleName="editorelement" alt="editor"/>
+					</button>
+					<button
+						title="strike"
+						type="button"
+						
+					>
+						<img src={strike} styleName="editorelement" alt="editor"/>
 					</button>
 					<button
 						title="Underline"
@@ -349,7 +361,7 @@ function TextEditor<
 							CustomEditor.toggleUnderlineMark(editor)
 						}}
 					>
-						U
+						<img src={underlined} styleName="editorelement" alt="editor"/>
 					</button>
 				</div>
 				<button
@@ -359,9 +371,7 @@ function TextEditor<
 						color: showEmojiPicker ? 'ButtonHighlight' : 'var(--tq-gray-00)',
 					}}
 				>
-					<span role="img" aria-label="glad">
-						😀
-					</span>
+					<img src={smile} styleName="editoremoji" alt="emojis"/>
 				</button>
 			</div>
 			<div styleName="input-answer-container">

@@ -16,6 +16,7 @@
 	position: relative;
 }
 
+
 .answer-editor-container > div:nth-child(1) {
 	display: flex;
 	flex-direction: column;
@@ -51,8 +52,16 @@
 
 .answer-btns-format {
 	display: flex;
-	width: 38%;
+	width: 53%;
 	justify-content: space-around;
+}
+.editorelement{
+    height: 14px;
+}
+.editoremoji{
+    height: 21px;
+    width: 35px;
+    margin: -1px;
 }
 
 .input-answer-container {

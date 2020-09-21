@@ -184,7 +184,7 @@
 }
 
 .btn-oauth:hover > img {
-	transform: translateX(70.5px);
+	transform: translateX(5.1rem);
 }
 
 .btn-oauth > img {
