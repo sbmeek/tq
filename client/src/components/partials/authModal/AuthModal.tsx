@@ -177,7 +177,7 @@ export default function AuthModal<
 															disabled={renderProps.isDisabled}
 															styleName="btn-oauth facebook"
 														>
-															<img src={facebookLogo} alt="facebook logo" />
+                                                            <img src={facebookLogo} alt="facebook logo" />
 															<span>
 																<hr></hr>
 																{showLogin
