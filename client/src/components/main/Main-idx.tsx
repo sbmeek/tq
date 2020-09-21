@@ -23,7 +23,7 @@ type DataType = {
 	key: string
 }
 
-function Main() {
+export default function Main() {
 	const [username, setUsername] = useState('')
 	const [inputMode, setInputMode] = useState(false)
 	const [showSubmitBtn, setShowSubmitBtn] = useState(false)
@@ -123,7 +123,7 @@ function Main() {
 							styleName={`${inputMode ? 'input-mode' : ''}`}
 							style={{
 								boxShadow: `${
-									showSubmitBtn ? 'none' : '0px 3.2px 0px 2.2px #01636d'
+									showSubmitBtn ? 'none' : '0px 3.2px 0px 2.2px var(--tq-blue-00)'
 								}`,
 							}}
 							tabIndex={-1}
@@ -168,5 +168,3 @@ function Main() {
 		</div>
 	)
 }
-
-export default Main

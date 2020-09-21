@@ -58,9 +58,9 @@
 	display: flex;
     position: relative;
     width: 100%;
-    color: #03666d;
-    border: 5.9px solid #018b9a;
-    background: #00b2c2;
+    color: var(--tq-blue-00);
+    border: 5.9px solid var(--tq-blue-01);
+    background: var(--tq-blue-02);
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     height: 42px;
@@ -71,18 +71,18 @@
 }
 
 .field-tq>div:nth-child(1):hover{
-	border: 5.9px solid #03a5b7;
-    background: #0ccfe0;
+	border: 5.9px solid var(--tq-blue-02);
+    background: var(--tq-blue-03);
 }
 
 .field-tq>div:nth-child(1).input-mode{
-	border: 5.9px solid #3defff !important;
-	background: #03c9db !important;
+	border: 5.9px solid var(--tq-blue-05) !important;
+	background: var(--tq-blue-03) !important;
 }
 
 .main-input{
 	padding: 3px 10px;
-	color: #03666d;
+	color: var(--tq-blue-00);
 	background: transparent;
 	border-radius: 30px;
 	min-height: 100%;
@@ -101,11 +101,11 @@
 .main-input:-ms-input-placeholder{
 	display: flex;
 	align-items: center;
-	color: #03666d !important;
+	color: var(--tq-blue-00) !important;
 }
 
 .main-input::placeholder{
-	color: #03666d !important;
+	color: var(--tq-blue-00) !important;
 }
 
 .main-input br {
@@ -123,7 +123,7 @@
 
 .main-btn{
 	position: absolute;
-    background: #018b9a;
+    background: var(--tq-blue-01);
     color: #fff;
     min-height: 100%;
     min-width: 115%;
@@ -136,7 +136,7 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
-	box-shadow: 0px 5.4px #01636d;
+	box-shadow: 0px 5.4px var(--tq-blue-00);
     cursor: pointer;
 }
 .main-btn > img{
@@ -158,9 +158,9 @@
 	align-items: center;
 	font-family: 'Nunito', sans-serif;
 	text-transform: none;
-	box-shadow: 0px 4.5px rgb(88, 0, 3);
+	box-shadow: 0px 4.5px var(--tq-red-00);
 	border-radius: 20px;
-	background-color: #9e0004;
+	background-color: var(--tq-red-02);
 	color: #fff;
 	min-width: 47%;
     height: 37px;
@@ -172,7 +172,7 @@
 
 ._btn-tq:hover {
 	background-color: #fff;
-	color: rgb(88, 0, 3);
+	color: var(--tq-red-00);
 	transition: ease-in 0.22s;
 }
 
