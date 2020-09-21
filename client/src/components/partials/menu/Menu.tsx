@@ -19,31 +19,31 @@ export default function Menu() {
 	const [showNewUserModal, setShowNewUserModal] = useState(false)
 	const [showMenu, setShowMenu] = useState(false)
 	const [enoughSpace, setEnoughSpace] = useState(false)
-    const [showAuthModal, setShowAuthModal] = useState(false)
-    const [isMobile, setIsMobile] = useState(false);
-    
+	const [showAuthModal, setShowAuthModal] = useState(false)
+	const [isMobile, setIsMobile] = useState(false)
+
 	const { isAuthenticated } = useSelector((state: RootStateOrAny) => state.auth)
-    const dispatch = useDispatch()
+	const dispatch = useDispatch()
 
-    const location = useLocation();
-    
-    const checkScreenSize = () => {
-        setIsMobile(document.documentElement.clientWidth <= 600);
-    }
+	const location = useLocation()
 
-    useEffect(() => {
-        checkScreenSize()
-        window.addEventListener('resize', checkScreenSize)
-        return () => window.removeEventListener('resize', checkScreenSize)
-    }, [])
+	const checkScreenSize = () => {
+		setIsMobile(document.documentElement.clientWidth <= 600)
+	}
 
-    useEffect(() => {
-        const params = new URLSearchParams(location.search)
-        let opt = params.get('opt') || '';
-        if(opt === 'show-login'){
-            setShowAuthModal(true)
-        }
-    }, [location.search])
+	useEffect(() => {
+		checkScreenSize()
+		window.addEventListener('resize', checkScreenSize)
+		return () => window.removeEventListener('resize', checkScreenSize)
+	}, [])
+
+	useEffect(() => {
+		const params = new URLSearchParams(location.search)
+		let opt = params.get('opt') || ''
+		if (opt === 'show-login') {
+			setShowAuthModal(true)
+		}
+	}, [location.search])
 
 	useEffect(() => {
 		setTimeout(() => {
@@ -73,8 +73,8 @@ export default function Menu() {
 	}
 
 	const handleAuthClick = () => {
-        setShowMenu(false)
-        setShowAuthModal(true)
+		setShowMenu(false)
+		setShowAuthModal(true)
 	}
 
 	const handleLogoutClick = async () => {
@@ -83,7 +83,7 @@ export default function Menu() {
 			setShowMenu(false)
 			dispatch(getAuthInfoAction())
 		}
-    }
+	}
 
 	return (
 		<div
@@ -106,65 +106,67 @@ export default function Menu() {
 					<img src={menulog} alt="menu logo" />
 				</button>
 				<div styleName={`sidebar ${showMenu ? 'active' : ''}`}>
-					<div>
-						<div styleName="sidebar-title">
-							<h1>Menu</h1>
-						</div>
-						<div styleName="btn-container">
-							<Link to="/Link">
-								<button styleName="sidebar-button">
-									<img src={home} alt="home" />
-									<span>Inicio</span>
-								</button>
-							</Link>
-						</div>
-						<div styleName="btn-container">
-							<Link to="/messages">
-								<button styleName="sidebar-button">
-									<img src={cloud} alt="home" />
-									<span>Bandeja</span>
-								</button>
-							</Link>
-						</div>
-						{!isAuthenticated && (
+					{showMenu && (
+						<div>
+							<div styleName="sidebar-title">
+								<h1>Menu</h1>
+							</div>
 							<div styleName="btn-container">
-								<button
-									styleName="sidebar-button"
-									onClick={handleAuthClick}
-								>
-									<img src={account} alt="home" />
-									<span>Auth</span>
-								</button>
+								<Link to="/Link">
+									<button styleName="sidebar-button">
+										<img src={home} alt="home" />
+										<span>Inicio</span>
+									</button>
+								</Link>
 							</div>
-						)}
-						{isAuthenticated && (
 							<div styleName="btn-container">
-								<button styleName="sidebar-button" onClick={handleLogoutClick}>
-									<img src={account} alt="home" />
-									<span>Log out</span>
-								</button>
+								<Link to="/messages">
+									<button styleName="sidebar-button">
+										<img src={cloud} alt="home" />
+										<span>Bandeja</span>
+									</button>
+								</Link>
 							</div>
-						)}
-						<div styleName="footer-container">
-							<div styleName="btn-container sbmeek-container">
-								<button styleName="sidebar-button sbmeek">
-									<img src={tqIcon} alt="tq-fav" />
-									<span>SB Meek</span>
-								</button>
+							{!isAuthenticated && (
+								<div styleName="btn-container">
+									<button styleName="sidebar-button" onClick={handleAuthClick}>
+										<img src={account} alt="home" />
+										<span>Auth</span>
+									</button>
+								</div>
+							)}
+							{isAuthenticated && (
+								<div styleName="btn-container">
+									<button
+										styleName="sidebar-button"
+										onClick={handleLogoutClick}
+									>
+										<img src={account} alt="home" />
+										<span>Log out</span>
+									</button>
+								</div>
+							)}
+							<div styleName="footer-container">
+								<div styleName="btn-container sbmeek-container">
+									<button styleName="sidebar-button sbmeek">
+										<img src={tqIcon} alt="tq-fav" />
+										<span>SB Meek</span>
+									</button>
+								</div>
+								<a href="/terms">
+									<button styleName="btn-terms">Términos y Condiciones</button>
+								</a>
 							</div>
-							<a href="/terms">
-								<button styleName="btn-terms">Términos y Condiciones</button>
-							</a>
 						</div>
-					</div>
+					)}
 				</div>
 			</div>
 			{isUserNew && <FirstTimeHelpBox active={showNewUserModal} />}
 			<AuthModal
 				opened={showAuthModal}
 				setOpened={setShowAuthModal}
-                setShowMenu={setShowMenu}
-                isMobile={isMobile}
+				setShowMenu={setShowMenu}
+				isMobile={isMobile}
 			/>
 		</div>
 	)
