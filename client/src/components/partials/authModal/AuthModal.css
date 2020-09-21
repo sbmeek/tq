@@ -322,14 +322,21 @@
 
 	.container {
 		width: 100%;
-		max-width: 420px;
 		height: 100% !important;
 		border-radius: 0;
 		padding: 20px;
-        justify-content: center !important;
+        overflow: auto;
 		position: relative;
-		background: transparent;
-	}
+        background: transparent;
+    }
+
+    .inner-container {
+        max-width: 420px;
+    }
+    
+    .container[aria-labelledby="login-container"]{
+        justify-content: center !important;
+    }
 
 	.inputs-and-buttons {
 		max-width: 100%;
@@ -415,6 +422,7 @@
 
     .buttons-sign > button {
         width: 100%;
+        min-width: 195px;
     }
 
 }

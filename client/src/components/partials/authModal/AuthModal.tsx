@@ -96,7 +96,8 @@ export default function AuthModal<
 						styleName="container"
 						style={{
 							height: showLogin ? '376px' : '556px',
-						}}
+                        }}
+                        aria-labelledby={showLogin ? 'login-container' : 'signup-container'}
 					>
 						{!showSignedupComp ? (
 							<div styleName="inner-container" ref={mainInnerContainer}>
