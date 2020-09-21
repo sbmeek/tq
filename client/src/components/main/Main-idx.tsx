@@ -126,7 +126,8 @@ export default function Main() {
 									showSubmitBtn ? 'none' : '0px 3.2px 0px 2.2px var(--tq-blue-00)'
 								}`,
 							}}
-							tabIndex={-1}
+                            tabIndex={-1}
+                            data-show-submitbtn={showSubmitBtn}
 						>
 							<textarea
 								value={username}
@@ -142,7 +143,7 @@ export default function Main() {
 								spellCheck="false"
 								autoComplete="off"
 								maxLength={20}
-								placeholder={!inputMode ? lang['InputPlaceholder'] : ''}
+                                placeholder={!inputMode ? lang['InputPlaceholder'] : ''}
 							></textarea>
 							{showSubmitBtn && (
 								<button type="submit" styleName="main-btn">
