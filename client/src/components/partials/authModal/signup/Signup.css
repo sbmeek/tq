@@ -85,7 +85,7 @@
 }
 
 .btn-cancel:hover > span:nth-child(1) {
-	transform: translateX(120px);
+	transform: translateX(300%);
 }
 
 .btn-cancel:hover > img{
@@ -125,7 +125,7 @@
 }
 
 .btn-create-account:hover:not(:disabled) > span:nth-child(1) {
-	transform: translateX(130px);
+	transform: translateX(300%);
 }
 
 .btn-create-account:hover:not(:disabled) > img {
