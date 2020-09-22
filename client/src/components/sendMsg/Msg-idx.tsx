@@ -13,6 +13,11 @@ import { InitContext } from 'global/context/InitContext'
 import cloud1 from 'assets/images/msg/cloud.png'
 import cloud2 from 'assets/images/msg/cloud-2.png'
 import arrow from 'assets/images/icons/icons-main/icon-arrow.svg'
+import bold from 'assets/images/icons/templateEditor-icons/icons-message/icon-bold.svg'
+import Italic from 'assets/images/icons/templateEditor-icons/icons-message/icon-italic.svg'
+import strike from 'assets/images/icons/templateEditor-icons/icons-message/icon-strikethrough.svg'
+import underlined from 'assets/images/icons/templateEditor-icons/icons-message/icon-underlined.svg'
+import smile from 'assets/images/icons/templateEditor-icons/icons-message/iconfinder-Smile.svg'
 
 type DataType = {
 	key?: string
@@ -64,8 +69,8 @@ function Success<
 	}
 >({ username, socket, lang }: T) {
 	const [msg, setMsg] = useState('')
-    const [sent, setSent] = useState(false)
-    const [showSubmitBtn, setShowSubmitBtn] = useState(false)
+	const [sent, setSent] = useState(false)
+	const [showSubmitBtn, setShowSubmitBtn] = useState(false)
 
 	useEffect(() => {
 		if (socket !== undefined) {
@@ -93,7 +98,7 @@ function Success<
 
 	function shoot(val: string) {
 		let isMsgNotEmpty = val.length !== 0
-        setShowSubmitBtn(isMsgNotEmpty)
+		setShowSubmitBtn(isMsgNotEmpty)
 	}
 
 	return (
@@ -117,6 +122,33 @@ function Success<
 								<h5 styleName="firstRowText">{lang['FirstRowText']}</h5>
 								<h5 styleName="secondRowText">{lang['SecondRowText']}</h5>
 								<div styleName="box">
+									<div styleName="editor">
+									<button title="Bold" type="button" styleName="buttonsedit">
+										<img src={bold} styleName="editorelement" alt="editor" />
+									</button>
+									<button title="Italic" type="button" styleName="buttonsedit">
+										<img src={Italic} styleName="editorelement" alt="editor" />
+									</button>
+									<button title="strike" type="button" styleName="buttonsedit">
+										<img src={strike} styleName="editorelement" alt="editor" />
+									</button>
+									<button
+										title="Underline"
+										type="button"
+										styleName="buttonsedit"
+									>
+										<img
+											src={underlined}
+											styleName="editorelement"
+											alt="editor"
+										/>
+									</button>
+									<div styleName="emoji">
+									<button type="button" styleName="buttonsedit">
+										<img src={smile} styleName="editoremoji" alt="emojis" />
+									</button>
+									</div>
+									</div>
 									<div styleName="cloud-bottom1-container">
 										<img
 											src={cloud2}
@@ -136,17 +168,17 @@ function Success<
 											name="msg"
 											value={msg}
 											id="msg"
-											placeholder={lang["FieldPlaceholder"]}
+											placeholder={lang['FieldPlaceholder']}
 											onChange={handleInputChange}
-                                            autoComplete="off"
-                                            autoFocus
-                                            spellCheck={false}
+											autoComplete="off"
+											autoFocus
+											spellCheck={false}
 										/>
 										<button
 											type="submit"
 											styleName={`_btn-tq ${showSubmitBtn ? 'active' : ''}`}
 										>
-											<img src={arrow} alt="arrow icon"/>
+											<img src={arrow} alt="arrow icon" />
 										</button>
 									</div>
 									<div styleName="cloud-bottom2-container">

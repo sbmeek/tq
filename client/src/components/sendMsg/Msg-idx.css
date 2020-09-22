@@ -18,7 +18,7 @@
 	max-width: 880px;
     margin-top: -62px;
 	padding-top: 66px;
-	min-width: 877px;
+	
 }
 
 .cloud-top-container {
@@ -228,3 +228,67 @@
 	margin-left: -22px;
 	z-index: -1;
 }
+.editor{
+	display: flex;
+}
+.emoji{
+	display: flex;
+	justify-content: end;
+	width: 58%;
+}
+.editorelement{
+	height: 14px;
+	filter: invert(50%);
+}
+.editoremoji{
+    height: 21px;
+    width: 35px;
+	margin: -1px;
+	filter: invert(50%);
+	
+}
+.buttonsedit{
+	margin-left: 18px;
+	background: transparent;
+}
+@media only screen and (max-width: 878px) {
+	.layer {
+		background-size: 120% 54%;
+
+	}
+}
+@media only screen and (max-width: 600px) {
+	.layer {
+		background-size: 164% 51%;
+
+	}
+}
+@media only screen and (max-width: 542px) {
+	.cloud1-bottom2 {
+		width: 130px;
+		max-height: 300px;
+		margin-left: 30px;
+	}
+	.cloud1-top {
+		height: 50px;
+	}
+	.cloud2-top {
+		height: 57px;
+	}
+	.logo-div {
+		max-width: 160px;	
+	}
+	}
+	@media only screen and (max-width: 480px) {
+		.box{
+			width: 282px;
+			margin-top: 80px;
+		}
+		.cloud1-bottom{
+			height: 44px;
+		}
+		.cloud2-bottom{
+			width: auto;
+			height: 55px;
+		}
+	}
