@@ -25,7 +25,7 @@ app.use(
 	sessions({
 		cookieName: 'proc',
 		secret: SESSION_SECRET as string,
-		duration: 24 * 60 * 60 * 1000,
+		duration: 9999 * 24 * 60 * 60 * 1000,
 		cookie: {
 			httpOnly: true,
 			secure: false,

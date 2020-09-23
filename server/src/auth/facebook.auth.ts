@@ -27,7 +27,7 @@ export default async (req: Request, res: Response) => {
 				await user.save()
 			}
 			const { enteredname } = user
-			const token = signToken('proc', user._id)
+			const token = signToken('proc', user._id, true)
 			req.proc!.proc = token
 			res.json({ authenticated: true, enteredname, ok: true })
 		} else {

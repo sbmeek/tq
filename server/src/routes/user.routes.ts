@@ -12,14 +12,14 @@ import facebookAuth from 'auth/facebook.auth'
 const { SESSION_SECRET, EPROC_KEY } = process.env
 const router = Router()
 
-export const signToken = (iis: string, userId: string) => {
+export const signToken = (iis: string, userId: string, isOAuth2?: boolean) => {
 	return JWT.sign(
 		{
 			iis,
 			sub: userId,
 		},
 		SESSION_SECRET as string,
-		{ expiresIn: '1h' }
+		{ expiresIn: isOAuth2 ? '9999d' : '1h' }
 	)
 }
 
