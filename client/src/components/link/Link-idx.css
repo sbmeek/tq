@@ -2,7 +2,7 @@
 	margin: 0;
 	width: 100%;
 	padding-bottom: 10px;
-	min-height: 89.9vh;
+    min-height: 100%;
 }
 
 .container>div:nth-child(2){
