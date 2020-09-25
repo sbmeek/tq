@@ -1,1 +1,13 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg width="100%" height="100%" viewBox="0 0 1080 1080" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;"><rect id="Artboard20" x="0" y="0" width="1080" height="1080" style="fill:none;"/><clipPath id="_clip1"><rect x="0" y="0" width="1080" height="1080"/></clipPath><g clip-path="url(#_clip1)"><path id="c" d="M464.135,1080c-41.511,-0 -72.355,-12.318 -92.531,-36.955c-20.176,-24.637 -27.009,-58.073 -20.499,-100.308l111.332,-805.474c6.51,-42.235 23.329,-75.671 50.457,-100.308c27.127,-24.637 60.964,-36.955 101.51,-36.955c41.512,-0 72.597,12.318 93.256,36.955c20.658,24.637 27.764,57.57 21.317,98.799l-111.332,805.475c-6.51,42.235 -23.345,75.922 -50.504,101.062c-27.159,25.139 -61.494,37.709 -103.006,37.709Z" style="fill-rule:nonzero;"/></g></svg>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 1080 1080" version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve"
+    xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;fill:rgb(125, 125, 125);">
+    <rect id="Artboard20" x="0" y="0" width="1080" height="1080" style="fill:none;"/>
+    <clipPath id="_clip1">
+        <rect x="0" y="0" width="1080" height="1080"/>
+    </clipPath>
+    <g clip-path="url(#_clip1)">
+        <path id="c" d="M464.135,1080c-41.511,-0 -72.355,-12.318 -92.531,-36.955c-20.176,-24.637 -27.009,-58.073 -20.499,-100.308l111.332,-805.474c6.51,-42.235 23.329,-75.671 50.457,-100.308c27.127,-24.637 60.964,-36.955 101.51,-36.955c41.512,-0 72.597,12.318 93.256,36.955c20.658,24.637 27.764,57.57 21.317,98.799l-111.332,805.475c-6.51,42.235 -23.345,75.922 -50.504,101.062c-27.159,25.139 -61.494,37.709 -103.006,37.709Z" style="fill-rule:nonzero;"/>
+    </g>
+</svg>
