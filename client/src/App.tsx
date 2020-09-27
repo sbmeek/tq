@@ -18,7 +18,9 @@ const TemplateMSG = lazy(() => import('components/inb/template/Template'));
 const Msg = lazy(() => import('components/sendMsg/Msg-idx'));
 const Menu = lazy(() => import('components/partials/menu/Menu'));
 const Terms = lazy(() => import('components/terms/Terms'));
-const VerifyAccount = lazy(() => import('components/verifyAccount/VerifyAccount'))
+const VerifyAccount = lazy(() =>
+	import('components/verifyAccount/VerifyAccount')
+);
 
 const loader = document.querySelector('#_l');
 
@@ -57,7 +59,7 @@ export default function App() {
 const RqqtComp = () => {
 	return (
 		<Router>
-			<Suspense fallback={<Loader/>}>
+			<Suspense fallback={<Loader />}>
 				<Route path="/">
 					<Menu />
 				</Route>
@@ -72,9 +74,6 @@ const RqqtComp = () => {
 							>
 								<Switch location={location}>
 									<UnauthRoute
-										needsRenderTime={
-											window.navigator.onLine
-										}
 										exact
 										path="/"
 										component={Main}
@@ -84,16 +83,13 @@ const RqqtComp = () => {
 										path="/messages"
 										component={Inbx}
 										redirectTo="/"
-										needsRenderTime={false}
 									/>
 									<AuthRoute
-										needsRenderTime={false}
 										path="/link"
 										component={UserLink}
 										redirectTo="/"
 									/>
 									<AuthRoute
-										needsRenderTime={false}
 										path="/message"
 										component={TemplateMSG}
 										redirectTo="/"

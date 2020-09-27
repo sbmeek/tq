@@ -1,31 +1,17 @@
-import React, { useEffect, useContext } from 'react'
-import { Route, Redirect } from 'react-router-dom'
-import { useSelector, RootStateOrAny } from 'react-redux'
-import Loader from '../components/partials/loader/Loader'
-import { InitContext, ActionEnum } from '../global/context/InitContext'
-import IPropsHOCs from './IPropsHOCs'
+import React from 'react';
+import { Route, Redirect } from 'react-router-dom';
+import { useSelector, RootStateOrAny } from 'react-redux';
+import Loader from '../components/partials/loader/Loader';
+import IPropsHOCs from './IPropsHOCs';
 
-export default function ({ component: Component, needsRenderTime, ...rest }: IPropsHOCs)  {
-	const { isAuthenticated, isLoaded } = useSelector((store: RootStateOrAny) => store.auth)
-	const { state, dispatch } = useContext(InitContext)
-
-	useEffect(() => {
-		dispatch({
-			type: ActionEnum.SET_IS_RENDERED,
-			payload: {
-				isRendered: !needsRenderTime,
-			},
-		})
-	}, [dispatch, needsRenderTime])
-
-	useEffect(() => {
-		const rootCls = document.querySelector('#react-root')!.classList
-		!state.isRendered ? rootCls.add('d-scroll') : rootCls.remove('d-scroll')
-	}, [state.isRendered])
+export default function ({ component: Component, ...rest }: IPropsHOCs) {
+	const { isAuthenticated, isLoaded } = useSelector(
+		(store: RootStateOrAny) => store.auth
+	);
 
 	return (
 		<>
-			{!isLoaded ? <Loader /> : !state.isRendered && <Loader />}
+			{!isLoaded && <Loader />}
 			<Route
 				{...rest}
 				render={(props) =>
@@ -42,5 +28,5 @@ export default function ({ component: Component, needsRenderTime, ...rest }: IPr
 				}
 			/>
 		</>
-	)
+	);
 }

@@ -6,7 +6,6 @@ import { checkTst } from 'AuthTester'
 
 interface IContextState {
 	socket: SocketIOClientStatic['Socket']
-	isRendered: boolean
     lang: object
     isTester: boolean
 }
@@ -18,13 +17,11 @@ interface IContextAction {
 
 const initialState: IContextState = {
 	socket: io(),
-	isRendered: false,
     lang: en,
     isTester: false
 }
 
 export enum ActionEnum {
-	SET_IS_RENDERED = 'SET_IS_RENDERED',
     SET_LANG = 'SET_LANG',
     SET_SOCKET = 'SET_SOCKET',
     SET_IS_TESTER = 'SET_IS_TESTER'
@@ -39,11 +36,6 @@ function reducer(state: IContextState, action: IContextAction) {
                 ...state,
                 socket: action.payload.socket
             }
-		case ActionEnum.SET_IS_RENDERED:
-			return {
-				...state,
-				isRendered: action.payload.isRendered,
-			}
 		case ActionEnum.SET_LANG:
 			return {
 				...state,

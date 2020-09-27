@@ -1,53 +1,51 @@
-import React, { useRef, useEffect, useState, useContext } from 'react'
-import { Link } from 'react-router-dom'
-import { useSelector, RootStateOrAny } from 'react-redux'
-import { InitContext, ActionEnum } from '../../global/context/InitContext'
-import Slider from './Slider'
-import Modal from './Modal'
-import './Link-idx.css'
-import copy from 'assets/images/icons/icons-inbox/icon-link.svg'
-import tqIcon from 'assets/images/msg/profile-tq.png'
+import React, { useRef, useEffect, useState, useContext } from 'react';
+import { Link } from 'react-router-dom';
+import { useSelector, RootStateOrAny } from 'react-redux';
+import { InitContext } from '../../global/context/InitContext';
+import Slider from './Slider';
+import Modal from './Modal';
+import './Link-idx.css';
+import copy from 'assets/images/icons/icons-inbox/icon-link.svg';
+import tqIcon from 'assets/images/msg/profile-tq.png';
 
 export default function LinkIdx() {
 	const inputLink = useRef<HTMLInputElement>(null);
 	const { user } = useSelector((store: RootStateOrAny) => store.auth);
 	const [name, setName] = useState('');
-    const [link, setLink] = useState('');
-    const [showPlaceholder, setShowPlaceholder] = useState(false);
+	const [link, setLink] = useState('');
+	const [showPlaceholder, setShowPlaceholder] = useState(false);
 	const [showCopiedLinkMsg, setShowCopiedLinkMsg] = useState(false);
-	const [showModal, setShowModal] = useState(false)
-	const btnLink = useRef(null)
+	const [showModal, setShowModal] = useState(false);
+	const btnLink = useRef(null);
 
 	const {
 		state: {
 			lang: { Link: lang },
 		},
-		dispatch,
-	} = useContext(InitContext)
+	} = useContext(InitContext);
 
 	useEffect(() => {
-        if(showPlaceholder){
-            dispatch({
-                type: ActionEnum.SET_IS_RENDERED,
-                payload: { isRendered: true },
-            })
-        }
-	}, [dispatch, showPlaceholder])
+		if (showPlaceholder) {
+			console.log('rendered');
+		}
+	}, [showPlaceholder]);
 
 	useEffect(() => {
 		(async () => {
-			if (user) await setName(user.enteredname)
-		})()
-	}, [user])
+			if (user) {
+				await setName(user.enteredname);
+			}
+		})();
+	}, [user]);
 
 	const copyLink = async () => {
-		await setLink(`${window.location.origin}/${name}`)
-		inputLink.current!.select()
-		inputLink.current!.setSelectionRange(0, 99)
-		document.execCommand('copy')
+		await setLink(`${window.location.origin}/${name}`);
+		inputLink.current!.select();
+		inputLink.current!.setSelectionRange(0, 99);
+		document.execCommand('copy');
 		setShowCopiedLinkMsg(true);
 		setTimeout(() => setShowCopiedLinkMsg(false), 7000);
-	}
+	};
 
 	return (
 		<div styleName="container">
@@ -63,18 +61,14 @@ export default function LinkIdx() {
 							ref={btnLink}
 							onClick={copyLink}
 						>
-							{
-								showCopiedLinkMsg 
-								?  
-								<>
-									{lang['BtnLinkCopiedToClipboard']}
-								</>
-								:
+							{showCopiedLinkMsg ? (
+								<>{lang['BtnLinkCopiedToClipboard']}</>
+							) : (
 								<>
 									<span> {lang['BtnCopyLink']} </span>
-									<img src={copy} alt="copy"/>
-								</> 
-							}
+									<img src={copy} alt="copy" />
+								</>
+							)}
 						</button>
 						<button
 							styleName="btn-copied-link-help"
@@ -104,11 +98,11 @@ export default function LinkIdx() {
 					<Link to="/messages" styleName="a_btn-tq">
 						<button type="button" styleName="_btn-tq">
 							<span>{lang['BtnInbox']}</span>
-							<img src={tqIcon} alt="logo"/>
+							<img src={tqIcon} alt="logo" />
 						</button>
 					</Link>
 				</div>
 			</div>
 		</div>
-	)
+	);
 }
