@@ -178,13 +178,27 @@
 }
 
 @media (max-width: 490px) {
+	:global #menucito {
+		display: none;
+	}
+
 	.container {
 		height: 100%;
 		display: block !important;
 	}
 
 	.container > div:nth-child(1) {
-		display: none;
+		display: flex;
+		position: absolute;
+		width: 100%;
+		margin-top: 10px;
+		justify-content: center;
+	}
+
+	.head-btns {
+		display: flex;
+		justify-content: space-between;
+		width: 90%;
 	}
 
 	.question-container {
