@@ -1,6 +1,7 @@
 /// <reference types="react-scripts" />
 
 declare module '*.css';
+declare module 'quill-emoji';
 declare module 'react-facebook-login/dist/facebook-login-render-props'
 
 declare interface ITQMessage {
