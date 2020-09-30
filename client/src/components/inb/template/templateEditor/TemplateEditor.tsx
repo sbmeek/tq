@@ -258,6 +258,11 @@ function TextEditor<
 	const {
 		lang: { TemplateEditor: lang },
 	} = useContext(InitContext).state;
+	const editorRef = useRef<ReactQuill>(null);
+
+	useEffect(() => {
+		editorRef.current!.getEditor().root.setAttribute('spellcheck', 'false');
+	}, []);
 
 	useEffect(() => {
 		const {
@@ -288,6 +293,7 @@ function TextEditor<
 			<div styleName="input-answer-container">
 				<div styleName="input-answer-inner-container">
 					<ReactQuill
+						ref={editorRef}
 						theme="snow"
 						modules={{
 							toolbar: [
