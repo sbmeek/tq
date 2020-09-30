@@ -239,6 +239,10 @@
 		.ql-container,
 		.ql-container:hover {
 			background-color: #fff !important;
-		}
-	}
+        }
+        
+        .ql-editor.ql-blank::before {
+            color: rgba(0, 0, 0, 0.2);
+        }
+    }
 }
