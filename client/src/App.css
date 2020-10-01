@@ -96,6 +96,10 @@ small {
     font-size: 13px;
 }
 
+.switch-container {
+    height: 100%;
+}
+
 :global {
     .fade-appear,
     .fade-enter {

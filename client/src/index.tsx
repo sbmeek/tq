@@ -22,11 +22,13 @@ window.addEventListener('onorientationchange', calcVH, true);
 window.addEventListener('resize', calcVH, true);
 
 ReactDOM.render(
-	<Provider store={store}>
-		<InitProvider>
-			<App />
-		</InitProvider>
-	</Provider>,
+	<React.StrictMode>
+		<Provider store={store}>
+			<InitProvider>
+				<App />
+			</InitProvider>
+		</Provider>
+	</React.StrictMode>,
 	reactRoot
 );
 

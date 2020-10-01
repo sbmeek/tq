@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, Suspense, lazy } from 'react';
+import React, { useEffect, useContext, Suspense, lazy, useRef } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { useSelector, RootStateOrAny } from 'react-redux';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
@@ -57,6 +57,8 @@ export default function App() {
 }
 
 const RqqtComp = () => {
+	const switchContainerRef = useRef(null);
+
 	return (
 		<Router>
 			<Suspense fallback={<Loader />}>
@@ -71,43 +73,49 @@ const RqqtComp = () => {
 								appear={true}
 								timeout={{ enter: 250, exit: 0 }}
 								classNames="fade"
+								nodeRef={switchContainerRef}
 							>
-								<Switch location={location}>
-									<UnauthRoute
-										exact
-										path="/"
-										component={Main}
-										redirectTo="/link"
-									/>
-									<AuthRoute
-										path="/messages"
-										component={Inbx}
-										redirectTo="/"
-									/>
-									<AuthRoute
-										path="/link"
-										component={UserLink}
-										redirectTo="/"
-									/>
-									<AuthRoute
-										path="/message"
-										component={TemplateMSG}
-										redirectTo="/"
-									/>
-									<Route
-										path="/account/verify"
-										component={VerifyAccount}
-									/>
-									<Route path="/terms" component={Terms} />
-									<Route
-										exact
-										path="/:username"
-										component={Msg}
-									/>
-									<Route path="*">
-										<Error404 />
-									</Route>
-								</Switch>
+								<div styleName='switch-container' ref={switchContainerRef}>
+									<Switch location={location}>
+										<UnauthRoute
+											exact
+											path="/"
+											component={Main}
+											redirectTo="/link"
+										/>
+										<AuthRoute
+											path="/messages"
+											component={Inbx}
+											redirectTo="/"
+										/>
+										<AuthRoute
+											path="/link"
+											component={UserLink}
+											redirectTo="/"
+										/>
+										<AuthRoute
+											path="/message"
+											component={TemplateMSG}
+											redirectTo="/"
+										/>
+										<Route
+											path="/account/verify"
+											component={VerifyAccount}
+										/>
+										<Route
+											path="/terms"
+											component={Terms}
+										/>
+										<Route
+											exact
+											path="/:username"
+											component={Msg}
+										/>
+										<Route path="*">
+											<Error404 />
+										</Route>
+									</Switch>
+								</div>
 							</CSSTransition>
 						</TransitionGroup>
 					)}
