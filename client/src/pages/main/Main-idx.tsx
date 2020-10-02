@@ -27,8 +27,8 @@ export default function Main() {
 	const [username, setUsername] = useState('');
 	const [inputMode, setInputMode] = useState(false);
 	const [showSubmitBtn, setShowSubmitBtn] = useState(false);
-    const [isLogoLoaded, setIsLogoLoaded] = useState(false);
-    const [isFieldLoaded, setIsFieldLoaded] = useState(false)
+	const [isLogoLoaded, setIsLogoLoaded] = useState(false);
+	const [isFieldLoaded, setIsFieldLoaded] = useState(false);
 	const tqField = useRef<HTMLTextAreaElement>(null);
 	const tqForm = useRef<HTMLFormElement>(null);
 	const dispatch = useDispatch();
@@ -38,13 +38,13 @@ export default function Main() {
 			socket,
 			lang: { Main: lang },
 		},
-    } = useContext(InitContext);
-    
-    useEffect(() => {
-        ;(document as any).fonts.ready.then(function () {
+	} = useContext(InitContext);
+
+	useEffect(() => {
+		(document as any).fonts.ready.then(function () {
 			setIsFieldLoaded(true);
-		})
-    })
+		});
+	});
 
 	const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -93,8 +93,17 @@ export default function Main() {
 
 	const handleFieldChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
 		const targetElement = e.target as HTMLTextAreaElement;
-		const { value: val } = targetElement;
-		setUsername(formatVal(val.replace(/\s/g, '')));
+		let { value: val } = targetElement;
+		val = val.match(/^[a-zA-Z0-9-\s]*$/) ? val : username;
+		val = val.replace(
+			/\s/g,
+			val[0] !== ' ' &&
+				val[targetElement.selectionStart] !== '-' &&
+				val[targetElement.selectionStart - 2] !== '-'
+				? '-'
+				: ''
+		);
+		setUsername(formatVal(val));
 		setShowSubmitBtn(val.length > 0);
 	};
 
@@ -118,17 +127,19 @@ export default function Main() {
 				styleName="form-container"
 				onSubmit={handleFormSubmit}
 			>
-                <div styleName="logo-container">
-                    <img
-                        styleName={`_tq-logo ${isLogoLoaded ? 'loaded' : ''}`}
-                        src={logo}
-                        draggable="false"
-                        alt="logo"
-                        onLoad={() => setIsLogoLoaded(true)}
-                    />
-                </div>
+				<div styleName="logo-container">
+					<img
+						styleName={`_tq-logo ${isLogoLoaded ? 'loaded' : ''}`}
+						src={logo}
+						draggable="false"
+						alt="logo"
+						onLoad={() => setIsLogoLoaded(true)}
+					/>
+				</div>
 				<div styleName="main-elements-container">
-					<div styleName={`field-tq ${isFieldLoaded ? 'loaded' : ''}`}>
+					<div
+						styleName={`field-tq ${isFieldLoaded ? 'loaded' : ''}`}
+					>
 						<div
 							styleName={`${inputMode ? 'input-mode' : ''}`}
 							style={{
