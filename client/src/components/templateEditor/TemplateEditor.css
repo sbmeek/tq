@@ -157,6 +157,21 @@
 	}
 }
 
+.tq-scrollbar::-webkit-scrollbar {
+	width: 6px !important;
+	height: 6px !important;
+}
+
+.tq-scrollbar::-webkit-scrollbar-thumb {
+	background: var(--tq-dark-gray-01) !important;
+	border-radius: 10px;
+}
+
+.tq-scrollbar {
+	scrollbar-width: thin !important;
+	scrollbar-color: var(--tq-dark-gray-01) transparent !important;
+}
+
 @media (max-width: 490px) {
 	.answer-editor-container {
 		display: grid;
@@ -239,10 +254,10 @@
 		.ql-container,
 		.ql-container:hover {
 			background-color: #fff !important;
-        }
-        
-        .ql-editor.ql-blank::before {
-            color: rgba(0, 0, 0, 0.2);
-        }
-    }
+		}
+
+		.ql-editor.ql-blank::before {
+			color: rgba(0, 0, 0, 0.2);
+		}
+	}
 }

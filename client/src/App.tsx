@@ -3,21 +3,22 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { useSelector, RootStateOrAny } from 'react-redux';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { InitContext } from 'global/context/InitContext';
-import './App.css';
-import Loader from 'components/partials/loader/Loader';
-import AuthTester from './AuthTester';
+import Loader from 'components/loader/Loader';
+import AuthTester from 'pages/authInTestMode/AuthInTestMode';
 
-const Main = lazy(() => import('components/main/Main-idx'));
-const Error404 = lazy(() => import('components/error/404'));
+import './App.css';
+
 const Error500 = lazy(() => import('components/error/500'));
-const Inbx = lazy(() => import('components/inb/Inb-idx'));
 const AuthRoute = lazy(() => import('HOCs/AuthRoute'));
 const UnauthRoute = lazy(() => import('HOCs/UnauthRoute'));
-const UserLink = lazy(() => import('components/link/Link-idx'));
-const TemplateMSG = lazy(() => import('components/inb/template/Template'));
-const Msg = lazy(() => import('components/sendMsg/Msg-idx'));
-const Menu = lazy(() => import('components/partials/menu/Menu'));
-const Terms = lazy(() => import('components/terms/Terms'));
+const Menu = lazy(() => import('components/menu/Menu'));
+const TemplateMSG = lazy(() => import('pages/msgTemplate/MsgTemplate'));
+const Main = lazy(() => import('pages/main/Main-idx'));
+const Inbx = lazy(() => import('pages/inbox/Inbox'));
+const Error404 = lazy(() => import('pages/error404/Error404'));
+const UserLink = lazy(() => import('pages/link/Link-idx'));
+const Msg = lazy(() => import('pages/sendMsg/SendMsg'));
+const Terms = lazy(() => import('pages/terms/Terms'));
 const VerifyAccount = lazy(() =>
 	import('components/verifyAccount/VerifyAccount')
 );
@@ -75,7 +76,10 @@ const RqqtComp = () => {
 								classNames="fade"
 								nodeRef={switchContainerRef}
 							>
-								<div styleName='switch-container' ref={switchContainerRef}>
+								<div
+									styleName="switch-container"
+									ref={switchContainerRef}
+								>
 									<Switch location={location}>
 										<UnauthRoute
 											exact

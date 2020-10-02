@@ -1,8 +1,8 @@
 import React from 'react'
 import logo from '../../assets/images/logo.png'
-import './404.css'
+import './Error404.css'
 
-export default function () {
+export default function Error404 () {
 	return (
 		<div styleName="main">
 			<div styleName="contenedor">
