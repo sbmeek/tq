@@ -121,7 +121,7 @@ export default function Main() {
 	};
 
 	return (
-		<div styleName="main">
+		<div styleName="main" data-testid="main-container">
 			<form
 				ref={tqForm}
 				styleName="form-container"
@@ -170,10 +170,11 @@ export default function Main() {
 								maxLength={20}
 								placeholder={
 									!inputMode ? lang['InputPlaceholder'] : ''
-								}
+                                }
+                                data-testid="username-field"
 							></textarea>
 							{showSubmitBtn && (
-								<button type="submit" styleName="main-btn">
+								<button type="submit" styleName="main-btn" data-testid="btn-submit">
 									<img src={arrow} alt="arrow" />
 								</button>
 							)}

@@ -1,30 +1,32 @@
 {
-    "presets": ["react-app"],
-    "env": {
-      "production": {
-        "presets": ["react-app"],
-        "plugins": [
-            [
-                "babel-plugin-react-css-modules",
-                {
-                    "webpackHotModuleReloading": true,
-                    "autoResolveMultipleImports": true,
-                    "generateScopedName": "[hash:base64:6]"
-                }
-            ]
-        ]
-      },
-      "development": {
-        "plugins": [
-            [
-                "babel-plugin-react-css-modules",
-                {
-                    "webpackHotModuleReloading": true,
-                    "autoResolveMultipleImports": true,
-                    "generateScopedName": "[name]__[local]__[hash:base64:5]"
-                }
-            ]
-        ]
-      }
-    }
-  }
+	"presets": ["react-app"],
+	"env": {
+		"production": {
+			"presets": ["react-app"],
+			"plugins": [
+                ["react-remove-properties", {"properties": ["data-testid"]}],
+				[
+                    "babel-plugin-react-css-modules",
+					{
+						"webpackHotModuleReloading": true,
+						"autoResolveMultipleImports": true,
+						"generateScopedName": "[hash:base64:6]"
+					}
+				]
+			]
+		},
+		"development": {
+			"plugins": [
+                "istanbul",
+				[
+					"babel-plugin-react-css-modules",
+					{
+						"webpackHotModuleReloading": true,
+						"autoResolveMultipleImports": true,
+						"generateScopedName": "[name]__[local]__[hash:base64:5]"
+					}
+				]
+			]
+		}
+	}
+}
