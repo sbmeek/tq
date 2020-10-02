@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react'
-import styles from './AuthTester.css'
 import logo from 'assets/images/ltqrNEW.png'
-import { LoaderEye } from 'components/partials/loader/Loader'
+import { LoaderEye } from 'components/loader/Loader'
 import Axios from 'axios'
 import { InitContext, ActionEnum } from 'global/context/InitContext'
+
+import styles from './AuthInTestMode.css'
 
 let timerID: NodeJS.Timeout
 

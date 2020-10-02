@@ -1,10 +1,6 @@
 import React, { useState, useRef, useContext, useEffect } from 'react';
-import '../Template.css';
-import './quill.tq-snow.css';
-import './quill-emoji.css';
-import styles from './TemplateEditor.css';
-import BgColors from '../templateOpts/BgColors';
-import Labels from '../templateOpts/Labels';
+import BgColors from './templateEditorTools/BgColors';
+import Labels from './templateEditorTools/Labels';
 import textIcon from 'assets/images/icons/templateEditor-icons/text-icon.svg';
 import stickers from 'assets/images/icons/templateEditor-icons/icon-stickers-minol.svg';
 import labelicon from 'assets/images/icons/templateEditor-icons/icon-labels-btn.svg';
@@ -14,6 +10,10 @@ import xIcon from 'assets/images/icons/share-icons/icon-x.svg';
 import ReactQuill, { Quill } from 'react-quill';
 import quillEmoji from 'quill-emoji';
 import { InitContext } from 'global/context/InitContext';
+
+import styles from './TemplateEditor.css';
+import './quill.tq-snow.css';
+import './quill-emoji.css';
 
 interface IProps {
 	answer: string;

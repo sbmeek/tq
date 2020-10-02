@@ -5,16 +5,43 @@ import icon from 'assets/images/icon.png'
 import { InitContext } from 'global/context/InitContext'
 import parse from 'html-react-parser'
 import SimpleBar from 'simplebar-react'
-import ShareOrSaveModal from '../shareOrSaveModal/ShareOrSaveModal'
+import ShareOrSaveModal from 'components/shareOrSaveModal/ShareOrSaveModal'
 import report from 'assets/images/icons/icons-inbox/icon-report.png'
 import delet from 'assets/images/icons/icons-inbox/icon-delete.png'
+import { useSelector, useDispatch, RootStateOrAny } from 'react-redux'
+import { setUserMessagesAction } from '../../global/ducks/authDucks'
 
-export default function Inbox<
+export default function () {
+	const { user: { messages } } = useSelector((store: RootStateOrAny) => store.auth)
+	const dispatch = useDispatch()
+	const {
+		state: { socket },
+	} = useContext(InitContext)
+	const [msgsList, setMsgsList] = useState([])
+	const [answeredMsgs, setAnsweredMsgs] = useState([])
+
+	useEffect(() => {
+		socket.on('msg:new', (data: ITQMessage[]) => {
+			dispatch(setUserMessagesAction(data))
+		})
+	}, [socket, dispatch])
+
+	useEffect(() => {
+		let _msgList = messages.filter((e: ITQMessage) => undefined === e.answer)
+		setMsgsList(_msgList)
+		_msgList = messages.filter((e: ITQMessage) => undefined !== e.answer)
+		setAnsweredMsgs(_msgList)
+	}, [messages])
+
+	return <Inbox messages={msgsList} answeredMsgs={answeredMsgs} />
+}
+
+const Inbox = <
 	T extends {
 		messages: ITQMessage[]
 		answeredMsgs: ITQMessage[]
 	}
->({ messages, answeredMsgs }: T) {
+>({ messages, answeredMsgs }: T) => {
 	const [actualTab, setActualTab] = useState('msg')
 	const [showShareOrSaveModal, setShowShareOrSaveModal] = useState(false)
 	const history = useHistory()

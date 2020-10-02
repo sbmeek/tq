@@ -264,7 +264,7 @@
 		vertical-align: text-top;
 	}
 	.ap {
-		background-image: url(../../../../assets/images/emoji-set.png);
+		background-image: url(~assets/images/emoji-set.png);
 		background-repeat: no-repeat;
 		background-size: 820px;
 		box-sizing: border-box;

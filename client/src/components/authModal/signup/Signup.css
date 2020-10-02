@@ -32,15 +32,15 @@
 }
 
 .field.is-loading{
-    background-image: url(../../../../assets/images/icons/tq-eye-loader.svg)
+    background-image: url(~assets/images/icons/tq-eye-loader.svg)
 }
 
 .field.is-valid {
-    background-image: url(../../../../assets/images/icons/icons-signup/ok-icon.svg)
+    background-image: url(~assets/images/icons/icons-signup/ok-icon.svg)
 }
 
 .field.is-invalid {
-    background-image: url(../../../../assets/images/icons/icons-signup/error-icon.svg)
+    background-image: url(~assets/images/icons/icons-signup/error-icon.svg)
 }
 
 .field:hover,

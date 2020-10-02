@@ -8,12 +8,12 @@ import React, {
 } from 'react'
 import { useLocation, Link } from 'react-router-dom'
 import parse from 'html-react-parser'
-import styles from './Template.css'
-import ReplyingModal from '../replyingModal/ReplyingModal'
-import TemplateEditor from './templateEditor/TemplateEditor'
+import ReplyingModal from 'components/replyingModal/ReplyingModal'
+import TemplateEditor from 'components/templateEditor/TemplateEditor'
 import { InitContext } from 'global/context/InitContext'
 import arrowanswer from 'assets/images/icons/icons-inbox/icon-arrow-answer.svg'
 import arrowexit from 'assets/images/icons/icons-inbox/icon-exit.svg'
+import styles from './MsgTemplate.css'
 
 export default function Template() {
 	const [answer, setAnswer] = useState<string>('')
