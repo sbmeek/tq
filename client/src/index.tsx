@@ -6,6 +6,9 @@ import generateStore from './global/store';
 import InitProvider from './global/context/InitContext';
 import * as serviceWorker from './serviceWorker';
 
+import './variables.css';
+import './globalStyles.css';
+
 const store = generateStore();
 
 const reactRoot = document.querySelector('#react-root');
