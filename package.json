@@ -5,7 +5,7 @@
 	"main": "index.js",
 	"scripts": {
 		"tq": "concurrently -n \"server,client\" -c 'green,blue' \"cd server && npm run dev\" \"cd client && npm start\"",
-		"ipkgs": "concurrently -n \"root-pkgs,server-pkgs,client-pkgs\" -c 'red,green,blue' \"npm i\" \"cd server && npm i\" \"cd client && npm i\"",
+		"ipkgs": "npm i && concurrently -n \"root-pkgs,server-pkgs,client-pkgs\" -c 'red,green,blue' \"npm i\" \"cd server && npm i\" \"cd client && npm i\"",
 		"i-client": "cd client && npm install",
 		"i-server": "cd server && npm install",
 		"b-server": "cd server && npm run build",
