@@ -6,83 +6,99 @@ export default {
 		BtnHelp: 'Ayuda',
 		BtnInfo: 'Info.',
 		AlertUserExpired: 'Este usuario ha expirado',
-		AlertUserNotAvailable: 'Este usuario no está disponible',
+		AlertUserNotAvailable: 'Este usuario no está disponible'
 	},
 	Link: {
 		BtnCopyLink: 'Copia tu link aquí',
 		BtnInbox: 'Bandeja',
 		AlertLinkCopied:
 			'Tu link sirve para recibir <span style="color: var(--tq-red-03);">mensajes anónimos en bandeja</span>. Compártelo en tus <span style="color: var(--tq-red-03);">redes sociales</span>',
-		BtnLinkCopiedToClipboard: 'Link copiado',
+		BtnLinkCopiedToClipboard: 'Link copiado'
 	},
-    MsgIdx: {
-        FirstRowText: "Te invitó a que le envíes un",
-        SecondRowText: "mensaje anónimo",
-        FieldPlaceholder: "Escribe tu mensaje"
-    },
+	MsgIdx: {
+		FirstRowText: 'Te invitó a que le envíes un',
+		SecondRowText: 'mensaje anónimo',
+		FieldPlaceholder: 'Escribe tu mensaje'
+	},
 	Inbox: {
 		NoMessagesInfo: 'Aún no hay nada aquí :(',
 		Title: 'Bandeja',
 		MsgTab: 'Mensajes',
-        AnsTab: 'Respondidos',
-        ReplyingModal: {
-            Title: "¿Estás seguro que deseas responder este mensaje?",
-            BtnCancel: "Cancelar",
-            BtnAnswer: "Responder",
-            Note: "Nota: Una vez que la respuesta ha sido enviada no podrá ser editada."
-        }  
-    },
-    Menu: {
-        ModalForNewUsers: "¿Sabías que esto es un menú?"
-    },
-    TemplateEditor: {
-        InputAnswerPlaceholder: "Escribe tu respuesta..."
-    },
-    AuthModal: {
-        FormSignupTitle: "Crea tu cuenta",
-        FormSignupSubtitle: "¿Sabías que puedes presionar TAB para cambiar de campo?",
-        FormLoginTitle: "Inicia sesión",
-        SignupWith: "Regístrate con {OAuth}",
-        LoginWith: "Inicia sesión con {OAuth}",
-        FormSignupFooter: "¿Ya tienes una cuenta?",
-        FormSignupFooterToggler: "Regístrate",
-        FormLoginFooter: "¿Aún no tienes una cuenta?",
-        FormLoginFooterToggler: "Acceder",
-        Signup: {
-            Username: "Nombre de usuario",
-            Email: "Correo electrónico",
-            Pwd: "Contraseña",
-            ConfirmPwd: "Confirmación",
-            BtnCreateAccount: "Crear cuenta",
-            BtnCancel: "Cancelar",
-            TermsNConditions: "Términos y condiciones",
-            FieldHelper: {
-                usernameHelpMsg: "El nombre de usuario debe contener más de 3 caracteres y solo puede contener letras y numeros.",
-                emailHelpMsg: 'Recuerde ingresar un email válido ya que le enviaremos un código de verificación de esa manera su cuenta será más segura.',
-                pwdHelpMsg: 'La contraseña debe contener mínimo 8 caracteres, al menos una letra mayúscula y una minúscula.',
-                cpwdHelpMsg: 'AYDIMIMADRE! Como que la confirmacion y la contraseña no se parecen D:'
-            },
-            Signedup: {
-                title: "Te haz registrado exitosamente",
-                helpText: "El próximo paso es verificar su correo electrónico, debe ingresar a su cuenta de email y acceder al enlace que le hemos enviado.",
-                logInBtn: "Iniciar sesión"
-            }
-        },
-        Login: {
-            UsernameOrEmail: "Nombre de usuario o email",
-            CredentialsErrMsg: "Credenciales incorrectas, verifique e intentelo de nuevo.",
-            EmptyFieldsErrMsg: "No llenó todos los campos.",
-            EmailNotVerified: "Ha digitado sus credenciales correctamente, pero necesitamos que confirme su correo electrónico antes de iniciar sesión.",
-            Pwd: "Contraseña",
-            BtnLogin: "Acceder",
-            BtnCancel: "Cancelar"
-        }
-    },
-    VerifyAccount: {
-        TitleIsVerificationOk: "Confirmación completada",
-        TitleIsVerificationNotOk: "Hubo un problema",
-        TextIsVerificationOk: "Ahora puede acceder a su cuenta.",
-        TextIsVerificationNotOk: "El enlace es inválido. Al parecer ya ha confirmado su correo electrónico, si es así no es necesario que lo haga de nuevo.",
-        LogInBtn: "Iniciar sesión"
-    }
-}
+		AnsTab: 'Respondidos',
+		ReplyingModal: {
+			Title: '¿Estás seguro que deseas responder este mensaje?',
+			BtnCancel: 'Cancelar',
+			BtnAnswer: 'Responder',
+			Note:
+				'Nota: Una vez que la respuesta ha sido enviada no podrá ser editada.'
+		}
+	},
+	Menu: {
+		ModalForNewUsers: '¿Sabías que esto es un menu?',
+		Title: 'Menu',
+		HomeOpt: 'Inicio',
+		InboxOpt: 'Bandeja',
+		SignInOpt: 'Ingresar',
+		LogOutOpt: 'Rodar',
+		BtnTerms: 'Términos y Condiciones'
+	},
+	TemplateEditor: {
+		InputAnswerPlaceholder: 'Escribe tu respuesta...'
+	},
+	AuthModal: {
+		FormSignupTitle: 'Crea tu cuenta',
+		FormSignupSubtitle:
+			'¿Sabías que puedes presionar TAB para cambiar de campo?',
+		FormLoginTitle: 'Inicia sesión',
+		SignupWith: 'Regístrate con {OAuth}',
+		LoginWith: 'Inicia sesión con {OAuth}',
+		FormSignupFooter: '¿Ya tienes una cuenta?',
+		FormSignupFooterToggler: 'Regístrate',
+		FormLoginFooter: '¿Aún no tienes una cuenta?',
+		FormLoginFooterToggler: 'Acceder',
+		Signup: {
+			Username: 'Nombre de usuario',
+			Email: 'Correo electrónico',
+			Pwd: 'Contraseña',
+			ConfirmPwd: 'Confirmación',
+			BtnCreateAccount: 'Crear cuenta',
+			BtnCancel: 'Cancelar',
+			TermsNConditions: 'Términos y condiciones',
+			FieldHelper: {
+				usernameHelpMsg:
+					'El nombre de usuario debe contener más de 3 caracteres y solo puede contener letras y numeros.',
+				emailHelpMsg:
+					'Recuerde ingresar un email válido ya que le enviaremos un código de verificación de esa manera su cuenta será más segura.',
+				pwdHelpMsg:
+					'La contraseña debe contener mínimo 8 caracteres, al menos una letra mayúscula y una minúscula.',
+				cpwdHelpMsg:
+					'AYDIMIMADRE! Como que la confirmacion y la contraseña no se parecen D:'
+			},
+			Signedup: {
+				title: 'Te haz registrado exitosamente',
+				helpText:
+					'El próximo paso es verificar su correo electrónico, debe ingresar a su cuenta de email y acceder al enlace que le hemos enviado.',
+				logInBtn: 'Iniciar sesión'
+			}
+		},
+		Login: {
+			UsernameOrEmail: 'Nombre de usuario o email',
+			CredentialsErrMsg:
+				'Credenciales incorrectas, verifique e intentelo de nuevo.',
+			EmptyFieldsErrMsg: 'No llenó todos los campos.',
+			EmailNotVerified:
+				'Ha digitado sus credenciales correctamente, pero necesitamos que confirme su correo electrónico antes de iniciar sesión.',
+			Pwd: 'Contraseña',
+			BtnLogin: 'Acceder',
+			BtnCancel: 'Cancelar'
+		}
+	},
+	VerifyAccount: {
+		TitleIsVerificationOk: 'Confirmación completada',
+		TitleIsVerificationNotOk: 'Hubo un problema',
+		TextIsVerificationOk: 'Ahora puede acceder a su cuenta.',
+		TextIsVerificationNotOk:
+			'El enlace es inválido. Al parecer ya ha confirmado su correo electrónico, si es así no es necesario que lo haga de nuevo.',
+		LogInBtn: 'Iniciar sesión'
+	}
+};

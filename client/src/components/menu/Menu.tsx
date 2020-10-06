@@ -1,97 +1,102 @@
-import React, { useState, useEffect } from 'react'
-import flecha from 'assets/images/left-arrow.svg'
-import menulog from 'assets/images/menu-tq.svg'
-import FirstTimeHelpBox from '../firstTimeHelpBox/FirstTimeHelpBox'
-import AuthModal from '../authModal/AuthModal'
-import home from 'assets/images/icons/icons-menu/icon-home.svg'
-import cloud from 'assets/images/icons/icons-menu/icon-cloud.svg'
-import account from 'assets/images/icons/icons-menu/icon-account.svg'
-import tqIcon from 'assets/images/msg/profile-tq.png'
-import Axios from 'axios'
-import { Link, useLocation } from 'react-router-dom'
-import { useSelector, RootStateOrAny, useDispatch } from 'react-redux'
-import { getAuthInfoAction } from 'global/ducks/authDucks'
+import React, { useState, useEffect, useContext } from 'react';
+import flecha from 'assets/images/left-arrow.svg';
+import menulog from 'assets/images/menu-tq.svg';
+import FirstTimeHelpBox from '../firstTimeHelpBox/FirstTimeHelpBox';
+import AuthModal from '../authModal/AuthModal';
+import home from 'assets/images/icons/icons-menu/icon-home.svg';
+import cloud from 'assets/images/icons/icons-menu/icon-cloud.svg';
+import account from 'assets/images/icons/icons-menu/icon-account.svg';
+import arrowexit from 'assets/images/icons/icons-inbox/icon-exit.svg';
+import tqIcon from 'assets/images/msg/profile-tq.png';
+import Axios from 'axios';
+import { Link, useLocation } from 'react-router-dom';
+import { useSelector, RootStateOrAny, useDispatch } from 'react-redux';
+import { getAuthInfoAction } from 'global/ducks/authDucks';
 
-import './Menu.css'
+import './Menu.css';
+import { InitContext } from 'global/context/InitContext';
 
 export default function Menu() {
-	const [isUserNew, setIsUserNew] = useState(true)
-	const [showNewUserModal, setShowNewUserModal] = useState(false)
-	const [showMenu, setShowMenu] = useState(false)
-	const [enoughSpace, setEnoughSpace] = useState(false)
-	const [showAuthModal, setShowAuthModal] = useState(false)
-	const [isMobile, setIsMobile] = useState(false)
+	const [isUserNew, setIsUserNew] = useState(true);
+	const [showNewUserModal, setShowNewUserModal] = useState(false);
+	const [showMenu, setShowMenu] = useState(false);
+	const [enoughSpace, setEnoughSpace] = useState(false);
+	const [showAuthModal, setShowAuthModal] = useState(false);
+	const [isMobile, setIsMobile] = useState(false);
+	const { Menu: lang } = useContext(InitContext).state.lang;
 
-	const { isAuthenticated } = useSelector((state: RootStateOrAny) => state.auth)
-	const dispatch = useDispatch()
+	const { isAuthenticated } = useSelector(
+		(state: RootStateOrAny) => state.auth
+	);
+	const dispatch = useDispatch();
 
-	const location = useLocation()
+	const location = useLocation();
 
 	const checkScreenSize = () => {
-		setIsMobile(document.documentElement.clientWidth <= 600)
-	}
+		setIsMobile(document.documentElement.clientWidth <= 600);
+	};
 
 	useEffect(() => {
-		checkScreenSize()
-		window.addEventListener('resize', checkScreenSize)
-		return () => window.removeEventListener('resize', checkScreenSize)
-	}, [])
+		checkScreenSize();
+		window.addEventListener('resize', checkScreenSize);
+		return () => window.removeEventListener('resize', checkScreenSize);
+	}, []);
 
 	useEffect(() => {
-		const params = new URLSearchParams(location.search)
-		let opt = params.get('opt') || ''
+		const params = new URLSearchParams(location.search);
+		let opt = params.get('opt') || '';
 		if (opt === 'show-login') {
-			setShowAuthModal(true)
+			setShowAuthModal(true);
 		}
-	}, [location.search])
+	}, [location.search]);
 
 	useEffect(() => {
 		setTimeout(() => {
 			if (!localStorage.getItem('sbm-tq-ft')) {
-				setIsUserNew(true)
-				setShowNewUserModal(true)
-				localStorage.setItem('sbm-tq-ft', '1')
+				setIsUserNew(true);
+				setShowNewUserModal(true);
+				localStorage.setItem('sbm-tq-ft', '1');
 			} else {
-				setIsUserNew(false)
+				setIsUserNew(false);
 			}
-		}, 1000)
-	}, [])
+		}, 1000);
+	}, []);
 
 	useEffect(() => {
-		handleSpace()
-		window.addEventListener('resize', handleSpace)
-		return () => window.removeEventListener('resize', handleSpace)
-	}, [])
+		handleSpace();
+		window.addEventListener('resize', handleSpace);
+		return () => window.removeEventListener('resize', handleSpace);
+	}, []);
 
 	const handleSpace = () => {
-		setEnoughSpace(window.innerWidth > 1311)
-	}
+		setEnoughSpace(window.innerWidth > 1311);
+	};
 
 	const toggleMenuActivation = () => {
-		if (showNewUserModal) setShowNewUserModal(false)
-		setShowMenu(!showMenu)
-	}
+		if (showNewUserModal) setShowNewUserModal(false);
+		setShowMenu(!showMenu);
+	};
 
 	const handleAuthClick = () => {
-		setShowMenu(false)
-		setShowAuthModal(true)
-	}
+		setShowMenu(false);
+		setShowAuthModal(true);
+	};
 
 	const handleLogoutClick = async () => {
-		const res = await Axios.post('/user/logout')
+		const res = await Axios.post('/user/logout');
 		if (res.data.ok) {
-			setShowMenu(false)
-			dispatch(getAuthInfoAction())
+			setShowMenu(false);
+			dispatch(getAuthInfoAction());
 		}
-	}
+	};
 
 	return (
 		<div
 			styleName="container-menu"
 			style={{
-				paddingRight: `${showMenu ? '27px' : ''}`,
-            }}
-            id="menucito"
+				paddingRight: `${showMenu ? '27px' : ''}`
+			}}
+			id="menucito"
 		>
 			<div
 				styleName={`overlay ${showMenu && !enoughSpace ? 'active' : ''}`}
@@ -110,13 +115,13 @@ export default function Menu() {
 					{showMenu && (
 						<div>
 							<div styleName="sidebar-title">
-								<h1>Menu</h1>
+								<h1>{lang['Title']}</h1>
 							</div>
 							<div styleName="btn-container">
 								<Link to="/Link">
 									<button styleName="sidebar-button">
 										<img src={home} alt="home" />
-										<span>Inicio</span>
+										<span>{lang['HomeOpt']}</span>
 									</button>
 								</Link>
 							</div>
@@ -124,7 +129,7 @@ export default function Menu() {
 								<Link to="/messages">
 									<button styleName="sidebar-button">
 										<img src={cloud} alt="home" />
-										<span>Bandeja</span>
+										<span>{lang['InboxOpt']}</span>
 									</button>
 								</Link>
 							</div>
@@ -132,7 +137,7 @@ export default function Menu() {
 								<div styleName="btn-container">
 									<button styleName="sidebar-button" onClick={handleAuthClick}>
 										<img src={account} alt="home" />
-										<span>Auth</span>
+										<span>{lang['SignInOpt']}</span>
 									</button>
 								</div>
 							)}
@@ -142,8 +147,13 @@ export default function Menu() {
 										styleName="sidebar-button"
 										onClick={handleLogoutClick}
 									>
-										<img src={account} alt="home" />
-										<span>Log out</span>
+										<img
+											src={arrowexit}
+											alt="home"
+											styleName="logout-icon"
+											style={{ padding: '4px' }}
+										/>
+										<span>{lang['LogOutOpt']}</span>
 									</button>
 								</div>
 							)}
@@ -154,8 +164,8 @@ export default function Menu() {
 										<span>SB Meek</span>
 									</button>
 								</div>
-								<a href="/terms">
-									<button styleName="btn-terms">Términos y Condiciones</button>
+								<a href="/terms" style={{ width: '101.6%' }}>
+									<button styleName="btn-terms">{lang['BtnTerms']}</button>
 								</a>
 							</div>
 						</div>
@@ -170,5 +180,5 @@ export default function Menu() {
 				isMobile={isMobile}
 			/>
 		</div>
-	)
+	);
 }
