@@ -123,9 +123,13 @@
 
 .sidebar > div {
 	display: grid;
-	grid-template-rows: minmax(90px, 110px) repeat(3, minmax(40px, 60px)) 5fr;
+	grid-template-rows: minmax(90px, 110px) repeat(2, minmax(40px, 60px)) 5fr;
 	max-width: 100%;
 	height: 100%;
+}
+
+.sidebar > div.authenticated {
+	grid-template-rows: minmax(90px, 110px) repeat(3, minmax(40px, 60px)) 5fr;
 }
 
 .sidebar-title,

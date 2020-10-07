@@ -113,7 +113,7 @@ export default function Menu() {
 				</button>
 				<div styleName={`sidebar ${showMenu ? 'active' : ''}`}>
 					{showMenu && (
-						<div>
+						<div styleName={`${isAuthenticated ? 'authenticated' : ''}`}>
 							<div styleName="sidebar-title">
 								<h1>{lang['Title']}</h1>
 							</div>
@@ -125,37 +125,39 @@ export default function Menu() {
 									</button>
 								</Link>
 							</div>
-							<div styleName="btn-container">
-								<Link to="/messages">
-									<button styleName="sidebar-button">
-										<img src={cloud} alt="home" />
-										<span>{lang['InboxOpt']}</span>
-									</button>
-								</Link>
-							</div>
 							{!isAuthenticated && (
 								<div styleName="btn-container">
 									<button styleName="sidebar-button" onClick={handleAuthClick}>
-										<img src={account} alt="home" />
+										<img src={account} alt="signin" />
 										<span>{lang['SignInOpt']}</span>
 									</button>
 								</div>
 							)}
 							{isAuthenticated && (
-								<div styleName="btn-container">
-									<button
-										styleName="sidebar-button"
-										onClick={handleLogoutClick}
-									>
-										<img
-											src={arrowexit}
-											alt="home"
-											styleName="logout-icon"
-											style={{ padding: '4px' }}
-										/>
-										<span>{lang['LogOutOpt']}</span>
-									</button>
-								</div>
+								<>
+									<div styleName="btn-container">
+										<Link to="/messages">
+											<button styleName="sidebar-button">
+												<img src={cloud} alt="cloud" />
+												<span>{lang['InboxOpt']}</span>
+											</button>
+										</Link>
+									</div>
+									<div styleName="btn-container">
+										<button
+											styleName="sidebar-button"
+											onClick={handleLogoutClick}
+										>
+											<img
+												src={arrowexit}
+												alt="logout"
+												styleName="logout-icon"
+												style={{ padding: '4px' }}
+											/>
+											<span>{lang['LogOutOpt']}</span>
+										</button>
+									</div>
+								</>
 							)}
 							<div styleName="footer-container">
 								<div styleName="btn-container sbmeek-container">
