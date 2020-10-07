@@ -22,6 +22,6 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v2
         with:
-          command: npm run test
-          project: ./client
+          command: npm run test-action && npm run test
+          working-directory: ./client
           config-file: cypress.json
