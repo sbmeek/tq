@@ -6,7 +6,7 @@ import React, {
 	FormEvent,
 	FocusEvent,
 	KeyboardEvent,
-	ChangeEvent,
+	ChangeEvent
 } from 'react';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
@@ -31,13 +31,14 @@ export default function Main() {
 	const [isFieldLoaded, setIsFieldLoaded] = useState(false);
 	const tqField = useRef<HTMLTextAreaElement>(null);
 	const tqForm = useRef<HTMLFormElement>(null);
+	const isFieldDisabled = useRef(false);
 	const dispatch = useDispatch();
 
 	const {
 		state: {
 			socket,
-			lang: { Main: lang },
-		},
+			lang: { Main: lang }
+		}
 	} = useContext(InitContext);
 
 	useEffect(() => {
@@ -72,7 +73,7 @@ export default function Main() {
 				}
 				const keyVal = res.key != null ? res.key : 'err';
 				let settings = {
-					headers: { 'Content-Type': 'application/json' },
+					headers: { 'Content-Type': 'application/json' }
 				};
 				const resp = await axios.post(
 					`/user/auth?tquser=${userVal}&tqpwd=${keyVal}`,
@@ -91,20 +92,31 @@ export default function Main() {
 		return val!.slice(0, l - (l - 20)) as string;
 	};
 
-	const handleFieldChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+	const handleFieldChange = (
+		e: ChangeEvent<HTMLTextAreaElement> & KeyboardEvent<HTMLTextAreaElement>
+	) => {
+		const curr = tqForm.current!;
 		const targetElement = e.target as HTMLTextAreaElement;
-		let { value: val } = targetElement;
-		val = val.match(/^[a-zA-Z0-9-\s]*$/) ? val : username;
-		val = val.replace(
-			/\s/g,
-			val[0] !== ' ' &&
-				val[targetElement.selectionStart] !== '-' &&
-				val[targetElement.selectionStart - 2] !== '-'
-				? '-'
-				: ''
-		);
-		setUsername(formatVal(val));
-		setShowSubmitBtn(val.length > 0);
+		console.log(e.key);
+		if (e.key === 'Enter') {
+			curr.dispatchEvent(new Event('submit', { cancelable: true }));
+			curr.disabled = true;
+			isFieldDisabled.current = true;
+		}
+		if (!isFieldDisabled.current) {
+			let { value: val } = targetElement;
+			val = val.match(/^[a-zA-Z0-9-\s]*$/) ? val : username;
+			val = val.replace(
+				/\s/g,
+				val[0] !== ' ' &&
+					val[targetElement.selectionStart] !== '-' &&
+					val[targetElement.selectionStart - 2] !== '-'
+					? '-'
+					: ''
+			);
+			setUsername(formatVal(val));
+			setShowSubmitBtn(val.length > 0);
+		}
 	};
 
 	const handleFieldFocus = (e: FocusEvent<HTMLTextAreaElement>) => {
@@ -112,21 +124,9 @@ export default function Main() {
 		if (e.type === 'focus') tqField.current!.focus();
 	};
 
-	const handleKeyPress = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-		if (e.key === 'Enter') {
-			tqForm.current!.dispatchEvent(
-				new Event('submit', { cancelable: true })
-			);
-		}
-	};
-
 	return (
 		<div styleName="main" data-testid="main-container">
-			<form
-				ref={tqForm}
-				styleName="form-container"
-				onSubmit={handleFormSubmit}
-			>
+			<form ref={tqForm} styleName="form-container" onSubmit={handleFormSubmit}>
 				<div styleName="logo-container">
 					<img
 						styleName={`_tq-logo ${isLogoLoaded ? 'loaded' : ''}`}
@@ -137,9 +137,7 @@ export default function Main() {
 					/>
 				</div>
 				<div styleName="main-elements-container">
-					<div
-						styleName={`field-tq ${isFieldLoaded ? 'loaded' : ''}`}
-					>
+					<div styleName={`field-tq ${isFieldLoaded ? 'loaded' : ''}`}>
 						<div
 							styleName={`${inputMode ? 'input-mode' : ''}`}
 							style={{
@@ -147,7 +145,7 @@ export default function Main() {
 									showSubmitBtn
 										? 'none'
 										: '0px 3.2px 0px 2.2px var(--tq-blue-00)'
-								}`,
+								}`
 							}}
 							tabIndex={-1}
 							data-show-submitbtn={showSubmitBtn}
@@ -156,25 +154,25 @@ export default function Main() {
 								value={username}
 								id="usrTQ"
 								data-name="tquser"
-								styleName={`main-input ${
-									inputMode ? 'input-mode' : ''
-								}`}
+								styleName={`main-input ${inputMode ? 'input-mode' : ''}`}
 								data-type={inputMode ? 'text' : 'button'}
 								onChange={handleFieldChange}
 								onFocus={handleFieldFocus}
 								onBlur={handleFieldFocus}
-								onKeyPress={handleKeyPress}
+								onKeyPress={handleFieldChange}
 								ref={tqField}
 								spellCheck="false"
 								autoComplete="off"
 								maxLength={20}
-								placeholder={
-									!inputMode ? lang['InputPlaceholder'] : ''
-                                }
-                                data-testid="username-field"
+								placeholder={!inputMode ? lang['InputPlaceholder'] : ''}
+								data-testid="username-field"
 							></textarea>
 							{showSubmitBtn && (
-								<button type="submit" styleName="main-btn" data-testid="btn-submit">
+								<button
+									type="submit"
+									styleName="main-btn"
+									data-testid="btn-submit"
+								>
 									<img src={arrow} alt="arrow" />
 								</button>
 							)}

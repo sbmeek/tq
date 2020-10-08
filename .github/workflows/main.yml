@@ -1,4 +1,4 @@
-name: main
+name: Lint
 
 on: [push]
 
@@ -12,16 +12,3 @@ jobs:
         with:
           node-version: 12.x
           name: Continuous Integration
-    name: Cypress tests
-  cypress-run:
-    name: Cypress run
-    runs-on: ubuntu-16.04
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v1
-      - name: Cypress run
-        uses: cypress-io/github-action@v2
-        with:
-          command: npm run test-action && npm run test
-          working-directory: ./client
-          config-file: cypress.json
