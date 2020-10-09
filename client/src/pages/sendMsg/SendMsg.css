@@ -9,7 +9,7 @@
 }
 
 .layer {
-	background-image: url(../../assets/images/msg/layer.png);
+	background-image: url(/static/media/49728047.png);
 	background-repeat: no-repeat;
 	background-size: 100% auto;
 	background-position: 50% 0%;
@@ -18,6 +18,7 @@
 	max-width: 880px;
 	margin-top: -62px;
 	padding-top: 66px;
+	max-height: 55%;
 }
 
 .cloud-top-container {
@@ -174,7 +175,7 @@
 ._btn-tq {
 	font-family: 'Nunito', sans-serif;
 	text-transform: none;
-	background-color: var(--tq-blue-01);;
+	background-color: var(--tq-blue-01);
 	width: 44px;
 	height: 50px;
 	border-radius: 10px 78px 78px 0px;
@@ -262,17 +263,23 @@
 
 @media only screen and (max-width: 878px) {
 	.layer {
-		background-size: 120% 54%;
+		background-size: 120% 48%;
+		min-height: 58%;
+		max-height: 650px;
 	}
 }
 
 @media only screen and (max-width: 600px) {
 	.layer {
 		background-size: 164% 51%;
+		max-height: 570px;
 	}
 }
 
 @media only screen and (max-width: 542px) {
+	.box{
+		margin-top: 30px;
+	}
 	.cloud1-bottom2 {
 		width: 130px;
 		max-height: 300px;
@@ -292,7 +299,6 @@
 @media only screen and (max-width: 480px) {
 	.box {
 		width: 282px;
-		margin-top: 80px;
 	}
 	.cloud1-bottom {
 		height: 44px;
