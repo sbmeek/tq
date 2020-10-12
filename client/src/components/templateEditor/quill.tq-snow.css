@@ -21,7 +21,7 @@
 		min-height: 150px;
 		color: #fff;
 		border: none !important;
-		background-color: var(--tq-gray-00) !important;
+		background-color: var(--tq-gray-00);
 		border-radius: 21px !important;
 		padding: 4px 8px !important;
 		max-width: 212.44px !important;
@@ -33,7 +33,7 @@
 		transition: background-color 150ms;
 	}
 	.ql-container:hover {
-		background-color: var(--tq-gray-01) !important;
+		background-color: var(--tq-gray-01);
 	}
 	.ql-clipboard {
 		left: -100000px;
@@ -71,8 +71,8 @@
 	}
 
 	.ql-editor * {
-		font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-			Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important;
+		font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+			Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important;
 	}
 
 	.ql-editor > * {
@@ -157,8 +157,8 @@
 			stroke: #444;
 		}
 	}
-    .ql-snow,
-    .ql-snow * {
+	.ql-snow,
+	.ql-snow * {
 		box-sizing: border-box;
 	}
 	.ql-snow .ql-hidden {
