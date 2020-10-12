@@ -20,9 +20,9 @@
 	cursor: pointer;
 }
 
-.label>span{
+.label > span {
 	text-align: center;
-    width: 100%;
+	width: 100%;
 }
 
 .label:nth-child(1) {

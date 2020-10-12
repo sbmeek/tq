@@ -141,6 +141,31 @@
 	text-align: center;
 }
 
+.sticker {
+	display: grid;
+	place-items: center;
+}
+
+.sticker > img {
+	width: 60%;
+	max-width: 156px;
+	height: auto;
+}
+
+.sticker.toggle-sticker-anim {
+	animation: toggleStickerAnim 300ms;
+}
+
+@keyframes toggleStickerAnim {
+	0% {
+		opacity: 0;
+		transform: scale(0);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
+
 .tq-scrollbar::-webkit-scrollbar,
 .answer > div::-webkit-scrollbar {
 	width: 6px !important;

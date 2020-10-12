@@ -5,8 +5,8 @@
 	align-content: flex-start;
 	width: 100%;
 	height: 100%;
-    padding-top: 32px;
-    max-width: 280px;
+	padding-top: 32px;
+	max-width: 280px;
 }
 
 .bg-color {
@@ -16,10 +16,10 @@
 	cursor: pointer;
 }
 
-.bg-color > div{
+.bg-color > div {
 	width: 100%;
-    height: 100%;
-    pointer-events: none;
+	height: 100%;
+	pointer-events: none;
 }
 
 .bg-color,
@@ -75,10 +75,10 @@
 	background: #5eff00;
 }
 
-@media (max-width: 490px){
-    .bg-colors-container{
-        width: 284px;
-        min-width: 284px;
-        max-width: -1px;
-    }
+@media (max-width: 490px) {
+	.bg-colors-container {
+		width: 284px;
+		min-width: 284px;
+		max-width: -1px;
+	}
 }

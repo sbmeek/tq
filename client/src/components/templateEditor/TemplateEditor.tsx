@@ -1,8 +1,10 @@
 import React, { useState, useRef, useContext, useEffect } from 'react';
-import BgColors from './templateEditorTools/BgColors';
-import Labels from './templateEditorTools/Labels';
+import BgColors from './templateEditorTools/bgColors/BgColors';
+import Labels from './templateEditorTools/labels/Labels';
+import Stickers from './templateEditorTools/stickers/Stickers';
+
 import textIcon from 'assets/images/icons/templateEditor-icons/text-icon.svg';
-import stickers from 'assets/images/icons/templateEditor-icons/icon-stickers-minol.svg';
+import stickersIcon from 'assets/images/icons/templateEditor-icons/icon-stickers-minol.svg';
 import labelicon from 'assets/images/icons/templateEditor-icons/icon-labels-btn.svg';
 import bg from 'assets/images/icons/templateEditor-icons/icon-background-btn.svg';
 import org from 'assets/images/icons/templateEditor-icons/icon-organization-btn.svg';
@@ -25,6 +27,7 @@ interface IProps {
 	templateQuestionContainer: HTMLDivElement | null;
 	isMobile: boolean;
 	setShowMobileEditor: React.Dispatch<React.SetStateAction<boolean>>;
+	setSelectedSticker: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export default function TemplateEditor({
@@ -37,11 +40,13 @@ export default function TemplateEditor({
 	templateQuestionContainer,
 	isMobile,
 	setShowMobileEditor,
+	setSelectedSticker
 }: IProps) {
 	const InitialEditorToolsState: { [key: string]: boolean } = {
 		showTextTool: false,
 		showBgColorsTool: false,
 		showLabelsTool: false,
+		showStickersTool: false
 	};
 	const [showToolsContainer, setShowToolsContainer] = useState(false);
 	const [toolsVisibility, setToolsVisibility] = useState(
@@ -60,6 +65,8 @@ export default function TemplateEditor({
 					return 'showBgColorsTool';
 				case 'labels':
 					return 'showLabelsTool';
+				case 'stickers':
+					return 'showStickersTool';
 				case 'text':
 					return 'showTextTool';
 				default:
@@ -70,26 +77,23 @@ export default function TemplateEditor({
 		for (let t in toolsVisibility) {
 			if (toolsVisibility[t] && t !== clickedTool && isMobile) {
 				setShouldAnimToolToggle(true);
-				editorToolsContainer.current!.addEventListener(
-					'animationend',
-					(e) => {
-						if (e.animationName === styles['contToggleOpt']) {
-							setShouldAnimToolToggle(false);
-						}
+				editorToolsContainer.current!.addEventListener('animationend', (e) => {
+					if (e.animationName === styles['contToggleOpt']) {
+						setShouldAnimToolToggle(false);
 					}
-				);
+				});
 			}
 		}
 
 		let _editorToolsVisibility = {
 			...InitialEditorToolsState,
-			[clickedTool]: true,
+			[clickedTool]: true
 		};
 
 		if (showToolsContainer) {
 			/*
                 If the clicked option is already being shown:
-                    The tools editor container will be hidden 
+                    The tools editor container will be hidden
                     and the toolsVisibility state will be set to default.
 
                 If not (In the else statement) the toolsVisibility state will be set
@@ -101,7 +105,7 @@ export default function TemplateEditor({
 			} else {
 				_editorToolsVisibility = {
 					...InitialEditorToolsState,
-					[clickedTool]: true,
+					[clickedTool]: true
 				};
 			}
 		} else {
@@ -112,7 +116,7 @@ export default function TemplateEditor({
 		if (targetElement.id === 'text' && !isMobile) {
 			_editorToolsVisibility = {
 				...InitialEditorToolsState,
-				showTextTool: true,
+				showTextTool: true
 			};
 			setShowToolsContainer(false);
 		}
@@ -147,9 +151,7 @@ export default function TemplateEditor({
 							</button>
 						)}
 						<button
-							styleName={`${
-								toolsVisibility.showTextTool ? 'selected' : ''
-							}`}
+							styleName={`${toolsVisibility.showTextTool ? 'selected' : ''}`}
 							type="button"
 							onClick={toggleEditorTool}
 							id="text"
@@ -159,9 +161,7 @@ export default function TemplateEditor({
 						</button>
 						<button
 							styleName={`${
-								toolsVisibility.showBgColorsTool
-									? 'selected'
-									: ''
+								toolsVisibility.showBgColorsTool ? 'selected' : ''
 							}`}
 							type="button"
 							onClick={toggleEditorTool}
@@ -170,17 +170,22 @@ export default function TemplateEditor({
 							<img src={bg} alt="icon" />
 						</button>
 						<button
-							styleName={`${
-								toolsVisibility.showLabelsTool ? 'selected' : ''
-							}`}
+							styleName={`${toolsVisibility.showLabelsTool ? 'selected' : ''}`}
 							type="button"
 							onClick={toggleEditorTool}
 							id="labels"
 						>
 							<img src={labelicon} alt=" icon" />
 						</button>
-						<button type="button" onClick={toggleEditorTool}>
-							<img src={stickers} alt="icon" />
+						<button
+							styleName={`${
+								toolsVisibility.showStickersTool ? 'selected' : ''
+							}`}
+							type="button"
+							onClick={toggleEditorTool}
+							id="stickers"
+						>
+							<img src={stickersIcon} alt="icon" />
 						</button>
 						<button type="button" onClick={toggleEditorTool}>
 							<img src={org} alt="icon" />
@@ -194,18 +199,13 @@ export default function TemplateEditor({
 					} ${shouldAnimToolToggle ? 'anim-tool-toggle' : ''}`}
 				>
 					{isMobile && (
-						<span
-							styleName="opt-stick-container"
-							onClick={hideMobileOpts}
-						>
+						<span styleName="opt-stick-container" onClick={hideMobileOpts}>
 							<span styleName="opt-stick"></span>
 						</span>
 					)}
 					<div
 						styleName={`${
-							toolsVisibility.showTextTool
-								? 'toggle-opt-anim'
-								: ''
+							toolsVisibility.showTextTool ? 'toggle-opt-anim' : ''
 						}`}
 					>
 						{isMobile && (
@@ -219,28 +219,24 @@ export default function TemplateEditor({
 					</div>
 					<div
 						styleName={`${
-							toolsVisibility.showBgColorsTool
-								? 'toggle-opt-anim'
-								: ''
+							toolsVisibility.showBgColorsTool ? 'toggle-opt-anim' : ''
 						}`}
 					>
-						<BgColors
-							templateQuestionContainer={
-								templateQuestionContainer!
-							}
-						/>
+						<BgColors templateQuestionContainer={templateQuestionContainer!} />
 					</div>
 					<div
 						styleName={`${
-							toolsVisibility.showLabelsTool
-								? 'toggle-opt-anim'
-								: ''
+							toolsVisibility.showLabelsTool ? 'toggle-opt-anim' : ''
 						}`}
 					>
-						<Labels
-							label={label.current!}
-							setShowLabel={setShowLabel}
-						/>
+						<Labels label={label.current!} setShowLabel={setShowLabel} />
+					</div>
+					<div
+						styleName={`${
+							toolsVisibility.showStickersTool ? 'toggle-opt-anim' : ''
+						}`}
+					>
+						<Stickers setSelectedSticker={setSelectedSticker} />
 					</div>
 				</div>
 			</form>
@@ -256,7 +252,7 @@ function TextEditor<
 >({ answer, setAnswer }: T) {
 	const [editorVal, setEditorVal] = useState('');
 	const {
-		lang: { TemplateEditor: lang },
+		lang: { TemplateEditor: lang }
 	} = useContext(InitContext).state;
 	const editorRef = useRef<ReactQuill>(null);
 
@@ -269,7 +265,7 @@ function TextEditor<
 			EmojiBlot,
 			ShortNameEmoji,
 			ToolbarEmoji,
-			TextAreaEmoji,
+			TextAreaEmoji
 		} = quillEmoji;
 
 		Quill.register(
@@ -277,7 +273,7 @@ function TextEditor<
 				'formats/emoji': EmojiBlot,
 				'modules/emoji-shortname': ShortNameEmoji,
 				'modules/emoji-toolbar': ToolbarEmoji,
-				'modules/emoji-textarea': TextAreaEmoji,
+				'modules/emoji-textarea': TextAreaEmoji
 			},
 			true
 		);
@@ -296,24 +292,15 @@ function TextEditor<
 						ref={editorRef}
 						theme="snow"
 						modules={{
-							toolbar: [
-								['bold', 'italic', 'underline', 'strike'],
-								['emoji'],
-							],
+							toolbar: [['bold', 'italic', 'underline', 'strike'], ['emoji']],
 							'emoji-toolbar': true,
 							'emoji-textarea': false,
-							'emoji-shortname': true,
+							'emoji-shortname': true
 						}}
 						placeholder={lang['InputAnswerPlaceholder']}
 						value={editorVal}
 						onChange={handleEditorChange}
-						formats={[
-							'bold',
-							'italic',
-							'underline',
-							'strike',
-							'emoji',
-						]}
+						formats={['bold', 'italic', 'underline', 'strike', 'emoji']}
 						data-value={answer}
 					/>
 				</div>
