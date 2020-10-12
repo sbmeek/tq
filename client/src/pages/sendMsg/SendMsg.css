@@ -9,7 +9,7 @@
 }
 
 .layer {
-	background-image: url(/static/media/49728047.png);
+	background-image: url(~assets/images/msg/layer.png);
 	background-repeat: no-repeat;
 	background-size: 100% auto;
 	background-position: 50% 0%;
@@ -277,9 +277,6 @@
 }
 
 @media only screen and (max-width: 542px) {
-	.box{
-		margin-top: 30px;
-	}
 	.cloud1-bottom2 {
 		width: 130px;
 		max-height: 300px;
