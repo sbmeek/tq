@@ -118,7 +118,7 @@ export default function Menu() {
 								<h1>{lang['Title']}</h1>
 							</div>
 							<div styleName="btn-container">
-								<Link to="/Link">
+								<Link to="/">
 									<button styleName="sidebar-button">
 										<img src={home} alt="home" />
 										<span>{lang['HomeOpt']}</span>
