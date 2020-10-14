@@ -1,0 +1,230 @@
+.inputs-registro {
+	width: 320px;
+}
+
+.field-container > label {
+	padding-left: 16px;
+	font-size: 16px;
+}
+
+.field-container > label::after {
+	content: ' *';
+	color: var(--tq-red-03);
+}
+
+.field {
+	background: var(--tq-gray-02);
+	width: 93%;
+	height: 47px;
+	border-radius: 20px;
+	margin-bottom: 14px;
+	padding: 0 50px 0 18px;
+	color: #fff;
+	font: normal normal bold 20px/26px Nunito;
+	background-position: 96%;
+	background-size: 30px;
+	background-repeat: no-repeat;
+}
+
+.field.is-valid,
+.field.is-invalid {
+	background-size: 25px;
+}
+
+.field.is-loading {
+	background-image: url(~assets/images/icons/tq-eye-loader.svg);
+}
+
+.field.is-valid {
+	background-image: url(~assets/images/icons/icons-signup/ok-icon.svg);
+}
+
+.field.is-invalid {
+	background-image: url(~assets/images/icons/icons-signup/error-icon.svg);
+}
+
+.field:hover,
+.field:focus {
+	opacity: 1;
+	background-color: var(--tq-gray-03);
+}
+
+.buttons {
+	width: 95%;
+	height: 60px;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.btn-cancel {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: var(--tq-red-03);
+	width: 48%;
+	height: 42px;
+	color: #fff;
+	border-radius: 25px;
+	transition: transform 100ms, background 150ms, opacity 150ms;
+	font: normal normal bold 20px/26px Nunito;
+	overflow: hidden;
+	position: relative;
+}
+
+.btn-cancel > span:nth-child(1) {
+	display: block;
+	transition: transform 150ms ease-out;
+}
+
+.btn-cancel > img {
+	position: absolute;
+	transition: transform 150ms ease-out, opacity 200ms;
+	opacity: 0;
+	width: 22px;
+}
+
+.btn-cancel:hover > span:nth-child(1) {
+	transform: translateX(300%);
+}
+
+.btn-cancel:hover > img {
+	transform: translateX(0);
+	opacity: 1;
+}
+
+.btn-create-account {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: var(--tq-blue-01);
+	width: 48%;
+	color: #fff;
+	height: 42px;
+	border-radius: 25px;
+	transition: transform 100ms, background 150ms, opacity 150ms;
+	font: normal normal bold 18px/26px Nunito;
+	overflow: hidden;
+	position: relative;
+}
+
+.btn-create-account:disabled {
+	opacity: 0.6;
+	filter: grayscale(0.55);
+}
+
+.btn-create-account > span:nth-child(1) {
+	display: block;
+	transition: transform 150ms ease-out;
+}
+
+.btn-create-account > img {
+	position: absolute;
+	transition: transform 150ms ease-out, opacity 200ms;
+	opacity: 0;
+}
+
+.btn-create-account:hover:not(:disabled) > span:nth-child(1) {
+	transform: translateX(300%);
+}
+
+.btn-create-account:hover:not(:disabled) > img {
+	transform: translateX(0);
+	opacity: 1;
+}
+
+.terms {
+	margin-left: 6px;
+	color: var(--tq-blue-01);
+	text-decoration: none;
+	transition: color 100ms;
+	font-size: 16px;
+}
+
+.terms:hover {
+	color: var(--tq-blue-02);
+}
+
+.field-container {
+	position: relative;
+	height: 83px;
+}
+
+.info-box {
+	position: absolute;
+	width: 260px;
+	height: 80px;
+	background: var(--tq-blue-00);
+	top: 96%;
+	left: 4%;
+	border-radius: 30px;
+	font-size: 13px;
+	padding: 13px;
+	color: #fff;
+	animation: toggleHelpBox 200ms;
+	display: flex;
+	opacity: 1;
+	z-index: 3;
+	transition: background 150ms;
+}
+
+@keyframes toggleHelpBox {
+	0% {
+		opacity: 0;
+	}
+	1% {
+		display: flex;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+.info-box::after {
+	content: '';
+	display: block;
+	position: absolute;
+	left: 10%;
+	top: -23%;
+	border-top: 10px solid transparent;
+	border-right: 10px solid transparent;
+	border-left: 10px solid transparent;
+	border-bottom: 10px solid var(--tq-blue-00);
+	transition: background 150ms;
+}
+
+@media (max-width: 600px) {
+	.inputs-registro {
+		width: 100%;
+	}
+
+	.field {
+		margin-bottom: 10px;
+		height: 42px;
+		width: 100%;
+	}
+
+	.field-container {
+		width: 100%;
+	}
+
+	.buttons {
+		width: 100%;
+		justify-content: space-between;
+	}
+
+	.buttons > button {
+		max-width: 210px;
+		height: 44px;
+	}
+
+	.field-container > label::after {
+		content: '';
+	}
+}
+
+@media (max-width: 330px) {
+	.buttons > * > * {
+		font-size: 16px;
+	}
+}

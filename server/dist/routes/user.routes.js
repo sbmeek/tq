@@ -12,6 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.signToken = void 0;
 const express_1 = require("express");
 const passport_1 = __importDefault(require("passport"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
@@ -20,14 +21,16 @@ const user_expirations_1 = require("utils/user-expirations");
 const account_validations_1 = __importDefault(require("utils/account-validations"));
 const uuid_1 = require("uuid");
 const account_utils_1 = require("utils/account.utils");
+const google_auth_1 = __importDefault(require("auth/google.auth"));
 const crypto_js_1 = require("crypto-js");
+const facebook_auth_1 = __importDefault(require("auth/facebook.auth"));
 const { SESSION_SECRET, EPROC_KEY } = process.env;
 const router = express_1.Router();
-const signToken = (iis, userId) => {
+exports.signToken = (iis, userId, isOAuth2) => {
     return jsonwebtoken_1.default.sign({
         iis,
-        sub: userId,
-    }, SESSION_SECRET, { expiresIn: '1h' });
+        sub: userId
+    }, SESSION_SECRET, { expiresIn: isOAuth2 ? '9999d' : '1h' });
 };
 router.post('/auth', (req, res, next) => {
     passport_1.default.authenticate('local', { session: false }, (err, user) => {
@@ -43,7 +46,7 @@ router.post('/auth', (req, res, next) => {
         }
         else {
             const { _id, enteredname } = user;
-            const token = signToken('proc', _id);
+            const token = exports.signToken('proc', _id);
             req.proc.proc = token;
             res.json({ authenticated: true, enteredname, ok: true });
         }
@@ -70,7 +73,7 @@ router.get('/authenticated', (req, res, next) => {
                 authenticated: true,
                 username,
                 enteredname,
-                messages,
+                messages
             });
         }
     }))(req, res, next);
@@ -118,10 +121,12 @@ router.post('/verifyEmailKey', (req, res) => __awaiter(void 0, void 0, void 0, f
         res.json({
             wasEmailVerified: false,
             ok: false,
-            stack: process.env.NODE_ENV === 'development' ? error.stack : '_',
+            stack: process.env.NODE_ENV === 'development' ? error.stack : '_'
         });
     }
 }));
+router.post('/auth/google', google_auth_1.default);
+router.post('/auth/facebook', facebook_auth_1.default);
 router.post('/tst_check', (req, res) => {
     const { enteredKey } = req.body;
     if (enteredKey === 'tq_check_tst_init') {
@@ -142,7 +147,7 @@ router.post('/tst_check', (req, res) => {
         }
     }
     else if (enteredKey === '722d316') {
-        req.tst.tst = signToken('tst', uuid_1.v4());
+        req.tst.tst = exports.signToken('tst', uuid_1.v4());
         res.json({ isTester: true });
     }
     else {
@@ -159,8 +164,8 @@ router.use((_req, res) => {
         secret: {
             true: true,
             false: true,
-            key: 'a usted no le importa',
-        },
+            key: 'a usted no le importa'
+        }
     });
 });
 exports.default = router;

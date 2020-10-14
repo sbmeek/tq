@@ -1,0 +1,307 @@
+.container {
+	height: 100%;
+}
+
+.curtain {
+	min-height: 100%;
+	display: grid;
+	place-items: end;
+}
+
+.layer {
+	background-image: url(~assets/images/msg/layer.png);
+	background-repeat: no-repeat;
+	background-size: 100% auto;
+	background-position: 50% 0%;
+	min-height: 80%;
+	width: 100%;
+	max-width: 880px;
+	margin-top: -62px;
+	padding-top: 66px;
+	max-height: 55%;
+}
+
+.cloud-top-container {
+	display: flex;
+	justify-content: space-between;
+	position: fixed;
+	align-items: flex-end;
+	margin: -37px;
+	margin-right: 57px;
+}
+
+.cloud2-top {
+	width: auto;
+	height: 70px;
+	z-index: 1;
+	position: absolute;
+	bottom: 15px;
+	left: 125px;
+}
+
+.cloud1-top {
+	width: auto;
+	height: 58px;
+	z-index: 1;
+	position: absolute;
+	bottom: 15px;
+	right: 0px;
+}
+
+.en-layer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: -102px;
+}
+
+.logo-div {
+	box-sizing: content-box;
+	min-height: 157px;
+	min-width: 160px;
+	max-width: 170px;
+	border-radius: 100px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 5px solid #000000;
+}
+
+.logo {
+	width: 100%;
+	height: auto;
+}
+
+.shadow_logo {
+	background-color: #00000045;
+	width: 163px;
+	height: 9px;
+	margin: 15px;
+	border-radius: 50%;
+}
+
+.user {
+	padding: 2px;
+	color: var(--tq-blue-05);
+	font-size: 264%;
+	font-family: 'Nunito', sans-serif;
+	margin-top: -13px;
+}
+
+.firstRowText {
+	color: #efebeb;
+	font-size: 106%;
+	margin-top: -2px;
+}
+
+.secondRowText {
+	color: #efebeb;
+	font-size: 106%;
+	margin-top: -3px;
+	margin-bottom: 2px;
+}
+
+.contenedolsito {
+	display: flex;
+	justify-content: center;
+	height: 80%;
+	min-width: 100vw;
+	background: #fff;
+}
+
+.box {
+	z-index: 1;
+	margin-top: 70px;
+}
+
+.cloud-bottom1-container {
+	position: fixed;
+	display: flex;
+	justify-content: center;
+	z-index: -1;
+	margin-top: 56px;
+}
+
+.cloud1-bottom {
+	width: auto;
+	height: 68px;
+	margin-left: 138px;
+	margin-top: -69px;
+}
+
+.cloud2-bottom {
+	width: 89px;
+	height: 70px;
+	transform: scaleX(-1);
+	margin-top: -68px;
+	margin-left: -27px;
+}
+
+.input-container {
+	display: flex;
+	align-items: center;
+	position: relative;
+}
+
+.input-container::after {
+	content: '';
+	display: block;
+	background-color: #0000004a;
+	width: 84%;
+	height: 8px;
+	border-radius: 50%;
+	bottom: -28px;
+	left: 15%;
+	z-index: -1;
+	position: absolute;
+}
+
+.input-msg {
+	width: 343px;
+	height: 135px !important;
+	resize: none;
+	font-family: 'Balsamiq Sans', cursive;
+	border-color: #969696 !important;
+	border: #969696 !important;
+	outline: none !important;
+	background-color: #d4d4d4;
+	border-radius: 12px;
+	font-size: 16px;
+	padding: 12px;
+	z-index: 1;
+	position: relative;
+}
+
+._btn-tq {
+	font-family: 'Nunito', sans-serif;
+	text-transform: none;
+	background-color: var(--tq-blue-01);
+	width: 44px;
+	height: 50px;
+	border-radius: 10px 78px 78px 0px;
+	border: 0px solid #000000;
+	color: transparent;
+	display: none;
+	place-items: center;
+	position: absolute;
+	left: 100%;
+}
+
+._btn-tq.active {
+	animation: showSubmitBtn 200ms;
+	display: grid;
+}
+
+@keyframes showSubmitBtn {
+	0% {
+		transform: translateX(-2%);
+		opacity: 0;
+	}
+	1% {
+		display: grid;
+	}
+	100% {
+		transform: translateX(0);
+		opacity: 1;
+	}
+}
+
+._btn-tq > img {
+	max-height: 20px;
+}
+
+.cloud-bottom2-container {
+	display: flex;
+	position: fixed;
+	justify-content: center;
+	margin-left: -99px;
+	margin-top: -26px;
+	z-index: 1;
+}
+
+.cloud1-bottom2 {
+	width: 180px;
+	height: auto;
+}
+
+.shadow_textarea {
+	background-color: #00000021;
+	width: 317px;
+	height: 6px;
+	border-radius: 50%;
+	margin-top: 43px;
+	margin-left: -22px;
+	z-index: -1;
+}
+
+.editor {
+	display: flex;
+}
+
+.emoji {
+	display: flex;
+	justify-content: flex-end;
+	width: 58%;
+}
+
+.editorelement {
+	height: 14px;
+	filter: invert(50%);
+}
+
+.editoremoji {
+	height: 21px;
+	width: 35px;
+	margin: -1px;
+	filter: invert(50%);
+}
+
+.buttonsedit {
+	margin-left: 18px;
+	background: transparent;
+}
+
+@media only screen and (max-width: 878px) {
+	.layer {
+		background-size: 120% 48%;
+		min-height: 58%;
+		max-height: 650px;
+	}
+}
+
+@media only screen and (max-width: 600px) {
+	.layer {
+		background-size: 164% 51%;
+		max-height: 570px;
+	}
+}
+
+@media only screen and (max-width: 542px) {
+	.cloud1-bottom2 {
+		width: 130px;
+		max-height: 300px;
+		margin-left: 30px;
+	}
+	.cloud1-top {
+		height: 50px;
+	}
+	.cloud2-top {
+		height: 57px;
+	}
+	.logo-div {
+		max-width: 160px;
+	}
+}
+
+@media only screen and (max-width: 480px) {
+	.box {
+		width: 282px;
+	}
+	.cloud1-bottom {
+		height: 44px;
+	}
+	.cloud2-bottom {
+		width: auto;
+		height: 55px;
+	}
+}

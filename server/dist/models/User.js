@@ -13,53 +13,51 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = require("mongoose");
-const bcrypt_1 = __importDefault(require("bcrypt"));
+const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const msgSchema = new mongoose_1.Schema({
     sentAt: { type: Date, default: new Date() },
     content: { type: String, required: true },
     readed: { type: Boolean, default: false },
-    answer: { type: String, required: false },
+    answer: { type: String, required: false }
 });
 const uSchema = new mongoose_1.Schema({
     username: {
         type: String,
         required: true,
         unique: true,
-        lowercase: true,
+        lowercase: true
     },
     enteredname: {
         type: String,
         required: true,
-        unique: true,
+        unique: true
     },
-    email: {
-        type: String,
-        unique: true,
-    },
+    email: { type: String },
     emailConfirmationCode: { type: String },
     isEmailVerified: { type: Boolean },
     isPermanentAccount: { type: Boolean },
+    authMethod: { type: String },
     keyOrPwd: { type: String },
     key: { type: String },
     createdAt: {
         type: Date,
         default: new Date(),
-        required: true,
+        required: true
     },
     willExpireAt: { type: Date },
     expired: { type: Boolean },
-    messages: [msgSchema],
+    messages: [msgSchema]
 });
 uSchema.methods.compareKeyOrPwd = (DBKeyOrPwd, KeyOrPwd, isPermanentAccount) => __awaiter(void 0, void 0, void 0, function* () {
     if (isPermanentAccount)
-        return yield bcrypt_1.default.compare(KeyOrPwd, DBKeyOrPwd);
+        return yield bcryptjs_1.default.compare(KeyOrPwd, DBKeyOrPwd);
     else
-        return yield bcrypt_1.default.compare(DBKeyOrPwd, KeyOrPwd);
+        return yield bcryptjs_1.default.compare(DBKeyOrPwd, KeyOrPwd);
 });
 uSchema.methods.hashKeyOrPwd = (keyOrPwd) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const salt = yield bcrypt_1.default.genSalt(10);
-        const hash = yield bcrypt_1.default.hash(keyOrPwd, salt);
+        const salt = yield bcryptjs_1.default.genSalt(10);
+        const hash = yield bcryptjs_1.default.hash(keyOrPwd, salt);
         return hash;
     }
     catch (error) {

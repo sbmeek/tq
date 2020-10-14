@@ -1,0 +1,127 @@
+.overlay,
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.overlay {
+	z-index: -34;
+	position: fixed;
+	top: 0;
+	left: 0;
+	min-width: 100vw;
+	min-height: 100%;
+	opacity: 0;
+	background: rgba(0, 0, 0, 0.8);
+}
+
+.overlay.active {
+	height: auto;
+	opacity: 1;
+	z-index: 34;
+	transition: opacity 250ms;
+}
+
+.confirm-container {
+	display: flex;
+	flex-direction: column;
+	background: #fff;
+	min-height: 150px;
+	max-width: 400px;
+	color: #1b1b1b;
+	border-radius: 20px;
+	padding: 20px 40px 0 40px;
+	opacity: 0;
+}
+
+.overlay.active > .confirm-container {
+	opacity: 1;
+}
+
+.confirm-container > h2 {
+	display: flex;
+	font-size: 1.3rem;
+	text-align: center;
+	margin: 0 !important;
+	font-family: 'NunitoBold';
+}
+
+.btns-container {
+	margin-top: 20px;
+	display: flex;
+	justify-content: space-between;
+	padding: 0 10px;
+}
+
+.modal-confirm-btn {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #fff;
+	padding: 7px;
+	border-radius: 20px;
+	font-size: 1.2rem;
+	transition: transform 100ms, background 150ms, opacity 150ms;
+	overflow: hidden;
+	position: relative;
+	min-width: 125px;
+	cursor: pointer;
+}
+
+.btn-cancel {
+	background: var(--tq-red-00);
+}
+
+.btn-cancel:hover {
+	background: var(--tq-red-03);
+}
+
+.btn-answer {
+	background: var(--tq-blue-01);
+}
+
+.btn-answer:hover {
+	background: var(--tq-blue-02);
+}
+
+.btn-primary-txt,
+.hover-txt {
+	display: block;
+	transition: transform 150ms ease-out;
+}
+
+.btn-primary-txt {
+	transform: translateX(0);
+	min-width: 100%;
+}
+
+.hover-txt {
+	position: absolute;
+	transform: translateX(-120px);
+	transition: transform 150ms ease-out, opacity 200ms;
+	min-width: 100%;
+	font-size: 2rem;
+	opacity: 0;
+}
+
+.modal-confirm-btn:hover > .btn-primary-txt {
+	transform: translateX(120px);
+}
+
+.modal-confirm-btn:hover > .hover-txt {
+	transform: translateX(0);
+	opacity: 1;
+}
+
+.confirm-note {
+	color: rgb(73, 73, 73);
+	font-size: 0.8rem;
+	padding: 8px 15px;
+}
+
+.ans-img {
+	display: none;
+	position: fixed;
+	left: -999rem;
+}

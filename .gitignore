@@ -3,4 +3,11 @@
 node_modules
 npm-debug.log
 .vscode/
-src
+dist
+build
+
+# testing
+coverage
+.nyc_output
+cypress/videos
+cypress/screenshots

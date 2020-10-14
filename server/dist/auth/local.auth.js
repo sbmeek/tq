@@ -24,7 +24,7 @@ const { SESSION_SECRET } = process.env;
 // Authorization
 passport_1.default.use(new passport_jwt_1.Strategy({
     jwtFromRequest: (req) => req.proc ? req.proc.proc : null,
-    secretOrKey: SESSION_SECRET,
+    secretOrKey: SESSION_SECRET
 }, (payload, done) => {
     User_1.default.findById({ _id: payload.sub }, (err, user) => {
         if (err)
@@ -38,15 +38,15 @@ passport_1.default.use(new passport_jwt_1.Strategy({
 // Authentication
 passport_1.default.use('local', new passport_local_1.Strategy({
     usernameField: 'tquser',
-    passwordField: 'tqpwd',
+    passwordField: 'tqpwd'
 }, (tquser, tqpwd, done) => __awaiter(void 0, void 0, void 0, function* () {
     tquser = tquser.toLowerCase();
     try {
         const user = (yield User_1.default.findOne({
-            $or: [{ username: tquser }, { email: tquser }],
+            $or: [{ username: tquser }, { email: tquser }]
         }));
         if (user !== null) {
-            if (yield user.compareKeyOrPwd(user.keyOrPwd || user.key, tqpwd, user.isPermanentAccount)) {
+            if (yield user.compareKeyOrPwd((user.keyOrPwd || user.key), tqpwd, user.isPermanentAccount)) {
                 if (user.isPermanentAccount && !user.isEmailVerified) {
                     done({ emailNotVerified: true }, false);
                     return;
@@ -91,13 +91,13 @@ exports.userRegister = function (data, socket) {
             createdAt: new Date(),
             willExpireAt: user_expirations_1.getExpirationDate(),
             expired: false,
-            isPermanentAccount: false,
+            isPermanentAccount: false
         });
         key = yield user.hashKeyOrPwd(user.keyOrPwd);
         const savedUser = yield user.save();
         socket.emit('save:LS', {
             _id: savedUser._id,
-            key,
+            key
         });
     });
 };

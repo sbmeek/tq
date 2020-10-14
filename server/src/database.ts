@@ -1,7 +1,13 @@
-import mongoose, { ConnectionOptions } from 'mongoose'
-require('dotenv').config()
+import mongoose, { ConnectionOptions } from 'mongoose';
+require('dotenv').config();
 
-const { DB_CONNECTION_STRING, DB_USERNAME, DB_USERPWD, DB_NAME } = process.env
+const {
+	DB_CONNECTION_STRING,
+	DB_USERNAME,
+	DB_USERPWD,
+	DB_NAME,
+	DOCKERIZED_DB_URI
+} = process.env;
 
 const dbStr =
 	DB_CONNECTION_STRING !== undefined
@@ -9,19 +15,22 @@ const dbStr =
 				.replace('{DB_USERNAME}', DB_USERNAME as string)
 				.replace('{DB_USERPWD}', DB_USERPWD as string)
 				.replace('{DB_NAME}', DB_NAME as string)
-        : null;
-        
+		: null;
+
 const connectionOptions: ConnectionOptions = {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
 	useFindAndModify: false,
-	useCreateIndex: true,
-}
+	useCreateIndex: true
+};
 
-mongoose.connect(dbStr || 'mongodb://localhost/tq', connectionOptions)
+mongoose.connect(
+	dbStr || DOCKERIZED_DB_URI || 'mongodb://localhost/tq',
+	connectionOptions
+);
 
 mongoose.connection.on('open', () =>
 	console.log('\x1b[32m%s\x1b[0m', 'Connected to database')
-)
+);
 
-export const instance = mongoose.connection
+export const instance = mongoose.connection;

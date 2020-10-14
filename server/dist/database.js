@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.instance = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 require('dotenv').config();
-const { DB_CONNECTION_STRING, DB_USERNAME, DB_USERPWD, DB_NAME } = process.env;
+const { DB_CONNECTION_STRING, DB_USERNAME, DB_USERPWD, DB_NAME, DOCKERIZED_DB_URI } = process.env;
 const dbStr = DB_CONNECTION_STRING !== undefined
     ? DB_CONNECTION_STRING
         .replace('{DB_USERNAME}', DB_USERNAME)
@@ -17,8 +17,8 @@ const connectionOptions = {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
-    useCreateIndex: true,
+    useCreateIndex: true
 };
-mongoose_1.default.connect(dbStr || 'mongodb://localhost/tq', connectionOptions);
+mongoose_1.default.connect(dbStr || DOCKERIZED_DB_URI || 'mongodb://localhost/tq', connectionOptions);
 mongoose_1.default.connection.on('open', () => console.log('\x1b[32m%s\x1b[0m', 'Connected to database'));
 exports.instance = mongoose_1.default.connection;

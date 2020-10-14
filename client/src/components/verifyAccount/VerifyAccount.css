@@ -1,76 +1,78 @@
-.container{ 
-    min-width: 100vw;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(0, 0, 0, .4);
-    z-index: 1;
+.container {
+	min-width: 100vw;
+	min-height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: rgba(0, 0, 0, 0.4);
+	z-index: 1;
 }
 
-.inner-container{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 70%;
-    background: #fff;
-    min-height: 100px;
-    border-radius: 20px;
-    z-index: 2;
-    box-shadow: 0px 0px 0.2px 0.1px #000;
-    padding: 30px;
-    max-width: 447px;
-    min-width: 447px;
+.inner-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 70%;
+	background: #fff;
+	min-height: 100px;
+	border-radius: 20px;
+	z-index: 2;
+	box-shadow: 0px 0px 0.2px 0.1px #000;
+	padding: 30px;
+	max-width: 447px;
+	min-width: 447px;
 }
 
-.inner-container>h1{
-    text-align: center;
+.inner-container > h1 {
+	text-align: center;
 }
 
-.inner-container>p{
-    color: #1b1b1b;
-    font-family: NunitoBold;
+.inner-container > p {
+	color: #1b1b1b;
+	font-family: NunitoBold;
 }
 
 .arrow {
-    width: 35px;
-    height: 35px;
-    transform: rotateY(180deg);
-    filter: drop-shadow(0px 0px 1px black) contrast(5.5) invert(.8) saturate(1) sepia(0.001) brightness(.9);
-    transition: filter 150ms, transform 150ms;
+	width: 35px;
+	height: 35px;
+	transform: rotateY(180deg);
+	filter: drop-shadow(0px 0px 1px black) contrast(5.5) invert(0.8) saturate(1)
+		sepia(0.001) brightness(0.9);
+	transition: filter 150ms, transform 150ms;
 }
 
-.login-arrow-container{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 50%;
-    height: 50%;
-    transition: transform 150ms;
-    cursor: pointer;
-    margin-top: 20px;
+.login-arrow-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 50%;
+	height: 50%;
+	transition: transform 150ms;
+	cursor: pointer;
+	margin-top: 20px;
 }
 
 .toggler {
 	color: var(--tq-blue-01);
-    text-decoration: none;
-    cursor: pointer;
-    transition: color 150ms;
+	text-decoration: none;
+	cursor: pointer;
+	transition: color 150ms;
 }
 
-.login-arrow-container:hover{
-    transform: scale(1.1);
+.login-arrow-container:hover {
+	transform: scale(1.1);
 }
 
-.login-arrow-container:hover>.arrow{
-    transform: translateX(5px) rotateY(180deg);
-    filter: drop-shadow(0px 0px 1px black) contrast(5.5) invert(.97) saturate(1) sepia(0.001) brightness(.9);
+.login-arrow-container:hover > .arrow {
+	transform: translateX(5px) rotateY(180deg);
+	filter: drop-shadow(0px 0px 1px black) contrast(5.5) invert(0.97) saturate(1)
+		sepia(0.001) brightness(0.9);
 }
 
-.login-arrow-container:hover>.toggler{
+.login-arrow-container:hover > .toggler {
 	color: var(--tq-blue-02);
 }
 
-.login-arrow-container>.toggler{
-    font-size: 35px;
+.login-arrow-container > .toggler {
+	font-size: 35px;
 }

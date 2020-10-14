@@ -19,13 +19,14 @@ exports.sendMessage = function ({ username, msg }, socket, io, onlineUsers) {
         try {
             const _tempUser = yield User_1.default.findOneAndUpdate({ username }, {
                 $push: {
-                    messages: { content: msg },
-                },
+                    messages: { content: msg }
+                }
             }, { new: true });
-            console.log(_tempUser.messages);
             const userSockets = onlineUsers.get(username);
-            for (let e of userSockets) {
-                io.to(e).emit('msg:new', _tempUser.messages);
+            if (userSockets !== undefined) {
+                for (const e of userSockets) {
+                    io.to(e).emit('msg:new', _tempUser.messages);
+                }
             }
             socket.emit('msg:send', { success: true, sent: true });
         }
@@ -35,7 +36,7 @@ exports.sendMessage = function ({ username, msg }, socket, io, onlineUsers) {
                 error: true,
                 msg: error,
                 success: false,
-                sent: false,
+                sent: false
             });
         }
     });
@@ -44,11 +45,11 @@ exports.answerMessage = function ({ answer, _id }, socket) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const _tempUser = yield User_1.default.findOneAndUpdate({ 'messages._id': _id }, {
-                $set: { 'messages.$.answer': answer },
+                $set: { 'messages.$.answer': answer }
             }, { new: true });
             socket.emit('msg:ans', {
                 success: true,
-                msgAnswered: true,
+                msgAnswered: true
             });
             socket.emit('msg:new', _tempUser.messages);
         }
@@ -58,7 +59,7 @@ exports.answerMessage = function ({ answer, _id }, socket) {
                 error: true,
                 errorMsg: error,
                 success: false,
-                msgAnswered: false,
+                msgAnswered: false
             });
         }
     });

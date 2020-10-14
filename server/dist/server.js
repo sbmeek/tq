@@ -44,11 +44,11 @@ app.set('json spaces', 2);
 app.use(client_sessions_1.default({
     cookieName: 'proc',
     secret: SESSION_SECRET,
-    duration: 24 * 60 * 60 * 1000,
+    duration: 9999 * 24 * 60 * 60 * 1000,
     cookie: {
         httpOnly: true,
-        secure: false,
-    },
+        secure: false
+    }
 }));
 app.use(client_sessions_1.default({
     cookieName: 'tst',
@@ -56,12 +56,27 @@ app.use(client_sessions_1.default({
     duration: 24 * 60 * 60 * 1000,
     cookie: {
         httpOnly: true,
-        secure: false,
-    },
+        secure: false
+    }
 }));
 app.use(helmet_1.default());
+app.use(helmet_1.default.contentSecurityPolicy({
+    directives: {
+        defaultSrc: ["'self'", 'https://accounts.google.com/'],
+        connectSrc: ["'self'", 'https://graph.facebook.com/'],
+        imgSrc: ["'self'", 'data:', 'https://www.facebook.com/'],
+        styleSrc: ["'self'", "'unsafe-inline'"],
+        objectSrc: ["'none'"],
+        scriptSrc: [
+            "'self'",
+            "'unsafe-inline'",
+            'https://connect.facebook.net/',
+            'https://apis.google.com/'
+        ]
+    }
+}));
 app.use(serve_favicon_1.default(app.get('favicon')));
-app.use(cors_1.default({ origin: 'http://127.0.0.1:3000' }));
+app.use(cors_1.default({ origin: ['http://127.0.0.1:3000', 'https://127.0.0.1:3000'] }));
 app.use(express_1.default.urlencoded({ extended: false }));
 app.use(express_1.default.json());
 app.use(morgan_1.default('dev'));
@@ -69,7 +84,11 @@ app.use(morgan_1.default('dev'));
 app.use('/user', user_routes_1.default);
 // Static files
 if (process.env.NODE_ENV === 'production') {
-    app.use(express_1.default.static(path_1.default.resolve(path_1.default.join('..', 'client', 'build'))));
+    const clientBuildPath = path_1.default.resolve(path_1.default.join('..', 'client', 'build'));
+    app.use(express_1.default.static(clientBuildPath));
+    app.get('*', (_req, res) => {
+        res.sendFile(path_1.default.join(clientBuildPath, 'index.html'));
+    });
 }
 exports.server = app.listen(app.get('port'), () => console.log('\x1b[32m%s\x1b[0m', `Server running :${app.get('port')}`));
 require('./utils/sockets');
