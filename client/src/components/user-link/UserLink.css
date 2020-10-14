@@ -2,15 +2,15 @@
 	margin: 0;
 	width: 100%;
 	padding-bottom: 10px;
-    min-height: 100%;
+	min-height: 100%;
 }
 
-.container>div:nth-child(2){
-    margin-top: 75px;
+.container > div:nth-child(2) {
+	margin-top: 75px;
 }
 
-.container>div:nth-child(2)>div:nth-child(1){
-    margin-bottom: 15px;
+.container > div:nth-child(2) > div:nth-child(1) {
+	margin-bottom: 15px;
 }
 
 .row {
@@ -65,7 +65,7 @@
 	font-size: 22.5px;
 	transition: ease-in-out 0.22s;
 	padding: 13px 15px;
-		overflow: hidden;
+	overflow: hidden;
 	position: relative;
 	justify-content: center;
 }
@@ -74,7 +74,7 @@
 	display: block;
 	transition: transform 150ms ease-out;
 }
-._btn-tq:hover > span{
+._btn-tq:hover > span {
 	transform: translateX(120px);
 }
 ._btn-tq:hover {
@@ -83,13 +83,13 @@
 	transition: ease-in 0.22s;
 	cursor: pointer;
 }
-._btn-tq>img{
+._btn-tq > img {
 	position: absolute;
 	transition: transform 150ms ease-out, opacity 200ms;
 	opacity: 0;
 	width: 22px;
 }
-._btn-tq:hover>img{
+._btn-tq:hover > img {
 	transform: translateX(0);
 	opacity: 1;
 }
@@ -129,11 +129,11 @@
 	position: relative;
 	justify-content: center;
 }
-.btn-waves-effect-waves-light> span{
+.btn-waves-effect-waves-light > span {
 	display: block;
 	transition: transform 150ms ease-out;
 }
-.btn-waves-effect-waves-light:hover> span{
+.btn-waves-effect-waves-light:hover > span {
 	transform: translateX(220px);
 }
 .btn-waves-effect-waves-light:hover {

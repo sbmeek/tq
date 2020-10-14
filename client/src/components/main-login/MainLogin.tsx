@@ -11,19 +11,20 @@ import React, {
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import logo from 'assets/images/ltqrNEW.png';
-import './Main-idx.css';
 import { getAuthInfoAction } from 'global/ducks/authDucks';
 import { InitContext } from 'global/context/InitContext';
 import arrow from 'assets/images/icons/icons-main/icon-arrow.svg';
 import Help from 'assets/images/icons/icons-main/icon-help.svg';
 import info from 'assets/images/icons/icons-main/icon-info.svg';
 
+import './MainLogin.css';
+
 type DataType = {
 	_id: string;
 	key: string;
 };
 
-export default function Main() {
+export default function MainLogin() {
 	const [username, setUsername] = useState('');
 	const [inputMode, setInputMode] = useState(false);
 	const [showSubmitBtn, setShowSubmitBtn] = useState(false);
