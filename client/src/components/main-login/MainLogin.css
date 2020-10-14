@@ -1,0 +1,248 @@
+﻿body {
+	display: flex;
+	flex-direction: column;
+}
+
+.main {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 100%;
+}
+
+.form-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	min-width: 250px;
+	min-height: 360px;
+	height: 74vh;
+	z-index: 2;
+}
+
+.main-elements-container {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	z-index: -2;
+}
+
+.logo-container {
+	position: relative;
+	height: 26%;
+	display: flex;
+	align-items: flex-end;
+}
+
+._tq-logo {
+	position: relative;
+	max-width: 500px;
+	max-height: 400px;
+	width: 100%;
+	margin-bottom: 25px;
+	margin-top: -90px;
+	opacity: 0;
+	transition: opacity 250ms;
+	transform: scale(1);
+}
+
+._tq-logo.loaded {
+	opacity: 1;
+}
+
+._tq-logo:not(.loaded)::before {
+	display: block;
+	content: '';
+	padding-top: calc(50%);
+}
+
+.wrapper {
+	position: relative;
+	width: 75%;
+}
+
+.field-tq {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	max-width: 300px;
+	min-width: 300px;
+	width: 70%;
+	opacity: 0.6;
+	transition: opacity 200ms;
+}
+
+.field-tq.loaded {
+	opacity: 1;
+}
+
+.field-tq > div {
+	max-width: 100%;
+}
+
+.field-tq > div:nth-child(1) {
+	display: flex;
+	position: relative;
+	width: 100%;
+	min-width: 250px;
+	color: var(--tq-blue-00);
+	border: 5.9px solid var(--tq-blue-01);
+	background: var(--tq-blue-02);
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+	height: 42px;
+	border-radius: 30px;
+	transition: background 100ms ease-in, border 100ms ease-in;
+	box-sizing: border-box;
+	padding: 0 !important;
+}
+
+.field-tq > div:nth-child(1):hover {
+	border: 5.9px solid var(--tq-blue-02);
+	background: var(--tq-blue-03);
+}
+
+.field-tq > div:nth-child(1).input-mode {
+	border: 5.9px solid var(--tq-blue-05) !important;
+	background: var(--tq-blue-03) !important;
+}
+
+.main-input {
+	padding: 3px 10px;
+	color: var(--tq-blue-00);
+	background: transparent;
+	border-radius: 30px;
+	min-height: 100%;
+	min-width: 250px;
+	width: 100%;
+	max-height: 42px;
+	cursor: pointer;
+	white-space: nowrap;
+	overflow: hidden;
+	line-height: 27px;
+	text-align: center;
+	resize: none !important;
+}
+
+.main-input::-moz-placeholder .main-input:-moz-placeholder,
+.main-input:-ms-input-placeholder {
+	display: flex;
+	align-items: center;
+	color: var(--tq-blue-00) !important;
+}
+
+.main-input::placeholder {
+	color: var(--tq-blue-00) !important;
+}
+
+.main-input br {
+	display: none;
+}
+
+.input-mode {
+	color: #fff;
+	font-size: 1.1rem;
+	outline: none;
+	line-height: 1.5em !important;
+	text-align: left !important;
+	cursor: text !important;
+}
+
+.main-btn {
+	position: absolute;
+	background: var(--tq-blue-01);
+	color: #fff;
+	min-height: 100%;
+	min-width: 116%;
+	border-radius: 30px;
+	padding: 0 7px;
+	left: -3%;
+	top: -5px;
+	height: 41px;
+	z-index: -1;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	box-shadow: 0px 5.4px var(--tq-blue-00);
+	cursor: pointer;
+}
+
+.main-btn > img {
+	width: 20px;
+	height: auto;
+}
+
+.field-tq > div:nth-child(2) {
+	margin-top: 15px;
+	max-width: 302px;
+	min-width: 250px;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+}
+
+._btn-tq {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-family: 'Nunito', sans-serif;
+	text-transform: none;
+	box-shadow: 0px 4.5px var(--tq-red-00);
+	border-radius: 20px;
+	background-color: var(--tq-red-02);
+	color: #fff;
+	min-width: 47%;
+	height: 37px;
+	border: 0;
+	font-size: 17.5px;
+	transition: ease-in-out 0.22s;
+	cursor: pointer;
+}
+
+._btn-tq:hover {
+	background-color: #fff;
+	color: var(--tq-red-00);
+	transition: ease-in 0.22s;
+}
+
+._btn-tq > img {
+	margin-left: 2px;
+	width: 14px;
+}
+
+@media (max-width: 420px) {
+	.field-tq {
+		width: 100%;
+		align-items: flex-start;
+	}
+
+	.field-tq > div:nth-child(1)[data-show-submitbtn='true'] {
+		width: 90%;
+	}
+
+	.main-btn {
+		min-width: 117%;
+	}
+
+	.main-btn > img {
+		width: 18px;
+	}
+}
+
+@media (max-width: 300px) {
+	.field-tq {
+		min-width: 250px;
+	}
+}
+
+@media (max-width: 290px) {
+	.field-tq > div:nth-child(1)[data-show-submitbtn='true'] {
+		width: 88%;
+	}
+
+	.main-btn {
+		min-width: 120%;
+	}
+}
