@@ -4,11 +4,12 @@ import { useSelector, RootStateOrAny } from 'react-redux';
 import { InitContext } from '../../global/context/InitContext';
 import Slider from 'components/link/Slider';
 import Modal from 'components/link/Modal';
-import './Link-idx.css';
 import copy from 'assets/images/icons/icons-inbox/icon-link.svg';
 import tqIcon from 'assets/images/msg/profile-tq.png';
 
-export default function LinkIdx() {
+import './UserLink.css';
+
+export default function UserLink() {
 	const inputLink = useRef<HTMLInputElement>(null);
 	const { user } = useSelector((store: RootStateOrAny) => store.auth);
 	const [name, setName] = useState('');
