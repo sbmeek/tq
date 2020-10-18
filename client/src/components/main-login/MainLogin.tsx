@@ -16,7 +16,6 @@ import { InitContext } from 'global/context/InitContext';
 import arrow from 'assets/images/icons/icons-main/icon-arrow.svg';
 import Help from 'assets/images/icons/icons-main/icon-help.svg';
 import info from 'assets/images/icons/icons-main/icon-info.svg';
-
 import {
 	MainContainer,
 	FormContainer,
@@ -27,9 +26,9 @@ import {
 	FirstFieldRow,
 	SecondFieldRow,
 	Textarea,
-	MainBtn,
-	BtnTQ
+	MainBtn
 } from './MainLogin.style';
+import Button from 'shared/button/Button';
 
 type DataType = {
 	_id: string;
@@ -181,14 +180,30 @@ export default function MainLogin() {
 							)}
 						</FirstFieldRow>
 						<SecondFieldRow>
-							<BtnTQ type="button">
+							<Button
+								type="button"
+								group="primary"
+								hoverMode="color"
+								style={{
+									height: '37px',
+									minWidth: '47%'
+								}}
+							>
 								{lang['BtnInfo']}
 								<img src={info} alt="arrow" />
-							</BtnTQ>
-							<BtnTQ type="button">
+							</Button>
+							<Button
+								type="button"
+								group="primary"
+								hoverMode="color"
+								style={{
+									height: '37px',
+									minWidth: '47%'
+								}}
+							>
 								{lang['BtnHelp']}
 								<img src={Help} alt="arrow" />
-							</BtnTQ>
+							</Button>
 						</SecondFieldRow>
 					</FieldTQ>
 				</MainElementsContainer>

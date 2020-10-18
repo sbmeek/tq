@@ -12,9 +12,9 @@ import {
 	Column,
 	UserLinkInput,
 	BtnHelp,
-	BtnTQ,
 	BtnCopyLink
 } from './UserLink.style';
+import Button from 'shared/button/Button';
 
 export default function UserLink() {
 	const inputLink = useRef<HTMLInputElement>(null);
@@ -90,10 +90,16 @@ export default function UserLink() {
 				</Column>
 				<Column>
 					<Link to="/messages">
-						<BtnTQ type="button">
+						<Button
+							type="button"
+							group="primary"
+							hoverMode="translate"
+							minWidth={115}
+							style={{ minHeight: '55px', borderRadius: '9999px' }}
+						>
 							<span>{lang['BtnInbox']}</span>
 							<img src={tqIcon} alt="logo" />
-						</BtnTQ>
+						</Button>
 					</Link>
 				</Column>
 			</InnerContainer>

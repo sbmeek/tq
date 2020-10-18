@@ -48,53 +48,6 @@ export const BtnHelp = styled.button<{ isVisible: boolean }>`
 	}
 `;
 
-export const BtnTQ = styled.button`
-	display: inline-flex;
-	align-items: center;
-	margin-top: 3px;
-	font-family: 'Nunito', sans-serif;
-	box-shadow: 0px 4.5px rgb(88, 0, 3);
-	border-radius: 1000px;
-	background-color: #9e0004;
-	color: #fff;
-	min-width: 115px;
-	min-height: 55px;
-	border: 0;
-	font-size: 22.5px;
-	transition: ease-in-out 0.22s;
-	padding: 13px 15px;
-	overflow: hidden;
-	position: relative;
-	justify-content: center;
-	& > span {
-		display: block;
-		transition: transform 150ms ease-out;
-	}
-
-	&:hover > span {
-		transform: translateX(120px);
-	}
-
-	&:hover {
-		background-color: var(--tq-red-00);
-		color: rgb(88, 0, 3);
-		transition: ease-in 0.22s;
-		cursor: pointer;
-	}
-
-	& > img {
-		position: absolute;
-		transition: transform 150ms ease-out, opacity 200ms;
-		opacity: 0;
-		width: 22px;
-	}
-
-	&:hover > img {
-		transform: translateX(0);
-		opacity: 1;
-	}
-`;
-
 export const BtnCopyLink = styled.button`
 	font-family: 'Nunito', sans-serif;
 	display: flex;
@@ -133,6 +86,6 @@ export const BtnCopyLink = styled.button`
 		transition: transform 150ms ease-out;
 	}
 	&:hover > span {
-		transform: translateX(220px);
+		transform: translateX(230px);
 	}
 `;

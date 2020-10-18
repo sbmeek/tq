@@ -185,32 +185,3 @@ export const MainBtn = styled.button`
 		min-width: 120%;
 	}
 `;
-
-export const BtnTQ = styled.button`
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	font-family: 'Nunito', sans-serif;
-	text-transform: none;
-	box-shadow: 0px 4.5px var(--tq-red-00);
-	border-radius: 20px;
-	background-color: var(--tq-red-02);
-	color: #fff;
-	min-width: 47%;
-	height: 37px;
-	border: 0;
-	font-size: 17.5px;
-	transition: ease-in-out 0.22s;
-	cursor: pointer;
-
-	&:hover {
-		background-color: #fff;
-		color: var(--tq-red-00);
-		transition: ease-in 0.22s;
-	}
-
-	& > img {
-		margin-left: 2px;
-		width: 14px;
-	}
-`;
