@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import App from './App';
 import generateStore from './global/store';
 import InitProvider from './global/context/InitContext';
+import { StyleSheetManager } from 'styled-components';
 import * as serviceWorker from './serviceWorker';
 
 import './variables.css';
@@ -28,7 +29,11 @@ ReactDOM.render(
 	<React.StrictMode>
 		<Provider store={store}>
 			<InitProvider>
-				<App />
+				<StyleSheetManager
+					disableVendorPrefixes={process.env.NODE_ENV === 'development'}
+				>
+					<App />
+				</StyleSheetManager>
 			</InitProvider>
 		</Provider>
 	</React.StrictMode>,
