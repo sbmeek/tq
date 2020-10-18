@@ -16,31 +16,31 @@ export default function Labels<
 
 	return (
 		<div styleName="labels-container" className="d-text-select">
-			<div styleName="label">
+			<button styleName="label">
 				<span role="img" aria-label="seen" onClick={labelClickHandler}>
 					✔️
 				</span>
-			</div>
-			<div styleName="label">
+			</button>
+			<button styleName="label">
 				<span role="img" aria-label="heart" onClick={labelClickHandler}>
 					❤️
 				</span>
-			</div>
-			<div styleName="label">
+			</button>
+			<button styleName="label">
 				<span role="img" aria-label="star" onClick={labelClickHandler}>
 					🌟
 				</span>
-			</div>
-			<div styleName="label">
+			</button>
+			<button styleName="label">
 				<span role="img" aria-label="fire" onClick={labelClickHandler}>
 					🔥
 				</span>
-			</div>
-			<div styleName="label">
+			</button>
+			<button styleName="label">
 				<span role="img" aria-label="water-drop" onClick={labelClickHandler}>
 					💧
 				</span>
-			</div>
+			</button>
 		</div>
 	);
 }

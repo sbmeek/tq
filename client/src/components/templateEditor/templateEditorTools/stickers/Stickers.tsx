@@ -35,13 +35,13 @@ export default function Stickers<
 	return (
 		<div styleName="container">
 			{stickersArr.current.map((st, idx) => (
-				<div
+				<button
 					styleName="sticker-container"
 					onMouseDown={handleStickerClick}
 					key={idx}
 				>
 					<img src={st} alt="un etikel" />
-				</div>
+				</button>
 			))}
 		</div>
 	);

@@ -15,7 +15,11 @@
 	height: fit-content;
 	margin: 11px 2px;
 	cursor: pointer;
-}
+	z-index: 23;
+	background-color: transparent;
+	transition: 500ms;
+	border-radius: 10px;
+	}
 
 .sticker-container,
 .sticker-container > img {
@@ -24,4 +28,10 @@
 
 .sticker-container > img {
 	height: auto;
+}
+
+.sticker-container:focus {
+	background: #7b7979;
+	height: 73px;
+	
 }

@@ -18,6 +18,10 @@
 	min-height: 45px;
 	font-size: 31px;
 	cursor: pointer;
+	transition: 500ms;
+}
+.label:focus{
+	background-color: var(--tq-gray-00);
 }
 
 .label > span {
