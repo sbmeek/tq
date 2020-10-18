@@ -4,9 +4,9 @@
 		"production": {
 			"presets": ["react-app"],
 			"plugins": [
-                ["react-remove-properties", {"properties": ["data-testid"]}],
+				["react-remove-properties", { "properties": ["data-testid"] }],
 				[
-                    "babel-plugin-react-css-modules",
+					"babel-plugin-react-css-modules",
 					{
 						"webpackHotModuleReloading": true,
 						"autoResolveMultipleImports": true,
@@ -17,7 +17,7 @@
 		},
 		"development": {
 			"plugins": [
-                "istanbul",
+				"istanbul",
 				[
 					"babel-plugin-react-css-modules",
 					{

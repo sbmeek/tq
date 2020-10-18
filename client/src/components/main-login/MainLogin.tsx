@@ -17,7 +17,19 @@ import arrow from 'assets/images/icons/icons-main/icon-arrow.svg';
 import Help from 'assets/images/icons/icons-main/icon-help.svg';
 import info from 'assets/images/icons/icons-main/icon-info.svg';
 
-import './MainLogin.css';
+import {
+	MainContainer,
+	FormContainer,
+	LogoContainer,
+	TQLogo,
+	MainElementsContainer,
+	FieldTQ,
+	FirstFieldRow,
+	SecondFieldRow,
+	Textarea,
+	MainBtn,
+	BtnTQ
+} from './MainLogin.style';
 
 type DataType = {
 	_id: string;
@@ -126,36 +138,30 @@ export default function MainLogin() {
 	};
 
 	return (
-		<div styleName="main" data-testid="main-container">
-			<form ref={tqForm} styleName="form-container" onSubmit={handleFormSubmit}>
-				<div styleName="logo-container">
-					<img
-						styleName={`_tq-logo ${isLogoLoaded ? 'loaded' : ''}`}
+		<MainContainer data-testid="main-container">
+			<FormContainer ref={tqForm} onSubmit={handleFormSubmit}>
+				<LogoContainer>
+					<TQLogo
+						isLogoLoaded={isLogoLoaded}
 						src={logo}
 						draggable="false"
 						alt="logo"
 						onLoad={() => setIsLogoLoaded(true)}
 					/>
-				</div>
-				<div styleName="main-elements-container">
-					<div styleName={`field-tq ${isFieldLoaded ? 'loaded' : ''}`}>
-						<div
-							styleName={`${inputMode ? 'input-mode' : ''}`}
-							style={{
-								boxShadow: `${
-									showSubmitBtn
-										? 'none'
-										: '0px 3.2px 0px 2.2px var(--tq-blue-00)'
-								}`
-							}}
+				</LogoContainer>
+				<MainElementsContainer>
+					<FieldTQ isFieldLoaded={isFieldLoaded}>
+						<FirstFieldRow
+							isInputMode={inputMode}
+							shouldShowSubmitBtn={showSubmitBtn}
 							tabIndex={-1}
 							data-show-submitbtn={showSubmitBtn}
 						>
-							<textarea
+							<Textarea
 								value={username}
 								id="usrTQ"
 								data-name="tquser"
-								styleName={`main-input ${inputMode ? 'input-mode' : ''}`}
+								isInputMode={inputMode}
 								data-type={inputMode ? 'text' : 'button'}
 								onChange={handleFieldChange}
 								onFocus={handleFieldFocus}
@@ -167,32 +173,26 @@ export default function MainLogin() {
 								maxLength={20}
 								placeholder={!inputMode ? lang['InputPlaceholder'] : ''}
 								data-testid="username-field"
-							></textarea>
+							></Textarea>
 							{showSubmitBtn && (
-								<button
-									type="submit"
-									styleName="main-btn"
-									data-testid="btn-submit"
-								>
+								<MainBtn type="submit" data-testid="btn-submit">
 									<img src={arrow} alt="arrow" />
-								</button>
+								</MainBtn>
 							)}
-						</div>
-						<div>
-							<button type="button" styleName="_btn-tq">
+						</FirstFieldRow>
+						<SecondFieldRow>
+							<BtnTQ type="button">
 								{lang['BtnInfo']}
-
 								<img src={info} alt="arrow" />
-							</button>
-							<button type="button" styleName="_btn-tq">
+							</BtnTQ>
+							<BtnTQ type="button">
 								{lang['BtnHelp']}
-
 								<img src={Help} alt="arrow" />
-							</button>
-						</div>
-					</div>
-				</div>
-			</form>
-		</div>
+							</BtnTQ>
+						</SecondFieldRow>
+					</FieldTQ>
+				</MainElementsContainer>
+			</FormContainer>
+		</MainContainer>
 	);
 }
