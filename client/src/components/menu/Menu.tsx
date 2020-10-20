@@ -12,15 +12,31 @@ import Axios from 'axios';
 import { Link, useLocation } from 'react-router-dom';
 import { useSelector, RootStateOrAny, useDispatch } from 'react-redux';
 import { getAuthInfoAction } from 'global/ducks/authDucks';
-
-import './Menu.css';
 import { InitContext } from 'global/context/InitContext';
+
+import {
+	ArrowIcon,
+	BtnMenu,
+	Container,
+	Overlay,
+	Sidebar,
+	ButtonContainer,
+	SidebarButton,
+	SidebarTitle,
+	TBombIcon,
+	Wrapper,
+	ButtonIcon,
+	ButtonText,
+	FooterContainer,
+	SBMeekWrapper,
+	ButtonTerms
+} from './Menu.style';
 
 export default function Menu() {
 	const [isUserNew, setIsUserNew] = useState(true);
 	const [showNewUserModal, setShowNewUserModal] = useState(false);
 	const [showMenu, setShowMenu] = useState(false);
-	const [enoughSpace, setEnoughSpace] = useState(false);
+	const [shouldShowOverlay, setShouldShowOverlay] = useState(false);
 	const [showAuthModal, setShowAuthModal] = useState(false);
 	const [isMobile, setIsMobile] = useState(false);
 	const { Menu: lang } = useContext(InitContext).state.lang;
@@ -69,7 +85,7 @@ export default function Menu() {
 	}, []);
 
 	const handleSpace = () => {
-		setEnoughSpace(window.innerWidth > 1311);
+		setShouldShowOverlay(window.innerWidth < 1311);
 	};
 
 	const toggleMenuActivation = () => {
@@ -91,89 +107,77 @@ export default function Menu() {
 	};
 
 	return (
-		<div
-			styleName="container-menu"
-			style={{
-				paddingRight: `${showMenu ? '27px' : ''}`
-			}}
-			id="menucito"
-		>
-			<div
-				styleName={`overlay ${showMenu && !enoughSpace ? 'active' : ''}`}
+		<Container showMenu={showMenu} id="menucito">
+			<Overlay
+				showOverlay={showMenu && shouldShowOverlay}
 				onClick={toggleMenuActivation}
 				onTouchStartCapture={toggleMenuActivation}
-			></div>
-			<div>
-				<button
-					styleName={`btn-menu ${showMenu ? 'active' : ''}`}
-					onClick={toggleMenuActivation}
-				>
-					<img src={flecha} alt="flecha roja" />
-					<img src={menulog} alt="menu logo" />
-				</button>
-				<div styleName={`sidebar ${showMenu ? 'active' : ''}`}>
+			/>
+			<Wrapper>
+				<BtnMenu onClick={toggleMenuActivation} showMenu={showMenu}>
+					<ArrowIcon showMenu={showMenu} src={flecha} alt="arrow" />
+					<TBombIcon showMenu={showMenu} src={menulog} alt="t-bomb" />
+				</BtnMenu>
+				<Sidebar showMenu={showMenu} isAuthenticated={isAuthenticated}>
 					{showMenu && (
-						<div styleName={`${isAuthenticated ? 'authenticated' : ''}`}>
-							<div styleName="sidebar-title">
+						<div>
+							<SidebarTitle>
 								<h1>{lang['Title']}</h1>
-							</div>
-							<div styleName="btn-container">
+							</SidebarTitle>
+							<ButtonContainer>
 								<Link to="/">
-									<button styleName="sidebar-button">
-										<img src={home} alt="home" />
-										<span>{lang['HomeOpt']}</span>
-									</button>
+									<SidebarButton>
+										<ButtonIcon src={home} alt="home" />
+										<ButtonText>{lang['HomeOpt']}</ButtonText>
+									</SidebarButton>
 								</Link>
-							</div>
+							</ButtonContainer>
 							{!isAuthenticated && (
-								<div styleName="btn-container">
-									<button styleName="sidebar-button" onClick={handleAuthClick}>
-										<img src={account} alt="signin" />
-										<span>{lang['SignInOpt']}</span>
-									</button>
-								</div>
+								<ButtonContainer>
+									<SidebarButton onClick={handleAuthClick}>
+										<ButtonIcon src={account} alt="signin" />
+										<ButtonText>{lang['SignInOpt']}</ButtonText>
+									</SidebarButton>
+								</ButtonContainer>
 							)}
 							{isAuthenticated && (
 								<>
-									<div styleName="btn-container">
+									<ButtonContainer>
 										<Link to="/messages">
-											<button styleName="sidebar-button">
-												<img src={cloud} alt="cloud" />
-												<span>{lang['InboxOpt']}</span>
-											</button>
+											<SidebarButton>
+												<ButtonIcon src={cloud} alt="cloud" />
+												<ButtonText>{lang['InboxOpt']}</ButtonText>
+											</SidebarButton>
 										</Link>
-									</div>
-									<div styleName="btn-container">
-										<button
-											styleName="sidebar-button"
-											onClick={handleLogoutClick}
-										>
-											<img
+									</ButtonContainer>
+									<ButtonContainer>
+										<SidebarButton onClick={handleLogoutClick}>
+											<ButtonIcon
 												src={arrowexit}
 												alt="logout"
-												styleName="logout-icon"
 												style={{ padding: '4px' }}
+												isLogoutIcon
 											/>
-											<span>{lang['LogOutOpt']}</span>
-										</button>
-									</div>
+											<ButtonText>{lang['LogOutOpt']}</ButtonText>
+										</SidebarButton>
+									</ButtonContainer>
 								</>
 							)}
-							<div styleName="footer-container">
-								<div styleName="btn-container sbmeek-container">
-									<button styleName="sidebar-button sbmeek">
-										<img src={tqIcon} alt="tq-fav" />
-										<span>SB Meek</span>
-									</button>
-								</div>
+							<FooterContainer>
+								<SBMeekWrapper>
+									<SidebarButton SBMeekButton>
+										<ButtonIcon src={tqIcon} alt="tq-fav" />
+										<ButtonText>SB Meek</ButtonText>
+									</SidebarButton>
+								</SBMeekWrapper>
 								<a href="/terms" style={{ width: '101.6%' }}>
-									<button styleName="btn-terms">{lang['BtnTerms']}</button>
+									<ButtonTerms>{lang['BtnTerms']}</ButtonTerms>
 								</a>
-							</div>
+							</FooterContainer>
 						</div>
 					)}
-				</div>
-			</div>
+				</Sidebar>
+			</Wrapper>
 			{isUserNew && <FirstTimeHelpBox active={showNewUserModal} />}
 			<AuthModal
 				opened={showAuthModal}
@@ -181,6 +185,6 @@ export default function Menu() {
 				setShowMenu={setShowMenu}
 				isMobile={isMobile}
 			/>
-		</div>
+		</Container>
 	);
 }
