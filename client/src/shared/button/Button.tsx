@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 type PropsType = {
 	group: 'primary' | 'secondary';
@@ -33,37 +33,37 @@ export default styled.button<PropsType & React.HTMLProps<HTMLButtonElement>>`
 	}
 	${(props) =>
 		props.hoverMode === 'translate'
-			? `
-		overflow: hidden;
-		position: relative;
-		min-width: ${props.minWidth}px;
-		& > *{
-			display: inline-block;
-	    transition: transform 150ms ease-out;
-		}
-		& > *:nth-child(1){
-			transform: translateX(0);
-			min-width: 100%;
-		}
-		& > *:nth-child(2){
-			position: absolute;
-			transform: translateX(-${props.minWidth! - 5}px);
-			transition: transform 150ms ease-out, opacity 200ms;
-			min-width: 100%;
-			font-size: 2rem;
-			opacity: 0;
-		}
-		&:hover > *:nth-child(1){
-    	transform: translateX(${props.minWidth! - 5}px);
-		}
-		&:hover> *:nth-child(2){
-			transform: translateX(0);
-			opacity: 1;
-		}
-		& > img {
-			width: 22px;
-			min-width: 1px !important;
-		}
-	`
+			? css`
+					overflow: hidden;
+					position: relative;
+					min-width: ${props.minWidth}px;
+					& > * {
+						display: inline-block;
+						transition: transform 150ms ease-out;
+					}
+					& > *:nth-child(1) {
+						transform: translateX(0);
+						min-width: 100%;
+					}
+					& > *:nth-child(2) {
+						position: absolute;
+						transform: translateX(-${props.minWidth! - 5}px);
+						transition: transform 150ms ease-out, opacity 200ms;
+						min-width: 100%;
+						font-size: 2rem;
+						opacity: 0;
+					}
+					&:hover > *:nth-child(1) {
+						transform: translateX(${props.minWidth! - 5}px);
+					}
+					&:hover > *:nth-child(2) {
+						transform: translateX(0);
+						opacity: 1;
+					}
+					& > img {
+						width: 22px;
+						min-width: 1px !important;
+					}
+			  `
 			: ``}
 `;
