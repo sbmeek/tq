@@ -3,125 +3,125 @@ import React, {
 	useContext,
 	useEffect,
 	useCallback,
-	useRef,
-} from 'react'
-import Axios from 'axios'
-import parse from 'html-react-parser'
-import account from 'assets/images/icons/share-icons/icon-account.svg'
-import xIcon from 'assets/images/icons/share-icons/icon-x.svg'
-import { InitContext } from 'global/context/InitContext'
-import { Link } from 'react-router-dom'
+	useRef
+} from 'react';
+import Axios from 'axios';
+import parse from 'html-react-parser';
+import account from 'assets/images/icons/share-icons/icon-account.svg';
+import xIcon from 'assets/images/icons/share-icons/icon-x.svg';
+import { InitContext } from 'global/context/InitContext';
+import { Link } from 'react-router-dom';
 
-import './Signup.css'
+import './Signup.css';
 
 export default function Signup<
 	T extends {
-		setShowSignedupComp: React.Dispatch<React.SetStateAction<boolean>>
-		setShowLogin: React.Dispatch<React.SetStateAction<boolean>>
-		setOpened: React.Dispatch<React.SetStateAction<boolean>>
+		setShowRegisteredComp: React.Dispatch<React.SetStateAction<boolean>>;
+		setShowLogin: React.Dispatch<React.SetStateAction<boolean>>;
+		setOpened: React.Dispatch<React.SetStateAction<boolean>>;
 	}
->({ setShowLogin, setShowSignedupComp, setOpened: setShowAuthModal }: T) {
+>({ setShowLogin, setShowRegisteredComp, setOpened: setShowAuthModal }: T) {
 	const [fields, setFields] = useState<{
 		[key: string]: {
-			value: string
-			valid: boolean | null
-			loading: boolean
-			timerID: NodeJS.Timeout | null
-		}
+			value: string;
+			valid: boolean | null;
+			loading: boolean;
+			timerID: NodeJS.Timeout | null;
+		};
 	}>({
 		username: {
 			value: '',
 			valid: null,
 			loading: false,
-			timerID: null,
+			timerID: null
 		},
 		email: {
 			value: '',
 			valid: null,
 			loading: false,
-			timerID: null,
+			timerID: null
 		},
 		pwd: {
 			value: '',
 			valid: null,
 			loading: false,
-			timerID: null,
+			timerID: null
 		},
 		cpwd: {
 			value: '',
 			valid: null,
 			loading: false,
-			timerID: null,
-		},
-	})
-	const [focusedFieldId, setFocusedFieldId] = useState('')
-	const { Signup: lang } = useContext(InitContext).state.lang.AuthModal
-	const btnCreate = useRef<HTMLButtonElement>(null)
+			timerID: null
+		}
+	});
+	const [focusedFieldId, setFocusedFieldId] = useState('');
+	const { Signup: lang } = useContext(InitContext).state.lang.AuthModal;
+	const btnCreate = useRef<HTMLButtonElement>(null);
 
 	const isEmail = (email: string) => {
-		const regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-		return !regex.test(String(email).toLowerCase())
-	}
+		const regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+		return !regex.test(String(email).toLowerCase());
+	};
 
 	const validatePwd = (pwd: string) => {
 		//At least one upper AND one lower
-		const regexPwd = /^(?=.*[A-Z])(?=.*[a-z])/
+		const regexPwd = /^(?=.*[A-Z])(?=.*[a-z])/;
 
-		let errored = false
+		let errored = false;
 
-		if (pwd !== undefined && pwd.length < 8) errored = true
-		if (!regexPwd.test(pwd)) errored = true
-		return errored
-	}
+		if (pwd !== undefined && pwd.length < 8) errored = true;
+		if (!regexPwd.test(pwd)) errored = true;
+		return errored;
+	};
 
 	const valdUsername = async (username: string) => {
-		const usernameRegex = /^[a-zA-Z0-9]*$/
+		const usernameRegex = /^[a-zA-Z0-9]*$/;
 
-		let errored = false
+		let errored = false;
 
-		if (username.length < 3) errored = true
-		if (!usernameRegex.test(username)) errored = true
+		if (username.length < 3) errored = true;
+		if (!usernameRegex.test(username)) errored = true;
 
-		return errored
-	}
+		return errored;
+	};
 
 	const handleFieldChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const targetElement = e.target as HTMLInputElement
-		const val = targetElement.value
-		const id = targetElement.id
+		const targetElement = e.target as HTMLInputElement;
+		const val = targetElement.value;
+		const id = targetElement.id;
 
-		clearTimeout(fields[id].timerID as NodeJS.Timeout)
+		clearTimeout(fields[id].timerID as NodeJS.Timeout);
 		if (val) {
 			setFields((fields) => ({
 				...fields,
-				[id]: { ...fields[id], value: val, loading: true },
-			}))
+				[id]: { ...fields[id], value: val, loading: true }
+			}));
 			fields[id].timerID = setTimeout(async () => {
-				let isErrored = true
+				let isErrored = true;
 				switch (id) {
 					case 'username':
-						isErrored = await valdUsername(val)
-						break
+						isErrored = await valdUsername(val);
+						break;
 					case 'email':
-						isErrored = isEmail(val)
-						break
+						isErrored = isEmail(val);
+						break;
 					case 'pwd':
-						isErrored = validatePwd(val)
-						break
+						isErrored = validatePwd(val);
+						break;
 					case 'cpwd':
-						isErrored = fields!.pwd.value !== val
-						break
+						isErrored = fields!.pwd.value !== val;
+						break;
 				}
-				targetElement.setAttribute('data-is-valid', !isErrored + '')
+				targetElement.setAttribute('data-is-valid', !isErrored + '');
 				setFields((fields) => ({
 					...fields,
 					[id]: {
 						...fields[id],
 						valid: !isErrored,
-						loading: false,
-					},
-				}))
-			}, 800)
+						loading: false
+					}
+				}));
+			}, 800);
 		} else {
 			setFields((fields) => ({
 				...fields,
@@ -129,50 +129,50 @@ export default function Signup<
 					...fields[focusedFieldId],
 					valid: null,
 					value: val,
-					loading: false,
-				},
-			}))
+					loading: false
+				}
+			}));
 		}
-	}
+	};
 
 	useEffect(() => {
-		btnCreate.current!.disabled = getNumberOfValidFields() < 4
-	})
+		btnCreate.current!.disabled = getNumberOfValidFields() < 4;
+	});
 
 	const getNumberOfValidFields = () => {
-		let validFields = 0
+		let validFields = 0;
 		for (let f in fields) {
 			if (fields[f].valid) {
-				validFields++
+				validFields++;
 			}
 		}
-		return validFields
-	}
+		return validFields;
+	};
 
 	const handleFormSubmit = async (e: React.FormEvent) => {
-		e.preventDefault()
-		if (getNumberOfValidFields() < 4) return
+		e.preventDefault();
+		if (getNumberOfValidFields() < 4) return;
 		try {
-			const values: { [key: string]: string } = {}
+			const values: { [key: string]: string } = {};
 			for (let f in fields) {
-				values[f] = fields[f].value
+				values[f] = fields[f].value;
 			}
-			const res = await Axios.post('/user/join', values)
-			const { ok } = res.data
-			setShowSignedupComp(ok as boolean)
-			setShowLogin(ok as boolean)
+			const res = await Axios.post('/user/join', values);
+			const { ok } = res.data;
+			setShowSignedupComp(ok as boolean);
+			setShowLogin(ok as boolean);
 		} catch (error) {
-			console.error(error)
+			console.error(error);
 		}
-	}
+	};
 
 	const handleFieldFocus = (e: React.FocusEvent<HTMLInputElement>) => {
-		setFocusedFieldId(e.target.id)
-	}
+		setFocusedFieldId(e.target.id);
+	};
 
 	const handleBtnCancelClick = () => {
-		setShowAuthModal(false)
-	}
+		setShowAuthModal(false);
+	};
 
 	return (
 		<div>
@@ -286,34 +286,34 @@ export default function Signup<
 				</Link>
 			</form>
 		</div>
-	)
+	);
 }
 
 function FieldHelper<T extends { fieldId: string }>({ fieldId }: T) {
-	const [msg, setMsg] = useState('')
+	const [msg, setMsg] = useState('');
 
 	const { FieldHelper: lang } = useContext(
 		InitContext
-	).state.lang.AuthModal.Signup
+	).state.lang.AuthModal.Signup;
 
 	const getFieldInfo = useCallback(() => {
 		switch (fieldId) {
 			case 'username':
-				return lang['usernameHelpMsg']
+				return lang['usernameHelpMsg'];
 			case 'email':
-				return lang['emailHelpMsg']
+				return lang['emailHelpMsg'];
 			case 'pwd':
-				return lang['pwdHelpMsg']
+				return lang['pwdHelpMsg'];
 			case 'cpwd':
-				return lang['cpwdHelpMsg']
+				return lang['cpwdHelpMsg'];
 			default:
-				return ''
+				return '';
 		}
-	}, [fieldId, lang])
+	}, [fieldId, lang]);
 
 	useEffect(() => {
-		setMsg(getFieldInfo())
-	}, [getFieldInfo])
+		setMsg(getFieldInfo());
+	}, [getFieldInfo]);
 
-	return <div styleName="info-box">{parse(msg)}</div>
+	return <div styleName="info-box">{parse(msg)}</div>;
 }
