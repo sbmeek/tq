@@ -11,8 +11,8 @@ import account from 'assets/images/icons/share-icons/icon-account.svg';
 import xIcon from 'assets/images/icons/share-icons/icon-x.svg';
 import { InitContext } from 'global/context/InitContext';
 
-import './Signup.css';
 import {
+	btnCustomStyle,
 	BtnsContainer,
 	FieldsContainer,
 	FormGroup,
@@ -21,6 +21,7 @@ import {
 	Label,
 	LinkTerms
 } from './Signup.style';
+import Button from 'shared/button/Button';
 
 export default function Signup<
 	T extends {
@@ -144,7 +145,9 @@ export default function Signup<
 	};
 
 	useEffect(() => {
-		btnCreate.current!.disabled = getNumberOfValidFields() < 4;
+		if (btnCreate.current) {
+			btnCreate.current!.disabled = getNumberOfValidFields() < 4;
+		}
 	});
 
 	const getNumberOfValidFields = () => {
@@ -252,14 +255,25 @@ export default function Signup<
 					</FormGroup>
 				</FieldsContainer>
 				<BtnsContainer>
-					<button styleName="btn-cancel" onMouseDown={handleBtnCancelClick}>
+					<Button
+						group="primary"
+						hoverMode="translate"
+						onMouseDown={handleBtnCancelClick}
+						customStyle={btnCustomStyle}
+					>
 						<span>{lang['BtnCancel']}</span>
 						<img src={xIcon} alt="cancel" />
-					</button>
-					<button styleName="btn-create-account" ref={btnCreate} disabled>
+					</Button>
+					<Button
+						group="secondary"
+						hoverMode="translate"
+						customStyle={btnCustomStyle}
+						ref={btnCreate}
+						disabled
+					>
 						<span>{lang['BtnCreateAccount']}</span>
 						<img src={account} alt="account" />
-					</button>
+					</Button>
 				</BtnsContainer>
 				<LinkTerms to="/terms">{lang['TermsNConditions']}</LinkTerms>
 			</form>

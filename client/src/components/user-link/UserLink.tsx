@@ -12,7 +12,8 @@ import {
 	Column,
 	UserLinkInput,
 	BtnHelp,
-	BtnCopyLink
+	BtnCopyLink,
+	btnCustomStyle
 } from './UserLink.style';
 import Button from 'shared/button/Button';
 
@@ -94,8 +95,7 @@ export default function UserLink() {
 							type="button"
 							group="primary"
 							hoverMode="translate"
-							minWidth={115}
-							style={{ minHeight: '55px', borderRadius: '9999px' }}
+							customStyle={btnCustomStyle}
 						>
 							<span>{lang['BtnInbox']}</span>
 							<img src={tqIcon} alt="logo" />

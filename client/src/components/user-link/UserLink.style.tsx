@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Container = styled.div`
 	width: 100%;
@@ -27,6 +27,11 @@ export const Column = styled.div<{ margin?: string }>`
 export const UserLinkInput = styled.input`
 	position: absolute;
 	left: -999em;
+`;
+
+export const btnCustomStyle = css`
+	min-height: 55px;
+	border-radius: 9999px;
 `;
 
 export const BtnHelp = styled.button<{ isVisible: boolean }>`

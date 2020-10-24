@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import okIcon from 'assets/images/icons/icons-signup/ok-icon.svg';
 import eyeLoaderIcon from 'assets/images/icons/tq-eye-loader.svg';
 import errorIcon from 'assets/images/icons/icons-signup/error-icon.svg';
@@ -89,6 +89,17 @@ export const BtnsContainer = styled.div`
 	@media (max-width: 330px) {
 		& * {
 			font-size: 16px;
+		}
+	}
+`;
+
+export const btnCustomStyle = css`
+	& {
+		width: 47%;
+		height: 42px;
+		box-shadow: none;
+		&:hover {
+			box-shadow: none;
 		}
 	}
 `;

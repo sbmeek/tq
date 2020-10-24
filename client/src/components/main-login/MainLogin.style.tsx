@@ -1,4 +1,4 @@
-﻿import styled from 'styled-components';
+﻿import styled, { css } from 'styled-components';
 
 export const MainContainer = styled.div`
 	display: flex;
@@ -184,4 +184,9 @@ export const MainBtn = styled.button`
 	@media (max-width: 290px) {
 		min-width: 120%;
 	}
+`;
+
+export const btnCustomStyle = css`
+	height: 37px;
+	min-width: 47%;
 `;

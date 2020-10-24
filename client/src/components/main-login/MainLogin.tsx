@@ -26,7 +26,8 @@ import {
 	FirstFieldRow,
 	SecondFieldRow,
 	Textarea,
-	MainBtn
+	MainBtn,
+	btnCustomStyle
 } from './MainLogin.style';
 import Button from 'shared/button/Button';
 
@@ -184,10 +185,7 @@ export default function MainLogin() {
 								type="button"
 								group="primary"
 								hoverMode="color"
-								style={{
-									height: '37px',
-									minWidth: '47%'
-								}}
+								customStyle={btnCustomStyle}
 							>
 								{lang['BtnInfo']}
 								<img src={info} alt="arrow" />
@@ -196,10 +194,7 @@ export default function MainLogin() {
 								type="button"
 								group="primary"
 								hoverMode="color"
-								style={{
-									height: '37px',
-									minWidth: '47%'
-								}}
+								customStyle={btnCustomStyle}
 							>
 								{lang['BtnHelp']}
 								<img src={Help} alt="arrow" />
