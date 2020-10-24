@@ -26,7 +26,7 @@ export default function Signup<
 			value: string;
 			valid: boolean | null;
 			loading: boolean;
-			timerID: NodeJS.Timeout | null;
+			timerID: NodeJS.Timeout | number | null;
 		};
 	}>({
 		username: {
@@ -159,7 +159,7 @@ export default function Signup<
 			}
 			const res = await Axios.post('/user/join', values);
 			const { ok } = res.data;
-			setShowSignedupComp(ok as boolean);
+			setShowRegisteredComp(ok as boolean);
 			setShowLogin(ok as boolean);
 		} catch (error) {
 			console.error(error);
