@@ -46,7 +46,6 @@ export const Input = styled.input<InputPropsType>`
 	background-position: 96%;
 	background-size: ${(props) => (props.isValid === null ? '30px' : '25px')};
 	background-repeat: no-repeat;
-	transition: opacity 150ms, background-color 150ms;
 	background-image: ${({ isLoading, isValid }) =>
 		isValid === null && !isLoading
 			? ''

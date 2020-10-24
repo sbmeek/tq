@@ -28,6 +28,8 @@ export const inputStyles = css`
 		padding: 0 50px 0 18px;
 		color: #fff;
 		font: normal normal bold 20px/26px Nunito;
+		transition: opacity 150ms, background-color 150ms;
+
 		:hover,
 		:focus {
 			opacity: 1;

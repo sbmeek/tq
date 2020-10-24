@@ -1,7 +1,12 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, {
+	ButtonHTMLAttributes,
+	useEffect,
+	useRef,
+	useState
+} from 'react';
 import { Button, PropsType } from './Button.style';
 
-const useCombinedRefs = (...refs: any[]): React.MutableRefObject<any> => {
+const useCombinedRefs = (...refs: any[]): any => {
 	const targetRef = React.useRef();
 
 	React.useEffect(() => {
@@ -21,7 +26,8 @@ const useCombinedRefs = (...refs: any[]): React.MutableRefObject<any> => {
 
 export default React.forwardRef<
 	HTMLButtonElement,
-	React.ButtonHTMLAttributes<HTMLButtonElement> & PropsType
+	React.ButtonHTMLAttributes<HTMLButtonElement> &
+		PropsType & { as?: undefined; forwardedAs?: undefined }
 >((props, ref) => {
 	const btnRef = useRef<HTMLButtonElement>(null);
 	const combinedRef = useCombinedRefs(ref, btnRef);
@@ -29,15 +35,15 @@ export default React.forwardRef<
 
 	useEffect(() => {
 		if (props.hoverMode === 'translate') {
+			const btnCurr = combinedRef.current;
 			const handleResize = () => {
-				console.log(combinedRef.current!.getBoundingClientRect().width);
-				setWidth(combinedRef.current!.getBoundingClientRect().width);
+				setWidth(btnCurr.getBoundingClientRect().width || btnCurr.offsetWidth);
 			};
 			handleResize();
-			window.addEventListener('load', handleResize);
+			btnCurr.addEventListener('load', handleResize);
 			window.addEventListener('resize', handleResize);
 			return () => {
-				window.removeEventListener('load', handleResize);
+				btnCurr.removeEventListener('load', handleResize);
 				window.removeEventListener('resize', handleResize);
 			};
 		}
