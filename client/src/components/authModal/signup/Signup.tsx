@@ -12,6 +12,7 @@ import xIcon from 'assets/images/icons/share-icons/icon-x.svg';
 import { InitContext } from 'global/context/InitContext';
 
 import {
+	AccountIcon,
 	btnCustomStyle,
 	BtnsContainer,
 	FieldsContainer,
@@ -272,7 +273,7 @@ export default function Signup<
 						disabled
 					>
 						<span>{lang['BtnCreateAccount']}</span>
-						<img src={account} alt="account" />
+						<AccountIcon src={account} alt="account" />
 					</Button>
 				</BtnsContainer>
 				<LinkTerms to="/terms">{lang['TermsNConditions']}</LinkTerms>

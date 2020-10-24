@@ -102,9 +102,13 @@ export const btnCustomStyle = css`
 			box-shadow: none !important;
 		}
 		& > img {
-			width: 33px !important;
+			width: 33px;
 		}
 	}
+`;
+
+export const AccountIcon = styled.img`
+	width: 33px !important;
 `;
 
 export const LinkTerms = styled(Link)`

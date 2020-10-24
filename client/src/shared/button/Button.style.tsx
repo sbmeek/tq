@@ -5,11 +5,9 @@ export type PropsType = {
 	hoverMode: 'translate' | 'color';
 	width?: number | string;
 	customStyle?: FlattenSimpleInterpolation;
-};
+} & React.HTMLProps<HTMLButtonElement>;
 
-export const Button = styled.button<
-	PropsType & React.HTMLProps<HTMLButtonElement>
->`
+export const Button = styled.button<PropsType>`
 	${(props) => props.customStyle}
 	display: flex;
 	align-items: center;
@@ -53,7 +51,7 @@ export const Button = styled.button<
 		if (hoverMode === 'translate') {
 			width = `${width}px`;
 			return css`
-				 {
+				& {
 					overflow: hidden;
 					position: relative;
 					& > * {
