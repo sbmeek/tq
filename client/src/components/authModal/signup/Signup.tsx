@@ -12,8 +12,6 @@ import xIcon from 'assets/images/icons/share-icons/icon-x.svg';
 import { InitContext } from 'global/context/InitContext';
 
 import {
-	AccountIcon,
-	btnCustomStyle,
 	BtnsContainer,
 	FieldsContainer,
 	FormGroup,
@@ -22,6 +20,7 @@ import {
 	Label,
 	LinkTerms
 } from './Signup.style';
+import { AccountIcon, btnCustomStyle } from '../style';
 import Button from 'shared/button/Button';
 
 export default function Signup<

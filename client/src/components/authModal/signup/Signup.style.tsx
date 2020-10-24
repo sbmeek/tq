@@ -1,8 +1,9 @@
-import styled, { css, keyframes } from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import okIcon from 'assets/images/icons/icons-signup/ok-icon.svg';
 import eyeLoaderIcon from 'assets/images/icons/tq-eye-loader.svg';
 import errorIcon from 'assets/images/icons/icons-signup/error-icon.svg';
 import { Link } from 'react-router-dom';
+import { inputStyles } from '../style';
 
 export const FieldsContainer = styled.div`
 	width: 320px;
@@ -41,14 +42,7 @@ type InputPropsType = {
 };
 
 export const Input = styled.input<InputPropsType>`
-	background: var(--tq-gray-02);
-	width: 93%;
-	height: 47px;
-	border-radius: 20px;
-	margin-bottom: 14px;
-	padding: 0 50px 0 18px;
-	color: #fff;
-	font: normal normal bold 20px/26px Nunito;
+	${inputStyles}
 	background-position: 96%;
 	background-size: ${(props) => (props.isValid === null ? '30px' : '25px')};
 	background-repeat: no-repeat;
@@ -57,11 +51,6 @@ export const Input = styled.input<InputPropsType>`
 		isValid === null && !isLoading
 			? ''
 			: `url(${isLoading ? eyeLoaderIcon : isValid ? okIcon : errorIcon})`};
-	&:hover,
-	&:focus {
-		opacity: 1;
-		background-color: var(--tq-gray-03);
-	}
 	@media (max-width: 600px) {
 		margin-bottom: 10px;
 		height: 42px;
@@ -91,24 +80,6 @@ export const BtnsContainer = styled.div`
 			font-size: 16px;
 		}
 	}
-`;
-
-export const btnCustomStyle = css`
-	& {
-		width: 47%;
-		height: 42px;
-		box-shadow: none;
-		&:hover {
-			box-shadow: none !important;
-		}
-		& > img {
-			width: 33px;
-		}
-	}
-`;
-
-export const AccountIcon = styled.img`
-	width: 33px !important;
 `;
 
 export const LinkTerms = styled(Link)`
