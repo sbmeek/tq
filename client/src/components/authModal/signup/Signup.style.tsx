@@ -99,7 +99,10 @@ export const btnCustomStyle = css`
 		height: 42px;
 		box-shadow: none;
 		&:hover {
-			box-shadow: none;
+			box-shadow: none !important;
+		}
+		& > img {
+			width: 33px !important;
 		}
 	}
 `;
