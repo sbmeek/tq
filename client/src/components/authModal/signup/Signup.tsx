@@ -10,9 +10,17 @@ import parse from 'html-react-parser';
 import account from 'assets/images/icons/share-icons/icon-account.svg';
 import xIcon from 'assets/images/icons/share-icons/icon-x.svg';
 import { InitContext } from 'global/context/InitContext';
-import { Link } from 'react-router-dom';
 
 import './Signup.css';
+import {
+	BtnsContainer,
+	FieldsContainer,
+	FormGroup,
+	InfoBox,
+	Input,
+	Label,
+	LinkTerms
+} from './Signup.style';
 
 export default function Signup<
 	T extends {
@@ -175,25 +183,18 @@ export default function Signup<
 	};
 
 	return (
-		<div>
+		<>
 			<form onSubmit={handleFormSubmit}>
-				<div styleName="inputs-registro">
-					<div styleName="field-container">
-						<label>{lang['Username']}</label>
-						<input
+				<FieldsContainer>
+					<FormGroup>
+						<Label>{lang['Username']}</Label>
+						<Input
 							type="text"
 							onFocus={handleFieldFocus}
 							onChange={handleFieldChange}
 							id="username"
-							styleName={`field ${
-								fields['username'].loading
-									? 'is-loading'
-									: fields['username'].valid === null
-									? ''
-									: fields['username'].valid
-									? 'is-valid'
-									: 'is-invalid'
-							}`}
+							isValid={fields['username'].valid}
+							isLoading={fields['username'].loading}
 							autoComplete="off"
 							spellCheck="false"
 							value={fields['username'].value}
@@ -201,21 +202,14 @@ export default function Signup<
 						{focusedFieldId === 'username' && !fields['username'].valid && (
 							<FieldHelper fieldId="username" />
 						)}
-					</div>
-					<div styleName="field-container">
-						<label>{lang['Email']}</label>
-						<input
+					</FormGroup>
+					<FormGroup>
+						<Label>{lang['Email']}</Label>
+						<Input
 							onChange={handleFieldChange}
 							onFocus={handleFieldFocus}
-							styleName={`field ${
-								fields['email'].loading
-									? 'is-loading'
-									: fields['email'].valid === null
-									? ''
-									: fields['email'].valid
-									? 'is-valid'
-									: 'is-invalid'
-							}`}
+							isValid={fields['email'].valid}
+							isLoading={fields['email'].loading}
 							type="email"
 							id="email"
 							autoComplete="off"
@@ -225,21 +219,14 @@ export default function Signup<
 						{focusedFieldId === 'email' && !fields['email'].valid && (
 							<FieldHelper fieldId="email" />
 						)}
-					</div>
-					<div styleName="field-container">
-						<label>{lang['Pwd']}</label>
-						<input
+					</FormGroup>
+					<FormGroup>
+						<Label>{lang['Pwd']}</Label>
+						<Input
 							onChange={handleFieldChange}
 							onFocus={handleFieldFocus}
-							styleName={`field ${
-								fields['pwd'].loading
-									? 'is-loading'
-									: fields['pwd'].valid === null
-									? ''
-									: fields['pwd'].valid
-									? 'is-valid'
-									: 'is-invalid'
-							}`}
+							isValid={fields['pwd'].valid}
+							isLoading={fields['pwd'].loading}
 							type="password"
 							id="pwd"
 							value={fields['pwd'].value}
@@ -247,21 +234,14 @@ export default function Signup<
 						{focusedFieldId === 'pwd' && !fields['pwd'].valid && (
 							<FieldHelper fieldId="pwd" />
 						)}
-					</div>
-					<div styleName="field-container">
-						<label>{lang['ConfirmPwd']}</label>
-						<input
+					</FormGroup>
+					<FormGroup>
+						<Label>{lang['ConfirmPwd']}</Label>
+						<Input
 							onChange={handleFieldChange}
 							onFocus={handleFieldFocus}
-							styleName={`field ${
-								fields['cpwd'].loading
-									? 'is-loading'
-									: fields['cpwd'].valid === null
-									? ''
-									: fields['cpwd'].valid
-									? 'is-valid'
-									: 'is-invalid'
-							}`}
+							isValid={fields['cpwd'].valid}
+							isLoading={fields['cpwd'].loading}
 							type="password"
 							id="cpwd"
 							value={fields['cpwd'].value}
@@ -269,9 +249,9 @@ export default function Signup<
 						{focusedFieldId === 'cpwd' && !fields['cpwd'].valid && (
 							<FieldHelper fieldId="cpwd" />
 						)}
-					</div>
-				</div>
-				<div styleName="buttons">
+					</FormGroup>
+				</FieldsContainer>
+				<BtnsContainer>
 					<button styleName="btn-cancel" onMouseDown={handleBtnCancelClick}>
 						<span>{lang['BtnCancel']}</span>
 						<img src={xIcon} alt="cancel" />
@@ -280,12 +260,10 @@ export default function Signup<
 						<span>{lang['BtnCreateAccount']}</span>
 						<img src={account} alt="account" />
 					</button>
-				</div>
-				<Link to="/terms" styleName="terms">
-					{lang['TermsNConditions']}
-				</Link>
+				</BtnsContainer>
+				<LinkTerms to="/terms">{lang['TermsNConditions']}</LinkTerms>
 			</form>
-		</div>
+		</>
 	);
 }
 
@@ -315,5 +293,5 @@ function FieldHelper<T extends { fieldId: string }>({ fieldId }: T) {
 		setMsg(getFieldInfo());
 	}, [getFieldInfo]);
 
-	return <div styleName="info-box">{parse(msg)}</div>;
+	return <InfoBox>{parse(msg)}</InfoBox>;
 }
