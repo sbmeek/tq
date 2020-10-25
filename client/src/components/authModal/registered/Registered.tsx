@@ -4,7 +4,15 @@ import arrow from 'assets/images/left-arrow.svg';
 import tqLogo from 'assets/images/ltqrNEW.png';
 import { Toggler } from '../AuthModal.style';
 
-import './Registered.css';
+import {
+	ArrowIcon,
+	Container,
+	InnerWrapper,
+	Logo,
+	Paragraph,
+	Title,
+	Wrapper
+} from './Registered.style';
 
 export default function Registered<
 	T extends {
@@ -22,16 +30,16 @@ export default function Registered<
 	};
 
 	return (
-		<div styleName="signedup-container">
-			<img styleName="tqlogo" src={tqLogo} alt="tq logo" />
-			<div styleName="toggler-container">
-				<h1>{lang['title']}</h1>
-				<p>{lang['helpText']}</p>
-				<div styleName="login-arrow-container" onClick={handleClick}>
+		<Container>
+			<Logo src={tqLogo} alt="tq logo" />
+			<Wrapper>
+				<Title>{lang['title']}</Title>
+				<Paragraph>{lang['helpText']}</Paragraph>
+				<InnerWrapper onClick={handleClick}>
 					<Toggler>{lang['logInBtn']}</Toggler>
-					<img src={arrow} alt="arrow" styleName="arrow" />
-				</div>
-			</div>
-		</div>
+					<ArrowIcon src={arrow} alt="arrow" />
+				</InnerWrapper>
+			</Wrapper>
+		</Container>
 	);
 }
