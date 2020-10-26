@@ -1,55 +1,40 @@
-import React from 'react'
-import './MsgSent.css'
-import { Link } from 'react-router-dom'
-import logo2 from '../../assets/images/msg/logo2.png'
+import React from 'react';
+import logo from 'assets/images/msg/logo2.png';
+import homeIcon from 'assets/images/icons/home.svg';
+
+import {
+	btnCustomStyle,
+	Container,
+	H3,
+	LinkHome,
+	LinkSendAgain,
+	Logo,
+	LogoContainer,
+	TextWrapper,
+	Wrapper
+} from './MsgSent.style';
+import Button from 'shared/button/Button';
 
 export const MsgSent = () => {
 	return (
-		<div
-			style={{
-				minHeight: '100%',
-				display: 'flex',
-				justifyContent: 'center',
-				alignItems: 'center',
-				flexDirection: 'column',
-				background: '#ffffff91',
-			}}
-		>
-			<div
-				styleName="container"
-					
-			>
-				<img
-					src={logo2}
-					alt="logo2"
-					style={{ width: '300px', height: '200px', marginTop: '-146px' }}
-				></img>
-				<div styleName="perfil"></div>
-				<div
-					style={{
-						display: 'flex',
-						textAlign: 'center',
-						flexDirection: 'column',
-					}}
-				>
-					<h3 styleName="H3">Gracias por mandar</h3>
-					<h3 styleName="H3-2">tu mensaje.</h3>
-					<button
-						onClick={() => window.location.reload()}
-						style={{ background: 'none', margin: '3px' }}
-					>
-						{' '}
-						<p styleName="send-again">envia otro mensaje</p>
-					</button>
-				</div>
-			</div>
-			<Link to="/">
-				<button styleName="_btn-tq" type="button">
+		<Container>
+			<Wrapper>
+				<LogoContainer>
+					<Logo src={logo} alt="logo" />
+				</LogoContainer>
+				<TextWrapper>
+					<H3>Gracias por mandar tu mensaje.</H3>
+					<LinkSendAgain to="/">Enviar otro mensaje</LinkSendAgain>
+				</TextWrapper>
+			</Wrapper>
+			<LinkHome to="/">
+				<Button group="primary" hoverMode="color" customStyle={btnCustomStyle}>
 					Inicio
-				</button>
-			</Link>
-		</div>
-	)
-}
+					<img src={homeIcon} alt="home icon" />
+				</Button>
+			</LinkHome>
+		</Container>
+	);
+};
 
-export default MsgSent
+export default MsgSent;

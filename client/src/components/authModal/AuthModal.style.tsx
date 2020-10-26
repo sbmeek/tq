@@ -1,3 +1,4 @@
+import { linkStyles } from 'shared/link/Link.style';
 import styled, { css, keyframes } from 'styled-components';
 
 type ActiveType = {
@@ -178,14 +179,7 @@ export const TogglerContainer = styled.span<ITogglerContainerProps>`
 `;
 
 export const Toggler = styled.span`
-	color: var(--tq-blue-01);
-	text-decoration: none;
-	cursor: pointer;
-	transition: color 150ms;
-	margin-left: 4px;
-	&:hover {
-		color: var(--tq-blue-02);
-	}
+	${linkStyles}
 `;
 
 export const FormWrapper = styled.div`
