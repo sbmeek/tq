@@ -1,14 +1,20 @@
-import styled, { css, FlattenSimpleInterpolation } from 'styled-components';
+import styled, {
+	css,
+	FlattenInterpolation,
+	FlattenSimpleInterpolation,
+	ThemedStyledProps
+} from 'styled-components';
 
 export type PropsType = {
 	group: 'primary' | 'secondary';
 	hoverMode: 'translate' | 'color';
 	width?: number | string;
-	customStyle?: FlattenSimpleInterpolation;
+	customStyle?:
+		| FlattenSimpleInterpolation
+		| FlattenInterpolation<ThemedStyledProps<{ [key: string]: any }, any>>;
 } & React.HTMLProps<HTMLButtonElement>;
 
 export const Button = styled.button<PropsType>`
-	${(props) => props.customStyle}
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -85,4 +91,6 @@ export const Button = styled.button<PropsType>`
 			`;
 		} else return '';
 	}}
+
+	${(props) => props.customStyle}
 `;

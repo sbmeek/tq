@@ -31,7 +31,8 @@ export const UserLinkInput = styled.input`
 
 export const btnCustomStyle = css`
 	min-height: 55px;
-	border-radius: 9999px;
+	border-radius: 9999px !important;
+	width: 100px;
 `;
 
 export const BtnHelp = styled.button<{ isVisible: boolean }>`
@@ -53,44 +54,19 @@ export const BtnHelp = styled.button<{ isVisible: boolean }>`
 	}
 `;
 
-export const BtnCopyLink = styled.button`
-	font-family: 'Nunito', sans-serif;
-	display: flex;
-	text-transform: none;
-	box-shadow: 0px 6.4px var(--tq-blue-00);
-	border-radius: 30px;
-	background: var(--tq-blue-02);
-	min-width: 250px;
-	min-height: 50px;
-	border: 5.9px solid var(--tq-blue-01);
-	font-size: 22.5px;
-	transition: ease-in-out 0.22s;
-	margin-bottom: 10px;
-	color: var(--tq-blue-00);
-	padding: 6px 23px;
-	cursor: pointer;
-	overflow: hidden;
-	position: relative;
-	justify-content: center;
-	&:hover {
-		border: 5.9px solid var(--tq-blue-02);
-		background: var(--tq-blue-03);
-	}
-	& > img {
-		position: absolute;
-		transition: transform 150ms ease-out, opacity 200ms;
-		opacity: 0;
-		width: 33px;
-	}
-	&:hover > img {
-		transform: translateX(0);
-		opacity: 1;
-	}
-	& > span {
-		display: block;
-		transition: transform 150ms ease-out;
-	}
-	&:hover > span {
-		transform: translateX(230px);
+export const btnCopyLinkCustomStyle = css<{ showCopiedLinkMsg?: boolean }>`
+	& {
+		box-shadow: 0px 6.4px var(--tq-blue-00);
+		background: var(--tq-blue-02);
+		border: 5.9px solid var(--tq-blue-01);
+		color: var(--tq-blue-00);
+		border-radius: 9999px;
+		min-width: ${(props) => (props.showCopiedLinkMsg ? '300px' : '250px')};
+		min-height: 50px;
+		font-size: 22.5px;
+		margin-bottom: 10px;
+		& > img {
+			width: 33px !important;
+		}
 	}
 `;

@@ -4,7 +4,7 @@ import { useSelector, RootStateOrAny } from 'react-redux';
 import { InitContext } from '../../global/context/InitContext';
 import Slider from 'components/link/Slider';
 import Modal from 'components/link/Modal';
-import copy from 'assets/images/icons/icons-inbox/icon-link.svg';
+import clipboardIcon from 'assets/images/icons/icons-inbox/icon-link.svg';
 import tqIcon from 'assets/images/msg/profile-tq.png';
 import {
 	Container,
@@ -12,8 +12,8 @@ import {
 	Column,
 	UserLinkInput,
 	BtnHelp,
-	BtnCopyLink,
-	btnCustomStyle
+	btnCustomStyle,
+	btnCopyLinkCustomStyle
 } from './UserLink.style';
 import Button from 'shared/button/Button';
 
@@ -40,17 +40,16 @@ export default function UserLink() {
 	}, [showPlaceholder]);
 
 	useEffect(() => {
-		(async () => {
-			if (user) {
-				await setName(user.enteredname);
-			}
-		})();
+		setName(user.enteredname || '');
 	}, [user]);
 
 	const copyLink = async () => {
-		await setLink(`${window.location.origin}/${name}`);
-		inputLink.current!.select();
-		inputLink.current!.setSelectionRange(0, 99);
+		const link = `${window.location.origin}/${name}`;
+		const { current: inputLinkCurr } = inputLink;
+		setLink(link);
+		inputLinkCurr!.value = link;
+		inputLinkCurr!.select();
+		inputLinkCurr!.setSelectionRange(0, 99);
 		document.execCommand('copy');
 		setShowCopiedLinkMsg(true);
 		setTimeout(() => setShowCopiedLinkMsg(false), 7000);
@@ -62,16 +61,24 @@ export default function UserLink() {
 			<InnerContainer>
 				<Column margin="0 0 15px 0">
 					<div>
-						<BtnCopyLink type="button" ref={btnLink} onClick={copyLink}>
+						<Button
+							group="secondary"
+							hoverMode={showCopiedLinkMsg ? 'color' : 'translate'}
+							type="button"
+							ref={btnLink}
+							onClick={copyLink}
+							customStyle={btnCopyLinkCustomStyle}
+							showCopiedLinkMsg={showCopiedLinkMsg}
+						>
 							{showCopiedLinkMsg ? (
 								<>{lang['BtnLinkCopiedToClipboard']}</>
 							) : (
 								<>
 									<span> {lang['BtnCopyLink']} </span>
-									<img src={copy} alt="copy" />
+									<img src={clipboardIcon} alt="clipboardIcon" />
 								</>
 							)}
-						</BtnCopyLink>
+						</Button>
 						<BtnHelp onClick={() => setShowModal(true)} isVisible={!showModal}>
 							?
 						</BtnHelp>

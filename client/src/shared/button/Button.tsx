@@ -27,7 +27,7 @@ const useCombinedRefs = (...refs: any[]): any => {
 export default React.forwardRef<
 	HTMLButtonElement,
 	React.ButtonHTMLAttributes<HTMLButtonElement> &
-		PropsType & { as?: undefined; forwardedAs?: undefined }
+		PropsType & { as?: undefined; forwardedAs?: undefined; [key: string]: any }
 >((props, ref) => {
 	const btnRef = useRef<HTMLButtonElement>(null);
 	const combinedRef = useCombinedRefs(ref, btnRef);
