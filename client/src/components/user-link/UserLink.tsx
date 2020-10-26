@@ -68,7 +68,7 @@ export default function UserLink() {
 							ref={btnLink}
 							onClick={copyLink}
 							customStyle={btnCopyLinkCustomStyle}
-							showCopiedLinkMsg={showCopiedLinkMsg}
+							customStyleProps={{ showCopiedLinkMsg }}
 						>
 							{showCopiedLinkMsg ? (
 								<>{lang['BtnLinkCopiedToClipboard']}</>

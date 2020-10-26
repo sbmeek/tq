@@ -1,10 +1,5 @@
-import React, {
-	ButtonHTMLAttributes,
-	useEffect,
-	useRef,
-	useState
-} from 'react';
-import { Button, PropsType } from './Button.style';
+import React, { useEffect, useRef, useState } from 'react';
+import { Button, IProps } from './Button.style';
 
 const useCombinedRefs = (...refs: any[]): any => {
 	const targetRef = React.useRef();
@@ -27,11 +22,26 @@ const useCombinedRefs = (...refs: any[]): any => {
 export default React.forwardRef<
 	HTMLButtonElement,
 	React.ButtonHTMLAttributes<HTMLButtonElement> &
-		PropsType & { as?: undefined; forwardedAs?: undefined; [key: string]: any }
+		IProps & { as?: undefined; forwardedAs?: undefined }
 >((props, ref) => {
 	const btnRef = useRef<HTMLButtonElement>(null);
 	const combinedRef = useCombinedRefs(ref, btnRef);
 	const [width, setWidth] = useState(0);
+	const [customStyleProps, setCustomStyleProps] = useState<{
+		[key: string]: any;
+	}>({});
+
+	useEffect(() => {
+		if (props.customStyleProps) {
+			const customProps = props.customStyleProps;
+			for (let p in customProps) {
+				setCustomStyleProps((oldState) => ({
+					...oldState,
+					[p]: customProps[p]
+				}));
+			}
+		}
+	}, [props.customStyleProps]);
 
 	useEffect(() => {
 		if (props.hoverMode === 'translate') {
@@ -50,7 +60,7 @@ export default React.forwardRef<
 	});
 
 	return (
-		<Button width={width} ref={combinedRef} {...props}>
+		<Button width={width} ref={combinedRef} {...customStyleProps} {...props}>
 			{props.children}
 		</Button>
 	);

@@ -5,16 +5,17 @@ import styled, {
 	ThemedStyledProps
 } from 'styled-components';
 
-export type PropsType = {
+export interface IProps extends React.HTMLProps<HTMLButtonElement> {
 	group: 'primary' | 'secondary';
 	hoverMode: 'translate' | 'color';
 	width?: number | string;
 	customStyle?:
 		| FlattenSimpleInterpolation
 		| FlattenInterpolation<ThemedStyledProps<{ [key: string]: any }, any>>;
-} & React.HTMLProps<HTMLButtonElement>;
+	customStyleProps?: { [key: string]: any };
+}
 
-export const Button = styled.button<PropsType>`
+export const Button = styled.button<IProps>`
 	display: flex;
 	align-items: center;
 	justify-content: center;
