@@ -40,7 +40,9 @@ export default function ShareOrSaveModal<
             showShareOrSaveModal: false
         });
     }
-
+	const handleBtnCancelClick = () => {
+		setShowShareOrSaveModal(false);
+	};
 	return (
         <div 
             styleName="overlay"
@@ -79,7 +81,7 @@ export default function ShareOrSaveModal<
 					<h3>save</h3>
 					<img src={descargar} alt="on-save"/>
 				</button>
-				<button styleName="close">
+				<button styleName="close"onMouseDown={handleBtnCancelClick} >
 					<span>close</span>
 					<span>X</span>
 					</button>
