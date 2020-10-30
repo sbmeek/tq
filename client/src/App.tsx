@@ -1,7 +1,7 @@
 import React, { useEffect, useContext, lazy } from 'react';
 import { useSelector, RootStateOrAny } from 'react-redux';
 import { InitContext } from 'global/context/InitContext';
-import AuthTester from 'pages/authInTestMode/AuthInTestMode';
+import AuthInPrivateMode from 'pages/authInPrivateMode/AuthInPrivateMode';
 import Routes from './Routes';
 
 const Error500 = lazy(() => import('components/error/500'));
@@ -15,7 +15,7 @@ export default function App() {
 		(store: RootStateOrAny) => store.auth
 	);
 	let { socket, isTester } = useContext(InitContext).state;
-	const testing = process.env.NODE_ENV === 'production';
+	const PRIVATE_MODE = process.env.NODE_ENV === 'production';
 
 	useEffect(() => {
 		if (user !== undefined)
@@ -27,10 +27,10 @@ export default function App() {
 			hideLoader();
 			return (
 				<>
-					{!testing ? (
+					{!PRIVATE_MODE ? (
 						<Routes />
 					) : !isTester ? (
-						<AuthTester />
+						<AuthInPrivateMode />
 					) : (
 						<Routes />
 					)}

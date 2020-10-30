@@ -2,7 +2,7 @@ import React, { createContext, useReducer, useEffect, ReactNode } from 'react';
 import io from 'socket.io-client';
 import en from '../../lang/en';
 import es from '../../lang/es';
-import { checkTst } from 'pages/authInTestMode/AuthInTestMode';
+import { checkTst } from 'pages/authInPrivateMode/AuthInPrivateMode';
 
 interface IContextState {
 	socket: SocketIOClientStatic['Socket'];
@@ -18,13 +18,13 @@ interface IContextAction {
 const initialState: IContextState = {
 	socket: io(),
 	lang: en,
-	isTester: false,
+	isTester: false
 };
 
 export enum ActionEnum {
 	SET_LANG = 'SET_LANG',
 	SET_SOCKET = 'SET_SOCKET',
-	SET_IS_TESTER = 'SET_IS_TESTER',
+	SET_IS_TESTER = 'SET_IS_TESTER'
 }
 
 export const InitContext = createContext<any>({ state: initialState });
@@ -34,17 +34,17 @@ function reducer(state: IContextState, action: IContextAction) {
 		case ActionEnum.SET_SOCKET:
 			return {
 				...state,
-				socket: action.payload.socket,
+				socket: action.payload.socket
 			};
 		case ActionEnum.SET_LANG:
 			return {
 				...state,
-				lang: action.payload.lang,
+				lang: action.payload.lang
 			};
 		case ActionEnum.SET_IS_TESTER:
 			return {
 				...state,
-				isTester: action.payload.isTester,
+				isTester: action.payload.isTester
 			};
 		default:
 			return state;
@@ -68,7 +68,7 @@ export default function <T extends { children: ReactNode }>({ children }: T) {
 	useEffect(() => {
 		dispatch({
 			type: ActionEnum.SET_LANG,
-			payload: { lang: gsetLang() },
+			payload: { lang: gsetLang() }
 		});
 	}, []);
 
@@ -76,7 +76,7 @@ export default function <T extends { children: ReactNode }>({ children }: T) {
 		(async () => {
 			dispatch({
 				type: ActionEnum.SET_IS_TESTER,
-				payload: { isTester: await checkTst('tq:init-user') },
+				payload: { isTester: await checkTst('tq:init-user') }
 			});
 		})();
 	}, []);
@@ -85,7 +85,7 @@ export default function <T extends { children: ReactNode }>({ children }: T) {
 		<InitContext.Provider
 			value={{
 				state,
-				dispatch,
+				dispatch
 			}}
 		>
 			{children}

@@ -4,7 +4,14 @@ import { LoaderEye } from 'components/loader/Loader';
 import Axios from 'axios';
 import { InitContext, ActionEnum } from 'global/context/InitContext';
 
-import styles from './AuthInTestMode.css';
+import {
+	Container,
+	ContainerEyeLoader,
+	FieldContainer,
+	Form,
+	KeyField,
+	Logo
+} from './AuthInPrivateMode.style';
 
 let timerID: number;
 
@@ -17,6 +24,7 @@ export const checkTst = async (val: string | 'tq_check_tst_init') => {
 
 export default function ValdTester() {
 	const [isLoading, setIsLoading] = useState(false);
+	const [isErrored, setIsErrored] = useState(false);
 	const { dispatch } = useContext(InitContext);
 
 	useEffect(() => {
@@ -38,7 +46,7 @@ export default function ValdTester() {
 				setTimeout(async () => {
 					const isTester = await checkTst(targetElement.value);
 					if (!isTester) {
-						targetElement.parentElement!.classList.add(styles['errored']);
+						setIsErrored(true);
 						dispatch({
 							type: ActionEnum.SET_IS_TESTER,
 							payload: { isTester: false }
@@ -56,26 +64,25 @@ export default function ValdTester() {
 	};
 
 	return (
-		<div styleName="container">
-			<form styleName="form" onSubmit={(e) => e.preventDefault()}>
-				<img styleName="logo" src={logo} alt="tq" draggable="false" />
-				<p>TQ se encuentra en modo test. Digite su código.</p>
-				<div>
-					<input
+		<Container>
+			<Form onSubmit={(e) => e.preventDefault()}>
+				<Logo src={logo} alt="tq" draggable="false" />
+				<p>This is a TQ private version. Enter your access code.</p>
+				<FieldContainer isErrored={isErrored}>
+					<KeyField
 						onChange={handleKeyChange}
-						styleName="key-field"
 						type="text"
 						autoFocus
 						spellCheck="false"
 						autoComplete="off"
 					/>
 					{isLoading && (
-						<div styleName="container-eye-loader">
+						<ContainerEyeLoader>
 							<LoaderEye size={'3%'} />
-						</div>
+						</ContainerEyeLoader>
 					)}
-				</div>
-			</form>
-		</div>
+				</FieldContainer>
+			</Form>
+		</Container>
 	);
 }
