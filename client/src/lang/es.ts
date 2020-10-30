@@ -8,6 +8,9 @@ export default {
 		AlertUserExpired: 'Este usuario ha expirado',
 		AlertUserNotAvailable: 'Este usuario no está disponible'
 	},
+	AuthInPrivateMode: {
+		Msg: 'Esta es una versión privada de TQ. Introduzca su código de acceso.'
+	},
 	Link: {
 		BtnCopyLink: 'Copia tu link aquí',
 		BtnInbox: 'Bandeja',

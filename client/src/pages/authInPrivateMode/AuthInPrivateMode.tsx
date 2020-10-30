@@ -25,7 +25,8 @@ export const checkTst = async (val: string | 'tq_check_tst_init') => {
 export default function ValdTester() {
 	const [isLoading, setIsLoading] = useState(false);
 	const [isErrored, setIsErrored] = useState(false);
-	const { dispatch } = useContext(InitContext);
+	const { state, dispatch } = useContext(InitContext);
+	const lang = state.lang.AuthInPrivateMode;
 
 	useEffect(() => {
 		(async () => {
@@ -67,7 +68,7 @@ export default function ValdTester() {
 		<Container>
 			<Form onSubmit={(e) => e.preventDefault()}>
 				<Logo src={logo} alt="tq" draggable="false" />
-				<p>This is a TQ private version. Enter your access code.</p>
+				<p>{lang['Msg']}</p>
 				<FieldContainer isErrored={isErrored}>
 					<KeyField
 						onChange={handleKeyChange}
