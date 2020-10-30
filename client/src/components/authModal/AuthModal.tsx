@@ -13,11 +13,10 @@ import { getAuthInfoAction } from 'global/ducks/authDucks';
 import Registered from './registered/Registered';
 
 import {
-	Container,
-	InnerContainer,
-	Overlay,
+	containerCustomStyles,
+	overlayCustomStyles,
+	Content,
 	Title,
-	Wrapper,
 	Toggler,
 	FormWrapper,
 	FormInnerWrapper,
@@ -26,6 +25,7 @@ import {
 	ButtonOAuth,
 	TogglerContainer
 } from './AuthModal.style';
+import Modal from 'shared/modal/Modal';
 
 export default function AuthModal<
 	T extends {
@@ -44,7 +44,9 @@ export default function AuthModal<
 
 	const dispatch = useDispatch();
 
-	const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
+	const handleOverlayClick = (
+		e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>
+	) => {
 		const targetElement = e.target as HTMLDivElement;
 		if (targetElement.id === 'overlay' && !isMobile) setOpened(!opened);
 	};
@@ -96,139 +98,131 @@ export default function AuthModal<
 		<>
 			{opened && (
 				<>
-					<Overlay
-						onClick={handleOverlayClick}
-						id="overlay"
+					<Modal
+						customOverlay={{ customStyles: overlayCustomStyles }}
+						customContainer={{
+							props: { showLogin },
+							customStyles: containerCustomStyles
+						}}
+						onOverlayMouseDownOrTouch={handleOverlayClick}
 						isActive={opened}
-					/>
-					<Wrapper>
-						<Container
-							isActive={opened}
-							aria-labelledby={
-								showLogin ? 'login-container' : 'signup-container'
-							}
-							showLogin={showLogin}
-						>
-							{!showRegisteredComp ? (
-								<InnerContainer
-									onAnimationEnd={() => setToggleContentMobileAnim(false)}
-									toggleContentAnim={toggleContentMobileAnim}
+					>
+						{!showRegisteredComp ? (
+							<Content
+								onAnimationEnd={() => setToggleContentMobileAnim(false)}
+								toggleContentAnim={toggleContentMobileAnim}
+							>
+								<Title
+									aria-labelledby={showLogin ? 'login-title' : 'signup-title'}
 								>
-									<Title
-										aria-labelledby={showLogin ? 'login-title' : 'signup-title'}
-									>
-										{showLogin ? (
-											lang['FormLoginTitle']
-										) : (
-											<>
-												{!isMobile
-													? lang['FormSignupTitle']
-													: lang['FormSignupFooterToggler']}
-												<small>{lang['FormSignupSubtitle']}</small>
-											</>
-										)}
-									</Title>
-									<FormWrapper>
-										{showLogin ? (
-											<Login
-												errMsg={errMsg}
-												setErrMsg={setErrMsg}
-												setIsModalOpened={setOpened}
-												setShowMenu={setShowMenu}
-											/>
-										) : (
-											<Signup
-												setOpened={setOpened}
-												setShowRegisteredComp={setShowRegisteredComp}
-												setShowLogin={setShowLogin}
-											/>
-										)}
-										<FormInnerWrapper>
-											<Separator>
-												<hr />
-												<span>Or</span>
-												<hr />
-											</Separator>
-											<BtnOAuthContainer>
-												<GoogleLogin
-													clientId={process.env.REACT_APP_G_CLIENT_ID as string}
-													render={(renderProps) => (
-														<ButtonOAuth
-															onClick={renderProps.onClick}
-															disabled={renderProps.disabled}
-															googleBtn
-														>
-															<img src={googleLogo} alt="google logo" />
-															<span>
-																<hr></hr>
+									{showLogin ? (
+										lang['FormLoginTitle']
+									) : (
+										<>
+											{!isMobile
+												? lang['FormSignupTitle']
+												: lang['FormSignupFooterToggler']}
+											<small>{lang['FormSignupSubtitle']}</small>
+										</>
+									)}
+								</Title>
+								<FormWrapper>
+									{showLogin ? (
+										<Login
+											errMsg={errMsg}
+											setErrMsg={setErrMsg}
+											setIsModalOpened={setOpened}
+											setShowMenu={setShowMenu}
+										/>
+									) : (
+										<Signup
+											setOpened={setOpened}
+											setShowRegisteredComp={setShowRegisteredComp}
+											setShowLogin={setShowLogin}
+										/>
+									)}
+									<FormInnerWrapper>
+										<Separator>
+											<hr />
+											<span>Or</span>
+											<hr />
+										</Separator>
+										<BtnOAuthContainer>
+											<GoogleLogin
+												clientId={process.env.REACT_APP_G_CLIENT_ID as string}
+												render={(renderProps) => (
+													<ButtonOAuth
+														onClick={renderProps.onClick}
+														disabled={renderProps.disabled}
+														googleBtn
+													>
+														<img src={googleLogo} alt="google logo" />
+														<span>
+															<hr></hr>
 
-																{showLogin
-																	? lang['LoginWith'].replace(
-																			'{OAuth}',
-																			'Google'
-																	  )
-																	: lang['SignupWith'].replace(
-																			'{OAuth}',
-																			'Google'
-																	  )}
-															</span>
-														</ButtonOAuth>
-													)}
-													onSuccess={(res) =>
-														handleGoogleAuth(res as GoogleLoginResponse)
-													}
-													onFailure={handleGoogleAuth}
-												/>
-												<FacebookLogin
-													appId={process.env.REACT_APP_F_APP_ID as string}
-													callback={handleFacebookAuth}
-													autoLoad={false}
-													fields="id,name,email"
-													render={(renderProps: any) => (
-														<ButtonOAuth
-															onClick={renderProps.onClick}
-															disabled={renderProps.isDisabled}
-															fbBtn
-														>
-															<img src={facebookLogo} alt="facebook logo" />
-															<span>
-																<hr></hr>
-																{showLogin
-																	? lang['LoginWith'].replace(
-																			'{OAuth}',
-																			'Facebook'
-																	  )
-																	: lang['SignupWith'].replace(
-																			'{OAuth}',
-																			'Facebook'
-																	  )}
-															</span>
-														</ButtonOAuth>
-													)}
-												></FacebookLogin>
-											</BtnOAuthContainer>
-										</FormInnerWrapper>
-									</FormWrapper>
-									<TogglerContainer isMobile={isMobile} showLogin={showLogin}>
+															{showLogin
+																? lang['LoginWith'].replace('{OAuth}', 'Google')
+																: lang['SignupWith'].replace(
+																		'{OAuth}',
+																		'Google'
+																  )}
+														</span>
+													</ButtonOAuth>
+												)}
+												onSuccess={(res) =>
+													handleGoogleAuth(res as GoogleLoginResponse)
+												}
+												onFailure={handleGoogleAuth}
+											/>
+											<FacebookLogin
+												appId={process.env.REACT_APP_F_APP_ID as string}
+												callback={handleFacebookAuth}
+												autoLoad={false}
+												fields="id,name,email"
+												render={(renderProps: any) => (
+													<ButtonOAuth
+														onClick={renderProps.onClick}
+														disabled={renderProps.isDisabled}
+														fbBtn
+													>
+														<img src={facebookLogo} alt="facebook logo" />
+														<span>
+															<hr></hr>
+															{showLogin
+																? lang['LoginWith'].replace(
+																		'{OAuth}',
+																		'Facebook'
+																  )
+																: lang['SignupWith'].replace(
+																		'{OAuth}',
+																		'Facebook'
+																  )}
+														</span>
+													</ButtonOAuth>
+												)}
+											></FacebookLogin>
+										</BtnOAuthContainer>
+									</FormInnerWrapper>
+								</FormWrapper>
+								<TogglerContainer isMobile={isMobile} showLogin={showLogin}>
+									{showLogin
+										? lang['FormLoginFooter']
+										: lang['FormSignupFooter']}
+									{'   '}
+									<Toggler onClick={handleTogglerClick}>
 										{showLogin
-											? lang['FormLoginFooter']
-											: lang['FormSignupFooter']}
-										{'   '}
-										<Toggler onClick={handleTogglerClick}>
-											{showLogin
-												? lang['FormSignupFooterToggler']
-												: lang['FormLoginFooterToggler']}
-										</Toggler>
-									</TogglerContainer>
-								</InnerContainer>
-							) : (
-								<Registered
-									setShowRegisteredComp={setShowRegisteredComp}
-									setShowLogin={setShowLogin}
-								/>
-							)}
-						</Container>
-					</Wrapper>
+											? lang['FormSignupFooterToggler']
+											: lang['FormLoginFooterToggler']}
+									</Toggler>
+								</TogglerContainer>
+							</Content>
+						) : (
+							<Registered
+								setShowRegisteredComp={setShowRegisteredComp}
+								setShowLogin={setShowLogin}
+							/>
+						)}
+					</Modal>
 				</>
 			)}
 		</>

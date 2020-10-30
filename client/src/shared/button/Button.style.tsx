@@ -1,17 +1,10 @@
-import styled, {
-	css,
-	FlattenInterpolation,
-	FlattenSimpleInterpolation,
-	ThemedStyledProps
-} from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export interface IProps extends React.HTMLProps<HTMLButtonElement> {
 	group: 'primary' | 'secondary';
 	hoverMode: 'translate' | 'color';
 	width?: number | string;
-	customStyle?:
-		| FlattenSimpleInterpolation
-		| FlattenInterpolation<ThemedStyledProps<{ [key: string]: any }, any>>;
+	customStyle?: CustomStyles;
 	customStyleProps?: { [key: string]: any };
 }
 

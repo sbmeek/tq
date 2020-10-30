@@ -1,113 +1,42 @@
 import { linkStyles } from 'shared/link/Link.style';
 import styled, { css, keyframes } from 'styled-components';
 
-type ActiveType = {
-	isActive: boolean;
-};
-
 const flexCenter = css`
-	display: flex;
-	align-items: center;
-	justify-content: center;
-`;
-
-const enableOverlay = keyframes`
-	0% {
-		opacity: 0;
-	}
-	100% {
-		opacity: 1;
+	& {
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 `;
 
-export const Overlay = styled.div<ActiveType>`
-	${flexCenter}
-	position: fixed;
-	top: 0;
-	left: 0;
-	${(props) =>
-		props.isActive
-			? css`
-					 {
-						z-index: 34;
-						opacity: 1;
-						height: 100%;
-						animation: ${enableOverlay} 300ms;
-					}
-			  `
-			: css`
-					 {
-						z-index: -34;
-						opacity: 0;
-						height: 0;
-					}
-			  `}
-	width: 100vw;
-	background: rgba(0, 0, 0, 0.8);
-	@media (max-width: 600px) {
-		background: rgba(255, 255, 255, 0.94);
-	}
-`;
-
-export const Wrapper = styled.div`
-	height: 100%;
-	width: 100vw;
-	${flexCenter}
-	position: fixed;
-	top: 0;
-	left: 0;
-	z-index: 35;
-	pointer-events: none;
-`;
-
-const enlarge = keyframes`
-0% {
-		transform: scale(0);
-	}
-	100% {
-		transform: scale(1.02);
-	}
-`;
-
-export const Container = styled.div<ActiveType & { showLogin: boolean }>`
-	display: flex;
-	flex-direction: column;
-	background: #fff;
-	width: 600px;
-	height: ${(props) => (props.showLogin ? '376px' : '556px')};
-	color: #1b1b1b;
-	border-radius: 20px;
-	padding: 20px 40px 0 40px;
-	overflow: hidden;
-	transition: height 250ms;
-	z-index: 35;
-	pointer-events: all;
-	${(props) =>
-		props.isActive
-			? css`
-					 {
-						justify-content: unset;
-						align-items: center;
-						transform: scale(1);
-						animation: ${enlarge} 150ms;
-					}
-			  `
-			: ''}
-	@media (max-width: 600px) {
-		width: 100%;
-		height: 100% !important;
-		border-radius: 0;
-		padding: 20px;
-		overflow: auto;
-		pointer-events: all;
-		position: relative;
-		background-color: transparent;
-		&[aria-labelledby='login-container'] {
-			justify-content: center !important;
+export const overlayCustomStyles = css`
+	& {
+		@media (max-width: 600px) {
+			background: rgba(255, 255, 255, 0.94);
 		}
 	}
-	@media (max-width: 296px) {
-		padding: 1px;
+`;
+
+export const containerCustomStyles = css<{ showLogin: boolean }>`
+	& {
+		height: ${(props) => (props.showLogin ? '376px' : '556px')};
+		transition: height 250ms;
+		@media (max-width: 600px) {
+			width: 100%;
+			height: 100% !important;
+			border-radius: 0;
+			padding: 20px;
+			overflow: auto;
+			pointer-events: all;
+			position: relative;
+			background-color: transparent;
+			&[aria-labelledby='login-container'] {
+				justify-content: center !important;
+			}
+		}
+		@media (max-width: 296px) {
+			padding: 1px;
+		}
 	}
 `;
 
@@ -123,7 +52,7 @@ const contentChange = keyframes`
 	}
 `;
 
-export const InnerContainer = styled.div<{ toggleContentAnim: boolean }>`
+export const Content = styled.div<{ toggleContentAnim: boolean }>`
 	${flexCenter}
 	flex-direction: column;
 	transition: transform 150ms;

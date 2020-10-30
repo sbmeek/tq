@@ -1,17 +1,17 @@
 .loading {
-    opacity: 0;
+	opacity: 0;
 }
 
 .preloader {
-    display: flex;
-    justify-content: center;
-    height: 0;
-    padding-bottom: 57%;
-    width: 100%;
-    position: relative;
-    opacity: 1;
-    transition: opacity 250ms;
-    max-height: 333px;
+	display: flex;
+	justify-content: center;
+	height: 0;
+	padding-bottom: 57%;
+	width: 100%;
+	position: relative;
+	opacity: 1;
+	transition: opacity 250ms;
+	max-height: 333px;
 }
 
 .img-placeholder {

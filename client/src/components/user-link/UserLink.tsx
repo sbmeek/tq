@@ -2,8 +2,8 @@ import React, { useRef, useEffect, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, RootStateOrAny } from 'react-redux';
 import { InitContext } from '../../global/context/InitContext';
-import Slider from 'components/link/Slider';
-import Modal from 'components/link/Modal';
+import Slider from './slider/Slider';
+import Dialog from './dialog/Dialog';
 import clipboardIcon from 'assets/images/icons/icons-inbox/icon-link.svg';
 import tqIcon from 'assets/images/msg/profile-tq.png';
 import {
@@ -24,7 +24,7 @@ export default function UserLink() {
 	const [link, setLink] = useState('');
 	const [showPlaceholder, setShowPlaceholder] = useState(false);
 	const [showCopiedLinkMsg, setShowCopiedLinkMsg] = useState(false);
-	const [showModal, setShowModal] = useState(false);
+	const [showHelpDialog, setShowHelpDialog] = useState(false);
 	const btnLink = useRef(null);
 
 	const {
@@ -79,13 +79,16 @@ export default function UserLink() {
 								</>
 							)}
 						</Button>
-						<BtnHelp onClick={() => setShowModal(true)} isVisible={!showModal}>
+						<BtnHelp
+							onClick={() => setShowHelpDialog(true)}
+							isVisible={!showHelpDialog}
+						>
 							?
 						</BtnHelp>
-						<Modal
+						<Dialog
 							modalTxt={`${lang['AlertLinkCopied']}.`}
-							showModal={showModal}
-							setShowModal={setShowModal}
+							showModal={showHelpDialog}
+							setShowModal={setShowHelpDialog}
 						/>
 					</div>
 					<UserLinkInput
