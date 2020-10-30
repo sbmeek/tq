@@ -1,48 +1,6 @@
-.loading {
-	opacity: 0;
-}
+import styled, { css } from 'styled-components';
 
-.preloader {
-	display: flex;
-	justify-content: center;
-	height: 0;
-	padding-bottom: 57%;
-	width: 100%;
-	position: relative;
-	opacity: 1;
-	transition: opacity 250ms;
-	max-height: 333px;
-}
-
-.img-placeholder {
-	filter: blur(10px);
-	opacity: 1;
-	width: 100%;
-	display: block;
-	position: absolute;
-	transition: opacity 400ms;
-}
-
-.preloader.disabled > .img-placeholder {
-	opacity: 0;
-}
-
-.imgFt1,
-img.img-placeholder ~ img {
-	min-height: 333px;
-}
-
-@media only screen and (max-width: 593px) {
-	.preloader.mobilePlaceholder {
-		padding-bottom: 0 !important;
-		height: 100% !important;
-	}
-	.imgFt1 {
-		min-height: 100% !important;
-	}
-}
-
-:global {
+const carouselStyles = css`
 	.carousel .control-arrow,
 	.carousel .carousel-slider .control-arrow {
 		-webkit-transition: all 0.25s ease-in;
@@ -358,4 +316,54 @@ img.img-placeholder ~ img {
 	.carousel:hover .slide .legend {
 		opacity: 1;
 	}
-}
+`;
+
+export const Container = styled.div`
+	${carouselStyles}
+`;
+
+export const Preloader = styled.div<{ placeholderLoaded: boolean }>`
+	display: flex;
+	justify-content: center;
+	height: 0;
+	padding-bottom: 57%;
+	width: 100%;
+	position: relative;
+	opacity: ${(props) => (props.placeholderLoaded ? '1' : '0')};
+	transition: opacity 250ms;
+	max-height: 333px;
+	@media (max-width: 593px) {
+		${(props) =>
+			props.placeholderLoaded
+				? css`
+						& {
+							padding-bottom: 0 !important;
+							height: 100% !important;
+						}
+				  `
+				: ''}
+	}
+`;
+
+type ImgPlaceholderPropsType = {
+	imagesLoaded: boolean;
+	placeholderLoaded: boolean;
+};
+
+export const ImgPlaceholder = styled.img<ImgPlaceholderPropsType>`
+	filter: blur(10px);
+	opacity: ${(props) =>
+		props.imagesLoaded && props.placeholderLoaded ? 0 : 1};
+	width: 100%;
+	display: block;
+	position: absolute;
+	transition: opacity 400ms;
+`;
+
+export const Img = styled.img<{ isLoading: boolean }>`
+	min-height: 333px;
+	opacity: ${(props) => (props.isLoading ? '0' : '1')};
+	@media (max-width: 593px) {
+		min-height: 100%;
+	}
+`;
