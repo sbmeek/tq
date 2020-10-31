@@ -1,97 +1,91 @@
-import React, { useState, useContext, MouseEvent, useEffect } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
-import styles from './Inbox.css'
-import icon from 'assets/images/icon.png'
-import { InitContext } from 'global/context/InitContext'
-import parse from 'html-react-parser'
-import SimpleBar from 'simplebar-react'
-import ShareOrSaveModal from 'components/shareOrSaveModal/ShareOrSaveModal'
-import report from 'assets/images/icons/icons-inbox/icon-report.png'
-import delet from 'assets/images/icons/icons-inbox/icon-delete.png'
-import { useSelector, useDispatch, RootStateOrAny } from 'react-redux'
-import { setUserMessagesAction } from '../../global/ducks/authDucks'
+import React, { useState, useContext, MouseEvent, useEffect } from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
+import styles from './Inbox.css';
+import icon from 'assets/images/icon.png';
+import { InitContext } from 'global/context/InitContext';
+import parse from 'html-react-parser';
+import SimpleBar from 'simplebar-react';
+import ShareOrSaveModal from 'components/shareOrSaveModal/ShareOrSaveModal';
+import report from 'assets/images/icons/icons-inbox/icon-report.png';
+import delet from 'assets/images/icons/icons-inbox/icon-delete.png';
+import { useSelector, RootStateOrAny } from 'react-redux';
 
 export default function () {
-	const { user: { messages } } = useSelector((store: RootStateOrAny) => store.auth)
-	const dispatch = useDispatch()
 	const {
-		state: { socket },
-	} = useContext(InitContext)
-	const [msgsList, setMsgsList] = useState([])
-	const [answeredMsgs, setAnsweredMsgs] = useState([])
+		user: { messages }
+	} = useSelector((store: RootStateOrAny) => store.auth);
+	const [msgsList, setMsgsList] = useState([]);
+	const [answeredMsgs, setAnsweredMsgs] = useState([]);
 
 	useEffect(() => {
-		socket.on('msg:new', (data: ITQMessage[]) => {
-			dispatch(setUserMessagesAction(data))
-		})
-	}, [socket, dispatch])
+		let _msgList = messages.filter((e: ITQMessage) => undefined === e.answer);
+		setMsgsList(_msgList);
+		_msgList = messages.filter((e: ITQMessage) => undefined !== e.answer);
+		setAnsweredMsgs(_msgList);
+	}, [messages]);
 
-	useEffect(() => {
-		let _msgList = messages.filter((e: ITQMessage) => undefined === e.answer)
-		setMsgsList(_msgList)
-		_msgList = messages.filter((e: ITQMessage) => undefined !== e.answer)
-		setAnsweredMsgs(_msgList)
-	}, [messages])
-
-	return <Inbox messages={msgsList} answeredMsgs={answeredMsgs} />
+	return <Inbox messages={msgsList} answeredMsgs={answeredMsgs} />;
 }
 
 const Inbox = <
 	T extends {
-		messages: ITQMessage[]
-		answeredMsgs: ITQMessage[]
+		messages: ITQMessage[];
+		answeredMsgs: ITQMessage[];
 	}
->({ messages, answeredMsgs }: T) => {
-	const [actualTab, setActualTab] = useState('msg')
-	const [showShareOrSaveModal, setShowShareOrSaveModal] = useState(false)
-	const history = useHistory()
-	const location = useLocation()
+>({
+	messages,
+	answeredMsgs
+}: T) => {
+	const [actualTab, setActualTab] = useState('msg');
+	const [showShareOrSaveModal, setShowShareOrSaveModal] = useState(false);
+	const history = useHistory();
+	const location = useLocation();
 	const {
 		state: {
-			lang: { Inbox: lang },
-		},
-	} = useContext(InitContext)
-	let openedMsgElement: HTMLDivElement
+			lang: { Inbox: lang }
+		}
+	} = useContext(InitContext);
+	let openedMsgElement: HTMLDivElement;
 
 	useEffect(() => {
-		let locationState = location.state as any
+		let locationState = location.state as any;
 		if (locationState === undefined) {
-			setShowShareOrSaveModal(false)
-			return
+			setShowShareOrSaveModal(false);
+			return;
 		}
-		setShowShareOrSaveModal(locationState['showShareOrSaveModal'])
-	}, [location.state])
+		setShowShareOrSaveModal(locationState['showShareOrSaveModal']);
+	}, [location.state]);
 
 	const handleTabClick = (e: MouseEvent<HTMLButtonElement>) => {
-		const targetElement = e.target as HTMLButtonElement
-		const { id } = targetElement
-		setActualTab(id === 'msg-tab' || id === '' ? 'msg' : 'ans')
-	}
+		const targetElement = e.target as HTMLButtonElement;
+		const { id } = targetElement;
+		setActualTab(id === 'msg-tab' || id === '' ? 'msg' : 'ans');
+	};
 
 	const handleMsgClick = (e: MouseEvent<HTMLDivElement>) => {
-		const targetElement = e.target as HTMLDivElement
+		const targetElement = e.target as HTMLDivElement;
 		if (targetElement.classList.contains(styles['opened'])) {
-			removeMsgOpenedStyle(targetElement)
+			removeMsgOpenedStyle(targetElement);
 		} else {
 			if (openedMsgElement !== undefined) {
-				removeMsgOpenedStyle(openedMsgElement)
+				removeMsgOpenedStyle(openedMsgElement);
 			}
-			targetElement.classList.add(styles['opened'])
+			targetElement.classList.add(styles['opened']);
 		}
-		openedMsgElement = targetElement
-	}
+		openedMsgElement = targetElement;
+	};
 
 	const handleAnswerMsgClick = (_e: MouseEvent, msgId: string) => {
-		const actualMsg = messages.filter((m) => m._id === msgId)[0]
+		const actualMsg = messages.filter((m) => m._id === msgId)[0];
 		history.push({
 			pathname: '/message',
-			state: { actualMsg },
-		})
-	}
+			state: { actualMsg }
+		});
+	};
 
 	const removeMsgOpenedStyle = (targetElement: HTMLDivElement) => {
-		targetElement.classList.remove(styles['opened'])
-	}
+		targetElement.classList.remove(styles['opened']);
+	};
 
 	return (
 		<div styleName="main-container">
@@ -142,7 +136,7 @@ const Inbox = <
 						id="ans-tab"
 						styleName={`ans-tab ${actualTab === 'ans' ? 'selected-tab' : ''}`}
 						style={{
-							display: answeredMsgs.length < 1 ? 'none' : 'flex',
+							display: answeredMsgs.length < 1 ? 'none' : 'flex'
 						}}
 						onClick={handleTabClick}
 					>
@@ -205,5 +199,5 @@ const Inbox = <
 				</div>
 			</div>
 		</div>
-	)
-}
+	);
+};
