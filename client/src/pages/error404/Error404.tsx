@@ -1,40 +1,51 @@
-import React from 'react'
-import logo from '../../assets/images/logo.png'
-import './Error404.css'
+import React from 'react';
+import Button from 'shared/button/Button';
+import logo from '../../assets/images/logo.png';
+import {
+	Container,
+	InnerContainer,
+	Main,
+	LogoImg,
+	InsideText,
+	Err4s,
+	FirstRowText,
+	SecondRowText,
+	btnCustomStyle,
+	LinkStyled
+} from './Error404.style';
 
-export default function Error404 () {
+export default function Error404() {
 	return (
-		<div styleName="main">
-			<div styleName="contenedor">
-				<div>
-					<img
-						styleName="logoCloud"
-						src={logo}
-						alt="logo"
-						draggable="false"
-					/>
-					<div styleName="insidetext">
+		<Main>
+			<Container>
+				<InnerContainer>
+					<LogoImg src={logo} alt="logo" draggable="false" />
+					<InsideText>
 						<h2>
-							Ooops... Error <span styleName="err4s">4</span>
+							Ooops... Error <Err4s>4</Err4s>
 							<span style={{ color: '#00909E' }}>0</span>
-							<span styleName="err4s">4</span>
+							<Err4s>4</Err4s>
 						</h2>
-						<span styleName="firstRowText">
+						<FirstRowText>
 							Lo sentimos. La p&aacute;gina que intentaste buscar no existe.
-						</span>
-						<span styleName="secondRowText">
+						</FirstRowText>
+						<SecondRowText>
 							Por favor verifique la direcci&oacute;n introducida e intentelo de
 							nuevo.
-						</span>
+						</SecondRowText>
 						<br />
-						<a href="/">
-							<button styleName="__btn-tq">
+						<LinkStyled to="/">
+							<Button
+								customStyle={btnCustomStyle}
+								hoverMode="color"
+								group="primary"
+							>
 								Inicio
-							</button>
-						</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	)
+							</Button>
+						</LinkStyled>
+					</InsideText>
+				</InnerContainer>
+			</Container>
+		</Main>
+	);
 }
