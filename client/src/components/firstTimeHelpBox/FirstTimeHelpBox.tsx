@@ -1,26 +1,21 @@
-import React, { useContext } from 'react'
-import styles from './FirstTimeHelpBox.css'
-import { InitContext } from 'global/context/InitContext'
+import React, { useContext } from 'react';
+import { InitContext } from 'global/context/InitContext';
+import { Container, Dialog } from './FirstTimeHelpBox.style';
 
 export default function FirstTimeModal<T extends { active: boolean }>({
-	active,
+	active
 }: T) {
-	const { Menu: lang } = useContext(InitContext).state.lang
+	const { Menu: lang } = useContext(InitContext).state.lang;
 
 	const transitionEndHandler = (e: React.TransitionEvent<HTMLDivElement>) => {
-        const targetElement = e.target as HTMLDivElement
-        if (!targetElement.classList.contains(styles['active']) && !active)
-			targetElement.remove();
-    }
+		console.log(e, 'transition end');
+	};
 
 	return (
-		<div
-			onTransitionEnd={transitionEndHandler}
-            styleName={`container ${active ? 'active' : ''}`}
-		>
-			<div styleName={`modal ${active ? 'active' : ''}`}>
+		<Container onTransitionEnd={transitionEndHandler} isActive={active}>
+			<Dialog isActive={active}>
 				<span>{lang['ModalForNewUsers']}</span>
-			</div>
-		</div>
-	)
+			</Dialog>
+		</Container>
+	);
 }
