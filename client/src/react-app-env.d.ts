@@ -1,29 +1,29 @@
 /// <reference types="react-scripts" />
-import {
-	FlattenInterpolation,
-	FlattenSimpleInterpolation,
-	ThemedStyledProps
-} from 'styled-components';
 
-declare global {
-	module '*.css';
-	module 'quill-emoji';
-	module 'react-facebook-login/dist/facebook-login-render-props';
+declare module 'react-facebook-login/dist/facebook-login-render-props';
+declare module '*.css';
+declare module 'quill-emoji';
 
-	interface ITQMessage {
-		sentAt: Date;
-		readed: boolean;
-		_id: string;
-		content: string;
-		answer?: string;
-	}
-
-	type CustomStyles =
-		| FlattenSimpleInterpolation
-		| FlattenInterpolation<
-				ThemedStyledProps<{ [key: string]: any | undefined }, any>
-		  >
-		| readonly Interpolation<
-				ThemedStyledProps<{ [key: string]: any | undefined }, any>
-		  >[];
+interface ITQMessage {
+	sentAt: Date;
+	readed: boolean;
+	_id: string;
+	content: string;
+	answer?: string;
 }
+
+type CustomStyles =
+	| any
+	| import('styled-components').FlattenSimpleInterpolation
+	| import('styled-components').FlattenInterpolation<
+			import('styled-components').ThemedStyledProps<
+				{ [key: string]: any | undefined },
+				any
+			>
+	  >
+	| readonly import('styled-components').Interpolation<
+			import('styled-components').ThemedStyledProps<
+				{ [key: string]: any | undefined },
+				any
+			>
+	  >[];
