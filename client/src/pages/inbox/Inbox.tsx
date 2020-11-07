@@ -1,14 +1,31 @@
 import React, { useState, useContext, MouseEvent, useEffect } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
-import styles from './Inbox.css';
 import icon from 'assets/images/icon.png';
 import { InitContext } from 'global/context/InitContext';
 import parse from 'html-react-parser';
-import SimpleBar from 'simplebar-react';
 import ShareOrSaveModal from 'components/shareOrSaveModal/ShareOrSaveModal';
-import report from 'assets/images/icons/icons-inbox/icon-report.png';
-import delet from 'assets/images/icons/icons-inbox/icon-delete.png';
+import reportIcon from 'assets/images/icons/icons-inbox/icon-report.png';
+import deleteIcon from 'assets/images/icons/icons-inbox/icon-delete.png';
 import { useSelector, RootStateOrAny } from 'react-redux';
+import {
+	BtnAnswer,
+	BtnDelete,
+	BtnReport,
+	BtnTab,
+	Container,
+	HeadContainer,
+	HeadIcon,
+	HeadIconContainer,
+	HeadTextContainer,
+	InnerContainer,
+	MsgContainer,
+	MsgItem,
+	MsgsList,
+	MsgsOffset,
+	NewMsgsContainer,
+	TabContent,
+	TabsContainer
+} from './Inbox.style';
 
 export default function () {
 	const {
@@ -45,7 +62,7 @@ const Inbox = <
 			lang: { Inbox: lang }
 		}
 	} = useContext(InitContext);
-	let openedMsgElement: HTMLDivElement;
+	let openedMsgElement: HTMLDivElement | undefined;
 
 	useEffect(() => {
 		let locationState = location.state as any;
@@ -64,13 +81,15 @@ const Inbox = <
 
 	const handleMsgClick = (e: MouseEvent<HTMLDivElement>) => {
 		const targetElement = e.target as HTMLDivElement;
-		if (targetElement.classList.contains(styles['opened'])) {
-			removeMsgOpenedStyle(targetElement);
+		const isClickedElementOpened = targetElement.dataset.isopened === 'true';
+
+		if (isClickedElementOpened) {
+			targetElement.dataset.isopened = 'false';
 		} else {
 			if (openedMsgElement !== undefined) {
-				removeMsgOpenedStyle(openedMsgElement);
+				openedMsgElement.dataset.isopened = 'false';
 			}
-			targetElement.classList.add(styles['opened']);
+			targetElement.dataset.isopened = 'true';
 		}
 		openedMsgElement = targetElement;
 	};
@@ -83,121 +102,101 @@ const Inbox = <
 		});
 	};
 
-	const removeMsgOpenedStyle = (targetElement: HTMLDivElement) => {
-		targetElement.classList.remove(styles['opened']);
-	};
-
 	return (
-		<div styleName="main-container">
+		<Container>
 			{showShareOrSaveModal && (
 				<ShareOrSaveModal
 					showShareOrSaveModal={showShareOrSaveModal}
 					setShowShareOrSaveModal={setShowShareOrSaveModal}
 				/>
 			)}
-			<div styleName="inbox-container" id="inb-cont">
-				<div styleName="inbox-title">
-					<div styleName="inbox-icon">
-						<img
-							className="responsive-image"
-							src={icon}
-							alt="icon"
-							draggable="false"
-						/>
-					</div>
-					<div styleName="title-inner-container">
+			<InnerContainer id="inb-cont">
+				<HeadContainer>
+					<HeadIconContainer>
+						<HeadIcon src={icon} alt="icon" draggable="false" />
+					</HeadIconContainer>
+					<HeadTextContainer>
 						<h4>{lang['Title']}</h4>
-						<div styleName="shadow-title"></div>
-					</div>
-				</div>
-				<div styleName="inbox-tabs-container">
-					<button
+					</HeadTextContainer>
+				</HeadContainer>
+				<TabsContainer>
+					<BtnTab
 						id="msg-tab"
-						styleName={`inbox-tab-msgs ${
-							actualTab === 'msg' ? 'selected-tab' : ''
-						} ${answeredMsgs.length < 1 ? 'not-answered-msgs' : ''} ${
-							messages.length < 1 && answeredMsgs.length < 1 ? 'no-msgs' : ''
-						} `}
+						isSelected={actualTab === 'msg'}
+						hasNotAnsweredMsgs={answeredMsgs.length < 1}
+						hasNoMessages={messages.length < 1 && answeredMsgs.length < 1}
 						onClick={handleTabClick}
 						autoFocus={true}
 					>
 						{messages.length < 1 && answeredMsgs.length < 1
 							? `${lang['NoMessagesInfo']}`
 							: `${lang['MsgTab']}`}
-						<div
-							styleName={`new-msgs-number ${
-								messages.length < 1 && answeredMsgs.length < 1 ? 'no-msgs' : ''
-							}`}
+						<NewMsgsContainer
+							hasNoMessages={messages.length < 1 && answeredMsgs.length < 1}
 						>
 							<span>{messages.length}</span>
-						</div>
-					</button>
-					<button
+						</NewMsgsContainer>
+					</BtnTab>
+					<BtnTab
 						id="ans-tab"
-						styleName={`ans-tab ${actualTab === 'ans' ? 'selected-tab' : ''}`}
+						isSelected={actualTab === 'ans'}
 						style={{
 							display: answeredMsgs.length < 1 ? 'none' : 'flex'
 						}}
+						isAnsTab
 						onClick={handleTabClick}
 					>
 						{lang['AnsTab']}
-					</button>
-				</div>
-				<div style={{ display: `${actualTab === 'msg' ? 'flex' : 'none'}` }}>
-					{messages.length > 0 ? (
-						<ul styleName="inbox-msgs-container">
-							<SimpleBar>
+					</BtnTab>
+				</TabsContainer>
+				<TabContent isTabSelected={actualTab === 'msg'}>
+					{messages.length > 0 && (
+						<MsgsList>
+							<MsgsOffset>
 								{messages.map((msg) => (
-									<div
+									<MsgContainer
 										onClick={(e) => handleMsgClick(e)}
 										key={msg._id}
-										styleName="msg-container"
+										data-isopened={false}
 									>
 										<div>
-											<span styleName="sender-name">An&oacute;nimo</span>
-											<button styleName="btn-report">
-												<img src={report} alt="report" />
-											</button>
+											<span>An&oacute;nimo</span>
+											<BtnReport>
+												<img src={reportIcon} alt="report" />
+											</BtnReport>
 										</div>
-										<li styleName="msg-li">
-											<span styleName="msg-content">"{msg.content}"</span>
-											<button styleName="btn-delete">
-												<img src={delet} alt="delete" />
-											</button>
-										</li>
-										<button
-											styleName="msg-btn-answer"
+										<MsgItem>
+											<span>"{msg.content}"</span>
+											<BtnDelete>
+												<img src={deleteIcon} alt="delete" />
+											</BtnDelete>
+										</MsgItem>
+										<BtnAnswer
 											onClick={(e) => handleAnswerMsgClick(e, msg._id)}
 										>
 											<span>answer</span>
-										</button>
-									</div>
+										</BtnAnswer>
+									</MsgContainer>
 								))}
-							</SimpleBar>
-						</ul>
-					) : (
-						<div styleName="_info-no-msgs">{lang['NoMessagesInfo']}</div>
+							</MsgsOffset>
+						</MsgsList>
 					)}
-				</div>
-				<div style={{ display: `${actualTab === 'ans' ? 'flex' : 'none'}` }}>
-					<ul styleName="answered-msgs-container">
-						<SimpleBar>
+				</TabContent>
+				<TabContent isTabSelected={actualTab === 'ans'}>
+					<MsgsList>
+						<MsgsOffset>
 							{answeredMsgs.map((msg) => (
-								<div
-									key={msg._id}
-									styleName="msg-container"
-									style={{ padding: '0' }}
-								>
-									<li styleName="msg-li">
+								<MsgContainer key={msg._id} style={{ padding: '0' }}>
+									<MsgItem>
 										"{msg.content}"<br />
 										<i>ans: {parse(msg.answer as string)}</i>
-									</li>
-								</div>
+									</MsgItem>
+								</MsgContainer>
 							))}
-						</SimpleBar>
-					</ul>
-				</div>
-			</div>
-		</div>
+						</MsgsOffset>
+					</MsgsList>
+				</TabContent>
+			</InnerContainer>
+		</Container>
 	);
 };

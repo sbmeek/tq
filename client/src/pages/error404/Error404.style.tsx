@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import styled, { css, keyframes } from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Main = styled.div`
 	min-height: 100%;
@@ -46,24 +46,24 @@ export const LogoImg = styled.img`
 		min-width: 283px;
 		top: -28%;
 		left: -9%;
-    }
-    @media (max-width: 650px) {
-        position: absolute;
+	}
+	@media (max-width: 650px) {
+		position: absolute;
 		min-height: 225px;
 		min-width: 228px;
 		top: -47%;
 		left: 2%;
 		transform: translate(0%, -6%);
-    }
-    @media (max-width: 440px) {
-        top: -47%;
+	}
+	@media (max-width: 440px) {
+		top: -47%;
 		left: 14%;
 		min-height: 197px;
 		min-width: 200px;
-    }
-    @media (max-width: 335px) {
-        left: 21%;
-    }
+	}
+	@media (max-width: 335px) {
+		left: 21%;
+	}
 `;
 export const InsideText = styled.div`
 	display: flex;
@@ -84,29 +84,28 @@ export const InsideText = styled.div`
 	@media (max-width: 830px) {
 		margin: 0px 0 0 35%;
 		max-width: 420px;
-    }
-    @media  (max-width: 740px) {
-        max-width: 300px;
+	}
+	@media (max-width: 740px) {
+		max-width: 300px;
 		margin: 0 0 0 37%;
-    }
-    @media (max-width: 650px) {
-        position: absolute;
+	}
+	@media (max-width: 650px) {
+		position: absolute;
 		max-width: 667px;
 		width: 430px;
 		left: 2%;
 		margin: 59px 0 0 0;
-    }
-    @media (max-width: 440px) {
-        position: relative;
+	}
+	@media (max-width: 440px) {
+		position: relative;
 		margin: 65px auto 0 auto;
 		max-width: 290px;
-    }
-    @media (max-width: 335px) {
-        position: relative;
+	}
+	@media (max-width: 335px) {
+		position: relative;
 		margin: 65px auto 0 auto;
 		max-width: 225px;
-    }
-    
+	}
 `;
 export const Err4s = styled.span`
 	color: #9e0004;
@@ -119,10 +118,10 @@ export const FirstRowText = styled.span`
 export const SecondRowText = styled.span`
 	display: inline-block;
 	word-wrap: break-word;
-    font-size: 14px;
-    @media (max-width: 440px) {
-        display: none;
-    }
+	font-size: 14px;
+	@media (max-width: 440px) {
+		display: none;
+	}
 `;
 
 export const LinkStyled = styled(Link)`
@@ -133,8 +132,8 @@ export const btnCustomStyle = css`
 	min-width: 115px;
 	min-height: 55px;
 	border-radius: 1000px;
-    font-size: 22.5px;
-    margin-top: 15px;
+	font-size: 22.5px;
+	margin-top: 15px;
 
 	@media (max-width: 1150px) {
 		min-width: 87px;
