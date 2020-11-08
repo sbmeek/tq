@@ -10,6 +10,7 @@ export const Container = styled.div<ShowMenuType>`
 	transition: opacity 2s linear;
 	z-index: 16;
 	width: 100%;
+	height: 0.1px;
 	padding-right: ${(props) => (props.showMenu ? '27px' : '')};
 `;
 
