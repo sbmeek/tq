@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
 	Container,
 	InnerContainer,
@@ -21,12 +21,10 @@ interface ModalProps extends IsActiveType {
 export default function Modal(
 	props: React.PropsWithChildren<React.ReactNode> & ModalProps
 ) {
-	const [isActive, setIsActive] = useState(props.isActive);
-
 	const handleOverlayMouseDownOrTouch =
 		props.onOverlayMouseDownOrTouch ||
 		(() => {
-			setIsActive(false);
+			props.isActive = false;
 		});
 
 	return (
@@ -34,16 +32,17 @@ export default function Modal(
 			<Overlay
 				{...props.customOverlay?.props}
 				customStyles={props.customOverlay?.customStyles}
-				isActive={isActive}
+				isActive={props.isActive}
 				onMouseDown={handleOverlayMouseDownOrTouch}
 				onTouchStart={handleOverlayMouseDownOrTouch}
+				id="overlay"
 			/>
 			<Wrapper
 				{...props.customWrapper?.props}
 				customStyles={props.customWrapper?.customStyles}
 			>
 				<Container
-					isActive={isActive}
+					isActive={props.isActive}
 					{...props.customContainer?.props}
 					customStyles={props.customContainer?.customStyles}
 				>

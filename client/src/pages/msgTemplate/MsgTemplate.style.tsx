@@ -44,7 +44,7 @@ const btnHeadStyles = css`
 		border-radius: 35px;
 		width: 58px;
 		height: 60px;
-		z-index: 35;
+		z-index: 33;
 		padding: 5px;
 		text-decoration: none;
 		& > i {

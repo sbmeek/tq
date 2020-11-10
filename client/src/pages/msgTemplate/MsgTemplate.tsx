@@ -107,6 +107,12 @@ export default function Template() {
 
 	return (
 		<Container onClick={toggleLabelHandler}>
+			<ReplyingModal
+				opened={isReplyingModalOpened}
+				setOpened={setIsReplyingModalOpened}
+				form={form.current as HTMLFormElement}
+				templateQuestion={templateQuestionContainer.current as HTMLDivElement}
+			/>
 			<div>
 				<HeadContainer>
 					<BtnBack to="/messages">
@@ -118,12 +124,6 @@ export default function Template() {
 						<img src={arrowanswer} alt="arrow" />
 					</BtnShare>
 				</HeadContainer>
-				<ReplyingModal
-					opened={isReplyingModalOpened}
-					setOpened={setIsReplyingModalOpened}
-					form={form.current as HTMLFormElement}
-					templateQuestion={templateQuestionContainer.current as HTMLDivElement}
-				/>
 				{!isMobile && (
 					<EditorContainer>
 						<TemplateEditor
