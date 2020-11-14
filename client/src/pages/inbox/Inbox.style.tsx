@@ -133,7 +133,7 @@ export const BtnTab = styled.button<IBtnTabProps>`
 					}
 			  `
 			: ''}
-	${(props) => (props.hasNoMessages ? noMsgsStyle : '')}
+	${(props) => (props.hasNoMessages && props.id === 'ans-tab' ? noMsgsStyle : '')}
 	${(props) =>
 		props.isAnsTab
 			? css`
