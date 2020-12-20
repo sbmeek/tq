@@ -13,6 +13,18 @@ import ReactQuill, { Quill } from 'react-quill';
 import quillEmoji from 'quill-emoji';
 import { InitContext } from 'global/context/InitContext';
 
+import {
+	Container,
+	Form,
+	OptsContainer,
+	OptsInnerContainer,
+	AnswerOptsMenu,
+	TextEditorContainer,
+	InputAnswerContainer,
+	InputAnswerInnerContainer,
+	OptStick,
+	OptStickContainer
+} from './TemplateEditor.style';
 import styles from './TemplateEditor.css';
 import './quill.tq-snow.css';
 import './quill-emoji.css';
@@ -131,27 +143,24 @@ export default function TemplateEditor({
 	};
 
 	return (
-		<div styleName="answer-editor">
-			<form
-				styleName="answer-editor-container"
-				onSubmit={handleFormSubmit}
-				ref={form}
-			>
+		<Container>
+			<Form onSubmit={handleFormSubmit} ref={form}>
 				<TextEditor
 					answer={answer}
 					showEmojiPicker={showEmojiPicker}
 					setAnswer={setAnswer}
 					setShowEmojiPicker={setShowEmojiPicker}
+					id="desktop-text-editor"
 				/>
-				<div styleName="answer-options-container">
-					<div styleName="answer-options tq-scrollbar">
+				<OptsContainer>
+					<OptsInnerContainer>
 						{isMobile && (
 							<button type="button" onClick={hideMobileOpts}>
 								<img src={xIcon} alt="x icon" />
 							</button>
 						)}
 						<button
-							styleName={`${toolsVisibility.showTextTool ? 'selected' : ''}`}
+							className={`${toolsVisibility.showTextTool ? 'selected' : ''}`}
 							type="button"
 							onClick={toggleEditorTool}
 							id="text"
@@ -160,7 +169,7 @@ export default function TemplateEditor({
 							<img src={textIcon} alt="text icon" />
 						</button>
 						<button
-							styleName={`${
+							className={`${
 								toolsVisibility.showBgColorsTool ? 'selected' : ''
 							}`}
 							type="button"
@@ -170,7 +179,7 @@ export default function TemplateEditor({
 							<img src={bg} alt="icon" />
 						</button>
 						<button
-							styleName={`${toolsVisibility.showLabelsTool ? 'selected' : ''}`}
+							className={`${toolsVisibility.showLabelsTool ? 'selected' : ''}`}
 							type="button"
 							onClick={toggleEditorTool}
 							id="labels"
@@ -178,7 +187,7 @@ export default function TemplateEditor({
 							<img src={labelicon} alt=" icon" />
 						</button>
 						<button
-							styleName={`${
+							className={`${
 								toolsVisibility.showStickersTool ? 'selected' : ''
 							}`}
 							type="button"
@@ -190,21 +199,20 @@ export default function TemplateEditor({
 						<button type="button" onClick={toggleEditorTool}>
 							<img src={org} alt="icon" />
 						</button>
-					</div>
-				</div>
-				<div
+					</OptsInnerContainer>
+				</OptsContainer>
+				<AnswerOptsMenu
 					ref={editorToolsContainer}
-					styleName={`answer-opts-menu ${
-						showToolsContainer ? 'opts-swipe_actv' : ''
-					} ${shouldAnimToolToggle ? 'anim-tool-toggle' : ''}`}
+					showToolsContainer={showToolsContainer}
+					shouldAnimToolToggle={shouldAnimToolToggle}
 				>
 					{isMobile && (
-						<span styleName="opt-stick-container" onClick={hideMobileOpts}>
-							<span styleName="opt-stick"></span>
-						</span>
+						<OptStickContainer onClick={hideMobileOpts}>
+							<OptStick />
+						</OptStickContainer>
 					)}
 					<div
-						styleName={`${
+						className={`${
 							toolsVisibility.showTextTool ? 'toggle-opt-anim' : ''
 						}`}
 					>
@@ -218,38 +226,39 @@ export default function TemplateEditor({
 						)}
 					</div>
 					<div
-						styleName={`${
+						className={`${
 							toolsVisibility.showBgColorsTool ? 'toggle-opt-anim' : ''
 						}`}
 					>
 						<BgColors templateQuestionContainer={templateQuestionContainer!} />
 					</div>
 					<div
-						styleName={`${
+						className={`${
 							toolsVisibility.showLabelsTool ? 'toggle-opt-anim' : ''
 						}`}
 					>
 						<Labels label={label.current!} setShowLabel={setShowLabel} />
 					</div>
 					<div
-						styleName={`${
+						className={`${
 							toolsVisibility.showStickersTool ? 'toggle-opt-anim' : ''
 						}`}
 					>
 						<Stickers setSelectedSticker={setSelectedSticker} />
 					</div>
-				</div>
-			</form>
-		</div>
+				</AnswerOptsMenu>
+			</Form>
+		</Container>
 	);
 }
 
 function TextEditor<
 	T extends {
+		id?: string;
 		answer: string;
 		setAnswer: React.Dispatch<React.SetStateAction<string>>;
 	}
->({ answer, setAnswer }: T) {
+>({ id, answer, setAnswer }: T) {
 	const [editorVal, setEditorVal] = useState('');
 	const {
 		lang: { TemplateEditor: lang }
@@ -285,9 +294,9 @@ function TextEditor<
 	};
 
 	return (
-		<div styleName="text-editor-container">
-			<div styleName="input-answer-container">
-				<div styleName="input-answer-inner-container">
+		<TextEditorContainer id={id}>
+			<InputAnswerContainer>
+				<InputAnswerInnerContainer>
 					<ReactQuill
 						ref={editorRef}
 						theme="snow"
@@ -303,8 +312,8 @@ function TextEditor<
 						formats={['bold', 'italic', 'underline', 'strike', 'emoji']}
 						data-value={answer}
 					/>
-				</div>
-			</div>
-		</div>
+				</InputAnswerInnerContainer>
+			</InputAnswerContainer>
+		</TextEditorContainer>
 	);
 }

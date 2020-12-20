@@ -29,7 +29,10 @@ export const HeadContainer = styled.div`
 	@media (max-width: 490px) {
 		display: flex;
 		justify-content: space-between;
-		width: 90%;
+		width: 100%;
+		position: absolute;
+		padding: 0 20px;
+		margin-top: 10px;
 	}
 `;
 

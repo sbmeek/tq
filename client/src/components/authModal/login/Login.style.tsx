@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import { inputStyles } from '../style';
 
 export const FieldsContainer = styled.div`
@@ -40,7 +40,11 @@ export const ErrMsg = styled.span<{ toggleErrMsg: boolean }>`
 	width: 100%;
 	margin: 5px 0;
 	animation: ${(props) =>
-		props.toggleErrMsg ? `${showErrMsgAnim} 250ms` : ''};
+		props.toggleErrMsg
+			? css`
+					${showErrMsgAnim} 250ms
+			  `
+			: ''};
 `;
 
 export const BtnsContainer = styled.div`
