@@ -263,7 +263,7 @@
 
 @media only screen and (max-width: 878px) {
 	.layer {
-		background-size: 120% 48%;
+		background-size: 120% 62%;
 		min-height: 58%;
 		max-height: 650px;
 	}
@@ -271,7 +271,7 @@
 
 @media only screen and (max-width: 600px) {
 	.layer {
-		background-size: 164% 51%;
+		background-size: 164% 57%;
 		max-height: 570px;
 	}
 }
