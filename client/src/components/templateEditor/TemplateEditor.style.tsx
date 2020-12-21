@@ -23,7 +23,7 @@ export const Container = styled.div`
 	background: var(--tq-dark-gray-02);
 	width: 226px;
 	height: 425px;
-	margin-top: 10px;
+	margin-top: 20px;
 	border-radius: 25px;
 	overflow: hidden;
 	@media (max-width: 490px) {
@@ -61,12 +61,13 @@ export const OptsContainer = styled.div`
 	display: flex;
 	align-self: flex-end;
 	max-height: fit-content;
-	margin: 0px 2px -12px 2px;
-	width: 98%;
+	margin: 0px 0px -12px 0px;
+	width: 100%;
 	overflow-y: hidden;
 	z-index: 3;
 	background: var(--tq-bg-00);
-	border-radius: 29px 29px 21px 21px;
+	border-radius: 27px 27px 21px 21px;
+	padding: 8px 15px 13px 15px;
 
 	@media (max-width: 490px) {
 		width: 100%;
@@ -80,11 +81,13 @@ export const OptsContainer = styled.div`
 
 export const OptsInnerContainer = styled.div`
 	display: flex;
-	margin: 0px 15px 6px 15px;
-	overflow-x: auto;
-	overflow-y: hidden;
+	overflow: auto;
+	overflow-y: overlay;
 	background: var(--tq-bg-00);
-	border-radius: 38px;
+	border-radius: 46%;
+	padding-bottom: 6px;
+	transform: translate3d(0, 0, 0);
+	-webkit-overflow-scrolling: touch;
 
 	& > button {
 		display: flex;
@@ -94,7 +97,7 @@ export const OptsInnerContainer = styled.div`
 		min-height: 55px;
 		min-width: 55px;
 		border-radius: 35px;
-		margin: 0 5px 9.5px 5px;
+		margin: 16.5px 5px 6.5px 5px;
 		background: var(--tq-dark-gray-02);
 		color: #fff;
 		padding: 10px;
@@ -106,8 +109,12 @@ export const OptsInnerContainer = styled.div`
 	}
 
 	& > button > img {
-		width: 100%;
+		width: 75%;
 		transition: transform 200ms;
+	}
+
+	& > button#bg-colors > img {
+		margin-bottom: 3px;
 	}
 
 	& > button:hover > img {

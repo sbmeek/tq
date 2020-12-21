@@ -7,7 +7,7 @@
     */
 
 	.quill {
-		width: 100%;
+		width: 90%;
 	}
 
 	.ql-container {
@@ -24,7 +24,7 @@
 		background-color: var(--tq-gray-00);
 		border-radius: 21px !important;
 		padding: 4px 8px !important;
-		max-width: 212.44px !important;
+		max-width: 192.44px !important;
 		min-width: 94% !important;
 		max-height: 194px;
 		outline: none;
@@ -85,16 +85,22 @@
 		pointer-events: none;
 		position: absolute;
 	}
+
+	.ql-emoji {
+		margin-right: 5px;
+	}
+
 	.ql-snow.ql-toolbar button,
 	.ql-snow .ql-toolbar button {
 		background: none;
 		border: none;
 		cursor: pointer;
-		display: inline-block;
+		display: flex;
+		align-items: center;
 		float: left;
 		height: 24px;
 		padding: 3px 5px;
-		width: 28px;
+		width: 23px;
 		cursor: pointer;
 		background-color: transparent;
 	}

@@ -9,6 +9,11 @@ import labelicon from 'assets/images/icons/templateEditor-icons/icon-labels-btn.
 import bg from 'assets/images/icons/templateEditor-icons/icon-background-btn.svg';
 import org from 'assets/images/icons/templateEditor-icons/icon-organization-btn.svg';
 import xIcon from 'assets/images/icons/share-icons/icon-x.svg';
+import boldIcon from 'assets/images/icons/templateEditor-icons/icons-message/icon-bold.svg';
+import italicIcon from 'assets/images/icons/templateEditor-icons/icons-message/icon-italic.svg';
+import underlinedIcon from 'assets/images/icons/templateEditor-icons/icons-message/icon-underlined.svg';
+import strikethroughIcon from 'assets/images/icons/templateEditor-icons/icons-message/icon-strikethrough.svg';
+import emojiFinderIcon from 'assets/images/icons/templateEditor-icons/icons-message/iconfinder-Smile.svg';
 import ReactQuill, { Quill } from 'react-quill';
 import quillEmoji from 'quill-emoji';
 import { InitContext } from 'global/context/InitContext';
@@ -252,6 +257,17 @@ export default function TemplateEditor({
 	);
 }
 
+const icons = ReactQuill.Quill.import('ui/icons');
+icons['bold'] = `<img style="width: 15.2px;" src=${boldIcon} alt="B" />`;
+icons['italic'] = `<img style="width: 15.2px;" src=${italicIcon} alt="I" />`;
+icons[
+	'underline'
+] = `<img style="width: 15.2px;" src=${underlinedIcon} alt="U" />`;
+icons[
+	'strike'
+] = `<img style="width: 15.2px;" src=${strikethroughIcon} alt="S" />`;
+const emojiIcon = `<img style="width: 24.2px;" src=${emojiFinderIcon} alt=":D" />`;
+
 function TextEditor<
 	T extends {
 		id?: string;
@@ -302,7 +318,9 @@ function TextEditor<
 						theme="snow"
 						modules={{
 							toolbar: [['bold', 'italic', 'underline', 'strike'], ['emoji']],
-							'emoji-toolbar': true,
+							'emoji-toolbar': {
+								buttonIcon: emojiIcon
+							},
 							'emoji-textarea': false,
 							'emoji-shortname': true
 						}}
