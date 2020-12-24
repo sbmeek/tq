@@ -1,5 +1,5 @@
 import React, { MouseEvent } from 'react';
-import './Labels.css';
+import { Container, Label } from './Labels.style';
 
 export default function Labels<
 	T extends {
@@ -15,32 +15,32 @@ export default function Labels<
 	};
 
 	return (
-		<div styleName="labels-container" className="d-text-select">
-			<button styleName="label">
+		<Container className="d-text-select">
+			<Label>
 				<span role="img" aria-label="seen" onClick={labelClickHandler}>
 					✔️
 				</span>
-			</button>
-			<button styleName="label">
+			</Label>
+			<Label>
 				<span role="img" aria-label="heart" onClick={labelClickHandler}>
 					❤️
 				</span>
-			</button>
-			<button styleName="label">
+			</Label>
+			<Label>
 				<span role="img" aria-label="star" onClick={labelClickHandler}>
 					🌟
 				</span>
-			</button>
-			<button styleName="label">
+			</Label>
+			<Label>
 				<span role="img" aria-label="fire" onClick={labelClickHandler}>
 					🔥
 				</span>
-			</button>
-			<button styleName="label">
+			</Label>
+			<Label>
 				<span role="img" aria-label="water-drop" onClick={labelClickHandler}>
 					💧
 				</span>
-			</button>
-		</div>
+			</Label>
+		</Container>
 	);
 }
