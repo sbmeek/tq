@@ -1,4 +1,6 @@
-.container {
+import styled from 'styled-components';
+
+export const Container = styled.div`
 	display: flex;
 	flex-wrap: wrap;
 	align-content: flex-start;
@@ -7,9 +9,9 @@
 	height: 100%;
 	padding-top: 28px;
 	max-width: 100%;
-}
+`;
 
-.sticker-container {
+export const Sticker = styled.div`
 	display: flex;
 	align-items: center;
 	height: fit-content;
@@ -19,19 +21,18 @@
 	background-color: transparent;
 	transition: 500ms;
 	border-radius: 10px;
+
+	&,
+	& > img {
+		max-width: 68px;
 	}
 
-.sticker-container,
-.sticker-container > img {
-	max-width: 68px;
-}
+	& > img {
+		height: auto;
+	}
 
-.sticker-container > img {
-	height: auto;
-}
-
-.sticker-container:focus {
-	background: #7b7979;
-	height: 73px;
-	
-}
+	&:focus {
+		background: #7b7979;
+		height: 73px;
+	}
+`;

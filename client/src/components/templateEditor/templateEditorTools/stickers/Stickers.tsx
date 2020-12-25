@@ -9,7 +9,7 @@ import stTodoBien from 'assets/images/template-editor/stickers/st-todo-bien.png'
 import stWisqui from 'assets/images/template-editor/stickers/st-wisqui.png';
 import stYete from 'assets/images/template-editor/stickers/st-y-ete.png';
 
-import './Stickers.css';
+import { Container, Sticker } from './Stickers.style';
 
 export default function Stickers<
 	T extends {
@@ -33,16 +33,12 @@ export default function Stickers<
 	};
 
 	return (
-		<div styleName="container">
+		<Container>
 			{stickersArr.current.map((st, idx) => (
-				<button
-					styleName="sticker-container"
-					onMouseDown={handleStickerClick}
-					key={idx}
-				>
-					<img src={st} alt="un etikel" />
-				</button>
+				<Sticker onMouseDown={handleStickerClick} key={idx}>
+					<img src={st} alt="sticker" />
+				</Sticker>
 			))}
-		</div>
+		</Container>
 	);
 }
