@@ -1,5 +1,4 @@
 import React from 'react';
-import './BgColors.css';
 import {
 	Bgcolorscontainer,
 	Bgcolor,
