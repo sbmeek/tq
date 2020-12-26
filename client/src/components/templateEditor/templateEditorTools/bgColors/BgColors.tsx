@@ -1,5 +1,21 @@
 import React from 'react';
 import './BgColors.css';
+import {
+	Bgcolorscontainer,
+	Bgcolor,
+	Bgcolor1,
+	Bgcolor2,
+	Bgcolor3,
+	Bgcolor4,
+	Bgcolor5,
+	Bgcolor6,
+	Bgcolor7,
+	Bgcolor8,
+	Bgcolor9,
+	Bgcolor10,
+	Bgcolor11,
+	Bgcolor12
+} from './BgColors.style';
 
 export default function BgColors<
 	T extends {
@@ -13,91 +29,20 @@ export default function BgColors<
 	};
 
 	return (
-		<div styleName="bg-colors-container">
-			<div
-				styleName="bg-color"
-				style={{ background: '#f0210f' }}
-				onClick={bgColorClickHandler}
-			>
-				<div></div>
-			</div>
-			<div
-				styleName="bg-color"
-				style={{ background: '#40265f' }}
-				onClick={bgColorClickHandler}
-			>
-				<div></div>
-			</div>
-			<div
-				styleName="bg-color"
-				style={{ background: '#60224f' }}
-				onClick={bgColorClickHandler}
-			>
-				<div></div>
-			</div>
-			<div
-				styleName="bg-color"
-				style={{ background: '#10244f' }}
-				onClick={bgColorClickHandler}
-			>
-				<div></div>
-			</div>
-			<div
-				styleName="bg-color"
-				style={{ background: '#90564f' }}
-				onClick={bgColorClickHandler}
-			>
-				<div></div>
-			</div>
-			<div
-				styleName="bg-color"
-				style={{ background: '#94124f' }}
-				onClick={bgColorClickHandler}
-			>
-				<div></div>
-			</div>
-			<div
-				styleName="bg-color"
-				style={{ background: '#91221f' }}
-				onClick={bgColorClickHandler}
-			>
-				<div></div>
-			</div>
-			<div
-				styleName="bg-color"
-				style={{ background: '#50278f' }}
-				onClick={bgColorClickHandler}
-			>
-				<div></div>
-			</div>
-			<div
-				styleName="bg-color"
-				style={{ background: '#60257f' }}
-				onClick={bgColorClickHandler}
-			>
-				<div></div>
-			</div>
-			<div
-				styleName="bg-color"
-				style={{ background: '#00812b' }}
-				onClick={bgColorClickHandler}
-			>
-				<div></div>
-			</div>
-			<div
-				styleName="bg-color"
-				style={{ background: '#0ed14f' }}
-				onClick={bgColorClickHandler}
-			>
-				<div></div>
-			</div>
-			<div
-				styleName="bg-color"
-				style={{ background: '#5eff00' }}
-				onClick={bgColorClickHandler}
-			>
-				<div></div>
-			</div>
-		</div>
+		<Bgcolorscontainer>
+			<Bgcolor1 onClick={bgColorClickHandler} style={{background: "#f0210f"}}></Bgcolor1>
+			<Bgcolor2 onClick={bgColorClickHandler} style={{background: "#40265f"}}></Bgcolor2>
+			<Bgcolor onClick={bgColorClickHandler} style={{background: "#60224f"}}></Bgcolor>
+			<Bgcolor3 onClick={bgColorClickHandler} style={{background: "#90564f"}}></Bgcolor3>
+			<Bgcolor4 onClick={bgColorClickHandler} style={{background: " #94124f"}}></Bgcolor4>
+			<Bgcolor5 onClick={bgColorClickHandler} style={{background: "#91221f"}}></Bgcolor5>
+			<Bgcolor6 onClick={bgColorClickHandler}style={{background: "#50278f"}}></Bgcolor6>
+			<Bgcolor7 onClick={bgColorClickHandler}style={{background: "#60257f"}}></Bgcolor7>
+			<Bgcolor8 onClick={bgColorClickHandler}style={{background: "#00812b"}}></Bgcolor8>
+			<Bgcolor9 onClick={bgColorClickHandler}style={{background: "#0ed14f"}}></Bgcolor9>
+			<Bgcolor10 onClick={bgColorClickHandler}style={{background: "#5eff00"}}></Bgcolor10>
+			<Bgcolor11 onClick={bgColorClickHandler}style={{background: "#10244f;"}}></Bgcolor11>
+			<Bgcolor12 onClick={bgColorClickHandler}style={{background: "#60224f"}}></Bgcolor12>
+		</Bgcolorscontainer>
 	);
 }
