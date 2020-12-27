@@ -37,3 +37,9 @@ export const inputStyles = css`
 		}
 	}
 `;
+export const modalcustom = css`
+&{
+	height: 328px;
+	width: 386px;
+}
+`;

@@ -13,6 +13,7 @@ interface ModalProps extends IsActiveType {
 	customWrapper?: CustomType;
 	customContainer?: CustomType;
 	customInnerContainer?: CustomType;
+	customStyle?: CustomStyles;
 	onOverlayMouseDownOrTouch?: (
 		eventObject: React.MouseEvent<any> & React.TouchEvent<any>
 	) => void;
