@@ -9,7 +9,7 @@ export const AnswerImg = styled.img`
 export const customContainerStyle = css`
 	& {
 		@media (max-width: 420px) {
-			padding: 20px 0;
+			padding: 30px 0;
 			width: 100%;
 		}
 	}
@@ -17,7 +17,7 @@ export const customContainerStyle = css`
 
 export const customInnerContainerStyle = css`
 	& {
-		justify-content: end;
+		justify-content: center;
 		max-width: 340px;
 		max-height: 140px;
 		@media (max-width: 489px) {
