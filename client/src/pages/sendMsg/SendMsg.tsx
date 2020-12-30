@@ -3,11 +3,10 @@ import React, {
 	useState,
 	useContext,
 	ChangeEvent,
-	FormEvent,
+	FormEvent
 } from 'react';
 import MsgSent from 'components/msgSent/MsgSent';
 import Error404 from '../error404/Error404';
-import './SendMsg.css';
 import logo from 'assets/images/msg/profile-tq.png';
 import { InitContext } from 'global/context/InitContext';
 import cloud1 from 'assets/images/msg/cloud.png';
@@ -18,6 +17,17 @@ import Italic from 'assets/images/icons/templateEditor-icons/icons-message/icon-
 import strike from 'assets/images/icons/templateEditor-icons/icons-message/icon-strikethrough.svg';
 import underlined from 'assets/images/icons/templateEditor-icons/icons-message/icon-underlined.svg';
 import smile from 'assets/images/icons/templateEditor-icons/icons-message/iconfinder-Smile.svg';
+import {
+	Container,
+	Curtain,
+	MiniCurtain,
+	CloudTop,
+	Layer,
+	EnLayer,
+	Box,
+	InputContainer,
+	CloudBottom
+} from './SendMsg.style';
 
 type DataType = {
 	key?: string;
@@ -31,7 +41,7 @@ export default function <
 >({ match: { params } }: T) {
 	const {
 		socket,
-		lang: { MsgIdx: lang },
+		lang: { MsgIdx: lang }
 	} = useContext(InitContext).state;
 	const [userExists, setUserExists] = useState(true);
 	params.username = params.username.toLowerCase();
@@ -55,11 +65,7 @@ export default function <
 			{!userExists ? (
 				<Error404 />
 			) : (
-				<Success
-					username={params.username}
-					socket={socket}
-					lang={lang}
-				/>
+				<Success username={params.username} socket={socket} lang={lang} />
 			)}
 		</>
 	);
@@ -106,122 +112,56 @@ function Success<
 	}
 
 	return (
-		<div styleName="container">
+		<Container>
 			{sent ? (
 				<MsgSent />
 			) : (
-				<form onSubmit={handleFormSubmit} styleName="curtain">
-					<div styleName="contenedolsito">
-						<div styleName="cloud-top-container">
-							<img
-								src={cloud2}
-								alt="cloud2-top"
-								styleName="cloud2-top"
-							></img>
-							<img
-								src={cloud1}
-								alt="cloud-top"
-								styleName="cloud1-top"
-							></img>
-						</div>
-						<div styleName="layer">
-							<div styleName="en-layer">
-								<div styleName="logo-div">
-									<img
-										src={logo}
-										alt="logo"
-										styleName="logo"
-									/>
+				<Curtain onSubmit={handleFormSubmit}>
+					<MiniCurtain>
+						<CloudTop>
+							<img src={cloud2} alt="cloud2-top"></img>
+							<img src={cloud1} alt="cloud-top"></img>
+						</CloudTop>
+						<Layer>
+							<EnLayer>
+								<div>
+									<img src={logo} alt="logo" />
 								</div>
-								<div styleName="shadow_logo"></div>
-								<h3 styleName="user">{username}</h3>
-								<h5 styleName="firstRowText">
-									{lang['FirstRowText']}
-								</h5>
-								<h5 styleName="secondRowText">
-									{lang['SecondRowText']}
-								</h5>
-								<div styleName="box">
-									<div styleName="editor">
-										<button
-											title="Bold"
-											type="button"
-											styleName="buttonsedit"
-										>
-											<img
-												src={bold}
-												styleName="editorelement"
-												alt="editor"
-											/>
+								<div></div>
+								<h3>{username}</h3>
+								<h5>{lang['FirstRowText']}</h5>
+								<h5>{lang['SecondRowText']}</h5>
+								<Box>
+									<div>
+										<button title="Bold" type="button" >
+											<img src={bold} alt="editor" />
 										</button>
-										<button
-											title="Italic"
-											type="button"
-											styleName="buttonsedit"
-										>
-											<img
-												src={Italic}
-												styleName="editorelement"
-												alt="editor"
-											/>
+										<button title="Italic" type="button">
+											<img src={Italic} alt="editor" />
 										</button>
-										<button
-											title="strike"
-											type="button"
-											styleName="buttonsedit"
-										>
-											<img
-												src={strike}
-												styleName="editorelement"
-												alt="editor"
-											/>
+										<button title="strike" type="button">
+											<img src={strike} alt="editor" />
 										</button>
-										<button
-											title="Underline"
-											type="button"
-											styleName="buttonsedit"
-										>
-											<img
-												src={underlined}
-												styleName="editorelement"
-												alt="editor"
-											/>
+										<button title="Underline" type="button">
+											<img src={underlined} alt="editor" />
 										</button>
-										<div styleName="emoji">
-											<button
-												type="button"
-												styleName="buttonsedit"
-											>
-												<img
-													src={smile}
-													styleName="editoremoji"
-													alt="emojis"
-												/>
+										<div>
+											<button type="button" >
+												<img src={smile}  alt="emojis" />
 											</button>
 										</div>
 									</div>
-									<div styleName="cloud-bottom1-container">
-										<img
-											src={cloud2}
-											alt="cloud2-bottom"
-											styleName="cloud2-bottom"
-										></img>
-										<img
-											src={cloud1}
-											alt="cloud-bottom"
-											styleName="cloud1-bottom"
-										></img>
+									<div>
+										<img src={cloud2} alt="cloud2-bottom"></img>
+										<img src={cloud1} alt="cloud-bottom"></img>
 									</div>
-									<div styleName="input-container">
+									<InputContainer>
 										<textarea
-											styleName="input-msg"
 											data-type="text"
 											name="msg"
 											value={msg}
 											id="msg"
-											placeholder={
-												lang['FieldPlaceholder']
-											}
+											placeholder={lang['FieldPlaceholder']}
 											onChange={handleInputChange}
 											autoComplete="off"
 											autoFocus
@@ -229,26 +169,24 @@ function Success<
 										/>
 										<button
 											type="submit"
-											styleName={`_btn-tq ${
-												showSubmitBtn ? 'active' : ''
-											}`}
+											className={`${showSubmitBtn ? 'active' : ''}`}
 										>
 											<img src={arrow} alt="arrow icon" />
 										</button>
-									</div>
-									<div styleName="cloud-bottom2-container">
+									</InputContainer>
+									<CloudBottom >
 										<img
 											src={cloud1}
 											alt="cloud1-bottom2"
-											styleName="cloud1-bottom2"
+											
 										></img>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</form>
+									</CloudBottom>
+								</Box>
+							</EnLayer>
+						</Layer>
+					</MiniCurtain>
+				</Curtain>
 			)}
-		</div>
+		</Container>
 	);
 }
