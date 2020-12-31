@@ -24,12 +24,16 @@ export const Container = styled.div`
 	height: 100%;
 `;
 
-export const Section = styled.div`
+export const Section = styled.div<{ isVisible: boolean }>`
 	${flexCenterColumn}
 	min-width: 100%;
 	height: 100%;
 	min-height: 605px;
 	position: relative;
+	transition: transform 500ms, opacity 300ms;
+	opacity: ${(props) => (props.isVisible ? 1 : 0)};
+	transform: ${(props) =>
+		props.isVisible ? 'translateY(0)' : 'translateY(100px)'};
 
 	& a {
 		text-decoration: none !important;

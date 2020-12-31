@@ -1,5 +1,5 @@
-import React, { useContext, useRef } from 'react';
-import Observer from '@researchgate/react-intersection-observer';
+import React, { useContext } from 'react';
+import InView from 'react-intersection-observer';
 import Button from 'shared/button/Button';
 import { Link } from 'react-router-dom';
 import { InitContext } from 'global/context/InitContext';
@@ -70,23 +70,13 @@ export default function Root() {
 		}
 	} = useContext(InitContext);
 
-	const handleChange = (e: any) => {
-		console.log(e);
-	};
-
-	const options = useRef({
-		onChange: handleChange,
-		root: '#scrolling-container',
-		rootMargin: '0% 0% -25%'
-	});
-
 	return (
 		<>
 			<HideMenucitoStyle />
-			<div id="scrolling-container" style={{ height: '100%' }}>
-				<Observer {...options.current}>
-					<Container>
-						<Section>
+			<Container>
+				<InView triggerOnce threshold={0.244}>
+					{({ inView, ref }) => (
+						<Section ref={ref} isVisible={inView}>
 							<FirstRowSection1>
 								<LogoSection1 src={logoMaxSection1} alt="logo-section1" />
 							</FirstRowSection1>
@@ -104,7 +94,11 @@ export default function Root() {
 								</InnerWrapperSection1>
 							</SecondRowSection1>
 						</Section>
-						<Section>
+					)}
+				</InView>
+				<InView triggerOnce threshold={0.244}>
+					{({ inView, ref }) => (
+						<Section ref={ref} isVisible={inView}>
 							<FirstRowSection2>
 								<LogoSection2 src={logoSection2} alt="logo-section2" />
 							</FirstRowSection2>
@@ -122,9 +116,9 @@ export default function Root() {
 								</InnerWrapperSection2>
 							</SecondRowSection2>
 						</Section>
-					</Container>
-				</Observer>
-			</div>
+					)}
+				</InView>
+			</Container>
 		</>
 	);
 }
