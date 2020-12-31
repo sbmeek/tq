@@ -1,4 +1,17 @@
 export default {
+	Root: {
+		BtnCreateUsername: 'Crear nombre de usuario',
+		Section1: {
+			Title: 'Mensajes anónimos',
+			Paragraph:
+				'Recibe <span style="color: var(--tq-blue-01)">mensajes anónimos</span> y compártelos en tus estados de forma <span style="color: var(--tq-blue-01)">rápida y sencilla</span>.'
+		},
+		Section2: {
+			Title: 'Cuenta temporal',
+			Paragraph:
+				'Para recibir <span style="color: var(--tq-blue-01);">mensajes anónimos</span> rápidamente, no necesita registrarse, solo necesita un <span style="color: var(--tq-blue-01);">nombre de usuario</span>.'
+		}
+	},
 	Main: {
 		InputPlaceholder: 'CREA UN NOMBRE PARA TQ',
 		BtnInbox: 'Bandeja',

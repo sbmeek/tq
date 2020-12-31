@@ -1,4 +1,16 @@
 export default {
+	Root: {
+		BtnCreateUsername: 'Create username',
+		Section1: {
+			Title: 'Anonymous messages',
+			Paragraph:
+				'Get <span style="color: var(--tq-blue-01)">anonymous messages</span> and share them in your stories in a <span style="color: var(--tq-blue-01)">fast and simple</span> way.'
+		},
+		Section2: {
+			Title: 'Temporal account',
+			Paragraph: `To get <span style="color: var(--tq-blue-01);">anonymous messages</span> quickly, you don't need to register, you'll need an <span style="color: var(--tq-blue-01);">username</span> only.`
+		}
+	},
 	Main: {
 		InputPlaceholder: 'CREATE AN USERNAME FOR TQ',
 		BtnInbox: 'Inbox',
