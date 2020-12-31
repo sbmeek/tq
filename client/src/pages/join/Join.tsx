@@ -28,7 +28,7 @@ import {
 	Textarea,
 	MainBtn,
 	btnCustomStyle
-} from './MainLogin.style';
+} from './Join.style';
 import Button from 'shared/button/Button';
 
 type DataType = {

@@ -2,6 +2,7 @@ import React, { Suspense, lazy, useRef } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import Loader from 'components/loader/Loader';
+import UnauthRoute from 'HOCs/UnauthRoute';
 
 const AuthRoute = lazy(() => import('HOCs/AuthRoute'));
 const Menu = lazy(() => import('components/menu/Menu'));
@@ -14,6 +15,7 @@ const Terms = lazy(() => import('pages/terms/Terms'));
 const VerifyAccount = lazy(() =>
 	import('components/verifyAccount/VerifyAccount')
 );
+const Join = lazy(() => import('pages/join/Join'));
 
 export default function Routes() {
 	const switchContainerRef = useRef(null);
@@ -37,6 +39,7 @@ export default function Routes() {
 								<div style={{ height: '100%' }} ref={switchContainerRef}>
 									<Switch location={location}>
 										<Route exact path="/" component={Main} />
+										<UnauthRoute path="/join" component={Join} redirectTo="/" />
 										<AuthRoute
 											path="/messages"
 											component={Inbx}
