@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components';
-import logoMinSection3 from 'assets/images/presentation/logo_min_section3.png';
 
 const gridCenter = css`
 	& {
@@ -18,19 +17,37 @@ export const FirstRowSection3 = styled.div`
 	}
 `;
 
-export const LogoSection3 = styled.img`
-	position: absolute;
-	width: 800px;
-	z-index: 1;
+const logoStyle = css`
+	& {
+		position: absolute;
+		z-index: 1;
+	}
+`;
+
+export const LogoMaxSection3 = styled.img`
+	${logoStyle}
 	margin-top: 6px;
+	width: 800px;
+
 	@media (max-width: 760px) {
-		content: url(${logoMinSection3});
+		display: none;
+	}
+`;
+
+export const LogoMinSection3 = styled.img`
+	${logoStyle}
+	display: none;
+
+	@media (max-width: 760px) {
+		display: block;
 		width: 380px;
 	}
+
 	@media (max-width: 390px) {
 		width: 310px;
 		margin-top: 55px;
 	}
+
 	@media (max-width: 320px) {
 		width: 265px;
 		margin-top: 75px;
@@ -69,13 +86,13 @@ export const TextWrapperSection3 = styled.div`
 export const TitleSection3 = styled.h1`
 	font-size: 44px;
 	color: var(--tq-blue-01);
+	text-align: center;
 
 	@media (max-width: 410px) {
-		font-size: 36px;
+		font-size: 34px;
 	}
 	@media (max-width: 334px) {
 		font-size: 32px;
-		text-align: center;
 	}
 `;
 

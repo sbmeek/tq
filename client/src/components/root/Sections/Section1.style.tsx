@@ -1,5 +1,4 @@
-import styled from 'styled-components';
-import logoMin from 'assets/images/presentation/logo_min_section1.svg';
+import styled, { css } from 'styled-components';
 import { flexCenterColumn } from '../Root.style';
 
 export const FirstRowSection1 = styled.div`
@@ -12,30 +11,48 @@ export const FirstRowSection1 = styled.div`
 	justify-content: center;
 `;
 
-export const LogoSection1 = styled.img`
-	position: absolute;
+const logoStyle = css`
+	& {
+		position: absolute;
+		height: auto;
+		z-index: 1;
+	}
+`;
+
+export const LogoMaxSection1 = styled.img`
+	${logoStyle}
 	top: 20%;
 	min-width: 510px;
 	max-width: 520px;
 	width: 45%;
-	height: auto;
-	z-index: 1;
 
 	@media (max-width: 520px) {
+		display: none;
+	}
+`;
+
+export const LogoMinSection1 = styled.img`
+	${logoStyle}
+	display: none;
+
+	@media (max-width: 520px) {
+		display: block;
 		top: 23%;
 		width: 100%;
 		min-width: 492px;
-		content: url(${logoMin});
 	}
+
 	@media (max-width: 417px) {
 		top: 33%;
 		width: 100%;
 		min-width: 462px;
 	}
+
 	@media (max-width: 394px) {
 		top: 47%;
 		min-width: 400px;
 	}
+
 	@media (max-width: 342px) {
 		top: 62%;
 		min-width: 335px;

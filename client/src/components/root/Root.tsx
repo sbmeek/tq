@@ -6,9 +6,11 @@ import { InitContext } from 'global/context/InitContext';
 import Interweave from 'interweave';
 import 'intersection-observer';
 
+import logoMinSection1 from 'assets/images/presentation/logo_min_section1.svg';
 import logoMaxSection1 from 'assets/images/presentation/logo_max_section1.svg';
 import logoSection2 from 'assets/images/presentation/logo_section2.png';
 import logoMaxSection3 from 'assets/images/presentation/logo_max_section3.png';
+import logoMinSection3 from 'assets/images/presentation/logo_min_section3.png';
 
 import bg1 from 'assets/images/presentation/bg1.svg';
 import bg2 from 'assets/images/presentation/bg2.svg';
@@ -26,7 +28,8 @@ import {
 	TitleSection1,
 	ParagraphSection1,
 	FirstRowSection1,
-	LogoSection1,
+	LogoMaxSection1,
+	LogoMinSection1,
 	Bg1,
 	SecondRowSection1
 } from './Sections/Section1.style';
@@ -44,7 +47,8 @@ import {
 import {
 	Bg3,
 	FirstRowSection3,
-	LogoSection3,
+	LogoMaxSection3,
+	LogoMinSection3,
 	ParagraphSection3,
 	SecondRowSection3,
 	TextWrapperSection3,
@@ -100,7 +104,8 @@ export default function Root() {
 					{({ inView, ref }) => (
 						<Section ref={ref} isVisible={inView}>
 							<FirstRowSection1>
-								<LogoSection1 src={logoMaxSection1} alt="logo-section1" />
+								<LogoMaxSection1 src={logoMaxSection1} alt="logo-section1" />
+								<LogoMinSection1 src={logoMinSection1} alt="logo-section1" />
 							</FirstRowSection1>
 							<SecondRowSection1>
 								<Bg1 src={bg1} alt="bg1" />
@@ -144,7 +149,8 @@ export default function Root() {
 					{({ inView, ref }) => (
 						<Section ref={ref} isVisible={inView}>
 							<FirstRowSection3>
-								<LogoSection3 src={logoMaxSection3} alt="logo3" />
+								<LogoMaxSection3 src={logoMaxSection3} alt="logo3" />
+								<LogoMinSection3 src={logoMinSection3} alt="logo3" />
 							</FirstRowSection3>
 							<SecondRowSection3>
 								<Bg3 src={bg3} alt="bg3" />
