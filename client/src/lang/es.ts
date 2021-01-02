@@ -10,6 +10,11 @@ export default {
 			Title: 'Cuenta temporal',
 			Paragraph:
 				'Para recibir <span style="color: var(--tq-blue-01);">mensajes anónimos</span> rápidamente, no necesita registrarse, solo necesita un <span style="color: var(--tq-blue-01);">nombre de usuario</span>.'
+		},
+		Section3: {
+			Title: 'Stickers y etiquetas',
+			Paragraph:
+				'Acompaña tus <span style="color: var(--tq-blue-01);">respuestas</span> con <span style="color: var(--tq-blue-01);">stickers y etiquetas</span>.'
 		}
 	},
 	Main: {

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import InView from 'react-intersection-observer';
 import Button from 'shared/button/Button';
 import { Link } from 'react-router-dom';
@@ -8,9 +8,11 @@ import 'intersection-observer';
 
 import logoMaxSection1 from 'assets/images/presentation/logo_max_section1.svg';
 import logoSection2 from 'assets/images/presentation/logo_section2.png';
+import logoMaxSection3 from 'assets/images/presentation/logo_max_section3.png';
 
 import bg1 from 'assets/images/presentation/bg1.svg';
 import bg2 from 'assets/images/presentation/bg2.svg';
+import bg3 from 'assets/images/presentation/bg3.svg';
 
 import {
 	Container,
@@ -38,6 +40,16 @@ import {
 	TitleSection2,
 	ParagraphSection2
 } from './Sections/Section2.style';
+
+import {
+	Bg3,
+	FirstRowSection3,
+	LogoSection3,
+	ParagraphSection3,
+	SecondRowSection3,
+	TextWrapperSection3,
+	TitleSection3
+} from './Sections/Section3.style';
 
 function BtnCreateUsername<T extends { section: number | undefined }>({
 	section
@@ -69,6 +81,16 @@ export default function Root() {
 			lang: { Root: lang }
 		}
 	} = useContext(InitContext);
+
+	useEffect(() => {
+		if (process.env.NODE_ENV === 'development') {
+			window.addEventListener('load', () => {
+				window.scrollTo(0, document.body.scrollHeight);
+			});
+		} else {
+			return;
+		}
+	}, []);
 
 	return (
 		<>
@@ -115,6 +137,27 @@ export default function Root() {
 									<BtnCreateUsername section={2} />
 								</InnerWrapperSection2>
 							</SecondRowSection2>
+						</Section>
+					)}
+				</InView>
+				<InView triggerOnce threshold={0.244}>
+					{({ inView, ref }) => (
+						<Section ref={ref} isVisible={inView}>
+							<FirstRowSection3>
+								<LogoSection3 src={logoMaxSection3} alt="logo3" />
+							</FirstRowSection3>
+							<SecondRowSection3>
+								<Bg3 src={bg3} alt="bg3" />
+								<TextWrapperSection3>
+									<TitleSection3>{lang.Section3['Title']}</TitleSection3>
+									<ParagraphSection3>
+										<Interweave
+											allowAttributes
+											content={lang.Section3['Paragraph']}
+										/>
+									</ParagraphSection3>
+								</TextWrapperSection3>
+							</SecondRowSection3>
 						</Section>
 					)}
 				</InView>

@@ -9,6 +9,11 @@ export default {
 		Section2: {
 			Title: 'Temporal account',
 			Paragraph: `To get <span style="color: var(--tq-blue-01);">anonymous messages</span> quickly, you don't need to register, you'll need an <span style="color: var(--tq-blue-01);">username</span> only.`
+		},
+		Section3: {
+			Title: 'Stickers and labels',
+			Paragraph:
+				'Add <span style="color: var(--tq-blue-01);">stickers and labels</span> to your <span style="color: var(--tq-blue-01);">answers</span>.'
 		}
 	},
 	Main: {
