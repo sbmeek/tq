@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import InView from 'react-intersection-observer';
 import Button from 'shared/button/Button';
 import { Link } from 'react-router-dom';
@@ -85,22 +85,13 @@ export default function Root() {
 			lang: { Root: lang }
 		}
 	} = useContext(InitContext);
-
-	useEffect(() => {
-		if (process.env.NODE_ENV === 'development') {
-			window.addEventListener('load', () => {
-				window.scrollTo(0, document.body.scrollHeight);
-			});
-		} else {
-			return;
-		}
-	}, []);
+	const [isContainerLoaded, setIsContainerLoaded] = useState(false);
 
 	return (
 		<>
 			<HideMenucitoStyle />
-			<Container>
-				<InView triggerOnce threshold={0.244}>
+			<Container onLoad={() => setIsContainerLoaded(true)}>
+				<InView skip={!isContainerLoaded} triggerOnce threshold={0.244}>
 					{({ inView, ref }) => (
 						<Section ref={ref} isVisible={inView}>
 							<FirstRowSection1>
@@ -123,7 +114,7 @@ export default function Root() {
 						</Section>
 					)}
 				</InView>
-				<InView triggerOnce threshold={0.244}>
+				<InView skip={!isContainerLoaded} triggerOnce threshold={0.244}>
 					{({ inView, ref }) => (
 						<Section ref={ref} isVisible={inView}>
 							<FirstRowSection2>
@@ -145,7 +136,7 @@ export default function Root() {
 						</Section>
 					)}
 				</InView>
-				<InView triggerOnce threshold={0.244}>
+				<InView skip={!isContainerLoaded} triggerOnce threshold={0.244}>
 					{({ inView, ref }) => (
 						<Section ref={ref} isVisible={inView}>
 							<FirstRowSection3>
