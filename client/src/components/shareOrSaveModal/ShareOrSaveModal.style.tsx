@@ -78,7 +78,7 @@ export const ButtonShare = styled.button`
 		opacity: 1;
 	}
 `;
-export const Btn_ = styled.button`
+export const Btn = styled.button`
 	display: flex;
 	justify-content: center;
 	align-items: center;

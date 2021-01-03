@@ -1,8 +1,8 @@
 import React from 'react'
-import './Terms.css'
+import {Container} from './Terms.style'
 export default function Terms() {
 	return (
-		<div styleName="container">
+		<Container >
             <h1>TÉRMINOS Y/O POLÍTICAS</h1>
             <br/>
 			<h2>POLÍTICA DE PRIVACIDAD</h2>
@@ -623,6 +623,6 @@ export default function Terms() {
 				Preguntas acerca de los Términos de Servicio deben ser enviadas a
 				Sb-meek@Sbmeek.com
 			</p>
-		</div>
+		</Container>
 	)
 }

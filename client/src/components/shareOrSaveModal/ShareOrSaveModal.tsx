@@ -18,7 +18,7 @@ import {
 	Titulo,
 	Share,
 	ButtonShare,
-	Btn_
+	Btn
 } from './ShareOrSaveModal.style';
 
 export default function ShareOrSaveModal<
@@ -77,19 +77,19 @@ export default function ShareOrSaveModal<
 						<img src={share} alt="on-share" />
 					</ButtonShare>
 				</Share>
-				<Btn_ >
+				<Btn>
 					<h3>Other...</h3>
 					<img src={other} alt="on-other" />
 					<img src={other} alt="on-other" />
-				</Btn_>
-				<Btn_ onClick={() => openImage!()}>
+				</Btn>
+				<Btn onClick={() => openImage!()}>
 					<h3>save</h3>
 					<img src={descargar} alt="on-save" />
-				</Btn_>
-				<Btn_  onMouseDown={handleBtnCancelClick}>
+				</Btn>
+				<Btn  onMouseDown={handleBtnCancelClick}>
 					<span>close</span>
 					<span>X</span>
-				</Btn_>
+				</Btn>
 			</Modal>
 		</Overlay>
 	);
