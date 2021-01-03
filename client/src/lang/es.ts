@@ -20,6 +20,9 @@ export default {
 			Title: 'Donde quieras, cuando quieras',
 			Paragraph:
 				'Utilice <span style="color: var(--tq-blue-01);">TiKiu</span> en el <span style="color: var(--tq-blue-01);">dispositivo móvil</span> que desee.'
+		},
+		Section5: {
+			Title: 'Empiece a recibir mensajes anónimos ahora mismo'
 		}
 	},
 	Main: {

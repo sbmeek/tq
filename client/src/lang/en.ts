@@ -19,6 +19,9 @@ export default {
 			Title: 'Where you want, when you want',
 			Paragraph:
 				'Use <span style="color: var(--tq-blue-01);">TiKiu</span> in the <span style="color: var(--tq-blue-01);">mobile device</span> that you wish.'
+		},
+		Section5: {
+			Title: 'Start receiving anonymous messages right now'
 		}
 	},
 	Main: {

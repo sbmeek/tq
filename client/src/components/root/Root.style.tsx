@@ -26,7 +26,8 @@ export const Container = styled.div`
 
 export const Section = styled.div<{ isVisible: boolean }>`
 	${flexCenterColumn}
-	min-width: 100%;
+	width: 100%;
+	min-width: 256px;
 	height: 100%;
 	min-height: 605px;
 	position: relative;
@@ -72,6 +73,14 @@ export const btnCustomStyle = css<{ section: number | undefined }>`
 						}
 					}
 				`;
+			case 5:
+				return css`
+					& {
+						margin: 0;
+					}
+				`;
+			default:
+				return;
 		}
 	}}
 `;

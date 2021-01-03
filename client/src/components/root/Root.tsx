@@ -6,8 +6,8 @@ import { InitContext } from 'global/context/InitContext';
 import Interweave from 'interweave';
 import 'intersection-observer';
 
-import logoMinSection1 from 'assets/images/presentation/logo_min_section1.svg';
-import logoMaxSection1 from 'assets/images/presentation/logo_max_section1.svg';
+import logoMaxGeneral from 'assets/images/presentation/logo_max_general.png';
+import logoMinGeneral from 'assets/images/presentation/logo_min_general.png';
 import logoSection2 from 'assets/images/presentation/logo_section2.png';
 import logoMaxSection3 from 'assets/images/presentation/logo_max_section3.png';
 import logoMinSection3 from 'assets/images/presentation/logo_min_section3.png';
@@ -19,6 +19,7 @@ import bg1 from 'assets/images/presentation/bg1.svg';
 import bg2 from 'assets/images/presentation/bg2.svg';
 import bg3 from 'assets/images/presentation/bg3.svg';
 import bg4 from 'assets/images/presentation/bg4.svg';
+import bg5 from 'assets/images/presentation/bg5.svg';
 
 import {
 	Container,
@@ -70,6 +71,15 @@ import {
 	TitleSection4
 } from './Sections/Section4.style';
 
+import {
+	LogoPicSection5,
+	LogoImgSection5,
+	InnerContainerSection5,
+	Bg5,
+	WrapperSection5,
+	TitleSection5
+} from './Sections/Section5.style';
+
 function BtnCreateUsername<T extends { section: number | undefined }>({
 	section
 }: T) {
@@ -110,8 +120,8 @@ export default function Root() {
 					{({ inView, ref }) => (
 						<Section ref={ref} isVisible={inView}>
 							<FirstRowSection1>
-								<LogoMaxSection1 src={logoMaxSection1} alt="logo-section1" />
-								<LogoMinSection1 src={logoMinSection1} alt="logo-section1" />
+								<LogoMaxSection1 src={logoMaxGeneral} alt="logo-section1" />
+								<LogoMinSection1 src={logoMinGeneral} alt="logo-section1" />
 							</FirstRowSection1>
 							<SecondRowSection1>
 								<Bg1 src={bg1} alt="bg1" />
@@ -198,6 +208,23 @@ export default function Root() {
 									</ParagraphSection4>
 								</TextWrapperSection4>
 							</SecondRowSection4>
+						</Section>
+					)}
+				</InView>
+				<InView skip={!isContainerLoaded} triggerOnce threshold={0.244}>
+					{({ inView, ref }) => (
+						<Section ref={ref} isVisible={inView}>
+							<LogoPicSection5>
+								<source media="(max-width: 515px)" srcSet={logoMinGeneral} />
+								<LogoImgSection5 src={logoMaxGeneral} alt="logo-section5" />
+							</LogoPicSection5>
+							<InnerContainerSection5>
+								<Bg5 src={bg5} />
+								<WrapperSection5>
+									<TitleSection5>{lang.Section5['Title']}</TitleSection5>
+									<BtnCreateUsername section={5} />
+								</WrapperSection5>
+							</InnerContainerSection5>
 						</Section>
 					)}
 				</InView>
