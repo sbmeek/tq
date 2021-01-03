@@ -11,10 +11,14 @@ import logoMaxSection1 from 'assets/images/presentation/logo_max_section1.svg';
 import logoSection2 from 'assets/images/presentation/logo_section2.png';
 import logoMaxSection3 from 'assets/images/presentation/logo_max_section3.png';
 import logoMinSection3 from 'assets/images/presentation/logo_min_section3.png';
+import logoMaxSection4 from 'assets/images/presentation/logo_max_section4.png';
+import logoMinSection4 from 'assets/images/presentation/logo_min_section4.png';
+import logoReMinSection4 from 'assets/images/presentation/logo_remin_section4.png';
 
 import bg1 from 'assets/images/presentation/bg1.svg';
 import bg2 from 'assets/images/presentation/bg2.svg';
 import bg3 from 'assets/images/presentation/bg3.svg';
+import bg4 from 'assets/images/presentation/bg4.svg';
 
 import {
 	Container,
@@ -54,6 +58,17 @@ import {
 	TextWrapperSection3,
 	TitleSection3
 } from './Sections/Section3.style';
+
+import {
+	Bg4,
+	FirstRowSection4,
+	LogoImgSection4,
+	LogoPicSection4,
+	ParagraphSection4,
+	SecondRowSection4,
+	TextWrapperSection4,
+	TitleSection4
+} from './Sections/Section4.style';
 
 function BtnCreateUsername<T extends { section: number | undefined }>({
 	section
@@ -155,6 +170,34 @@ export default function Root() {
 									</ParagraphSection3>
 								</TextWrapperSection3>
 							</SecondRowSection3>
+						</Section>
+					)}
+				</InView>
+				<InView skip={!isContainerLoaded} triggerOnce threshold={0.244}>
+					{({ inView, ref }) => (
+						<Section ref={ref} isVisible={inView}>
+							<FirstRowSection4>
+								<LogoPicSection4>
+									<source
+										media="(max-width: 390px)"
+										srcSet={logoReMinSection4}
+									/>
+									<source media="(max-width: 501px)" srcSet={logoMinSection4} />
+									<LogoImgSection4 src={logoMaxSection4} alt="logo-section4" />
+								</LogoPicSection4>
+							</FirstRowSection4>
+							<SecondRowSection4>
+								<Bg4 src={bg4} alt="bg4" />
+								<TextWrapperSection4>
+									<TitleSection4>{lang.Section4['Title']}</TitleSection4>
+									<ParagraphSection4>
+										<Interweave
+											allowAttributes
+											content={lang.Section4['Paragraph']}
+										/>
+									</ParagraphSection4>
+								</TextWrapperSection4>
+							</SecondRowSection4>
 						</Section>
 					)}
 				</InView>

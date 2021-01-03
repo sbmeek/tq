@@ -15,6 +15,11 @@ export default {
 			Title: 'Stickers y etiquetas',
 			Paragraph:
 				'Acompaña tus <span style="color: var(--tq-blue-01);">respuestas</span> con <span style="color: var(--tq-blue-01);">stickers y etiquetas</span>.'
+		},
+		Section4: {
+			Title: 'Donde quieras, cuando quieras',
+			Paragraph:
+				'Utilice <span style="color: var(--tq-blue-01);">TiKiu</span> en el <span style="color: var(--tq-blue-01);">dispositivo móvil</span> que desee.'
 		}
 	},
 	Main: {

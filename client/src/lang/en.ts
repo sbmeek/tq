@@ -14,6 +14,11 @@ export default {
 			Title: 'Stickers and labels',
 			Paragraph:
 				'Add <span style="color: var(--tq-blue-01);">stickers and labels</span> to your <span style="color: var(--tq-blue-01);">answers</span>.'
+		},
+		Section4: {
+			Title: 'Where you want, when you want',
+			Paragraph:
+				'Use <span style="color: var(--tq-blue-01);">TiKiu</span> in the <span style="color: var(--tq-blue-01);">mobile device</span> that you wish.'
 		}
 	},
 	Main: {
@@ -32,7 +37,7 @@ export default {
 		BtnCopyLink: 'Copy your link here',
 		BtnInbox: 'Inbox',
 		AlertLinkCopied:
-			'Your link is used to receive <span style="color: var(--tq-red-03);">anonymous messages in inbox</span>. Share it on your <span style="color: var(--tq-red-03);">social networks</span>',
+			'Your link is used to receive < style="color: var(--tq-red-03);">anonymous messages in inbox</>. Share it on your <span style="color: var(--tq-red-03);">social networks</span>',
 		BtnLinkCopiedToClipboard: 'Link copied to clipboard',
 		BtnInfo: 'Info.'
 	},
