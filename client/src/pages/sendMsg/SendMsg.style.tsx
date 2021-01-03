@@ -267,20 +267,6 @@ export const CloudBottom = styled.div`
 		height: auto;
 	}
 
-	@media only screen and (max-width: 542px) {
-		& > img:nth-child(2) {
-			width: 130px;
-			max-height: 300px;
-			margin-left: 30px;
-		}
-	}
-	@media only screen and (max-width: 480px) {
-		& > img:nth-child(1) {
-			height: 44px;
-		}
-		& > img:nth-child(2) {
-			width: auto;
-			height: 55px;
-		}
-	}
+	
+	
 `;
