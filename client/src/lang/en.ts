@@ -22,6 +22,24 @@ export default {
 		},
 		Section5: {
 			Title: 'Start receiving anonymous messages right now'
+		},
+		Footer: {
+			Group1: {
+				Title: 'Product',
+				Items: ['Download', 'Why TiKiu', 'Information']
+			},
+			Group2: {
+				Title: 'Company',
+				Items: ['About us', 'Brand']
+			},
+			Group3: {
+				Title: 'Resources',
+				Items: ['Technical support', 'Help', 'Security']
+			},
+			Group4: {
+				Title: 'Policies',
+				Items: ['Terms', 'Conditions', 'Privacy']
+			}
 		}
 	},
 	Main: {

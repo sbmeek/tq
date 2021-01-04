@@ -14,6 +14,7 @@ import logoMinSection3 from 'assets/images/presentation/logo_min_section3.png';
 import logoMaxSection4 from 'assets/images/presentation/logo_max_section4.png';
 import logoMinSection4 from 'assets/images/presentation/logo_min_section4.png';
 import logoReMinSection4 from 'assets/images/presentation/logo_remin_section4.png';
+import logoFooter from 'assets/images/presentation/logo_footer.svg';
 
 import bg1 from 'assets/images/presentation/bg1.svg';
 import bg2 from 'assets/images/presentation/bg2.svg';
@@ -21,11 +22,24 @@ import bg3 from 'assets/images/presentation/bg3.svg';
 import bg4 from 'assets/images/presentation/bg4.svg';
 import bg5 from 'assets/images/presentation/bg5.svg';
 
+import arrowFooter from 'assets/images/presentation/arrow_lang-toggler.svg';
+
+import esFlag from 'assets/images/presentation/lang-flags/es-flag.svg';
+
 import {
 	Container,
 	Section,
 	HideMenucitoStyle,
-	btnCustomStyle
+	btnCustomStyle,
+	Footer,
+	LogoFooterWrapper,
+	LangToggler,
+	ColumnFooter,
+	FlagLangToggler,
+	LinkFooter,
+	GroupTitleFooter,
+	GroupWrapper,
+	InnerContainerFooter
 } from './Root.style';
 
 import {
@@ -228,6 +242,53 @@ export default function Root() {
 						</Section>
 					)}
 				</InView>
+				<Footer>
+					<InnerContainerFooter>
+						<ColumnFooter firstColumn>
+							<LogoFooterWrapper>
+								<img src={logoFooter} alt="logo-footer" />
+								<h1>TiKiu</h1>
+							</LogoFooterWrapper>
+							<LangToggler>
+								<FlagLangToggler src={esFlag} alt="es-flag" />
+								<span>Español</span>
+								<img src={arrowFooter} alt="arrow_lang-toggler" />
+							</LangToggler>
+						</ColumnFooter>
+						<ColumnFooter>
+							<GroupWrapper>
+								<GroupTitleFooter>{lang.Footer.Group1.Title}</GroupTitleFooter>
+								{lang.Footer.Group1.Items.map((item: string, idx: number) => (
+									<LinkFooter key={idx}>{item}</LinkFooter>
+								))}
+							</GroupWrapper>
+						</ColumnFooter>
+						<ColumnFooter>
+							<GroupWrapper>
+								<GroupTitleFooter>{lang.Footer.Group2.Title}</GroupTitleFooter>
+								{lang.Footer.Group2.Items.map((item: string, idx: number) => (
+									<LinkFooter key={idx}>{item}</LinkFooter>
+								))}
+							</GroupWrapper>
+						</ColumnFooter>
+						<ColumnFooter>
+							<GroupWrapper>
+								<GroupTitleFooter>{lang.Footer.Group3.Title}</GroupTitleFooter>
+								{lang.Footer.Group3.Items.map((item: string, idx: number) => (
+									<LinkFooter key={idx}>{item}</LinkFooter>
+								))}
+							</GroupWrapper>
+						</ColumnFooter>
+						<ColumnFooter>
+							<GroupWrapper>
+								<GroupTitleFooter>{lang.Footer.Group4.Title}</GroupTitleFooter>
+								{lang.Footer.Group4.Items.map((item: string, idx: number) => (
+									<LinkFooter key={idx}>{item}</LinkFooter>
+								))}
+							</GroupWrapper>
+						</ColumnFooter>
+					</InnerContainerFooter>
+				</Footer>
 			</Container>
 		</>
 	);

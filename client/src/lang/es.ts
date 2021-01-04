@@ -23,6 +23,24 @@ export default {
 		},
 		Section5: {
 			Title: 'Empiece a recibir mensajes anónimos ahora mismo'
+		},
+		Footer: {
+			Group1: {
+				Title: 'Producto',
+				Items: ['Descargar', 'Por qué TiKiu', 'Información']
+			},
+			Group2: {
+				Title: 'Compañía',
+				Items: ['Sobre nosotros', 'Marca']
+			},
+			Group3: {
+				Title: 'Recursos',
+				Items: ['Soporte técnico', 'Ayuda', 'Seguridad']
+			},
+			Group4: {
+				Title: 'Políticas',
+				Items: ['Términos', 'Condiciones', 'Privacidad']
+			}
 		}
 	},
 	Main: {
