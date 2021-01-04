@@ -16,6 +16,7 @@ export default function Labels<
 
 	return (
 		<Container className="d-text-select">
+			<div><h1>Label</h1></div>
 			<Label>
 				<span role="img" aria-label="seen" onClick={labelClickHandler}>
 					✔️

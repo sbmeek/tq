@@ -1,5 +1,5 @@
 import React from 'react';
-import { Bgcolorscontainer, Bgcolor } from './BgColors.style';
+import { Bgcolorscontainer, Bgcolor, Tittle } from './BgColors.style';
 
 export default function BgColors<
 	T extends {
@@ -13,6 +13,8 @@ export default function BgColors<
 	};
 
 	return (
+		<div>
+		<Tittle><h1>Colors</h1></Tittle>
 		<Bgcolorscontainer>
 			<Bgcolor style={{ background: '#f0210f' }} onClick={bgColorClickHandler}>
 				<div></div>
@@ -51,5 +53,6 @@ export default function BgColors<
 				<div></div>
 			</Bgcolor>
 		</Bgcolorscontainer>
+		</div>
 	);
 }

@@ -1,5 +1,11 @@
 import styled from 'styled-components';
 
+export const Tittle = styled.div `
+    height: 22%;
+    display: flex;
+    align-items: flex-end;
+    padding-left: 17px;
+`
 export const Bgcolorscontainer = styled.div`
 	display: flex;
 	flex-wrap: wrap;
@@ -7,13 +13,13 @@ export const Bgcolorscontainer = styled.div`
 	align-content: flex-start;
 	width: 100%;
 	height: 100%;
-	padding-top: 32px;
 	max-width: 280px;
 	@media (max-width: 490px) {
 		width: 284px;
 		min-width: 284px;
 		max-width: -1px;
 	}
+	
 `;
 
 export const Bgcolor = styled.div`

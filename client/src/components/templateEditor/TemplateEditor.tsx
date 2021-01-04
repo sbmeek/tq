@@ -311,6 +311,7 @@ function TextEditor<
 
 	return (
 		<TextEditorContainer id={id}>
+			<div><h1>message</h1></div>
 			<InputAnswerContainer>
 				<InputAnswerInnerContainer>
 					<ReactQuill

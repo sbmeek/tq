@@ -248,6 +248,12 @@ export const TextEditorContainer = styled.div`
 	@media (max-width: 490px) {
 		max-width: 272px;
 	}
+	& > div:nth-child(1){
+		padding: 0px 0px 18px 28px;
+		@media (max-width: 490px) {
+			padding:0px 0px 0px 27px;
+		}
+	}
 `;
 
 export const InputAnswerContainer = styled.div`

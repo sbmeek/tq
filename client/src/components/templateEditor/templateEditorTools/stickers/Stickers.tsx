@@ -9,7 +9,7 @@ import stTodoBien from 'assets/images/template-editor/stickers/st-todo-bien.png'
 import stWisqui from 'assets/images/template-editor/stickers/st-wisqui.png';
 import stYete from 'assets/images/template-editor/stickers/st-y-ete.png';
 
-import { Container, Sticker } from './Stickers.style';
+import { Container, Sticker, Tittle } from './Stickers.style';
 
 export default function Stickers<
 	T extends {
@@ -34,6 +34,7 @@ export default function Stickers<
 
 	return (
 		<Container>
+			<Tittle><h1>Stickers</h1></Tittle>
 			{stickersArr.current.map((st, idx) => (
 				<Sticker onMouseDown={handleStickerClick} key={idx}>
 					<img src={st} alt="sticker" />

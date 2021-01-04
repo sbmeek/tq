@@ -9,7 +9,11 @@ export const Container = styled.div`
 	height: 100%;
 	padding-top: 28px;
 	max-width: 100%;
+
 `;
+export const Tittle = styled.div `
+width: 89%;
+`
 
 export const Sticker = styled.div`
 	display: flex;

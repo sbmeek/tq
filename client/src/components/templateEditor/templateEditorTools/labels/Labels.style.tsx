@@ -7,6 +7,9 @@ export const Container = styled.div`
 	width: 100%;
 	height: 100%;
 	padding: 32px 12px 0 12px;
+	& > div:nth-child(1){
+		width: 89%
+	}
 `;
 
 export const Label = styled.button`
