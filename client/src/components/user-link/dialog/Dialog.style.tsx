@@ -24,8 +24,8 @@ export const DialogWrapper = styled.div`
 
 export const BtnCloseDialog = styled.button`
 	position: absolute;
-	top: 101px;
-	left: -16px;
+	top: 131px;
+	left: -1px;
 	background: rgba(255, 0, 0, 0.692);
 	color: #fff;
 	border-radius: 25px;
@@ -34,6 +34,6 @@ export const BtnCloseDialog = styled.button`
 	min-width: 17px;
 	cursor: pointer;
 	@media (max-width: 780px) {
-		left: 100%;
+		top: 110px;
 	}
 `;
