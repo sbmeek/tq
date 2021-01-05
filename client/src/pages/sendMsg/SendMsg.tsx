@@ -28,6 +28,7 @@ import {
 	InputContainer,
 	CloudBottom
 } from './SendMsg.style';
+import Loader from 'components/loader/Loader';
 
 type DataType = {
 	key?: string;
@@ -43,6 +44,7 @@ export default function <
 		socket,
 		lang: { MsgIdx: lang }
 	} = useContext(InitContext).state;
+	const [isLoading, setIsLoading] = useState(true);
 	const [userExists, setUserExists] = useState(true);
 	params.username = params.username.toLowerCase();
 
@@ -56,12 +58,14 @@ export default function <
 				if (null !== data && data.expired) {
 					setUserExists(false);
 				}
+				setIsLoading(false);
 			});
 		}
 	}, [socket, params.username]);
 
 	return (
 		<>
+			{isLoading && <Loader />}
 			{!userExists ? (
 				<Error404 />
 			) : (
@@ -133,7 +137,7 @@ function Success<
 								<h5>{lang['SecondRowText']}</h5>
 								<Box>
 									<div>
-										<button title="Bold" type="button" >
+										<button title="Bold" type="button">
 											<img src={bold} alt="editor" />
 										</button>
 										<button title="Italic" type="button">
@@ -146,8 +150,8 @@ function Success<
 											<img src={underlined} alt="editor" />
 										</button>
 										<div>
-											<button type="button" >
-												<img src={smile}  alt="emojis" />
+											<button type="button">
+												<img src={smile} alt="emojis" />
 											</button>
 										</div>
 									</div>
@@ -174,12 +178,8 @@ function Success<
 											<img src={arrow} alt="arrow icon" />
 										</button>
 									</InputContainer>
-									<CloudBottom >
-										<img
-											src={cloud1}
-											alt="cloud1-bottom2"
-											
-										></img>
+									<CloudBottom>
+										<img src={cloud1} alt="cloud1-bottom2"></img>
 									</CloudBottom>
 								</Box>
 							</EnLayer>
