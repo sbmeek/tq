@@ -13,7 +13,7 @@ export const btnCustomStyle = css`
 			box-shadow: none !important;
 		}
 		& > img {
-			width: 33px;
+			width: 23px;
 		}
 	}
 `;
@@ -38,8 +38,8 @@ export const inputStyles = css`
 	}
 `;
 export const modalcustom = css`
-&{
-	height: 328px;
-	width: 386px;
-}
+	& {
+		height: 328px;
+		width: 386px;
+	}
 `;
