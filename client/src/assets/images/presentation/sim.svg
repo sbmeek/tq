@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="35.999" height="35.999" viewBox="0 0 35.999 35.999">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="iconfinder_icons_user2_1564535" width="20.199" height="20.199" fill="#9e0004"/>
+    </clipPath>
+  </defs>
+  <g id="sim" transform="translate(0 0)">
+    <path id="Trazado_53" data-name="Trazado 53" d="M203.2-72.059a18.008,18.008,0,0,1,18,18,18.008,18.008,0,0,1-18,18,18.008,18.008,0,0,1-18-18A18.008,18.008,0,0,1,203.2-72.059Z" transform="translate(-185.199 72.059)" fill="#1a1a1a" fill-rule="evenodd"/>
+    <g id="icon-account" transform="translate(7.9 7.9)">
+      <g id="Grupo_39" data-name="Grupo 39">
+        <g id="Grupo_38" data-name="Grupo 38">
+          <g id="Grupo_37" data-name="Grupo 37" clip-path="url(#clip-path)">
+            <g id="icons" transform="translate(-13.466 -14.308)">
+              <path id="Trazado_783" data-name="Trazado 783" d="M18.273-6.11A23.58,23.58,0,1,1-5.308,17.47,23.591,23.591,0,0,1,18.273-6.11Zm-1.766.065C8.915-6.045-4.615,8.669-4.615,16.261s15.3,30.231,22.887,30.231S43.755,26.271,43.755,18.679,24.1-6.045,16.507-6.045Zm9.358,31.139a11.459,11.459,0,0,1-15.183,0,1.118,1.118,0,0,1-.115-1.61A10.336,10.336,0,0,1,15.4,20.378a6.336,6.336,0,0,0,5.751,0,9.8,9.8,0,0,1,4.831,3.106A1.034,1.034,0,0,1,25.864,25.094ZM18.273,8.416c2.531,0,4.6,2.531,4.6,5.751s-2.07,5.751-4.6,5.751-4.6-2.531-4.6-5.751,2.07-5.751,4.6-5.751Z" transform="translate(5.308 6.11)" fill="#fff" fill-rule="evenodd"/>
+            </g>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

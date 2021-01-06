@@ -19,11 +19,12 @@ import { AccountIcon, btnCustomStyle } from '../style';
 export default function Login<
 	T extends {
 		errMsg: string;
+		fromMenu?: boolean;
 		setErrMsg: React.Dispatch<React.SetStateAction<string>>;
 		setIsModalOpened: React.Dispatch<React.SetStateAction<boolean>>;
-		setShowMenu: React.Dispatch<React.SetStateAction<boolean>>;
+		setShowMenu?: React.Dispatch<React.SetStateAction<boolean>>;
 	}
->({ errMsg, setErrMsg, setIsModalOpened, setShowMenu }: T) {
+>({ errMsg, fromMenu, setErrMsg, setIsModalOpened, setShowMenu }: T) {
 	const {
 		AuthModal: { Login: lang }
 	} = useContext(InitContext).state.lang;
@@ -63,7 +64,9 @@ export default function Login<
 			} else {
 				setErrMsg('');
 				setIsModalOpened(false);
-				setShowMenu(false);
+				if (fromMenu) {
+					setShowMenu!(false);
+				}
 				dispatch(getAuthInfoAction());
 			}
 			setToggleErrMsg(true);

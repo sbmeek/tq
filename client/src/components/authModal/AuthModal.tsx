@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import Signup from './signup/Signup';
 import facebookLogo from 'assets/images/icons/share-icons/facebook.svg';
 import googleLogo from 'assets/images/icons/share-icons/google.svg';
@@ -30,11 +30,11 @@ import Modal from 'shared/modal/Modal';
 export default function AuthModal<
 	T extends {
 		opened: boolean;
-		isMobile: boolean;
+		fromMenu?: boolean;
 		setOpened: React.Dispatch<React.SetStateAction<boolean>>;
-		setShowMenu: React.Dispatch<React.SetStateAction<boolean>>;
+		setShowMenu?: React.Dispatch<React.SetStateAction<boolean>>;
 	}
->({ opened, isMobile, setOpened, setShowMenu }: T) {
+>({ opened, fromMenu, setOpened, setShowMenu }: T) {
 	const [errMsg, setErrMsg] = useState('');
 	const [showLogin, setShowLogin] = useState(true);
 	const [toggleContentMobileAnim, setToggleContentMobileAnim] = useState(false);
@@ -43,6 +43,18 @@ export default function AuthModal<
 	const { AuthModal: lang } = useContext(InitContext).state.lang;
 
 	const dispatch = useDispatch();
+
+	const [isMobile, setIsMobile] = useState(false);
+
+	const checkScreenSize = () => {
+		setIsMobile(document.documentElement.clientWidth <= 600);
+	};
+
+	useEffect(() => {
+		checkScreenSize();
+		window.addEventListener('resize', checkScreenSize);
+		return () => window.removeEventListener('resize', checkScreenSize);
+	}, []);
 
 	const handleOverlayClick = (
 		e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>
@@ -69,7 +81,9 @@ export default function AuthModal<
 			} else {
 				setErrMsg('');
 				setOpened(false);
-				setShowMenu(false);
+				if (fromMenu) {
+					setShowMenu!(false);
+				}
 				dispatch(getAuthInfoAction());
 			}
 		}
@@ -88,7 +102,9 @@ export default function AuthModal<
 			} else {
 				setErrMsg('');
 				setOpened(false);
-				setShowMenu(false);
+				if (fromMenu) {
+					setShowMenu!(false);
+				}
 				dispatch(getAuthInfoAction());
 			}
 		}
@@ -130,6 +146,7 @@ export default function AuthModal<
 									{showLogin ? (
 										<Login
 											errMsg={errMsg}
+											fromMenu={fromMenu}
 											setErrMsg={setErrMsg}
 											setIsModalOpened={setOpened}
 											setShowMenu={setShowMenu}

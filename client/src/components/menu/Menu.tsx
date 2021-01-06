@@ -38,7 +38,6 @@ export default function Menu() {
 	const [showMenu, setShowMenu] = useState(false);
 	const [shouldShowOverlay, setShouldShowOverlay] = useState(false);
 	const [showAuthModal, setShowAuthModal] = useState(false);
-	const [isMobile, setIsMobile] = useState(false);
 	const { Menu: lang } = useContext(InitContext).state.lang;
 
 	const { isAuthenticated } = useSelector(
@@ -47,16 +46,6 @@ export default function Menu() {
 	const dispatch = useDispatch();
 
 	const location = useLocation();
-
-	const checkScreenSize = () => {
-		setIsMobile(document.documentElement.clientWidth <= 600);
-	};
-
-	useEffect(() => {
-		checkScreenSize();
-		window.addEventListener('resize', checkScreenSize);
-		return () => window.removeEventListener('resize', checkScreenSize);
-	}, []);
 
 	useEffect(() => {
 		const params = new URLSearchParams(location.search);
@@ -183,7 +172,7 @@ export default function Menu() {
 				opened={showAuthModal}
 				setOpened={setShowAuthModal}
 				setShowMenu={setShowMenu}
-				isMobile={isMobile}
+				fromMenu
 			/>
 		</Container>
 	);

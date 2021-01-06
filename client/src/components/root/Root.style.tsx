@@ -24,6 +24,35 @@ export const Container = styled.div`
 	height: 100%;
 `;
 
+export const ButtonFlyContainer = styled.div`
+	position: absolute;
+	top: 0;
+	width: 92%;
+	height: 70px;
+	display: flex;
+	justify-content: flex-end;
+	align-items: flex-end;
+	z-index: 2;
+
+	& > button {
+		background: white;
+		width: 116px;
+		height: 41px;
+		display: flex;
+		border-radius: 20px;
+		justify-content: center;
+		align-items: center;
+		box-shadow: 0 0 5px -0.78px rgba(0, 0, 0, 0.5);
+		font-size: 18px;
+		cursor: pointer;
+	}
+
+	& img {
+		width: 20px;
+		margin-left: 5px;
+	}
+`;
+
 export const Section = styled.div<{ isVisible: boolean }>`
 	${flexCenterColumn}
 	width: 100%;

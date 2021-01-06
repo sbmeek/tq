@@ -3,6 +3,7 @@ import InView from 'react-intersection-observer';
 import Button from 'shared/button/Button';
 import { Link } from 'react-router-dom';
 import { InitContext } from 'global/context/InitContext';
+import AuthModal from '../authModal/AuthModal';
 import Interweave from 'interweave';
 import 'intersection-observer';
 
@@ -23,8 +24,8 @@ import bg4 from 'assets/images/presentation/bg4.svg';
 import bg5 from 'assets/images/presentation/bg5.svg';
 
 import arrowFooter from 'assets/images/presentation/arrow_lang-toggler.svg';
-
 import esFlag from 'assets/images/presentation/lang-flags/es-flag.svg';
+import sim from 'assets/images/presentation/sim.svg';
 
 import {
 	Container,
@@ -39,7 +40,8 @@ import {
 	LinkFooter,
 	GroupTitleFooter,
 	GroupWrapper,
-	InnerContainerFooter
+	InnerContainerFooter,
+	ButtonFlyContainer
 } from './Root.style';
 
 import {
@@ -125,15 +127,30 @@ export default function Root() {
 		}
 	} = useContext(InitContext);
 	const [isContainerLoaded, setIsContainerLoaded] = useState(false);
+	const [showAuthModal, setShowAuthModal] = useState(false);
+
+	const handleAuthClick = () => {
+		setShowAuthModal(true);
+	};
 
 	return (
 		<>
 			<HideMenucitoStyle />
+
 			<Container onLoad={() => setIsContainerLoaded(true)}>
 				<InView skip={!isContainerLoaded} triggerOnce threshold={0.244}>
 					{({ inView, ref }) => (
 						<Section ref={ref} isVisible={inView}>
 							<FirstRowSection1>
+								<ButtonFlyContainer>
+									<button onClick={handleAuthClick}>
+										{lang['BtnLogin']} <img src={sim} alt="sim" />
+									</button>
+								</ButtonFlyContainer>
+								<AuthModal
+									opened={showAuthModal}
+									setOpened={setShowAuthModal}
+								/>
 								<LogoMaxSection1 src={logoMaxGeneral} alt="logo-section1" />
 								<LogoMinSection1 src={logoMinGeneral} alt="logo-section1" />
 							</FirstRowSection1>

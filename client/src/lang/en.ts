@@ -1,6 +1,7 @@
 export default {
 	Root: {
 		BtnCreateUsername: 'Create username',
+		BtnLogin: 'Log in',
 		Section1: {
 			Title: 'Anonymous messages',
 			Paragraph:
