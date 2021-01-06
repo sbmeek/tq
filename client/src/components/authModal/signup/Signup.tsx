@@ -85,13 +85,16 @@ export default function Signup<
 
 	const valdUsername = async (username: string) => {
 		const usernameRegex = /^[a-zA-Z0-9]*$/;
+	
 
 		let errored = false;
 
 		if (username.length < 3) errored = true;
 		if (!usernameRegex.test(username)) errored = true;
+		if (username.length > 20) errored = true
 
 		return errored;
+		
 	};
 
 	const handleFieldChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -201,6 +204,7 @@ export default function Signup<
 							autoComplete="off"
 							spellCheck="false"
 							value={fields['username'].value}
+							maxLength={20}
 						/>
 						{focusedFieldId === 'username' && !fields['username'].valid && (
 							<FieldHelper fieldId="username" />

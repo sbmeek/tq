@@ -113,7 +113,7 @@ export default {
 			TermsNConditions: 'Términos y condiciones',
 			FieldHelper: {
 				usernameHelpMsg:
-					'El nombre de usuario debe contener más de 3 caracteres y solo puede contener letras y numeros.',
+					'El nombre de usuario debe contener más de 3 caracteres y menos de 20 (Solo puede contener letras y numeros.)',
 				emailHelpMsg:
 					'Recuerde ingresar un email válido ya que le enviaremos un código de verificación de esa manera su cuenta será más segura.',
 				pwdHelpMsg:

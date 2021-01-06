@@ -108,7 +108,7 @@ const toggleHelpBox = keyframes`
 export const InfoBox = styled.div`
 	position: absolute;
 	width: 260px;
-	height: 80px;
+	height: 87px;
 	background: var(--tq-blue-00);
 	top: 96%;
 	left: 4%;
