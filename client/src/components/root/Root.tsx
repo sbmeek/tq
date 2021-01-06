@@ -136,7 +136,7 @@ export default function Root() {
 	return (
 		<>
 			<HideMenucitoStyle />
-
+			<AuthModal opened={showAuthModal} setOpened={setShowAuthModal} />
 			<Container onLoad={() => setIsContainerLoaded(true)}>
 				<InView skip={!isContainerLoaded} triggerOnce threshold={0.244}>
 					{({ inView, ref }) => (
@@ -147,10 +147,6 @@ export default function Root() {
 										{lang['BtnLogin']} <img src={sim} alt="sim" />
 									</button>
 								</ButtonFlyContainer>
-								<AuthModal
-									opened={showAuthModal}
-									setOpened={setShowAuthModal}
-								/>
 								<LogoMaxSection1 src={logoMaxGeneral} alt="logo-section1" />
 								<LogoMinSection1 src={logoMinGeneral} alt="logo-section1" />
 							</FirstRowSection1>
