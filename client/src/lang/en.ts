@@ -44,7 +44,7 @@ export default {
 		}
 	},
 	Main: {
-		InputPlaceholder: 'CREATE AN USERNAME FOR TQ',
+		InputPlaceholder: 'Create a username',
 		BtnInbox: 'Inbox',
 		BtnContacts: 'Contacts',
 		BtnHelp: 'Help',

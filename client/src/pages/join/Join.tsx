@@ -3,17 +3,13 @@ import React, {
 	useEffect,
 	useRef,
 	useContext,
-	FormEvent,
-	FocusEvent,
-	KeyboardEvent,
-	ChangeEvent
+	FormEvent
 } from 'react';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import logo from 'assets/images/ltqrNEW.png';
 import { getAuthInfoAction } from 'global/ducks/authDucks';
 import { InitContext } from 'global/context/InitContext';
-import arrow from 'assets/images/icons/icons-main/icon-arrow.svg';
 import Help from 'assets/images/icons/icons-main/icon-help.svg';
 import info from 'assets/images/icons/icons-main/icon-info.svg';
 import {
@@ -25,11 +21,10 @@ import {
 	FieldTQ,
 	FirstFieldRow,
 	SecondFieldRow,
-	Textarea,
-	MainBtn,
 	btnCustomStyle
 } from './Join.style';
 import Button from 'shared/button/Button';
+import MainTextInput from 'components/main-text-input/MainTextInput';
 
 type DataType = {
 	_id: string;
@@ -42,9 +37,7 @@ export default function MainLogin() {
 	const [showSubmitBtn, setShowSubmitBtn] = useState(false);
 	const [isLogoLoaded, setIsLogoLoaded] = useState(false);
 	const [isFieldLoaded, setIsFieldLoaded] = useState(false);
-	const tqField = useRef<HTMLTextAreaElement>(null);
 	const tqForm = useRef<HTMLFormElement>(null);
-	const isFieldDisabled = useRef(false);
 	const dispatch = useDispatch();
 
 	const {
@@ -100,43 +93,6 @@ export default function MainLogin() {
 		});
 	};
 
-	const formatVal = (val: string): string => {
-		let l = val.length;
-		return val!.slice(0, l - (l - 20)) as string;
-	};
-
-	const handleFieldChange = (
-		e: ChangeEvent<HTMLTextAreaElement> & KeyboardEvent<HTMLTextAreaElement>
-	) => {
-		const curr = tqForm.current!;
-		const targetElement = e.target as HTMLTextAreaElement;
-		console.log(e.key);
-		if (e.key === 'Enter') {
-			curr.dispatchEvent(new Event('submit', { cancelable: true }));
-			curr.disabled = true;
-			isFieldDisabled.current = true;
-		}
-		if (!isFieldDisabled.current) {
-			let { value: val } = targetElement;
-			val = val.match(/^[a-zA-Z0-9-\s]*$/) ? val : username;
-			val = val.replace(
-				/\s/g,
-				val[0] !== ' ' &&
-					val[targetElement.selectionStart] !== '-' &&
-					val[targetElement.selectionStart - 2] !== '-'
-					? '-'
-					: ''
-			);
-			setUsername(formatVal(val));
-			setShowSubmitBtn(val.length > 0);
-		}
-	};
-
-	const handleFieldFocus = (e: FocusEvent<HTMLTextAreaElement>) => {
-		setInputMode(!(e.type === 'blur' && username.length === 0));
-		if (e.type === 'focus') tqField.current!.focus();
-	};
-
 	return (
 		<MainContainer data-testid="main-container">
 			<FormContainer ref={tqForm} onSubmit={handleFormSubmit}>
@@ -157,28 +113,15 @@ export default function MainLogin() {
 							tabIndex={-1}
 							data-show-submitbtn={showSubmitBtn}
 						>
-							<Textarea
-								value={username}
-								id="usrTQ"
-								data-name="tquser"
-								isInputMode={inputMode}
-								data-type={inputMode ? 'text' : 'button'}
-								onChange={handleFieldChange}
-								onFocus={handleFieldFocus}
-								onBlur={handleFieldFocus}
-								onKeyPress={handleFieldChange}
-								ref={tqField}
-								spellCheck="false"
-								autoComplete="off"
-								maxLength={20}
-								placeholder={!inputMode ? lang['InputPlaceholder'] : ''}
-								data-testid="username-field"
-							></Textarea>
-							{showSubmitBtn && (
-								<MainBtn type="submit" data-testid="btn-submit">
-									<img src={arrow} alt="arrow" />
-								</MainBtn>
-							)}
+							<MainTextInput
+								username={username}
+								setUsername={setUsername}
+								inputMode={inputMode}
+								setInputMode={setInputMode}
+								showSubmitBtn={showSubmitBtn}
+								setShowSubmitBtn={setShowSubmitBtn}
+								tqForm={tqForm}
+							/>
 						</FirstFieldRow>
 						<SecondFieldRow>
 							<Button

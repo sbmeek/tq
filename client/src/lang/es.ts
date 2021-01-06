@@ -45,7 +45,7 @@ export default {
 		}
 	},
 	Main: {
-		InputPlaceholder: 'CREA UN NOMBRE PARA TQ',
+		InputPlaceholder: 'Crear nombre de usuario',
 		BtnInbox: 'Bandeja',
 		BtnContacts: 'Contactos',
 		BtnHelp: 'Ayuda',
