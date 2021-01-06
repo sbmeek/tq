@@ -12,6 +12,7 @@ const Inbx = lazy(() => import('pages/inbox/Inbox'));
 const Error404 = lazy(() => import('pages/error404/Error404'));
 const Msg = lazy(() => import('pages/sendMsg/SendMsg'));
 const Terms = lazy(() => import('pages/terms/Terms'));
+const Politics = lazy(()=> import('pages/politics/Politics'));
 const VerifyAccount = lazy(() =>
 	import('components/verifyAccount/VerifyAccount')
 );
@@ -52,6 +53,7 @@ export default function Routes() {
 										/>
 										<Route path="/account/verify" component={VerifyAccount} />
 										<Route path="/terms" component={Terms} />
+										<Route path="/politics" component={Politics} />
 										<Route exact path="/:username" component={Msg} />
 										<Route path="*">
 											<Error404 />
