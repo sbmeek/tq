@@ -39,7 +39,7 @@ export default {
 			},
 			Group4: {
 				Title: 'Políticas',
-				Items: ['Términos', 'Condiciones', 'Privacidad']
+				Items: ['Términos & Condiciones', 'Privacidad']
 			}
 		}
 	},
