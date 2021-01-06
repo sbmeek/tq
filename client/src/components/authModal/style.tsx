@@ -20,7 +20,7 @@ export const btnCustomStyle = css`
 
 export const inputStyles = css`
 	& {
-		background: var(--tq-gray-02);
+		background-color: var(--tq-gray-02);
 		width: 93%;
 		height: 47px;
 		border-radius: 20px;
