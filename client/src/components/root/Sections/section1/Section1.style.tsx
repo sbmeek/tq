@@ -1,7 +1,36 @@
 import styled, { css } from 'styled-components';
-import { flexCenterColumn } from '../Root.style';
+import { flexCenterColumn } from '../../Root.style';
 
-export const FirstRowSection1 = styled.div`
+export const ButtonFlyContainer = styled.div`
+	position: absolute;
+	top: 0;
+	width: 92%;
+	height: 70px;
+	display: flex;
+	justify-content: flex-end;
+	align-items: flex-end;
+	z-index: 2;
+
+	& > button {
+		background: white;
+		width: 116px;
+		height: 41px;
+		display: flex;
+		border-radius: 20px;
+		justify-content: center;
+		align-items: center;
+		box-shadow: 0 0 5px -0.78px rgba(0, 0, 0, 0.5);
+		font-size: 18px;
+		cursor: pointer;
+	}
+
+	& img {
+		width: 20px;
+		margin-left: 5px;
+	}
+`;
+
+export const FirstRow = styled.div`
 	position: relative;
 	height: 30%;
 	min-height: 180px;
@@ -19,7 +48,7 @@ const logoStyle = css`
 	}
 `;
 
-export const LogoMaxSection1 = styled.img`
+export const LogoMax = styled.img`
 	${logoStyle}
 	top: 20%;
 	min-width: 510px;
@@ -31,7 +60,7 @@ export const LogoMaxSection1 = styled.img`
 	}
 `;
 
-export const LogoMinSection1 = styled.img`
+export const LogoMin = styled.img`
 	${logoStyle}
 	display: none;
 
@@ -59,7 +88,7 @@ export const LogoMinSection1 = styled.img`
 	}
 `;
 
-export const SecondRowSection1 = styled.div`
+export const SecondRow = styled.div`
 	position: relative;
 	display: flex;
 	height: 70%;
@@ -69,14 +98,14 @@ export const SecondRowSection1 = styled.div`
 	justify-content: center;
 `;
 
-export const Bg1 = styled.img`
+export const Bg = styled.img`
 	position: absolute;
 	min-width: 113%;
 	min-height: 443px;
 	max-height: 445px;
 `;
 
-export const InnerWrapperSection1 = styled.div`
+export const InnerWrapper = styled.div`
 	${flexCenterColumn}
 	width: 100%;
 	min-width: 390px;
@@ -85,7 +114,7 @@ export const InnerWrapperSection1 = styled.div`
 	z-index: 1;
 `;
 
-export const TitleSection1 = styled.h1`
+export const Title = styled.h1`
 	color: var(--tq-blue-01);
 	font-size: 44px;
 	width: 100%;
@@ -99,7 +128,7 @@ export const TitleSection1 = styled.h1`
 	}
 `;
 
-export const ParagraphSection1 = styled.p`
+export const Paragraph = styled.p`
 	width: 50%;
 	min-width: 447px;
 	text-align: center;
@@ -111,5 +140,11 @@ export const ParagraphSection1 = styled.p`
 
 	@media (max-width: 350px) {
 		min-width: 255px;
+	}
+`;
+
+export const formCustomStyle = css`
+	& {
+		margin-top: 30px;
 	}
 `;

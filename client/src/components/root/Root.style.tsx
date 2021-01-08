@@ -24,35 +24,6 @@ export const Container = styled.div`
 	height: 100%;
 `;
 
-export const ButtonFlyContainer = styled.div`
-	position: absolute;
-	top: 0;
-	width: 92%;
-	height: 70px;
-	display: flex;
-	justify-content: flex-end;
-	align-items: flex-end;
-	z-index: 2;
-
-	& > button {
-		background: white;
-		width: 116px;
-		height: 41px;
-		display: flex;
-		border-radius: 20px;
-		justify-content: center;
-		align-items: center;
-		box-shadow: 0 0 5px -0.78px rgba(0, 0, 0, 0.5);
-		font-size: 18px;
-		cursor: pointer;
-	}
-
-	& img {
-		width: 20px;
-		margin-left: 5px;
-	}
-`;
-
 export const Section = styled.div<{ isVisible: boolean }>`
 	${flexCenterColumn}
 	width: 100%;
@@ -68,50 +39,6 @@ export const Section = styled.div<{ isVisible: boolean }>`
 	& a {
 		text-decoration: none !important;
 	}
-`;
-
-export const btnCustomStyle = css<{ section: number | undefined }>`
-	& {
-		border: 5.9px solid var(--tq-blue-01);
-		background-color: var(--tq-blue-02);
-		padding: 7px 40px;
-		border-radius: 9999px;
-		margin-top: 30px;
-	}
-
-	${(props) => {
-		switch (props.section) {
-			case 1:
-				return css`
-					@media (max-width: 300px) {
-						& {
-							padding: 7px 10px;
-						}
-					}
-				`;
-			case 2:
-				return css`
-					@media (max-width: 330px) {
-						& {
-							margin-top: 10px;
-						}
-					}
-					@media (max-width: 290px) {
-						& {
-							padding: 7px 11px;
-						}
-					}
-				`;
-			case 5:
-				return css`
-					& {
-						margin: 0;
-					}
-				`;
-			default:
-				return;
-		}
-	}}
 `;
 
 export const Footer = styled.div`

@@ -1,8 +1,8 @@
 export default {
 	Root: {
 		BtnCreateUsername: 'Crear nombre de usuario',
-		BtnLogin: 'Entrar',
 		Section1: {
+			BtnLogin: 'Entrar',
 			Title: 'Mensajes anónimos',
 			Paragraph:
 				'Recibe <span style="color: var(--tq-blue-01)">mensajes anónimos</span> y compártelos en tus estados de forma <span style="color: var(--tq-blue-01)">rápida y sencilla</span>.'

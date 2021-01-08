@@ -44,7 +44,7 @@ export const MainElementsContainer = styled.div`
 	z-index: -2;
 `;
 
-export const FieldTQ = styled.div<{ isFieldLoaded: boolean }>`
+export const Wrapper = styled.div<{ isFieldLoaded: boolean }>`
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -69,47 +69,7 @@ export const FieldTQ = styled.div<{ isFieldLoaded: boolean }>`
 	}
 `;
 
-export const FirstFieldRow = styled.div<{
-	isInputMode: boolean;
-	shouldShowSubmitBtn: boolean;
-}>`
-	display: flex;
-	position: relative;
-	width: 100%;
-	min-width: 250px;
-	color: var(--tq-blue-00);
-	border: 5.9px solid
-		${(props) => (props.isInputMode ? 'var(--tq-blue-05)' : 'var(--tq-blue-01)')};
-	background: ${(props) =>
-		props.isInputMode ? 'var(--tq-blue-03)' : 'var(--tq-blue-02)'};
-	border-top-right-radius: 0;
-	border-bottom-right-radius: 0;
-	height: 42px;
-	border-radius: 30px;
-	transition: background 100ms ease-in, border 100ms ease-in;
-	box-sizing: border-box;
-	padding: 0 !important;
-	/* box-shadow: ${(props) =>
-		props.shouldShowSubmitBtn
-			? 'none'
-			: '0px 3.2px 0px 2.2px var(--tq-blue-00)'}; */
-	&:hover {
-		border: 5.9px solid var(--tq-blue-02);
-		background: var(--tq-blue-03);
-	}
-	@media (max-width: 420px) {
-		&[data-show-submitbtn='true'] {
-			width: 90%;
-		}
-	}
-	@media (max-width: 290px) {
-		&[data-show-submitbtn='true'] {
-			width: 88%;
-		}
-	}
-`;
-
-export const SecondFieldRow = styled.div`
+export const BtnsWrapper = styled.div`
 	margin-top: 15px;
 	max-width: 302px;
 	min-width: 250px;

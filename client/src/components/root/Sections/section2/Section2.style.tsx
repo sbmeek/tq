@@ -1,6 +1,6 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export const FirstRowSection2 = styled.div`
+export const FirstRow = styled.div`
 	display: grid;
 	place-items: center;
 	position: relative;
@@ -9,7 +9,7 @@ export const FirstRowSection2 = styled.div`
 	z-index: 1;
 `;
 
-export const LogoSection2 = styled.img`
+export const Logo = styled.img`
 	margin-left: 297px;
 	margin-top: 44px;
 	height: auto;
@@ -33,7 +33,7 @@ export const LogoSection2 = styled.img`
 	}
 `;
 
-export const SecondRowSection2 = styled.div`
+export const SecondRow = styled.div`
 	display: grid;
 	place-items: center;
 	position: relative;
@@ -41,7 +41,7 @@ export const SecondRowSection2 = styled.div`
 	height: 545px;
 `;
 
-export const Bg2 = styled.img`
+export const Bg = styled.img`
 	position: absolute;
 	width: 102.59%;
 	min-width: 867px;
@@ -57,7 +57,7 @@ export const Bg2 = styled.img`
 	}
 `;
 
-export const InnerWrapperSection2 = styled.div`
+export const InnerWrapper = styled.div`
 	display: flex;
 	align-items: flex-end;
 	flex-direction: column;
@@ -75,7 +75,7 @@ export const InnerWrapperSection2 = styled.div`
 	}
 `;
 
-export const TitleSection2 = styled.h1`
+export const Title = styled.h1`
 	font-size: 44px;
 	color: var(--tq-blue-01);
 	@media (max-width: 391px) {
@@ -89,10 +89,16 @@ export const TitleSection2 = styled.h1`
 	}
 `;
 
-export const ParagraphSection2 = styled.p`
+export const Paragraph = styled.p`
 	font-size: 19px;
 	text-align: right;
 	@media (max-width: 445px) {
 		text-align: center;
+	}
+`;
+
+export const formCustomStyle = css`
+	& {
+		margin-top: 30px;
 	}
 `;

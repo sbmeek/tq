@@ -1,15 +1,10 @@
 import React, { useContext, useState } from 'react';
 import InView from 'react-intersection-observer';
-import Button from 'shared/button/Button';
-import { Link } from 'react-router-dom';
 import { InitContext } from 'global/context/InitContext';
 import AuthModal from '../authModal/AuthModal';
 import Interweave from 'interweave';
 import 'intersection-observer';
 
-import logoMaxGeneral from 'assets/images/presentation/logo_max_general.png';
-import logoMinGeneral from 'assets/images/presentation/logo_min_general.png';
-import logoSection2 from 'assets/images/presentation/logo_section2.png';
 import logoMaxSection3 from 'assets/images/presentation/logo_max_section3.png';
 import logoMinSection3 from 'assets/images/presentation/logo_min_section3.png';
 import logoMaxSection4 from 'assets/images/presentation/logo_max_section4.png';
@@ -17,21 +12,16 @@ import logoMinSection4 from 'assets/images/presentation/logo_min_section4.png';
 import logoReMinSection4 from 'assets/images/presentation/logo_remin_section4.png';
 import logoFooter from 'assets/images/presentation/logo_footer.svg';
 
-import bg1 from 'assets/images/presentation/bg1.svg';
-import bg2 from 'assets/images/presentation/bg2.svg';
 import bg3 from 'assets/images/presentation/bg3.svg';
 import bg4 from 'assets/images/presentation/bg4.svg';
-import bg5 from 'assets/images/presentation/bg5.svg';
 
 import arrowFooter from 'assets/images/presentation/arrow_lang-toggler.svg';
 import esFlag from 'assets/images/presentation/lang-flags/es-flag.svg';
-import sim from 'assets/images/presentation/sim.svg';
 
 import {
 	Container,
 	Section,
 	HideMenucitoStyle,
-	btnCustomStyle,
 	Footer,
 	LogoFooterWrapper,
 	LangToggler,
@@ -40,30 +30,8 @@ import {
 	LinkFooter,
 	GroupTitleFooter,
 	GroupWrapper,
-	InnerContainerFooter,
-	ButtonFlyContainer
+	InnerContainerFooter
 } from './Root.style';
-
-import {
-	InnerWrapperSection1,
-	TitleSection1,
-	ParagraphSection1,
-	FirstRowSection1,
-	LogoMaxSection1,
-	LogoMinSection1,
-	Bg1,
-	SecondRowSection1
-} from './Sections/Section1.style';
-
-import {
-	Bg2,
-	FirstRowSection2,
-	SecondRowSection2,
-	LogoSection2,
-	InnerWrapperSection2,
-	TitleSection2,
-	ParagraphSection2
-} from './Sections/Section2.style';
 
 import {
 	Bg3,
@@ -87,38 +55,16 @@ import {
 	TitleSection4
 } from './Sections/Section4.style';
 
-import {
-	LogoPicSection5,
-	LogoImgSection5,
-	InnerContainerSection5,
-	Bg5,
-	WrapperSection5,
-	TitleSection5
-} from './Sections/Section5.style';
+import Section1 from './Sections/section1/Section1';
+import Section2 from './Sections/section2/Section2';
+import Section5 from './Sections/section5/Section5';
 
-function BtnCreateUsername<T extends { section: number | undefined }>({
-	section
-}: T) {
-	const {
-		state: {
-			lang: { Root: lang }
-		}
-	} = useContext(InitContext);
-
-	return (
-		<Link to="/join">
-			<Button
-				type="button"
-				group="secondary"
-				hoverMode="color"
-				customStyle={btnCustomStyle}
-				customStyleProps={{ section }}
-			>
-				{lang['BtnCreateUsername']}
-			</Button>
-		</Link>
-	);
-}
+export type SectionPropsType = {
+	inView: boolean;
+	inViewRef:
+		| React.RefObject<any>
+		| ((node?: Element | null | undefined) => void);
+};
 
 export default function Root() {
 	const {
@@ -140,53 +86,15 @@ export default function Root() {
 			<Container onLoad={() => setIsContainerLoaded(true)}>
 				<InView skip={!isContainerLoaded} triggerOnce threshold={0.244}>
 					{({ inView, ref }) => (
-						<Section ref={ref} isVisible={inView}>
-							<FirstRowSection1>
-								<ButtonFlyContainer>
-									<button onClick={handleAuthClick}>
-										{lang['BtnLogin']} <img src={sim} alt="sim" />
-									</button>
-								</ButtonFlyContainer>
-								<LogoMaxSection1 src={logoMaxGeneral} alt="logo-section1" />
-								<LogoMinSection1 src={logoMinGeneral} alt="logo-section1" />
-							</FirstRowSection1>
-							<SecondRowSection1>
-								<Bg1 src={bg1} alt="bg1" />
-								<InnerWrapperSection1>
-									<TitleSection1>{lang.Section1['Title']}</TitleSection1>
-									<ParagraphSection1>
-										<Interweave
-											allowAttributes={true}
-											content={lang.Section1['Paragraph']}
-										/>
-									</ParagraphSection1>
-									<BtnCreateUsername section={1} />
-								</InnerWrapperSection1>
-							</SecondRowSection1>
-						</Section>
+						<Section1
+							inView={inView}
+							inViewRef={ref}
+							handleAuthClick={handleAuthClick}
+						/>
 					)}
 				</InView>
 				<InView skip={!isContainerLoaded} triggerOnce threshold={0.244}>
-					{({ inView, ref }) => (
-						<Section ref={ref} isVisible={inView}>
-							<FirstRowSection2>
-								<LogoSection2 src={logoSection2} alt="logo-section2" />
-							</FirstRowSection2>
-							<SecondRowSection2>
-								<Bg2 src={bg2} alt="bg2" />
-								<InnerWrapperSection2>
-									<TitleSection2>{lang.Section2['Title']}</TitleSection2>
-									<ParagraphSection2>
-										<Interweave
-											allowAttributes={true}
-											content={lang.Section2['Paragraph']}
-										/>
-									</ParagraphSection2>
-									<BtnCreateUsername section={2} />
-								</InnerWrapperSection2>
-							</SecondRowSection2>
-						</Section>
-					)}
+					{({ inView, ref }) => <Section2 inView={inView} inViewRef={ref} />}
 				</InView>
 				<InView skip={!isContainerLoaded} triggerOnce threshold={0.244}>
 					{({ inView, ref }) => (
@@ -239,21 +147,7 @@ export default function Root() {
 					)}
 				</InView>
 				<InView skip={!isContainerLoaded} triggerOnce threshold={0.244}>
-					{({ inView, ref }) => (
-						<Section ref={ref} isVisible={inView}>
-							<LogoPicSection5>
-								<source media="(max-width: 515px)" srcSet={logoMinGeneral} />
-								<LogoImgSection5 src={logoMaxGeneral} alt="logo-section5" />
-							</LogoPicSection5>
-							<InnerContainerSection5>
-								<Bg5 src={bg5} />
-								<WrapperSection5>
-									<TitleSection5>{lang.Section5['Title']}</TitleSection5>
-									<BtnCreateUsername section={5} />
-								</WrapperSection5>
-							</InnerContainerSection5>
-						</Section>
-					)}
+					{({ inView, ref }) => <Section5 inView={inView} inViewRef={ref} />}
 				</InView>
 				<Footer>
 					<InnerContainerFooter>

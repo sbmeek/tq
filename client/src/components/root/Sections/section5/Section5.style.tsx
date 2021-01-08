@@ -1,6 +1,6 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export const LogoPicSection5 = styled.picture`
+export const LogoPic = styled.picture`
 	width: 100%;
 	height: 350px;
 	display: flex;
@@ -8,7 +8,7 @@ export const LogoPicSection5 = styled.picture`
 	z-index: 1;
 `;
 
-export const LogoImgSection5 = styled.img`
+export const LogoImg = styled.img`
 	position: absolute;
 	width: 630px;
 	margin-top: 37px;
@@ -34,7 +34,7 @@ export const LogoImgSection5 = styled.img`
 	}
 `;
 
-export const InnerContainerSection5 = styled.div`
+export const InnerContainer = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -43,7 +43,7 @@ export const InnerContainerSection5 = styled.div`
 	height: 505px;
 `;
 
-export const Bg5 = styled.img`
+export const Bg = styled.img`
 	min-width: 1444px;
 	width: 145%;
 	height: 813px;
@@ -55,9 +55,10 @@ export const Bg5 = styled.img`
 	}
 `;
 
-export const WrapperSection5 = styled.div`
+export const Wrapper = styled.div`
 	display: flex;
 	flex-direction: column;
+	align-items: center;
 	height: 130px;
 	width: 600px;
 
@@ -79,7 +80,7 @@ export const WrapperSection5 = styled.div`
 	}
 `;
 
-export const TitleSection5 = styled.h1`
+export const Title = styled.h1`
 	font-size: 44px;
 	color: var(--tq-blue-01);
 	text-align: center;
@@ -91,5 +92,11 @@ export const TitleSection5 = styled.h1`
 
 	@media (max-width: 310px) {
 		font-size: 36px;
+	}
+`;
+
+export const formCustomStyle = css`
+	& {
+		margin-top: 25px;
 	}
 `;

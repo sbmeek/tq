@@ -1,8 +1,8 @@
 export default {
 	Root: {
 		BtnCreateUsername: 'Create username',
-		BtnLogin: 'Log in',
 		Section1: {
+			BtnLogin: 'Log in',
 			Title: 'Anonymous messages',
 			Paragraph:
 				'Get <span style="color: var(--tq-blue-01)">anonymous messages</span> and share them in your stories in a <span style="color: var(--tq-blue-01)">fast and simple</span> way.'
