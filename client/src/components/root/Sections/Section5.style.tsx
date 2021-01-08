@@ -46,7 +46,7 @@ export const InnerContainerSection5 = styled.div`
 export const Bg5 = styled.img`
 	min-width: 1444px;
 	width: 145%;
-	height: 750px;
+	height: 813px;
 	position: absolute;
 	z-index: -1;
 
