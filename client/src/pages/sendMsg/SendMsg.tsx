@@ -96,12 +96,16 @@ function Success<
 			});
 		}
 	}, [socket]);
-
+	const formatVal = (val: string): string => {
+		let l = val.length;
+		return val!.slice(0, l - (l - 90)) as string;
+	};
 	const handleInputChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
 		const targetElement = e.target as HTMLTextAreaElement;
 		const { value: val } = targetElement;
 		setMsg(val);
 		shoot(val);
+		setMsg(formatVal(val));
 	};
 
 	const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -170,6 +174,7 @@ function Success<
 											autoComplete="off"
 											autoFocus
 											spellCheck={false}
+											maxLength={90}
 										/>
 										<button
 											type="submit"
