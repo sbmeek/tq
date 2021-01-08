@@ -279,7 +279,7 @@ export default function Signup<
 						<AccountIcon src={account} alt="account" />
 					</Button>
 				</BtnsContainer>
-				<LinkTerms to="/terms">{lang['TermsNConditions']}</LinkTerms>
+				<LinkTerms onClick={handleBtnCancelClick} to="/terms">{lang['TermsNConditions']}</LinkTerms>
 			</form>
 		</>
 	);
