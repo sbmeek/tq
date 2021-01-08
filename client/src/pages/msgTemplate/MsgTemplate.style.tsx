@@ -186,7 +186,6 @@ export const AnswerPreview = styled.div`
 
 	& > div {
 		max-width: 216px;
-		max-height: 100px;
 		overflow: auto;
 		overflow-wrap: break-word;
 		text-align: center;

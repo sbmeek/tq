@@ -304,6 +304,13 @@ function TextEditor<
 		);
 	}, []);
 
+	const handleEditorKeyPress = (e: any) => {
+		const unprivilegedEditor = editorRef.current!.unprivilegedEditor;
+		if (unprivilegedEditor!.getLength() > 90 && e.key !== 'Backspace') {
+			e.preventDefault();
+		}
+	};
+
 	const handleEditorChange = (content: string) => {
 		setEditorVal(content);
 		setAnswer(content);
@@ -311,7 +318,9 @@ function TextEditor<
 
 	return (
 		<TextEditorContainer id={id}>
-			<div><h1>message</h1></div>
+			<div>
+				<h1>message</h1>
+			</div>
 			<InputAnswerContainer>
 				<InputAnswerInnerContainer>
 					<ReactQuill
@@ -328,6 +337,7 @@ function TextEditor<
 						placeholder={lang['InputAnswerPlaceholder']}
 						value={editorVal}
 						onChange={handleEditorChange}
+						onKeyPress={handleEditorKeyPress}
 						formats={['bold', 'italic', 'underline', 'strike', 'emoji']}
 						data-value={answer}
 					/>
