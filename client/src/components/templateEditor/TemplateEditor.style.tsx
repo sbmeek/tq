@@ -188,6 +188,9 @@ export const AnswerOptsMenu = styled.div<AnswerOptsMenuPropsType>`
 		opacity: 1;
 		height: 80%;
 	}
+	& > div.toggle-opt-anim > div:nth-child(1){
+		overflow-y: auto;
+	}
 
 	@media (max-width: 490px) {
 		top: 0;
