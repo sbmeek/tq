@@ -72,6 +72,7 @@ export const TabsContainer = styled.div`
 	display: flex;
 	justify-content: center;
 	margin-bottom: 11px;
+	overflow: auto;
 `;
 
 const noMsgsStyle = css`
@@ -186,10 +187,17 @@ export const TabContent = styled.div<{ isTabSelected: boolean }>`
 export const MsgsList = styled.div`
 	display: flex;
 	min-width: 100%;
+	background: var(--tq-bg-00);
+	border-radius: 50px;
 	max-height: 67vh;
+	
 	@media (min-width: 600px) {
 		min-width: 100%;
 		max-height: 59vh;
+		
+	}
+	@media (max-width: 600px) {
+		border-radius: 20px;
 	}
 `;
 
@@ -198,7 +206,26 @@ export const MsgsOffset = styled.div`
 	background: var(--tq-bg-00);
 	padding: 30px 33px;
 	min-height: 59vh;
-	min-width: 100%;
+	width: 92%;
+	overflow: auto;
+	box-shadow: -19px 0px 0px 0px var(--tq-bg-00);
+	@media (max-width: 600px) {
+		box-shadow: 0 0px 0px 0px transparent;
+		width: 94%;
+	}
+	&::-webkit-scrollbar {
+		width: 7px;
+		background: transparent;
+	}
+	&::-webkit-scrollbar-thumb {
+		background: #4d4b4b;
+		border-radius: 25px;
+	}
+	&::-webkit-scrollbar-track-piece > end {
+		background: transparent;
+		margin-bottom: 10px;
+	}
+	
 `;
 
 export const MsgContainer = styled.div<{ isOpened?: boolean }>`
@@ -212,7 +239,7 @@ export const MsgContainer = styled.div<{ isOpened?: boolean }>`
 	margin-top: 5px;
 	height: 60px;
 	font-weight: 700;
-	width: 100%;
+	width: 105%;
 	padding: 14px;
 	cursor: pointer;
 	border-radius: 5px;
