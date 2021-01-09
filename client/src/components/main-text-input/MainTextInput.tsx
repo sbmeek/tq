@@ -109,7 +109,7 @@ export default function MainTextInput<
 					: ''
 			);
 			setUsername(formatVal(val));
-			setShowSubmitBtn(val.length > 0);
+			setShowSubmitBtn(val.length >= 3);
 		}
 	};
 
