@@ -1,3 +1,5 @@
+
+
 export default {
 	Root: {
 		BtnCreateUsername: 'Create username',
@@ -66,6 +68,11 @@ export default {
 		FirstRowText: 'Invited you to send him/her an',
 		SecondRowText: 'anonymous message',
 		FieldPlaceholder: 'Type your message'
+	},
+	MsgSent: {
+		Thanks: 'Thanks for sending your message.',
+		Again: 'Send another message',
+		Home: 'Home'
 	},
 	Inbox: {
 		NoMessagesInfo: "There isn't nothing here yet :(",
@@ -144,5 +151,7 @@ export default {
 		TextIsVerificationNotOk:
 			'The link is invalid. It looks like you have already confirmed your email if so it is not needed that you do it again.',
 		LogInBtn: 'Log in'
-	}
+	},
+
+	
 };
