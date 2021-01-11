@@ -1,21 +1,23 @@
-import React from 'react'
-import './Loader.css'
+import React from 'react';
+import './Loader.css';
 
 const Loader = () => {
 	return (
 		<div className="loader-container">
 			<LoaderEye size={'20%'} />
 		</div>
-	)
-}
+	);
+};
 
-export function LoaderEye<T extends {
-    size: '3%' | '20%'
-}>({ size }: T) {
-    const wh = size === '20%' ? '79.5px' : size === '3%' ? '30px' : '30%';
+export function LoaderEye<
+	T extends {
+		size: '3%' | '20%';
+	}
+>({ size }: T) {
+	const wh = size === '20%' ? '100px' : size === '3%' ? '30px' : '30%';
 	return (
 		<svg
-            className="tq-loader-eye"
+			className="tq-loader-eye"
 			width="100%"
 			height="100%"
 			viewBox="0 0 2048 2048"
@@ -26,16 +28,16 @@ export function LoaderEye<T extends {
 			data-xmlnsserif="http://www.serif.com/"
 			style={
 				{
-                    width: size,
-                    height: size,
-                    maxWidth: wh,
+					width: size,
+					height: size,
+					maxWidth: wh,
 					minWidth: wh,
 					minHeight: wh,
 					maxHeight: wh,
 					fillRule: 'evenodd',
 					clipRule: 'evenodd',
 					strokeLinejoin: 'round',
-					strokeMiterlimit: '2',
+					strokeMiterlimit: '2'
 				} as any
 			}
 		>
@@ -50,7 +52,7 @@ export function LoaderEye<T extends {
 				/>
 			</g>
 		</svg>
-	)
+	);
 }
 
-export default Loader
+export default Loader;

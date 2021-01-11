@@ -6,14 +6,14 @@
 		min-width: 100vw;
 		justify-content: space-evenly;
 		min-height: 100%;
-		background: #fff;
-    }
+		background-color: #fff;
+	}
 
 	.tq-loader-eye {
-        margin: 0 auto;
+		margin: 0 auto;
 		animation: loaderEyeAnim 730ms linear 50ms infinite;
-		width: 20%;
-		height: 20%;
+		width: 30%;
+		height: 30%;
 	}
 }
 

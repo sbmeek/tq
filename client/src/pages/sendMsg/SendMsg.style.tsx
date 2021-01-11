@@ -179,7 +179,6 @@ export const Box = styled.div`
 	@media (max-width: 480px) {
 		width: 282px;
 	}
-
 `;
 
 const ShowSubmitBtn = keyframes`
@@ -266,7 +265,4 @@ export const CloudBottom = styled.div`
 		width: 180px;
 		height: auto;
 	}
-
-	
-	
 `;

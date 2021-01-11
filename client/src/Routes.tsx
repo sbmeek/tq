@@ -1,8 +1,8 @@
 import React, { Suspense, lazy, useRef } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
-import Loader from 'components/loader/Loader';
 import UnauthRoute from 'HOCs/UnauthRoute';
+import Loader from 'components/loader/Loader';
 
 const AuthRoute = lazy(() => import('HOCs/AuthRoute'));
 const Menu = lazy(() => import('components/menu/Menu'));
@@ -12,7 +12,7 @@ const Inbx = lazy(() => import('pages/inbox/Inbox'));
 const Error404 = lazy(() => import('pages/error404/Error404'));
 const Msg = lazy(() => import('pages/sendMsg/SendMsg'));
 const Terms = lazy(() => import('pages/terms/Terms'));
-const Politics = lazy(()=> import('pages/politics/Politics'));
+const Politics = lazy(() => import('pages/politics/Politics'));
 const VerifyAccount = lazy(() =>
 	import('components/verifyAccount/VerifyAccount')
 );

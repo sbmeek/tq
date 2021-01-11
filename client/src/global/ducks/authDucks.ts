@@ -1,5 +1,5 @@
-import axios from 'axios'
-import { Dispatch } from 'redux'
+import axios from 'axios';
+import { Dispatch } from 'redux';
 
 export interface IDucksAction {
 	type: string;
@@ -17,12 +17,13 @@ const initialData: IDucksState = {
 	user: {},
 	isAuthenticated: false,
 	isLoaded: false,
-	isStatus500: false, //Server error
-}
+	isStatus500: false //Server error
+};
 
 // Types
-const GET_AUTH_INFO = 'GET_AUTH_INFO'
-const SET_MESSAGES = 'SET_MESSAGES'
+const GET_AUTH_INFO = 'GET_AUTH_INFO';
+const SET_MESSAGES = 'SET_MESSAGES';
+const SET_IS_LOADED = 'SET_IS_LOADED';
 
 // Reducer
 export default function authReducer(state = initialData, action: IDucksAction) {
@@ -33,52 +34,66 @@ export default function authReducer(state = initialData, action: IDucksAction) {
 				isStatus500: action.payload.isStatus500,
 				user: action.payload.user,
 				isLoaded: action.payload.isLoaded,
-				isAuthenticated: action.payload.isAuthenticated,
-			}
+				isAuthenticated: action.payload.isAuthenticated
+			};
 		case SET_MESSAGES:
-			const { user } = state
+			const { user } = state;
 			return {
 				...state,
-				user: { ...user, messages: action.payload.messages },
-			}
+				user: { ...user, messages: action.payload.messages }
+			};
+		case SET_IS_LOADED:
+			return {
+				...state,
+				isLoaded: action.payload.isLoaded
+			};
 		default:
-			return state
+			return state;
 	}
 }
 
 // Actions
 export const getAuthInfoAction = () => async (dispatch?: Dispatch) => {
 	try {
-		const res = await axios.get('/user/authenticated')
+		const res = await axios.get('/user/authenticated');
 		if (res.status !== 500) {
-			const { username, enteredname, messages } = res.data
+			const { username, enteredname, messages } = res.data;
 			dispatch!({
 				type: GET_AUTH_INFO,
 				payload: {
 					user: { username, enteredname, messages },
 					isAuthenticated: res.data.authenticated,
 					isStatus500: false,
-					isLoaded: true,
-				},
-            })
+					isLoaded: true
+				}
+			});
 		}
 	} catch (error) {
-		console.error(error)
+		console.error(error);
 		dispatch!({
 			type: GET_AUTH_INFO,
 			payload: {
 				user: null,
 				isAuthenticated: false,
 				isStatus500: true,
-				isLoaded: true,
-			},
-		})
+				isLoaded: true
+			}
+		});
 	}
-}
+};
 
-export const setUserMessagesAction = (messages: ITQMessage[]) => async (dispatch: Dispatch) => {
+export const setIsLoaded = (isLoaded: boolean) => (dispatch: Dispatch) => {
+	dispatch({
+		type: SET_IS_LOADED,
+		payload: { isLoaded }
+	});
+};
+
+export const setUserMessagesAction = (messages: ITQMessage[]) => async (
+	dispatch: Dispatch
+) => {
 	dispatch({
 		type: SET_MESSAGES,
-		payload: { messages },
-	})
-}
+		payload: { messages }
+	});
+};

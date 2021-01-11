@@ -1,17 +1,15 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { useSelector, RootStateOrAny } from 'react-redux';
-import Loader from 'components/loader/Loader';
 import IPropsHOCs from './IPropsHOCs';
 
 export default function ({ component: Component, ...rest }: IPropsHOCs) {
-	const { isAuthenticated, isLoaded } = useSelector(
+	const { isAuthenticated } = useSelector(
 		(store: RootStateOrAny) => store.auth
 	);
 
 	return (
 		<>
-			{!isLoaded && <Loader />}
 			<Route
 				{...rest}
 				render={(props) =>
@@ -19,7 +17,7 @@ export default function ({ component: Component, ...rest }: IPropsHOCs) {
 						<Redirect
 							to={{
 								pathname: rest.redirectTo,
-								state: { from: props.location },
+								state: { from: props.location }
 							}}
 						/>
 					) : (
