@@ -68,6 +68,11 @@ export default {
 		SecondRowText: 'mensaje anónimo',
 		FieldPlaceholder: 'Escribe tu mensaje'
 	},
+	MsgSent: {
+		Thanks: 'Gracias por mandar tu mensaje.',
+		Again: 'Enviar otro mensaje',
+		Home: 'Inicio'
+	},
 	Inbox: {
 		NoMessagesInfo: 'Aún no hay nada aquí :(',
 		Title: 'Bandeja',
