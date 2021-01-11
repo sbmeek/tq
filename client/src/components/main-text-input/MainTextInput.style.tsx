@@ -13,7 +13,7 @@ export const Form = styled.form<FormPropsType>`
 	color: var(--tq-blue-00);
 	border: 5.9px solid
 		${(props) =>
-			props.isInputMode ? 'var(--tq-blue-05)' : 'var(--tq-blue-01)'};
+			props.isInputMode ? 'var(--tq-blue-05) !important' : 'var(--tq-blue-01)'};
 	background: ${(props) =>
 		props.isInputMode ? 'var(--tq-blue-03)' : 'var(--tq-blue-02)'};
 	border-top-right-radius: 0;
