@@ -5,14 +5,11 @@ import AuthModal from '../authModal/AuthModal';
 import Interweave from 'interweave';
 import 'intersection-observer';
 
-import logoMaxSection3 from 'assets/images/presentation/logo_max_section3.png';
-import logoMinSection3 from 'assets/images/presentation/logo_min_section3.png';
 import logoMaxSection4 from 'assets/images/presentation/logo_max_section4.png';
 import logoMinSection4 from 'assets/images/presentation/logo_min_section4.png';
 import logoReMinSection4 from 'assets/images/presentation/logo_remin_section4.png';
 import logoFooter from 'assets/images/presentation/logo_footer.svg';
 
-import bg3 from 'assets/images/presentation/bg3.svg';
 import bg4 from 'assets/images/presentation/bg4.svg';
 
 import arrowFooter from 'assets/images/presentation/arrow_lang-toggler.svg';
@@ -34,17 +31,6 @@ import {
 } from './Root.style';
 
 import {
-	Bg3,
-	FirstRowSection3,
-	LogoMaxSection3,
-	LogoMinSection3,
-	ParagraphSection3,
-	SecondRowSection3,
-	TextWrapperSection3,
-	TitleSection3
-} from './Sections/Section3.style';
-
-import {
 	Bg4,
 	FirstRowSection4,
 	LogoImgSection4,
@@ -57,6 +43,7 @@ import {
 
 import Section1 from './Sections/section1/Section1';
 import Section2 from './Sections/section2/Section2';
+import Section3 from './Sections/section3/Section3';
 import Section5 from './Sections/section5/Section5';
 
 export type SectionPropsType = {
@@ -98,24 +85,7 @@ export default function Root() {
 				</InView>
 				<InView skip={!isContainerLoaded} triggerOnce threshold={0.244}>
 					{({ inView, ref }) => (
-						<Section ref={ref} isVisible={inView}>
-							<FirstRowSection3>
-								<LogoMaxSection3 src={logoMaxSection3} alt="logo3" />
-								<LogoMinSection3 src={logoMinSection3} alt="logo3" />
-							</FirstRowSection3>
-							<SecondRowSection3>
-								<Bg3 src={bg3} alt="bg3" />
-								<TextWrapperSection3>
-									<TitleSection3>{lang.Section3['Title']}</TitleSection3>
-									<ParagraphSection3>
-										<Interweave
-											allowAttributes
-											content={lang.Section3['Paragraph']}
-										/>
-									</ParagraphSection3>
-								</TextWrapperSection3>
-							</SecondRowSection3>
-						</Section>
+						<Section3 inView={inView} inViewRef={ref}></Section3>
 					)}
 				</InView>
 				<InView skip={!isContainerLoaded} triggerOnce threshold={0.244}>
