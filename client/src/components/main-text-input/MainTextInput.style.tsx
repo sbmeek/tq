@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 type FormPropsType = {
 	isInputMode: boolean;
@@ -20,7 +20,8 @@ export const Form = styled.form<FormPropsType>`
 	border-bottom-right-radius: 0;
 	height: 46px;
 	border-radius: 30px;
-	transition: background 100ms ease-in, border 100ms ease-in;
+	transition: background 100ms ease-in, border 100ms ease-in,
+		margin-right 300ms ease-in;
 	box-sizing: border-box;
 	padding: 0 !important;
 
@@ -69,6 +70,15 @@ export const Textarea = styled.textarea<{ isInputMode: boolean }>`
 	}
 `;
 
+const showBtn = keyframes`
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+`;
+
 export const MainBtn = styled.button`
 	position: absolute;
 	background: var(--tq-blue-01);
@@ -84,6 +94,7 @@ export const MainBtn = styled.button`
 	justify-content: flex-end;
 	align-items: center;
 	cursor: pointer;
+	animation: ${showBtn} 300ms ease;
 
 	& > img {
 		width: 20px;
