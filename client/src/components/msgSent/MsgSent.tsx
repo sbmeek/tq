@@ -15,7 +15,9 @@ import {
 } from './MsgSent.style';
 import Button from 'shared/button/Button';
 
-export const MsgSent = () => {
+export function MsgSent<
+	T extends { setSent: React.Dispatch<React.SetStateAction<boolean>> }
+>({ setSent }: T) {
 	return (
 		<Container>
 			<Wrapper>
@@ -24,7 +26,9 @@ export const MsgSent = () => {
 				</LogoContainer>
 				<TextWrapper>
 					<H3>Gracias por mandar tu mensaje.</H3>
-					<LinkSendAgain to="/">Enviar otro mensaje</LinkSendAgain>
+					<LinkSendAgain onClick={() => setSent(false)}>
+						Enviar otro mensaje
+					</LinkSendAgain>
 				</TextWrapper>
 			</Wrapper>
 			<LinkHome to="/">
@@ -35,6 +39,6 @@ export const MsgSent = () => {
 			</LinkHome>
 		</Container>
 	);
-};
+}
 
 export default MsgSent;

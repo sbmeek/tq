@@ -75,7 +75,7 @@ export const H3 = styled.h3`
 	}
 `;
 
-export const LinkSendAgain = styled(Link)`
+export const LinkSendAgain = styled.span`
 	${linkStyles}
 	color: var(--tq-blue-02) !important;
 	&:hover {

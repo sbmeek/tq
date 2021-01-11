@@ -122,7 +122,7 @@ function Success<
 	return (
 		<Container>
 			{sent ? (
-				<MsgSent />
+				<MsgSent setSent={setSent} />
 			) : (
 				<Curtain onSubmit={handleFormSubmit}>
 					<MiniCurtain>
