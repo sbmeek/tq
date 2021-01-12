@@ -191,6 +191,7 @@ export const MsgsList = styled.div`
 	border-radius: 50px;
 	max-height: 67vh;
 	align-items: center;
+	justify-content: center;
 
 	@media (min-width: 600px) {
 		min-width: 100%;
@@ -202,17 +203,22 @@ export const MsgsList = styled.div`
 `;
 
 export const MsgsOffset = styled.div`
-	padding: 0px 33px;
+	padding: 0px 13px;
+	margin: 0 33px;
 	min-height: 50vh;
-	width: 96%;
+	width: 100%;
 	overflow: auto;
 	height: 88%;
+	border-radius: 50px;
+	display: grid;
+	place-items: center;
 	@media (max-width: 600px) {
-		box-shadow: 0 0px 0px 0px transparent;
-		width: 94%;
+		width: 100%;
+		margin: 0 6px;
 	}
+
 	&::-webkit-scrollbar {
-		width: 7px;
+		width: 0;
 		background: transparent;
 	}
 	&::-webkit-scrollbar-thumb {
