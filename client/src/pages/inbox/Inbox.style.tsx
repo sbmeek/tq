@@ -4,7 +4,8 @@ export const Container = styled.div`
 	display: flex;
 	align-items: center;
 	height: 100%;
-	@media (min-width: 600px) {
+
+	@media (min-width: 501px) {
 		justify-content: center;
 	}
 `;
@@ -14,7 +15,8 @@ export const InnerContainer = styled.div`
 	flex-direction: column;
 	min-width: 100%;
 	height: 100%;
-	@media (min-width: 600px) {
+
+	@media (min-width: 501px) {
 		max-width: 500px;
 		min-width: initial;
 		width: 100%;
@@ -28,6 +30,10 @@ export const HeadContainer = styled.div`
 	margin: 25px 13px;
 	align-items: baseline;
 	justify-content: center;
+
+	@media (max-width: 500px) {
+		height: 13%;
+	}
 `;
 
 export const HeadIconContainer = styled.div`
@@ -37,13 +43,13 @@ export const HeadIconContainer = styled.div`
 	background: var(--tq-red-02);
 	border-radius: 30px;
 	border: 0px solid #000000;
-	width: 62px;
+	min-width: 62px;
 	height: 61px;
 `;
 
 export const HeadIcon = styled.img`
 	height: 70%;
-	width: 65.5%;
+	width: 40px;
 `;
 
 export const HeadTextContainer = styled.div`
@@ -73,6 +79,10 @@ export const TabsContainer = styled.div`
 	justify-content: center;
 	margin-bottom: 11px;
 	overflow: auto;
+
+	@media (max-width: 500px) {
+		height: 10%;
+	}
 `;
 
 const noMsgsStyle = css`
@@ -182,6 +192,10 @@ export const NewMsgsContainer = styled.div<{ hasNoMessages: boolean }>`
 
 export const TabContent = styled.div<{ isTabSelected: boolean }>`
 	display: ${(props) => (props.isTabSelected ? 'flex' : 'none')};
+
+	@media (max-width: 500px) {
+		height: 68%;
+	}
 `;
 
 export const MsgsList = styled.div`
@@ -189,33 +203,38 @@ export const MsgsList = styled.div`
 	min-width: 100%;
 	background: var(--tq-bg-00);
 	border-radius: 50px;
-	max-height: 67vh;
+	height: 100%;
 	align-items: center;
 	justify-content: center;
 
-	@media (min-width: 600px) {
+	@media (min-width: 501px) {
 		min-width: 100%;
-		max-height: 59vh;
+		height: 59vh;
 	}
-	@media (max-width: 600px) {
-		border-radius: 20px;
+
+	@media (max-width: 500px) {
+		border-radius: 40px 40px 0 0;
 	}
 `;
 
 export const MsgsOffset = styled.div`
-	padding: 0px 13px;
+	padding: 0px 12px;
 	margin: auto 33px;
-	min-height: 50vh;
+	height: auto;
+	max-height: 82%;
 	width: 100%;
-	overflow: auto;
-	height: 88%;
-	border-radius: 50px;
+	overflow: hidden auto;
+	border-radius: 30px;
 	display: grid;
 	place-items: center;
+	grid-template-rows: repeat(auto-fill, minmax(60px, auto));
+	grid-row-gap: 7px;
+	scrollbar-width: none;
 
-	@media (max-width: 600px) {
+	@media (max-width: 501px) {
 		width: 100%;
-		margin: 0 6px;
+		margin: 0 15px;
+		max-height: 90%;
 	}
 
 	&::-webkit-scrollbar {
@@ -240,8 +259,7 @@ export const MsgContainer = styled.div<{ isOpened?: boolean }>`
 	background: var(--tq-dark-gray-01);
 	text-overflow: ellipsis;
 	color: #fff;
-	margin-top: 5px;
-	height: 71px;
+	height: 60px;
 	font-weight: 700;
 	width: 105%;
 	padding: 14px;
@@ -251,6 +269,7 @@ export const MsgContainer = styled.div<{ isOpened?: boolean }>`
 	transition: border-radius 200ms cubic-bezier(0, 0.44, 0.98, 1.45),
 		height 200ms;
 	position: relative;
+
 	&:first-child {
 		margin-top: 0;
 	}
@@ -354,6 +373,8 @@ export const MsgItem = styled.li`
 	text-align: center;
 	list-style: none;
 	pointer-events: none;
+	font-size: 20px;
+
 	& > span {
 		opacity: 1 !important;
 	}
@@ -365,15 +386,12 @@ const msgBtnsStyle = css`
 		width: 20px !important;
 		background: transparent;
 		left: 93%;
+		cursor: pointer;
 	}
 
 	& > img {
 		color: #fff;
 		width: 17px;
-	}
-
-	&:hover {
-		filter: invert(50%);
 	}
 `;
 
