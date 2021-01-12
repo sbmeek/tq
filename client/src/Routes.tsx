@@ -1,8 +1,7 @@
-import React, { Suspense, lazy, useRef } from 'react';
+import React, { lazy, useRef } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import UnauthRoute from 'HOCs/UnauthRoute';
-import Loader from 'components/loader/Loader';
 
 const AuthRoute = lazy(() => import('HOCs/AuthRoute'));
 const Menu = lazy(() => import('components/menu/Menu'));
@@ -23,48 +22,42 @@ export default function Routes() {
 
 	return (
 		<Router>
-			<Suspense fallback={<Loader />}>
-				<Route path="/">
-					<Menu />
-				</Route>
-				<Route
-					render={({ location }) => (
-						<TransitionGroup component={null}>
-							<CSSTransition
-								key={location.key}
-								appear={true}
-								timeout={{ enter: 250, exit: 0 }}
-								classNames="fade"
-								nodeRef={switchContainerRef}
-							>
-								<div style={{ height: '100%' }} ref={switchContainerRef}>
-									<Switch location={location}>
-										<Route exact path="/" component={Main} />
-										<UnauthRoute path="/join" component={Join} redirectTo="/" />
-										<AuthRoute
-											path="/messages"
-											component={Inbx}
-											redirectTo="/"
-										/>
-										<AuthRoute
-											path="/message"
-											component={TemplateMSG}
-											redirectTo="/"
-										/>
-										<Route path="/account/verify" component={VerifyAccount} />
-										<Route path="/terms" component={Terms} />
-										<Route path="/politics" component={Politics} />
-										<Route exact path="/:username" component={Msg} />
-										<Route path="*">
-											<Error404 />
-										</Route>
-									</Switch>
-								</div>
-							</CSSTransition>
-						</TransitionGroup>
-					)}
-				/>
-			</Suspense>
+			<Route path="/">
+				<Menu />
+			</Route>
+			<Route
+				render={({ location }) => (
+					<TransitionGroup component={null}>
+						<CSSTransition
+							key={location.key}
+							appear={true}
+							timeout={{ enter: 250, exit: 0 }}
+							classNames="fade"
+							nodeRef={switchContainerRef}
+						>
+							<div style={{ height: '100%' }} ref={switchContainerRef}>
+								<Switch location={location}>
+									<Route exact path="/" component={Main} />
+									<UnauthRoute path="/join" component={Join} redirectTo="/" />
+									<AuthRoute path="/messages" component={Inbx} redirectTo="/" />
+									<AuthRoute
+										path="/message"
+										component={TemplateMSG}
+										redirectTo="/"
+									/>
+									<Route path="/account/verify" component={VerifyAccount} />
+									<Route path="/terms" component={Terms} />
+									<Route path="/politics" component={Politics} />
+									<Route exact path="/:username" component={Msg} />
+									<Route path="*">
+										<Error404 />
+									</Route>
+								</Switch>
+							</div>
+						</CSSTransition>
+					</TransitionGroup>
+				)}
+			/>
 		</Router>
 	);
 }

@@ -1,13 +1,13 @@
 import React from 'react';
-import './Loader.css';
+import { LoaderContainer, LoaderEyeSvg } from './Loader.style';
 
-const Loader = () => {
+export default function Loader() {
 	return (
-		<div className="loader-container">
+		<LoaderContainer>
 			<LoaderEye size={'20%'} />
-		</div>
+		</LoaderContainer>
 	);
-};
+}
 
 export function LoaderEye<
 	T extends {
@@ -16,8 +16,7 @@ export function LoaderEye<
 >({ size }: T) {
 	const wh = size === '20%' ? '100px' : size === '3%' ? '30px' : '30%';
 	return (
-		<svg
-			className="tq-loader-eye"
+		<LoaderEyeSvg
 			width="100%"
 			height="100%"
 			viewBox="0 0 2048 2048"
@@ -51,8 +50,6 @@ export function LoaderEye<
 					style={{ fill: 'rgb(100,100,100)' }}
 				/>
 			</g>
-		</svg>
+		</LoaderEyeSvg>
 	);
 }
-
-export default Loader;

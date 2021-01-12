@@ -1,9 +1,10 @@
-import React, { useEffect, useContext, lazy } from 'react';
+import React, { useEffect, useContext, Suspense, lazy } from 'react';
 import { useSelector, RootStateOrAny, useDispatch } from 'react-redux';
 import { InitContext } from 'global/context/InitContext';
 import AuthInPrivateMode from 'pages/authInPrivateMode/AuthInPrivateMode';
 import Routes from './Routes';
 import { setUserMessagesAction } from 'global/ducks/authDucks';
+import Loader from 'components/loader/Loader';
 
 const Error500 = lazy(() => import('components/error/500'));
 
@@ -35,13 +36,15 @@ export default function App() {
 			hideLoader();
 			return (
 				<>
-					{!PRIVATE_MODE ? (
-						<Routes />
-					) : !isTester ? (
-						<AuthInPrivateMode />
-					) : (
-						<Routes />
-					)}
+					<Suspense fallback={<Loader />}>
+						{!PRIVATE_MODE ? (
+							<Routes />
+						) : !isTester ? (
+							<AuthInPrivateMode />
+						) : (
+							<Routes />
+						)}
+					</Suspense>
 				</>
 			);
 		} else return <div></div>;
