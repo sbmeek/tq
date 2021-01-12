@@ -91,8 +91,8 @@ export default function MainTextInput<
 	) => {
 		const curr = tqForm.current!;
 		const targetElement = e.target as HTMLTextAreaElement;
-		console.log(e.key);
-		if (e.key === 'Enter') {
+
+		if (e.key === 'Enter' && targetElement.value.length >= 3) {
 			curr.dispatchEvent(new Event('submit', { cancelable: true }));
 			curr.disabled = true;
 			isFieldDisabled.current = true;
