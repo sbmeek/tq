@@ -41,7 +41,12 @@ export default function () {
 		setAnsweredMsgs(_msgList);
 	}, [messages]);
 
-	return <Inbox messages={msgsList} answeredMsgs={answeredMsgs} />;
+	return (
+		<Inbox
+			messages={[...msgsList].reverse()}
+			answeredMsgs={[...answeredMsgs].reverse()}
+		/>
+	);
 }
 
 const Inbox = <

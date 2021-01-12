@@ -204,7 +204,7 @@ export const MsgsList = styled.div`
 
 export const MsgsOffset = styled.div`
 	padding: 0px 13px;
-	margin: 0 33px;
+	margin: auto 33px;
 	min-height: 50vh;
 	width: 100%;
 	overflow: auto;
@@ -212,6 +212,7 @@ export const MsgsOffset = styled.div`
 	border-radius: 50px;
 	display: grid;
 	place-items: center;
+
 	@media (max-width: 600px) {
 		width: 100%;
 		margin: 0 6px;
