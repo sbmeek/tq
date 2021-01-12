@@ -190,11 +190,12 @@ export const MsgsList = styled.div`
 	background: var(--tq-bg-00);
 	border-radius: 50px;
 	max-height: 67vh;
-	
+	align-items: center;
+	justify-content: center;
+
 	@media (min-width: 600px) {
 		min-width: 100%;
 		max-height: 59vh;
-		
 	}
 	@media (max-width: 600px) {
 		border-radius: 20px;
@@ -202,19 +203,22 @@ export const MsgsList = styled.div`
 `;
 
 export const MsgsOffset = styled.div`
-	border-radius: 50px;
-	background: var(--tq-bg-00);
-	padding: 30px 33px;
-	min-height: 59vh;
-	width: 92%;
+	padding: 0px 13px;
+	margin: 0 33px;
+	min-height: 50vh;
+	width: 100%;
 	overflow: auto;
-	box-shadow: -19px 0px 0px 0px var(--tq-bg-00);
+	height: 88%;
+	border-radius: 50px;
+	display: grid;
+	place-items: center;
 	@media (max-width: 600px) {
-		box-shadow: 0 0px 0px 0px transparent;
-		width: 94%;
+		width: 100%;
+		margin: 0 6px;
 	}
+
 	&::-webkit-scrollbar {
-		width: 7px;
+		width: 0;
 		background: transparent;
 	}
 	&::-webkit-scrollbar-thumb {
@@ -225,7 +229,6 @@ export const MsgsOffset = styled.div`
 		background: transparent;
 		margin-bottom: 10px;
 	}
-	
 `;
 
 export const MsgContainer = styled.div<{ isOpened?: boolean }>`
@@ -237,7 +240,7 @@ export const MsgContainer = styled.div<{ isOpened?: boolean }>`
 	text-overflow: ellipsis;
 	color: #fff;
 	margin-top: 5px;
-	height: 60px;
+	height: 71px;
 	font-weight: 700;
 	width: 105%;
 	padding: 14px;
