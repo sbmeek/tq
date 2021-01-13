@@ -254,7 +254,7 @@ export const MobileEditorContainer = styled.div<{ showMobileEditor: boolean }>`
 		width: 100%;
 		max-height: 351px;
 		position: absolute;
-		top: 42%;
+		bottom: 0;
 		transform: ${(props) =>
 			props.showMobileEditor ? 'translateY(0)' : 'translateY(100px)'};
 	}

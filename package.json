@@ -37,8 +37,8 @@
 	},
 	"lint-staged": {
 		"*": [
-			"prettier --write --ignore-unknown",
-			"git add"
+			"pretty-quick --staged",
+			"prettier --write --ignore-unknown --loglevel debug"
 		]
 	},
 	"husky": {
