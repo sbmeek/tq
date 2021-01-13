@@ -2,19 +2,16 @@ import React, { useContext, useState } from 'react';
 import InView from 'react-intersection-observer';
 import { InitContext } from 'global/context/InitContext';
 import AuthModal from '../authModal/AuthModal';
+import LangToggler from 'components/langToggler/LangToggler';
 import 'intersection-observer';
 import logoFooter from 'assets/images/presentation/logo_footer.svg';
-import arrowFooter from 'assets/images/presentation/arrow_lang-toggler.svg';
-import esFlag from 'assets/images/presentation/lang-flags/es-flag.svg';
 
 import {
 	Container,
 	HideMenucitoStyle,
 	Footer,
 	LogoFooterWrapper,
-	LangToggler,
 	ColumnFooter,
-	FlagLangToggler,
 	LinkFooter,
 	GroupTitleFooter,
 	GroupWrapper,
@@ -84,11 +81,7 @@ export default function Root() {
 								<img src={logoFooter} alt="logo-footer" />
 								<h1>TiKiu</h1>
 							</LogoFooterWrapper>
-							<LangToggler>
-								<FlagLangToggler src={esFlag} alt="es-flag" />
-								<span>Español</span>
-								<img src={arrowFooter} alt="arrow_lang-toggler" />
-							</LangToggler>
+							<LangToggler />
 						</ColumnFooter>
 						<ColumnFooter>
 							<GroupWrapper>

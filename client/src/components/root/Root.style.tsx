@@ -157,27 +157,6 @@ export const LogoFooterWrapper = styled.div`
 	}
 `;
 
-export const LangToggler = styled.div`
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	margin-top: 40px;
-
-	& > span {
-		margin-right: 10px;
-		color: #fff;
-	}
-
-	@media (max-width: 420px) {
-		margin-top: 25px;
-	}
-`;
-
-export const FlagLangToggler = styled.img`
-	width: 37px;
-	margin-right: 10px;
-`;
-
 export const GroupTitleFooter = styled.h5`
 	font-size: 19px;
 	color: var(--tq-blue-03);

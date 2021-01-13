@@ -1,5 +1,3 @@
-
-
 export default {
 	Root: {
 		BtnCreateUsername: 'Create username',
@@ -151,7 +149,5 @@ export default {
 		TextIsVerificationNotOk:
 			'The link is invalid. It looks like you have already confirmed your email if so it is not needed that you do it again.',
 		LogInBtn: 'Log in'
-	},
-
-	
+	}
 };
