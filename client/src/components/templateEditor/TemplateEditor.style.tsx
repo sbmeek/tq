@@ -186,10 +186,15 @@ export const AnswerOptsMenu = styled.div<AnswerOptsMenuPropsType>`
 		display: flex;
 		justify-content: center;
 		opacity: 1;
-		height: 80%;
+		height: 85%;
 	}
-	& > div.toggle-opt-anim > div:nth-child(1){
+	& > div.toggle-opt-anim > div:nth-child(1) {
 		overflow-y: auto;
+		scrollbar-width: none;
+		&::-webkit-scrollbar {
+			width: 2px;
+			background: transparent;
+		}
 	}
 
 	@media (max-width: 490px) {
@@ -251,10 +256,10 @@ export const TextEditorContainer = styled.div`
 	@media (max-width: 490px) {
 		max-width: 272px;
 	}
-	& > div:nth-child(1){
+	& > div:nth-child(1) {
 		padding: 0px 0px 18px 28px;
 		@media (max-width: 490px) {
-			padding:0px 0px 0px 27px;
+			padding: 0px 0px 0px 27px;
 		}
 	}
 `;
