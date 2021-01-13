@@ -1,4 +1,7 @@
 import styled, { keyframes } from 'styled-components';
+import okIcon from 'assets/images/icons/icons-signup/ok-icon.svg';
+import eyeLoaderIcon from 'assets/images/icons/tq-eye-loader.svg';
+import errorIcon from 'assets/images/icons/icons-signup/error-icon.svg';
 
 type FormPropsType = {
 	isInputMode: boolean;
@@ -34,8 +37,12 @@ export const Form = styled.form<FormPropsType>`
 		background: var(--tq-blue-03);
 	}
 `;
-
-export const Textarea = styled.textarea<{ isInputMode: boolean }>`
+type TextareaPropsType = {
+	isValid: boolean | null;
+	isLoading: boolean;
+	isInputMode: boolean
+};
+export const Textarea = styled.textarea<TextareaPropsType>`
 	background: transparent;
 	border-radius: 30px;
 	width: 100%;
@@ -43,6 +50,13 @@ export const Textarea = styled.textarea<{ isInputMode: boolean }>`
 	white-space: nowrap;
 	overflow: hidden;
 	resize: none !important;
+	background-position: 96%;
+	background-size: ${(props) => (props.isValid === null ? '30px' : '25px')};
+	background-repeat: no-repeat;
+	background-image: ${({ isLoading, isValid }) =>
+		isValid === null && !isLoading
+			? ''
+			: `url(${isLoading ? eyeLoaderIcon : isValid ? okIcon : errorIcon})`};
 
 	${(props) =>
 		props.isInputMode

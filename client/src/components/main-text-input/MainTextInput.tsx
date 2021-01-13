@@ -19,7 +19,7 @@ type DataType = {
 	_id: string;
 	key: string;
 };
-
+let timerID: NodeJS.Timeout | number;
 export default function MainTextInput<
 	T extends {
 		username: string;
@@ -31,6 +31,8 @@ export default function MainTextInput<
 	const isFieldDisabled = useRef(false);
 	const [inputMode, setInputMode] = useState(false);
 	const [showSubmitBtn, setShowSubmitBtn] = useState(false);
+	const [isValid, setIsValid] = useState<boolean | null>(null);
+	const [isLoading, setIsLoading] = useState(false);
 	const tqForm = useRef<HTMLFormElement>(null);
 	const dispatch = useDispatch();
 
@@ -91,7 +93,17 @@ export default function MainTextInput<
 	) => {
 		const curr = tqForm.current!;
 		const targetElement = e.target as HTMLTextAreaElement;
-
+		clearTimeout(timerID as NodeJS.Timeout);
+		if (targetElement.value) {
+			setIsLoading(true);
+			timerID = setTimeout(() => {
+				setIsValid(targetElement.value.length >= 3);
+				setIsLoading(false);
+			}, 800);
+		} else {
+			setIsLoading(false);
+			setIsValid(null);
+		}
 		if (e.key === 'Enter' && targetElement.value.length >= 3) {
 			curr.dispatchEvent(new Event('submit', { cancelable: true }));
 			curr.disabled = true;
@@ -129,6 +141,8 @@ export default function MainTextInput<
 		>
 			<Textarea
 				value={username}
+				isValid={isValid}
+				isLoading={isLoading}
 				id="usrTQ"
 				data-name="tquser"
 				isInputMode={inputMode}
