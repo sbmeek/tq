@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 
 import Interweave from 'interweave';
 import { SectionPropsType } from 'components/root/Root';
@@ -22,7 +22,6 @@ import MainTextInput from 'components/main-text-input/MainTextInput';
 import { InitContext } from 'global/context/InitContext';
 
 export default function Section2({ inView, inViewRef }: SectionPropsType) {
-	const [username, setUsername] = useState('');
 	const lang = useContext(InitContext).state.lang.Root.Section2;
 
 	return (
@@ -37,11 +36,7 @@ export default function Section2({ inView, inViewRef }: SectionPropsType) {
 					<Paragraph>
 						<Interweave allowAttributes={true} content={lang['Paragraph']} />
 					</Paragraph>
-					<MainTextInput
-						formCustomStyle={formCustomStyle}
-						username={username}
-						setUsername={setUsername}
-					/>
+					<MainTextInput formCustomStyle={formCustomStyle} />
 				</InnerWrapper>
 			</SecondRow>
 		</Section>

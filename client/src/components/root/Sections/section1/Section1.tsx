@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 
 import { SectionPropsType } from 'components/root/Root';
 import { Section } from 'components/root/Root.style';
@@ -31,8 +31,6 @@ export default function Section1<
 		handleAuthClick: () => void;
 	} & SectionPropsType
 >({ inView, inViewRef, handleAuthClick }: T) {
-	const [username, setUsername] = useState('');
-
 	const lang = useContext(InitContext).state.lang.Root.Section1;
 
 	return (
@@ -53,11 +51,7 @@ export default function Section1<
 					<Paragraph>
 						<Interweave allowAttributes={true} content={lang['Paragraph']} />
 					</Paragraph>
-					<MainTextInput
-						formCustomStyle={formCustomStyle}
-						username={username}
-						setUsername={setUsername}
-					/>
+					<MainTextInput formCustomStyle={formCustomStyle} />
 				</InnerWrapper>
 			</SecondRow>
 		</Section>

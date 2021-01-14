@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 
 import { SectionPropsType } from 'components/root/Root';
 import { InitContext } from 'global/context/InitContext';
@@ -20,7 +20,6 @@ import {
 } from './Section5.style';
 
 export default function Section5({ inViewRef, inView }: SectionPropsType) {
-	const [username, setUsername] = useState('');
 	const lang = useContext(InitContext).state.lang.Root.Section5;
 
 	return (
@@ -33,11 +32,7 @@ export default function Section5({ inViewRef, inView }: SectionPropsType) {
 				<Bg src={bg} alt="bg" />
 				<Wrapper>
 					<Title>{lang['Title']}</Title>
-					<MainTextInput
-						formCustomStyle={formCustomStyle}
-						username={username}
-						setUsername={setUsername}
-					/>
+					<MainTextInput formCustomStyle={formCustomStyle} />
 				</Wrapper>
 			</InnerContainer>
 		</Section>

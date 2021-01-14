@@ -22,18 +22,18 @@ type DataType = {
 let timerID: NodeJS.Timeout | number;
 export default function MainTextInput<
 	T extends {
-		username: string;
-		setUsername: React.Dispatch<React.SetStateAction<string>>;
 		formCustomStyle?: CustomStyles;
 	}
->({ username, setUsername, formCustomStyle }: T) {
+>({ formCustomStyle }: T) {
 	const tqField = useRef<HTMLTextAreaElement>(null);
 	const isFieldDisabled = useRef(false);
+	const [username, setUsername] = useState('');
 	const [inputMode, setInputMode] = useState(false);
 	const [showSubmitBtn, setShowSubmitBtn] = useState(false);
 	const [isValid, setIsValid] = useState<boolean | null>(null);
 	const [isLoading, setIsLoading] = useState(false);
 	const tqForm = useRef<HTMLFormElement>(null);
+
 	const dispatch = useDispatch();
 
 	const {
