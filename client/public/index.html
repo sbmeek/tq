@@ -12,54 +12,10 @@
 		<meta name="author" content="sbmeek" />
 		<link rel="apple-touch-icon" href="%PUBLIC_URL%/favicon.ico" />
 		<link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-		<style id="_l-css">
-			#_l.rem {
-				animation: _lH 200ms;
-				opacity: 0;
-			}
-
-			@keyframes _lH {
-				0% {
-					opacity: 1;
-				}
-
-				1% {
-					display: none;
-				}
-
-				100% {
-					opacity: 0;
-				}
-			}
-		</style>
 		<title>TQ</title>
 	</head>
 
 	<body>
 		<div id="react-root"></div>
-		<div
-			id="_l"
-			style="
-				z-index: 999;
-				opacity: 1;
-				transition: opacity 250ms;
-				min-width: 100vw;
-				min-height: 100%;
-				background: #fff;
-				position: fixed;
-				top: 0;
-				left: 0;
-			"
-		></div>
-		<script id="_l-js">
-			var _l = document.querySelector('#_l');
-			var _lCSS = document.querySelector('#_l-css');
-			var _lJS = document.querySelector('#_l-js');
-			_l.addEventListener('animationend', (e) => {
-				_l.remove();
-				_lCSS.remove();
-				_lJS.remove();
-			});
-		</script>
 	</body>
 </html>

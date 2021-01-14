@@ -8,10 +8,6 @@ import Loader from 'components/loader/Loader';
 
 const Error500 = lazy(() => import('components/error/500'));
 
-const loader = document.querySelector('#_l');
-
-const hideLoader = () => loader?.classList.add('rem');
-
 export default function App() {
 	const dispatch = useDispatch();
 	const { isStatus500, isLoaded, user } = useSelector(
@@ -33,7 +29,6 @@ export default function App() {
 
 	if (!isStatus500) {
 		if (isLoaded) {
-			hideLoader();
 			return (
 				<>
 					<Suspense fallback={<Loader />}>
