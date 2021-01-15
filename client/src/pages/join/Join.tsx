@@ -14,10 +14,10 @@ import {
 	BtnsWrapper
 } from './Join.style';
 import Button from 'shared/button/Button';
-import MainTextInput from 'components/main-text-input/MainTextInput';
+// import MainTextInput from 'components/main-text-input/MainTextInput';
 
 export default function MainLogin() {
-	const [username, setUsername] = useState('');
+	// const [username, setUsername] = useState('');
 	const [isLogoLoaded, setIsLogoLoaded] = useState(false);
 	const [isFieldLoaded, setIsFieldLoaded] = useState(false);
 
@@ -47,7 +47,8 @@ export default function MainLogin() {
 				</LogoContainer>
 				<MainElementsContainer>
 					<Wrapper isFieldLoaded={isFieldLoaded}>
-						<MainTextInput username={username} setUsername={setUsername} />
+						Disabled
+						{/* <MainTextInput username={username} setUsername={setUsername} /> */}
 						<BtnsWrapper>
 							<Button
 								type="button"
