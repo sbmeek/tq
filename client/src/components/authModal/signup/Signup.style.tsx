@@ -126,7 +126,7 @@ export const InfoBox = styled.div`
 		display: block;
 		position: absolute;
 		left: 10%;
-		top: -23%;
+		bottom: 100%;
 		border: 10px solid transparent;
 		border-bottom: 10px solid var(--tq-blue-00);
 		transition: background 150ms;
