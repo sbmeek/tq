@@ -21,7 +21,7 @@ import {
 import MainTextInput from 'components/main-text-input/MainTextInput';
 import { InitContext } from 'global/context/InitContext';
 
-export default function Section2({ inView, inViewRef }: SectionPropsType) {
+function Section2({ inView, inViewRef }: SectionPropsType) {
 	const lang = useContext(InitContext).state.lang.Root.Section2;
 
 	return (
@@ -42,3 +42,5 @@ export default function Section2({ inView, inViewRef }: SectionPropsType) {
 		</Section>
 	);
 }
+
+export default React.memo(Section2);

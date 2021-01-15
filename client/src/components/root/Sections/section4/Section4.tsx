@@ -17,7 +17,8 @@ import {
 	TitleSection4
 } from './Section4.style';
 import Interweave from 'interweave';
-export default function Section3({ inView, inViewRef }: SectionPropsType) {
+
+function Section4({ inView, inViewRef }: SectionPropsType) {
 	const lang = useContext(InitContext).state.lang.Root.Section4;
 	return (
 		<Section ref={inViewRef} isVisible={inView}>
@@ -40,3 +41,5 @@ export default function Section3({ inView, inViewRef }: SectionPropsType) {
 		</Section>
 	);
 }
+
+export default React.memo(Section4);

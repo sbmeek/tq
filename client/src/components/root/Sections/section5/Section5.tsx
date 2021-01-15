@@ -19,7 +19,7 @@ import {
 	formCustomStyle
 } from './Section5.style';
 
-export default function Section5({ inViewRef, inView }: SectionPropsType) {
+function Section5({ inViewRef, inView }: SectionPropsType) {
 	const lang = useContext(InitContext).state.lang.Root.Section5;
 
 	return (
@@ -38,3 +38,5 @@ export default function Section5({ inViewRef, inView }: SectionPropsType) {
 		</Section>
 	);
 }
+
+export default React.memo(Section5);

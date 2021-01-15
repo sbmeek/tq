@@ -17,7 +17,7 @@ import {
 } from './Section3.style';
 import Interweave from 'interweave';
 
-export default function Section3({ inView, inViewRef }: SectionPropsType) {
+function Section3({ inView, inViewRef }: SectionPropsType) {
 	const lang = useContext(InitContext).state.lang.Root.Section3;
 	return (
 		<Section ref={inViewRef} isVisible={inView}>
@@ -37,3 +37,5 @@ export default function Section3({ inView, inViewRef }: SectionPropsType) {
 		</Section>
 	);
 }
+
+export default React.memo(Section3);

@@ -26,7 +26,7 @@ import {
 
 import MainTextInput from 'components/main-text-input/MainTextInput';
 
-export default function Section1<
+function Section1<
 	T extends {
 		handleAuthClick: () => void;
 	} & SectionPropsType
@@ -57,3 +57,5 @@ export default function Section1<
 		</Section>
 	);
 }
+
+export default React.memo(Section1);
