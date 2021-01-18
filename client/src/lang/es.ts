@@ -75,7 +75,7 @@ export default {
 	},
 	Inbox: {
 		NoMessagesInfo: 'Aún no hay nada aquí :(',
-		Title: 'Bandeja',
+		Title: 'Inbox',
 		MsgTab: 'Mensajes',
 		AnsTab: 'Respondidos',
 		ReplyingModal: {
