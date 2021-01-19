@@ -2,7 +2,6 @@ import React, { useState, useContext, MouseEvent, useEffect } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import icon from 'assets/images/icon.png';
 import { InitContext } from 'global/context/InitContext';
-import parse from 'html-react-parser';
 import ShareOrSaveModal from 'components/shareOrSaveModal/ShareOrSaveModal';
 import reportIcon from 'assets/images/icons/icons-inbox/icon-report.png';
 import deleteIcon from 'assets/images/icons/icons-inbox/icon-delete.png';
@@ -192,10 +191,7 @@ const Inbox = <
 						<MsgsOffset>
 							{answeredMsgs.map((msg) => (
 								<MsgContainer key={msg._id} style={{ padding: '0' }}>
-									<MsgItem>
-										"{msg.content}"<br />
-										<i>ans: {parse(msg.answer as string)}</i>
-									</MsgItem>
+									<MsgItem>"{msg.content}"</MsgItem>
 								</MsgContainer>
 							))}
 						</MsgsOffset>

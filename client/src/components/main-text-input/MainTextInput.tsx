@@ -13,7 +13,7 @@ import { InitContext } from 'global/context/InitContext';
 import { getAuthInfoAction } from 'global/ducks/authDucks';
 
 import arrow from 'assets/images/icons/icons-main/icon-arrow.svg';
-import { Form, Textarea, MainBtn } from './MainTextInput.style';
+import { Form, Input, MainBtn } from './MainTextInput.style';
 
 type DataType = {
 	_id: string;
@@ -25,7 +25,7 @@ export default function MainTextInput<
 		formCustomStyle?: CustomStyles;
 	}
 >({ formCustomStyle }: T) {
-	const tqField = useRef<HTMLTextAreaElement>(null);
+	const tqField = useRef<HTMLInputElement>(null);
 	const isFieldDisabled = useRef(false);
 	const [username, setUsername] = useState('');
 	const [inputMode, setInputMode] = useState(false);
@@ -89,10 +89,10 @@ export default function MainTextInput<
 	};
 
 	const handleFieldChange = (
-		e: ChangeEvent<HTMLTextAreaElement> & KeyboardEvent<HTMLTextAreaElement>
+		e: ChangeEvent<HTMLInputElement> & KeyboardEvent<HTMLInputElement>
 	) => {
 		const curr = tqForm.current!;
-		const targetElement = e.target as HTMLTextAreaElement;
+		const targetElement = e.target as HTMLInputElement;
 		clearTimeout(timerID as NodeJS.Timeout);
 		if (targetElement.value) {
 			setIsLoading(true);
@@ -115,8 +115,8 @@ export default function MainTextInput<
 			val = val.replace(
 				/\s/g,
 				val[0] !== ' ' &&
-					val[targetElement.selectionStart] !== '-' &&
-					val[targetElement.selectionStart - 2] !== '-'
+					val[targetElement.selectionStart!] !== '-' &&
+					val[targetElement.selectionStart! - 2] !== '-'
 					? '-'
 					: ''
 			);
@@ -125,7 +125,7 @@ export default function MainTextInput<
 		}
 	};
 
-	const handleFieldFocus = (e: FocusEvent<HTMLTextAreaElement>) => {
+	const handleFieldFocus = (e: FocusEvent<HTMLInputElement>) => {
 		setInputMode(!(e.type === 'blur' && username.length === 0));
 		if (e.type === 'focus') tqField.current!.focus();
 	};
@@ -139,7 +139,7 @@ export default function MainTextInput<
 			formCustomStyle={formCustomStyle}
 			ref={tqForm}
 		>
-			<Textarea
+			<Input
 				value={username}
 				isValid={isValid}
 				isLoading={isLoading}
@@ -157,7 +157,7 @@ export default function MainTextInput<
 				maxLength={20}
 				placeholder={!inputMode ? lang['InputPlaceholder'] : ''}
 				data-testid="username-field"
-			></Textarea>
+			/>
 			{showSubmitBtn && (
 				<MainBtn type="submit" data-testid="btn-submit">
 					<img src={arrow} alt="arrow" />

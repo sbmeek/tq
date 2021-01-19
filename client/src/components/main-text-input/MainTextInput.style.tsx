@@ -37,12 +37,12 @@ export const Form = styled.form<FormPropsType>`
 		background: var(--tq-blue-03);
 	}
 `;
-type TextareaPropsType = {
+type InputPropsType = {
 	isValid: boolean | null;
 	isLoading: boolean;
-	isInputMode: boolean
+	isInputMode: boolean;
 };
-export const Textarea = styled.textarea<TextareaPropsType>`
+export const Input = styled.input<InputPropsType>`
 	background: transparent;
 	border-radius: 30px;
 	width: 100%;
@@ -61,7 +61,7 @@ export const Textarea = styled.textarea<TextareaPropsType>`
 	${(props) =>
 		props.isInputMode
 			? `
-			padding: 5px 10px;
+			padding: 5px 40px 5px 10px;
 			color: #fff;
 			font-size: 1.1rem;
 			outline: none;
