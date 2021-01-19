@@ -200,12 +200,13 @@ export const TabContent = styled.div<{ isTabSelected: boolean }>`
 
 export const MsgsList = styled.div`
 	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+	padding: 30px 0;
 	min-width: 100%;
 	background: var(--tq-bg-00);
 	border-radius: 50px;
 	height: 100%;
-	align-items: center;
-	justify-content: center;
 
 	@media (min-width: 501px) {
 		min-width: 100%;
@@ -219,9 +220,9 @@ export const MsgsList = styled.div`
 
 export const MsgsOffset = styled.div`
 	padding: 0px 12px;
-	margin: auto 33px;
+	margin: 0 33px;
 	height: auto;
-	max-height: 82%;
+	max-height: 100%;
 	width: 100%;
 	overflow: hidden auto;
 	border-radius: 30px;
@@ -234,7 +235,6 @@ export const MsgsOffset = styled.div`
 	@media (max-width: 501px) {
 		width: 100%;
 		margin: 0 15px;
-		max-height: 90%;
 	}
 
 	&::-webkit-scrollbar {
