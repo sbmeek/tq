@@ -5,7 +5,7 @@ export const FirstRow = styled.div`
 	place-items: center;
 	position: relative;
 	width: 100%;
-	height: 61px;
+	height: 200px;
 	z-index: 1;
 `;
 
@@ -17,18 +17,19 @@ export const Logo = styled.img`
 	@media (max-width: 535px) {
 		position: absolute;
 		margin: 0;
-		top: 106%;
+		top: 30%;
 		right: 0;
 		width: 190px;
 	}
 	@media (max-width: 390px) {
-		top: 122%;
+		top: 35%;
 	}
 	@media (max-width: 290px) {
-		top: 162%;
+		top: 42%;
 		width: 170px;
 	}
 	@media (max-width: 280px) {
+		top: 45%;
 		width: 160px;
 	}
 `;
@@ -38,7 +39,7 @@ export const SecondRow = styled.div`
 	place-items: center;
 	position: relative;
 	width: 100%;
-	height: 545px;
+	height: 260px;
 `;
 
 export const Bg = styled.img`
@@ -71,7 +72,7 @@ export const InnerWrapper = styled.div`
 		align-items: center;
 	}
 	@media (max-width: 290px) {
-		margin-top: 100px;
+		margin-top: 38px;
 	}
 `;
 
