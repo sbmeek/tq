@@ -24,7 +24,7 @@ export default function Answer<
 		templateQuestion: HTMLDivElement;
 	}
 >({ opened, setOpened, form, templateQuestion }: T) {
-	const { ReplyingModal: lang } = useContext(InitContext).state.lang.Inbox;
+	const lang = useContext(InitContext).state.lang.Inbox;
 	const [templateImg, setTemplateImg] = useState('');
 	const ansImg = useRef<HTMLImageElement>(null);
 	const history = useHistory();
@@ -64,7 +64,7 @@ export default function Answer<
 				onOverlayMouseDownOrTouch={handleOverlayClick}
 				isActive={opened}
 			>
-				<Title>{lang['Title']}</Title>
+				<Title>{lang['TitleRep']}</Title>
 				<BtnsWrapper>
 					<Button
 						group="primary"
