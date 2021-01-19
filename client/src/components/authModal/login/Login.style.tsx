@@ -3,9 +3,9 @@ import { inputStyles } from '../style';
 
 export const FieldsContainer = styled.div`
 	width: 320px;
-	max-height: 191px;
+	height: 174px;
 	@media (max-width: 600px) {
-		height: 191px;
+		height: 178px;
 		width: 100%;
 	}
 `;
