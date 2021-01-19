@@ -178,7 +178,7 @@ const Inbox = <
 										<BtnAnswer
 											onClick={(e) => handleAnswerMsgClick(e, msg._id)}
 										>
-											<span>answer</span>
+											<span>{lang['BtnAnswer']}</span>
 										</BtnAnswer>
 									</MsgContainer>
 								))}

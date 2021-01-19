@@ -76,13 +76,11 @@ export default {
 		NoMessagesInfo: "There isn't nothing here yet :(",
 		Title: 'Inbox',
 		MsgTab: 'Messages',
+		BtnAnswer: 'Answer',
 		AnsTab: 'Answered',
-		ReplyingModal: {
-			Title: 'Are you sure you want to send this message?',
-			BtnCancel: 'Cancel',
-			BtnAnswer: 'Answer',
-			Note: 'Note: Once an answer is sent it cannot be edited.'
-		}
+		TitleRep: 'Are you sure you want to send this message?',
+		BtnCancel: 'Cancel',
+		Note: 'Note: Once an answer is sent it cannot be edited.'
 	},
 	Menu: {
 		ModalForNewUsers: 'Did you know this is a menu?',
