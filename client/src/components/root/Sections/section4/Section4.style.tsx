@@ -77,8 +77,9 @@ export const TitleSection4 = styled.h1`
 	color: var(--tq-blue-01);
 
 	@media (max-width: 418px) {
-		font-size: 36px;
+		font-size: 32px;
 		line-height: 0.9;
+		height: 25%;
 	}
 `;
 
