@@ -35,6 +35,7 @@ export default function Success<
 	const [msg, setMsg] = useState('');
 	const [sent, setSent] = useState(false);
 	const [showSubmitBtn, setShowSubmitBtn] = useState(false);
+	const [disabler, setDisabler] = useState(true);
 
 	useEffect(() => {
 		if (socket !== undefined) {
@@ -60,8 +61,12 @@ export default function Success<
 
 	const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		const data = { username, msg };
-		socket.emit('msg:send', data);
+
+		if (disabler === true) {
+			const data = { username, msg };
+			socket.emit('msg:send', data);
+			setDisabler(false);
+		}
 	};
 
 	function shoot(val: string) {

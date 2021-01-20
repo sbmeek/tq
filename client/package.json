@@ -38,7 +38,7 @@
 		"styled-components": "^5.2.0"
 	},
 	"scripts": {
-		"start": "cross-env HTTPS=true BROWSER=none react-app-rewired start --required @cypress/instrument-cra",
+		"start": "cross-env HTTP=true BROWSER=none react-app-rewired start --required @cypress/instrument-cra",
 		"build": "cross-env GENERATE_SOURCEMAP=false INLINE_RUNTIME_CHUNK=false react-app-rewired build",
 		"eject": "react-scripts eject",
 		"start-test": "cypress open",
