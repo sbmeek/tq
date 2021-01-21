@@ -123,8 +123,9 @@ export const Title = styled.h1`
 		font-size: 38px;
 	}
 	@media (max-width: 350px) {
-		width: 80%;
-		font-size: 34px;
+		width: 79%;
+		font-size: 44px;
+		line-height: 1;
 	}
 `;
 
