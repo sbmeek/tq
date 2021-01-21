@@ -1,4 +1,5 @@
-import React, { MouseEvent } from 'react';
+import { InitContext } from 'global/context/InitContext';
+import React, { MouseEvent, useContext } from 'react';
 import { Container, Label } from './Labels.style';
 
 export default function Labels<
@@ -13,10 +14,13 @@ export default function Labels<
 		setShowLabel(true);
 		label.style.color = window.getComputedStyle(targetElement).color;
 	};
+	const lang = useContext(InitContext).state.lang.TemplateEditor;
 
 	return (
 		<Container className="d-text-select">
-			<div><h1>Label</h1></div>
+			<div>
+				<h1>{lang['Label']}</h1>
+			</div>
 			<Label>
 				<span role="img" aria-label="seen" onClick={labelClickHandler}>
 					✔️

@@ -92,7 +92,10 @@ export default {
 		BtnTerms: 'Terms and Conditions'
 	},
 	TemplateEditor: {
-		InputAnswerPlaceholder: 'Type your answer...'
+		InputAnswerPlaceholder: 'Type your answer...',
+		Message: 'Message',
+		Colors: 'Colors',
+		Label: 'Labels'
 	},
 	AuthModal: {
 		FormSignupTitle: 'Create your account',
