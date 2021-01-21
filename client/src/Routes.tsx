@@ -35,9 +35,9 @@ export default function Routes() {
 							classNames="fade"
 							nodeRef={switchContainerRef}
 						>
-							<div style={{ height: '100%' }} ref={switchContainerRef}>
-								<Switch location={location}>
-									<Route exact path="/" component={Main} />
+							<Switch location={location}>
+								<Route exact path="/" component={Main} />
+								<div style={{ height: '100%' }} ref={switchContainerRef}>
 									<UnauthRoute path="/join" component={Join} redirectTo="/" />
 									<AuthRoute path="/messages" component={Inbx} redirectTo="/" />
 									<AuthRoute
@@ -45,15 +45,15 @@ export default function Routes() {
 										component={TemplateMSG}
 										redirectTo="/"
 									/>
-									<Route path="/account/verify" component={VerifyAccount} />
-									<Route path="/terms" component={Terms} />
-									<Route path="/politics" component={Politics} />
-									<Route exact path="/:username" component={Msg} />
-									<Route path="*">
-										<Error404 />
-									</Route>
-								</Switch>
-							</div>
+								</div>
+								<Route path="/account/verify" component={VerifyAccount} />
+								<Route path="/terms" component={Terms} />
+								<Route path="/politics" component={Politics} />
+								<Route exact path="/:username" component={Msg} />
+								<Route path="*">
+									<Error404 />
+								</Route>
+							</Switch>
 						</CSSTransition>
 					</TransitionGroup>
 				)}
