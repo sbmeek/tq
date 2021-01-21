@@ -64,8 +64,12 @@ small {
 
 :global {
 	#react-root {
-		background: #ecebeba3;
+		background-color: #fff;
 		z-index: 0;
+	}
+
+	#react-root.bgColor-for-img {
+		background-color: #ecebeba3;
 	}
 
 	.d-scroll {

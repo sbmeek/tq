@@ -1,4 +1,5 @@
-import React, { lazy } from 'react';
+import Loader from 'components/loader/Loader';
+import React, { lazy, Suspense } from 'react';
 import { RootStateOrAny, useSelector } from 'react-redux';
 
 const Root = lazy(() => import('components/root/Root'));
@@ -9,5 +10,15 @@ export default function Main() {
 		(store: RootStateOrAny) => store.auth
 	);
 
-	return <>{isAuthenticated ? <UserLink /> : <Root />}</>;
+	return (
+		<>
+			{isAuthenticated ? (
+				<Suspense fallback={<Loader />}>
+					<UserLink />
+				</Suspense>
+			) : (
+				<Root />
+			)}
+		</>
+	);
 }

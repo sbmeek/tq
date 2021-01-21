@@ -26,6 +26,9 @@ function calcVH() {
 }
 
 calcVH();
+window.addEventListener('load', () => {
+	reactRoot?.classList.add('bgColor-for-img');
+});
 window.addEventListener('onorientationchange', calcVH, true);
 window.addEventListener('resize', calcVH, true);
 

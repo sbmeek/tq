@@ -6,11 +6,11 @@ export const LoaderContainer = styled.div`
 	align-items: center;
 	justify-content: center;
 	vertical-align: middle;
-	position: absolute;
+	position: fixed;
 	min-width: 100vw;
 	min-height: 100%;
 	background-color: #fff;
-	z-index: 999;
+	z-index: 9999;
 `;
 
 const loaderEyeAnim = keyframes`

@@ -4,7 +4,6 @@ import { InitContext } from 'global/context/InitContext';
 import AuthInPrivateMode from 'pages/authInPrivateMode/AuthInPrivateMode';
 import Routes from './Routes';
 import { setUserMessagesAction } from 'global/ducks/authDucks';
-import Loader from 'components/loader/Loader';
 
 const Error500 = lazy(() => import('components/error/500'));
 
@@ -31,7 +30,7 @@ export default function App() {
 		if (isLoaded) {
 			return (
 				<>
-					<Suspense fallback={<Loader />}>
+					<Suspense fallback={null}>
 						{!PRIVATE_MODE ? (
 							<Routes />
 						) : !isTester ? (
