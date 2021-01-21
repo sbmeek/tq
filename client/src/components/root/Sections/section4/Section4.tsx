@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
-import { SectionPropsType } from 'components/root/Root';
 import { InitContext } from 'global/context/InitContext';
 import { Section } from 'components/root/Root.style';
+import { useInView } from 'react-intersection-observer';
 import bg4 from 'assets/images/presentation/bg4.svg';
 import logoMaxSection4 from 'assets/images/presentation/logo_max_section4.png';
 import logoMinSection4 from 'assets/images/presentation/logo_min_section4.png';
@@ -17,11 +17,14 @@ import {
 	TitleSection4
 } from './Section4.style';
 import Interweave from 'interweave';
+import { inViewOptions } from 'components/root/Root';
 
-function Section4({ inView, inViewRef }: SectionPropsType) {
+function Section4() {
 	const lang = useContext(InitContext).state.lang.Root.Section4;
+	const { ref, inView } = useInView(inViewOptions);
+
 	return (
-		<Section ref={inViewRef} isVisible={inView}>
+		<Section ref={ref} isVisible={inView}>
 			<FirstRowSection4>
 				<LogoPicSection4>
 					<source media="(max-width: 390px)" srcSet={logoReMinSection4} />

@@ -1,3 +1,4 @@
+import { getViewportH } from 'index';
 import styled, { createGlobalStyle, css } from 'styled-components';
 
 export const HideMenucitoStyle = createGlobalStyle`
@@ -18,13 +19,13 @@ export const flexCenterColumn = css`
 export const Container = styled.div`
 	display: flex;
 	flex-direction: column;
-	overflow-y: auto;
-	overflow-x: hidden;
-	min-width: 100%;
+	overflow: hidden auto;
+	width: 100%;
 	height: 100%;
+	min-height: ${getViewportH()}px;
 `;
 
-export const Section = styled.div<{ isVisible: boolean }>`
+export const Section = styled.div<{ isVisible?: boolean }>`
 	${flexCenterColumn}
 	width: 100%;
 	min-width: 256px;

@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 
 import Interweave from 'interweave';
-import { SectionPropsType } from 'components/root/Root';
 import { Section } from 'components/root/Root.style';
 
 import bg from 'assets/images/presentation/bg2.svg';
@@ -20,12 +19,15 @@ import {
 
 import MainTextInput from 'components/main-text-input/MainTextInput';
 import { InitContext } from 'global/context/InitContext';
+import { useInView } from 'react-intersection-observer';
+import { inViewOptions } from 'components/root/Root';
 
-function Section2({ inView, inViewRef }: SectionPropsType) {
+function Section2() {
 	const lang = useContext(InitContext).state.lang.Root.Section2;
+	const { ref, inView } = useInView(inViewOptions);
 
 	return (
-		<Section ref={inViewRef} isVisible={inView}>
+		<Section ref={ref} isVisible={inView}>
 			<FirstRow>
 				<Logo src={logoSection2} alt="logo-section2" />
 			</FirstRow>

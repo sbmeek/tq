@@ -13,12 +13,16 @@ import './globalStyles.css';
 const store = generateStore();
 
 const reactRoot = document.querySelector('#react-root');
-function calcVH() {
-	var vH = Math.max(
+
+export const getViewportH = () => {
+	return Math.max(
 		document.documentElement.clientHeight,
 		window.innerHeight || 0
 	);
-	reactRoot!.setAttribute('style', 'height:' + vH + 'px;');
+};
+
+function calcVH() {
+	reactRoot!.setAttribute('style', 'height:' + getViewportH() + 'px;');
 }
 
 calcVH();

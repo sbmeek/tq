@@ -12,15 +12,13 @@ import Section4 from './Sections/section4/Section4';
 import Section5 from './Sections/section5/Section5';
 import Footer from './Footer/Footer';
 
-export type SectionPropsType = {
-	inView: boolean;
-	inViewRef:
-		| React.RefObject<any>
-		| ((node?: Element | null | undefined) => void);
+export const inViewOptions = {
+	threshold: 0.355,
+	triggerOnce: true,
+	root: document.body
 };
 
 export default function Root() {
-	const [isContainerLoaded, setIsContainerLoaded] = useState(false);
 	const [showAuthModal, setShowAuthModal] = useState(false);
 
 	const handleAuthClick = () => {
@@ -31,30 +29,16 @@ export default function Root() {
 		<>
 			<HideMenucitoStyle />
 			<AuthModal opened={showAuthModal} setOpened={setShowAuthModal} />
-			<Container onLoad={() => setIsContainerLoaded(true)}>
-				<InView skip={!isContainerLoaded} triggerOnce threshold={0.244}>
-					{({ inView, ref }) => (
-						<Section1
-							inView={inView}
-							inViewRef={ref}
-							handleAuthClick={handleAuthClick}
-						/>
-					)}
-				</InView>
-				<InView skip={!isContainerLoaded} triggerOnce threshold={0.244}>
-					{({ inView, ref }) => <Section2 inView={inView} inViewRef={ref} />}
-				</InView>
-				<InView skip={!isContainerLoaded} triggerOnce threshold={0.244}>
-					{({ inView, ref }) => (
-						<Section3 inView={inView} inViewRef={ref}></Section3>
-					)}
-				</InView>
-				<InView skip={!isContainerLoaded} triggerOnce threshold={0.244}>
-					{({ inView, ref }) => (
-						<Section4 inView={inView} inViewRef={ref}></Section4>
-					)}
-				</InView>
-				<InView skip={!isContainerLoaded} triggerOnce threshold={0.244}>
+			<Container>
+				<Section1 handleAuthClick={handleAuthClick} />
+				<Section2 />
+				<Section3 />
+				<Section4 />
+				<InView
+					root={inViewOptions.root}
+					triggerOnce={inViewOptions.triggerOnce}
+					threshold={inViewOptions.threshold}
+				>
 					{({ inView, ref }) => (
 						<>
 							<Section5 inView={inView} inViewRef={ref} />

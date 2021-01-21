@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import { SectionPropsType } from 'components/root/Root';
 import { Section } from 'components/root/Root.style';
 import { InitContext } from 'global/context/InitContext';
 import logoMaxSection3 from 'assets/images/presentation/logo_max_section3.png';
@@ -16,11 +15,15 @@ import {
 	TitleSection3
 } from './Section3.style';
 import Interweave from 'interweave';
+import { useInView } from 'react-intersection-observer';
+import { inViewOptions } from 'components/root/Root';
 
-function Section3({ inView, inViewRef }: SectionPropsType) {
+function Section3() {
 	const lang = useContext(InitContext).state.lang.Root.Section3;
+	const { ref, inView } = useInView(inViewOptions);
+
 	return (
-		<Section ref={inViewRef} isVisible={inView}>
+		<Section ref={ref} isVisible={inView}>
 			<FirstRowSection3>
 				<LogoMaxSection3 src={logoMaxSection3} alt="logo3" />
 				<LogoMinSection3 src={logoMinSection3} alt="logo3" />

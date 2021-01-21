@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 
-import { SectionPropsType } from 'components/root/Root';
 import { InitContext } from 'global/context/InitContext';
 import MainTextInput from 'components/main-text-input/MainTextInput';
 
@@ -19,7 +18,14 @@ import {
 	formCustomStyle
 } from './Section5.style';
 
-function Section5({ inViewRef, inView }: SectionPropsType) {
+function Section5<
+	T extends {
+		inView: boolean | undefined;
+		inViewRef:
+			| React.RefObject<any>
+			| ((node?: Element | null | undefined) => void);
+	}
+>({ inViewRef, inView }: T) {
 	const lang = useContext(InitContext).state.lang.Root.Section5;
 
 	return (

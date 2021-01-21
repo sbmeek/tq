@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
+import { useInView } from 'react-intersection-observer';
 
-import { SectionPropsType } from 'components/root/Root';
 import { Section } from 'components/root/Root.style';
 
 import Interweave from 'interweave';
@@ -25,16 +25,18 @@ import {
 } from './Section1.style';
 
 import MainTextInput from 'components/main-text-input/MainTextInput';
+import { inViewOptions } from 'components/root/Root';
 
 function Section1<
 	T extends {
 		handleAuthClick: () => void;
-	} & SectionPropsType
->({ inView, inViewRef, handleAuthClick }: T) {
+	}
+>({ handleAuthClick }: T) {
 	const lang = useContext(InitContext).state.lang.Root.Section1;
+	const { ref, inView } = useInView(inViewOptions);
 
 	return (
-		<Section ref={inViewRef} isVisible={inView}>
+		<Section ref={ref} isVisible={inView}>
 			<FirstRow>
 				<ButtonFlyContainer>
 					<button onClick={handleAuthClick}>
