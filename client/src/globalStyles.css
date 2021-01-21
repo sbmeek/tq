@@ -89,18 +89,7 @@ small {
 	.fade-appear-active,
 	.fade-enter.fade-enter-active {
 		opacity: 1;
-		transform: scale(1);
 		transition: opacity 250ms linear 150ms;
-		animation: enlarge 250ms;
-	}
-
-	@keyframes enlarge {
-		0% {
-			transform: scale(0);
-		}
-		100% {
-			transform: scale(1.02);
-		}
 	}
 
 	.fade-exit {
