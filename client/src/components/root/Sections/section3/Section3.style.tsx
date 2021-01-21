@@ -88,7 +88,7 @@ export const TitleSection3 = styled.h1`
 	color: var(--tq-blue-01);
 	text-align: center;
 
-	@media (max-width: 410px) {
+	@media (max-width: 420px) {
 		font-size: 34px;
 	}
 	@media (max-width: 334px) {
@@ -98,7 +98,7 @@ export const TitleSection3 = styled.h1`
 
 export const ParagraphSection3 = styled.p`
 	font-size: 19px;
-	@media (max-width: 410px) {
+	@media (max-width: 460px) {
 		text-align: center;
 	}
 `;
