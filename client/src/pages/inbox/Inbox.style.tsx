@@ -258,6 +258,7 @@ export const MsgContainer = styled.div<{ isOpened?: boolean }>`
 	flex-direction: column;
 	background: var(--tq-dark-gray-01);
 	text-overflow: ellipsis;
+	overflow: hidden;
 	color: #fff;
 	height: 60px;
 	font-weight: 700;
