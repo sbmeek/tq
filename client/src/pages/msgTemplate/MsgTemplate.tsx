@@ -14,7 +14,7 @@ import { InitContext } from 'global/context/InitContext';
 import arrowanswer from 'assets/images/icons/icons-inbox/icon-arrow-answer.svg';
 import arrowexit from 'assets/images/icons/icons-inbox/icon-exit.svg';
 import xIcon from 'assets/images/icons/share-icons/icon-x.svg';
-import { useLocation } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 
 import {
 	AnswerPreview,
@@ -49,6 +49,7 @@ export default function Template() {
 	const label = useRef<HTMLDivElement>(null);
 	const form = useRef<HTMLFormElement>(null);
 	const location = useLocation<ITQMessage>();
+	const history = useHistory();
 	const {
 		state: { socket }
 	} = useContext(InitContext);
@@ -64,10 +65,16 @@ export default function Template() {
 	}, []);
 
 	useEffect(() => {
-		const msg = (location.state as any)['actualMsg'] as ITQMessage;
-		setActualMsg(msg);
-		templateAnswer.current!.focus();
-		templateQuestion.current!.innerHTML = `"${msg!.content}"`;
+		const actualMsgInState = (location.state as any)['actualMsg'] as ITQMessage;
+		if (actualMsgInState !== undefined) {
+			setActualMsg(actualMsgInState);
+			templateAnswer.current!.focus();
+			templateQuestion.current!.innerHTML = `"${actualMsgInState!.content}"`;
+		} else {
+			history.push('/messages', {
+				actualMsg: undefined
+			});
+		}
 	}, [location, actualMsg]);
 
 	const handleStickerAnimationEnd = useCallback(() => {
@@ -84,10 +91,7 @@ export default function Template() {
 		data._id = actualMsg!._id;
 		socket.emit('msg:ans', data);
 		socket.on('msg:ans', (_data: Object) => {
-			console.log(data);
-			// if (data.success) {
-			// 	//success
-			// }
+			console.log(data, _data);
 		});
 	};
 

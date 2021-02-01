@@ -9,9 +9,7 @@ import share from 'assets/images/icons/share-icons/share.svg';
 import other from 'assets/images/icons/share-icons/other.svg';
 import descargar from 'assets/images/icons/share-icons/descargar.svg';
 import Modal from 'shared/modal/Modal';
-import{modalcustom } from '../authModal/style'
-
-
+import { modalcustom } from '../authModal/style';
 
 import {
 	Overlay,
@@ -49,7 +47,8 @@ export default function ShareOrSaveModal<
 
 		setShowShareOrSaveModal(false);
 		history.push('/messages', {
-			showShareOrSaveModal: false
+			showShareOrSaveModal: false,
+			actualMsg: undefined
 		});
 	};
 	const handleBtnCancelClick = () => {
@@ -57,22 +56,27 @@ export default function ShareOrSaveModal<
 	};
 	return (
 		<Overlay onClick={handleOverlayClick} id="overlay">
-			<Modal 	isActive={true} customStyle={modalcustom} >
+			<Modal isActive={true} customStyle={modalcustom}>
 				<Titulo>share or save the image.</Titulo>
 				<Share>
-					<ButtonShare style={{background: "#00B800"}}>
+					<ButtonShare style={{ background: '#00B800' }}>
 						<img src={whatsapp} alt="share" />
 						<img src={share} alt="on-share" />
 					</ButtonShare>
-					<ButtonShare style={{background: "#0A5AA1"}}>
+					<ButtonShare style={{ background: '#0A5AA1' }}>
 						<img src={facebook} alt="share" />
 						<img src={share} alt="on-share" />
 					</ButtonShare>
-					<ButtonShare style={{background: " transparent linear-gradient(247deg, #7D05AF 0%, #D91799 26%, #FC277C 53%, #FC8B09 85%, #FFCB7E 100%) 0% 0% no-repeat padding-box"}}>
+					<ButtonShare
+						style={{
+							background:
+								' transparent linear-gradient(247deg, #7D05AF 0%, #D91799 26%, #FC277C 53%, #FC8B09 85%, #FFCB7E 100%) 0% 0% no-repeat padding-box'
+						}}
+					>
 						<img src={instagram} alt="share" />
 						<img src={share} alt="on-share" />
 					</ButtonShare>
-					<ButtonShare style={{background: "#DF0E0E"}}>
+					<ButtonShare style={{ background: '#DF0E0E' }}>
 						<img src={youtube} alt="share" />
 						<img src={share} alt="on-share" />
 					</ButtonShare>
@@ -86,7 +90,7 @@ export default function ShareOrSaveModal<
 					<h3>save</h3>
 					<img src={descargar} alt="on-save" />
 				</Btn>
-				<Btn  onMouseDown={handleBtnCancelClick}>
+				<Btn onMouseDown={handleBtnCancelClick}>
 					<span>close</span>
 					<span>X</span>
 				</Btn>

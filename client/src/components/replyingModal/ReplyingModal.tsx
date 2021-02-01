@@ -49,9 +49,12 @@ export default function Answer<
 		form.dispatchEvent(new Event('submit', { cancelable: true }));
 		const img = await convertTemplate();
 		localStorage.setItem('imgdata', img as string);
-		history.push({
+		history.replace({
 			pathname: '/messages',
-			state: { showShareOrSaveModal: true }
+			state: {
+				showShareOrSaveModal: true,
+				actualMsg: undefined
+			}
 		});
 	};
 
