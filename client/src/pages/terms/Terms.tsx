@@ -1,8 +1,8 @@
-import React from 'react'
-import {Container} from './Terms.style'
+import React from 'react';
+import { Container } from './Terms.style';
 export default function Terms() {
 	return (
-		<Container >
+		<Container>
 			<h1>TÉRMINOS DE SERVICIO</h1>
 
 			<h3>INFORMACIÓN GENERAL</h3>
@@ -48,69 +48,8 @@ export default function Terms() {
 				cambios.
 			</p>
 
-			<p>
-				Nuestra tienda se encuentra alojada en Shopify Inc. Ellos nos
-				proporcionan la plataforma de comercio electrónico en línea, que nos
-				permite venderte nuestros productos y servicios.
-			</p>
-
-			<h3>SECCIÓN 1 - TÉRMINOS DE LA TIENDA EN LÍNEA</h3>
-
-			<p>
-				Al utilizar este sitio, declaras que tienes al menos la mayoría de edad
-				en tu estado o provincia de residencia, o que tienes la mayoría de edad
-				en tu estado o provincia de residencia y que nos has dado tu
-				consentimiento para permitir que cualquiera de tus dependientes menores
-				use este sitio.
-			</p>
-
-			<p>
-				No puedes usar nuestros productos con ningún propósito ilegal o no
-				autorizado tampoco puedes, en el uso del Servicio, violar cualquier ley
-				en tu jurisdicción (incluyendo pero no limitado a las leyes de derecho
-				de autor).
-			</p>
-
-			<p>
-				No debes transmitir gusanos, virus o cualquier código de naturaleza
-				destructiva.
-			</p>
-
-			<p>
-				El incumplimiento o violación de cualquiera de estos Términos darán
-				lugar al cese inmediato de tus Servicios.
-			</p>
-
-			<h3>SECCIÓN 2 - CONDICIONES GENERALES</h3>
-
-			<p>
-				Nos reservamos el derecho de rechazar la prestación de servicio a
-				cualquier persona, por cualquier motivo y en cualquier momento.
-			</p>
-
-			<p>
-				Entiendes que tu contenido (sin incluir la información de tu tarjeta de
-				crédito), puede ser transferida sin encriptar e involucrar (a)
-				transmisiones a través de varias redes; y (b) cambios para ajustarse o
-				adaptarse a los requisitos técnicosde conexión de redes o dispositivos.
-				La información de tarjetas de crédito está siempre encriptada durante la
-				transferencia a través de las redes.
-			</p>
-
-			<p>
-				Estás de acuerdo con no reproducir, duplicar, copiar, vender, revender o
-				explotar cualquier parte del Servicio, usp del Servicio, o acceso al
-				Servicio o cualquier contacto en el sitio web a través del cual se
-				presta el servicio, sin el expreso permiso por escrito de nuestra parte.
-			</p>
-
-			<p>
-				Los títulos utilizados en este acuerdo se icluyen solo por conveniencia
-				y no limita o afecta a estos Términos.
-			</p>
-
 			<h3>
-				SECCIÓN 3 - EXACTITUD, EXHAUSTVIDAD Y ACTUALIDAD DE LA INFORMACIÓN
+				SECCIÓN 1 - EXACTITUD, EXHAUSTVIDAD Y ACTUALIDAD DE LA INFORMACIÓN
 			</h3>
 
 			<p>
@@ -131,90 +70,14 @@ export default function Terms() {
 				responsabilidad de monitorear los cambios en nuestro sitio.
 			</p>
 
-			<h3>SECTION 4 - MODIFICACIONES AL SERVICIO Y PRECIOS</h3>
-
-			<p>Los precios de nuestros productos están sujetos a cambio sin aviso.</p>
+			<h3>SECTION 2 - MODIFICACIONES AL SERVICIO </h3>
 
 			<p>
 				Nos reservamos el derecho de modificar o discontinuar el Servicio (o
 				cualquier parte del contenido) en cualquier momento sin aviso previo.
 			</p>
 
-			<p>
-				No seremos responsables ante ti o alguna tercera parte por cualquier
-				modificación, cambio de precio, suspensión o discontinuidad del
-				Servicio.
-			</p>
-
-			<h3>SECCIÓN 5 - PRODUCTOS O SERVICIOS (si aplicable)</h3>
-
-			<p>
-				Ciertos productos o servicios puedene star disponibles exclusivamente en
-				línea a través del sitio web. Estos productos o servicios pueden tener
-				cantidades limitadas y estar sujetas a devolución o cambio de acuerdo a
-				nuestra política de devolución solamente.
-			</p>
-
-			<p>
-				Hemos hecho el esfuerzo de mostrar los colores y las imágenes de
-				nuestros productos, en la tienda, con la mayor precisión de colores
-				posible. No podemos garantizar que el monitor de tu computadora muestre
-				los colores de manera exacta.
-			</p>
-
-			<p>
-				Nos reservamos el derecho, pero no estamos obligados, para limitar las
-				ventas de nuestros productos o servicios a cualquier persona, región
-				geográfica o jurisdicción. Podemos ejercer este derecho basados en cada
-				caso. Nos reservamos el derecho de limitar las cantidades de los
-				productos o servicios que ofrecemos. Todas las descripciones de
-				productos o precios de los productos están sujetos a cambios en
-				cualquier momento sin previo aviso, a nuestra sola discreción. Nos
-				reservamos el derecho de discontinuar cualquier producto en cualquier
-				momento. Cualquier oferta de producto o servicio hecho en este sitio es
-				nulo donde esté prohibido.
-			</p>
-
-			<p>
-				No garantizamos que la calidad de los productos, servicios, información
-				u otro material comprado u obtenido por ti cumpla con tus expectativas,
-				o que cualquier error en el Servicio será corregido.
-			</p>
-
-			<h3>SECCIÓN 6 - EXACTITUD DE FACTURACIÓN E INFORMACIÓN DE CUENTA</h3>
-
-			<p>
-				Nos reservamos el derecho de rechazar cualquier pedido que realice con
-				nosotros. Podemos, a nuestra discreción, limitar o cancelar las
-				cantidades compradas por persona, por hogar o por pedido. Estas
-				restricciones pueden incluir pedidos realizados por o bajo la misma
-				cuenta de cliente, la misma tarjeta de crédito, y/o pedidos que utilizan
-				la misma facturación y/o dirección de envío.
-			</p>
-
-			<p>
-				En el caso de que hagamos un cambio o cancelemos una orden, podemos
-				intentar notificarte poniéndonos en contacto vía correo electrónico y/o
-				dirección de facturación / número de teléfono proporcionado en el
-				momento que se hizo pedido. Nos reservamos el derecho de limitar o
-				prohibir las órdenes que, a nuestro juicio, parecen ser colocado por los
-				concesionarios, revendedores o distribuidores.
-			</p>
-
-			<p>
-				Te comprometes a proporcionar información actual, completa y precisa de
-				la compra y cuenta utilizada para todas las compras realizadasen nuestra
-				tienda. Te comprometes a ctualizar rápidamente tu cuenta y otra
-				información, incluyendo tu dirección de correo electrónico y números de
-				tarjetas de crédito y fechas de vencimiento, para que podamos completar
-				tus transacciones y contactarte cuando sea necesario.
-			</p>
-
-			<p>
-				Para más detalles, por favor revisa nuestra Política de Devoluciones.
-			</p>
-
-			<h3>SECCIÓN 7 - HERRAMIENTAS OPCIONALES</h3>
+			<h3>SECCIÓN 3 - HERRAMIENTAS OPCIONALES</h3>
 
 			<p>
 				Es posible que te proporcionemos aceso a herramientas de terceros a los
@@ -243,7 +106,7 @@ export default function Terms() {
 				servicios tambien estarán sujetos a estos Términos de Servicio.
 			</p>
 
-			<h3>SECCIÓN 8 - ENLACES DE TERCERAS PARTES</h3>
+			<h3>SECCIÓN 4 - ENLACES DE TERCERAS PARTES</h3>
 
 			<p>
 				Cierto contenido, productos y servicios disponibles vía nuestro Servicio
@@ -269,7 +132,7 @@ export default function Terms() {
 				productos de terceros deben ser dirigidas a la tercera parte.
 			</p>
 
-			<h3>SECCIÓN 9 - COMENTARIOS DE USUARIO, CAPTACIÓN Y OTROS ENVÍOS</h3>
+			<h3>SECCIÓN 5 - COMENTARIOS DE USUARIO, CAPTACIÓN Y OTROS ENVÍOS</h3>
 
 			<p>
 				Si, a pedido nuestro, envías ciertas presentaciones específicas (por
@@ -307,14 +170,14 @@ export default function Terms() {
 				comentarios publicados por ti o cualquier tercer parte.
 			</p>
 
-			<h3>SECCIÓN 10 - INFORMACIÓN PERSONAL</h3>
+			<h3>SECCIÓN 6 - INFORMACIÓN PERSONAL</h3>
 
 			<p>
 				Tu presentación de información personal a través del sitio se rige por
 				nuestra Política de Privacidad. Para ver nuestra Política de Privacidad.
 			</p>
 
-			<h3>SECCIÓN 11 - ERRORES, INEXACTITUDES Y OMISIONES</h3>
+			<h3>SECCIÓN 7 - ERRORES, INEXACTITUDES Y OMISIONES</h3>
 
 			<p>
 				De vez en cuando puede haber información en nuestro sitio o en el
@@ -339,7 +202,7 @@ export default function Terms() {
 				actualizado.
 			</p>
 
-			<h3>SECCIÓN 12 - USOS PROHIBIDOS</h3>
+			<h3>SECCIÓN 8 - USOS PROHIBIDOS</h3>
 
 			<p>
 				En adición a otras prohibiciones como se establece en los Términos de
@@ -365,9 +228,7 @@ export default function Terms() {
 				los usos prohibidos.
 			</p>
 
-			<h3>
-				SECCIÓN 13 - EXCLUSIÓN DE GARANTÍAS; LIMITACIÓN DE RESPONSABILIDAD
-			</h3>
+			<h3>SECCIÓN 9 - EXCLUSIÓN DE GARANTÍAS; LIMITACIÓN DE RESPONSABILIDAD</h3>
 
 			<p>
 				No garantizamos ni aseguramos que el uso de nuestro servicio será
@@ -421,7 +282,7 @@ export default function Terms() {
 				ley.
 			</p>
 
-			<h3>SECCIÓN 14 - INDEMNIZACIÓN</h3>
+			<h3>SECCIÓN 10 - INDEMNIZACIÓN</h3>
 
 			<p>
 				Aceptas indemnizar, defender y mantener indemne Sb-Meek y nuestras
@@ -435,7 +296,7 @@ export default function Terms() {
 				tercero.
 			</p>
 
-			<h3>SECCIÓN 15 - DIVISIBILIDAD</h3>
+			<h3>SECCIÓN 11 - DIVISIBILIDAD</h3>
 
 			<p>
 				En el caso de que se determine que cualquier disposición de estas
@@ -446,7 +307,7 @@ export default function Terms() {
 				la validez de aplicabilidad de las demás disposiciones restantes.
 			</p>
 
-			<h3>SECCIÓN 16 - RESCISIÓN</h3>
+			<h3>SECCIÓN 12 - RESCISIÓN</h3>
 
 			<p>
 				Las obligaciones y responsabilidades de las partes que hayan incurrido
@@ -471,7 +332,7 @@ export default function Terms() {
 				mismo).
 			</p>
 
-			<h3>SECCIÓN 17 - ACUERDO COMPLETO</h3>
+			<h3>SECCIÓN 13 - ACUERDO COMPLETO</h3>
 
 			<p>
 				Nuestra falla para ejercer o hacer valer cualquier derecho o disposiciôn
@@ -494,7 +355,7 @@ export default function Terms() {
 				servicio no se interpretarán en contra del grupo de redacción.
 			</p>
 
-			<h3>SECCIÓN 18 - LEY</h3>
+			<h3>SECCIÓN 14 - LEY</h3>
 
 			<p>
 				Estas Condiciones del servicio y cualquier acuerdos aparte en el que te
@@ -502,7 +363,7 @@ export default function Terms() {
 				las leyes.
 			</p>
 
-			<h3>SECCIÓN 19 - CAMBIOS EN LOS TÉRMINOS DE SERVICIO</h3>
+			<h3>SECCIÓN 15 - CAMBIOS EN LOS TÉRMINOS DE SERVICIO</h3>
 
 			<p>
 				Puedes revisar la versión más actualizada de los Términos de Servicio en
@@ -520,12 +381,12 @@ export default function Terms() {
 				de dichos cambios.
 			</p>
 
-			<h3>SECCIÓN 20 - INFORMACIÓN DE CONTACTO</h3>
+			<h3>SECCIÓN 16 - INFORMACIÓN DE CONTACTO</h3>
 
 			<p>
 				Preguntas acerca de los Términos de Servicio deben ser enviadas a
 				Sb-meek@Sbmeek.com
 			</p>
 		</Container>
-	)
+	);
 }
