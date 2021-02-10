@@ -4,11 +4,15 @@ export const LangTogglerWrapper = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	transition: transform 600ms;
 	margin-top: 40px;
 	cursor: pointer;
 	position: relative;
 
-	& > span {
+	&:hover {
+		transform: scale(1.1);
+	}
+	& > p {
 		margin-right: 10px;
 		color: #fff;
 	}
@@ -54,12 +58,13 @@ export const DropdownItem = styled.div`
 		height: 24px;
 	}
 
-	& > span {
+	& > p {
 		color: var(--tq-dark-gray-02);
 		width: 50%;
 		height: 24px;
 		display: inline-flex;
 		align-items: flex-end;
+		font-size: 16px;
 	}
 `;
 

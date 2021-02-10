@@ -12,6 +12,7 @@ import {
 
 export default function LangToggler() {
 	const [showDropdown, setShowDropdown] = useState(false);
+	const [showArrow, setShowArrow] = useState(false);
 	const { state, dispatch } = useContext(InitContext);
 
 	const getLangInfo = () => {
@@ -33,6 +34,13 @@ export default function LangToggler() {
 			type: ActionEnum.SET_LANG,
 			payload: { langSelected: selectedLocale }
 		});
+		if (showDropdown) {
+			console.log('abri');
+		}
+	};
+	const handleChange = () => {
+		if (!showArrow) {
+		}
 	};
 
 	return (
@@ -46,14 +54,18 @@ export default function LangToggler() {
 							data-locale={lang[0]}
 						>
 							<img src={lang[1].flag} alt="lang-flag" />
-							<span>{lang[1].title}</span>
+							<p>{lang[1].title}</p>
 						</DropdownItem>
 					))}
 				</Dropdown>
 			)}
 			<FlagLangToggler src={getLangInfo().flag} alt="flag" />
-			<span>{getLangInfo().title}</span>
-			<img src={arrowFooter} alt="arrow_lang-toggler" />
+			<p>{getLangInfo().title}</p>
+			<img
+				style={{ transform: showDropdown ? 'rotateX(153deg)' : '' }}
+				src={arrowFooter}
+				alt="arrow_lang-toggler"
+			/>
 		</LangTogglerWrapper>
 	);
 }
