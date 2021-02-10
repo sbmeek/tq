@@ -31,6 +31,7 @@ import {
 	SBMeekWrapper,
 	ButtonTerms
 } from './Menu.style';
+import LangToggler from 'components/langToggler/LangToggler';
 
 export default function Menu() {
 	const [isUserNew, setIsUserNew] = useState(true);
@@ -155,8 +156,7 @@ export default function Menu() {
 							<FooterContainer>
 								<SBMeekWrapper>
 									<SidebarButton SBMeekButton>
-										<ButtonIcon src={tqIcon} alt="tq-fav" />
-										<ButtonText>SB Meek</ButtonText>
+										<LangToggler></LangToggler>
 									</SidebarButton>
 								</SBMeekWrapper>
 								<a href="/terms" style={{ width: '101.6%' }}>

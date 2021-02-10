@@ -172,6 +172,10 @@ export const SidebarButton = styled.button<{ SBMeekButton?: boolean }>`
 	color: var(--tq-red-01);
 	font-size: 1.7em;
 	cursor: pointer;
+	& p {
+		color: black !important;
+		font-size: 16px;
+	}
 	&:hover {
 		background: rgba(78, 78, 78, 0.16);
 	}
