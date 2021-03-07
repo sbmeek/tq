@@ -111,15 +111,23 @@ export default function MainTextInput<
 		}
 		if (!isFieldDisabled.current) {
 			let { value: val } = targetElement;
-			val = val.match(/^[a-zA-Z0-9-\s]*$/) ? val : username;
+			const valLengthMinus1 = val.length - 1;
+			const separator = '-';
+			const alphanumericRegex = /^[a-zA-Z0-9-\s]*$/;
+
+			val = val.match(alphanumericRegex) ? val : username;
+			val =
+				val[valLengthMinus1] === separator &&
+				val[valLengthMinus1 - 1] === separator
+					? val.substring(0, valLengthMinus1)
+					: val;
 			val = val.replace(
 				/\s/g,
-				val[0] !== ' ' &&
-					val[targetElement.selectionStart!] !== '-' &&
-					val[targetElement.selectionStart! - 2] !== '-'
-					? '-'
+				val[0] !== ' ' && val[targetElement.selectionStart! - 2] !== separator
+					? separator
 					: ''
 			);
+
 			setUsername(formatVal(val));
 			setShowSubmitBtn(val.length >= 3);
 		}
