@@ -109,6 +109,9 @@ export default {
 		FormSignupFooterToggler: 'Regístrate',
 		FormLoginFooter: '¿Aún no tienes una cuenta?',
 		FormLoginFooterToggler: 'Acceder',
+		IsViewChanged:
+			'Al parecer ha editado uno o más campos.\n' +
+			'Si sale antes de guardar, sus cambios se perderán.',
 		Signup: {
 			Username: 'Nombre de usuario',
 			Email: 'Correo electrónico',

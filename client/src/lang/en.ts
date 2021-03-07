@@ -107,6 +107,9 @@ export default {
 		FormSignupFooterToggler: 'Sign up',
 		FormLoginFooter: 'Not registered yet?',
 		FormLoginFooterToggler: 'Log in',
+		IsViewChanged:
+			'It looks like you have edited one or more fields.\n' +
+			'If you leave before saving, your changes will be lost.',
 		Signup: {
 			Username: 'Username',
 			Email: 'Email address',

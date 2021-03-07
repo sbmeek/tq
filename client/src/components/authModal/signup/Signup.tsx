@@ -27,9 +27,17 @@ export default function Signup<
 	T extends {
 		setShowRegisteredComp: React.Dispatch<React.SetStateAction<boolean>>;
 		setShowLogin: React.Dispatch<React.SetStateAction<boolean>>;
-		setOpened: React.Dispatch<React.SetStateAction<boolean>>;
+		setIsModalOpened: React.Dispatch<React.SetStateAction<boolean>>;
+		hideModal: () => void;
+		setIsViewChanged: React.Dispatch<React.SetStateAction<boolean>>;
 	}
->({ setShowLogin, setShowRegisteredComp, setOpened: setShowAuthModal }: T) {
+>({
+	setShowLogin,
+	setShowRegisteredComp,
+	setIsViewChanged,
+	hideModal,
+	setIsModalOpened
+}: T) {
 	const [fields, setFields] = useState<{
 		[key: string]: {
 			value: string;
@@ -85,17 +93,29 @@ export default function Signup<
 
 	const valdUsername = async (username: string) => {
 		const usernameRegex = /^[a-zA-Z0-9]*$/;
-	
 
 		let errored = false;
 
 		if (username.length < 3) errored = true;
 		if (!usernameRegex.test(username)) errored = true;
-		if (username.length > 20) errored = true
+		if (username.length > 20) errored = true;
 
 		return errored;
-		
 	};
+
+	const evalFieldsValue = useCallback(() => {
+		for (let i in fields) {
+			if (fields[i].value.length > 0) {
+				setIsViewChanged(true);
+				return;
+			}
+		}
+		setIsViewChanged(false);
+	}, [fields, setIsViewChanged]);
+
+	useEffect(() => {
+		evalFieldsValue();
+	}, [evalFieldsValue, fields]);
 
 	const handleFieldChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const targetElement = e.target as HTMLInputElement;
@@ -185,7 +205,7 @@ export default function Signup<
 	};
 
 	const handleBtnCancelClick = () => {
-		setShowAuthModal(false);
+		hideModal();
 	};
 
 	return (
@@ -279,7 +299,9 @@ export default function Signup<
 						<AccountIcon src={account} alt="account" />
 					</Button>
 				</BtnsContainer>
-				<LinkTerms onClick={handleBtnCancelClick} to="/terms">{lang['TermsNConditions']}</LinkTerms>
+				<LinkTerms onClick={() => setIsModalOpened(false)} to="/terms">
+					{lang['TermsNConditions']}
+				</LinkTerms>
 			</form>
 		</>
 	);

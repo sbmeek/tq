@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import Axios from 'axios';
 import accountIcon from 'assets/images/icons/share-icons/icon-account.svg';
 import xIcon from 'assets/images/icons/share-icons/icon-x.svg';
@@ -23,8 +23,18 @@ export default function Login<
 		setErrMsg: React.Dispatch<React.SetStateAction<string>>;
 		setIsModalOpened: React.Dispatch<React.SetStateAction<boolean>>;
 		setShowMenu?: React.Dispatch<React.SetStateAction<boolean>>;
+		setIsViewChanged: React.Dispatch<React.SetStateAction<boolean>>;
+		hideModal: () => void;
 	}
->({ errMsg, fromMenu, setErrMsg, setIsModalOpened, setShowMenu }: T) {
+>({
+	errMsg,
+	fromMenu,
+	setErrMsg,
+	setIsModalOpened,
+	setShowMenu,
+	setIsViewChanged,
+	hideModal
+}: T) {
 	const {
 		AuthModal: { Login: lang }
 	} = useContext(InitContext).state.lang;
@@ -39,8 +49,15 @@ export default function Login<
 
 	const handleFieldChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const targetElement = e.target as HTMLInputElement;
+
 		setFields({ ...fields, [targetElement.id]: targetElement.value });
 	};
+
+	useEffect(() => {
+		setIsViewChanged(
+			fields.usernameOrEmail.length > 0 || fields.pwd.length > 0
+		);
+	}, [fields, setIsViewChanged]);
 
 	const handleFormSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
@@ -76,7 +93,7 @@ export default function Login<
 	};
 
 	const handleBtnCancelClick = () => {
-		setIsModalOpened(false);
+		hideModal();
 		setErrMsg('');
 	};
 
