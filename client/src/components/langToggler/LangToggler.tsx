@@ -1,8 +1,8 @@
 import React, { useContext, useState } from 'react';
 import { ActionEnum, InitContext } from 'global/context/InitContext';
-
+import { getDataByLang } from 'helpers';
+import LangsEnum from 'lang/LangsEnum';
 import arrowFooter from 'assets/images/presentation/arrow_lang-toggler.svg';
-
 import {
 	LangTogglerWrapper,
 	FlagLangToggler,
@@ -16,17 +16,12 @@ export default function LangToggler() {
 	const { state, dispatch } = useContext(InitContext);
 
 	const getLangInfo = () => {
-		switch (state.langSelected) {
-			case 'es':
-				return state.availableLangs['es'];
-			default:
-				return state.availableLangs['en'];
-		}
+		return getDataByLang(state.availableLangs);
 	};
 
 	const handleLangClick = (e: React.MouseEvent<HTMLDivElement>) => {
 		const { dataset } = e.target as HTMLDivElement;
-		const selectedLocale = dataset['locale'] || 'en';
+		const selectedLocale = dataset['locale'] || LangsEnum.en;
 
 		localStorage.setItem('selectedLang', selectedLocale);
 

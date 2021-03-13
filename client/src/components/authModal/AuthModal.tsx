@@ -11,6 +11,7 @@ import { InitContext } from 'global/context/InitContext';
 import { useDispatch } from 'react-redux';
 import { getAuthInfoAction } from 'global/ducks/authDucks';
 import Registered from './registered/Registered';
+import { Prompt } from 'react-router';
 
 import {
 	containerCustomStyles,
@@ -39,6 +40,7 @@ export default function AuthModal<
 	const [showLogin, setShowLogin] = useState(true);
 	const [toggleContentMobileAnim, setToggleContentMobileAnim] = useState(false);
 	const [showRegisteredComp, setShowRegisteredComp] = useState(false);
+	const [isViewChanged, setIsViewChanged] = useState(false);
 
 	const { AuthModal: lang } = useContext(InitContext).state.lang;
 
@@ -60,14 +62,32 @@ export default function AuthModal<
 		e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>
 	) => {
 		const targetElement = e.target as HTMLDivElement;
-		if (targetElement.id === 'overlay' && !isMobile) setOpened(!opened);
+
+		if (targetElement.id === 'overlay' && !isMobile) {
+			validateModalStateChange(() => setOpened(!opened));
+		}
 	};
 
 	const handleTogglerClick = () => {
 		if (isMobile) {
 			setToggleContentMobileAnim(true);
 		}
-		setShowLogin(!showLogin);
+		validateModalStateChange(() => setShowLogin(!showLogin));
+	};
+
+	const validateModalStateChange = (callback: CallableFunction) => {
+		if (isViewChanged) {
+			if (window.confirm(lang['IsViewChanged'])) {
+				callback();
+				setIsViewChanged(false);
+			}
+		} else {
+			callback();
+		}
+	};
+
+	const hideModal = () => {
+		validateModalStateChange(() => setOpened(false));
 	};
 
 	const handleGoogleAuth = async (response: GoogleLoginResponse) => {
@@ -123,6 +143,7 @@ export default function AuthModal<
 						onOverlayMouseDownOrTouch={handleOverlayClick}
 						isActive={opened}
 					>
+						<Prompt when={isViewChanged} message={lang['IsViewChanged']} />
 						{!showRegisteredComp ? (
 							<Content
 								onAnimationEnd={() => setToggleContentMobileAnim(false)}
@@ -150,12 +171,17 @@ export default function AuthModal<
 											setErrMsg={setErrMsg}
 											setIsModalOpened={setOpened}
 											setShowMenu={setShowMenu}
+											setIsViewChanged={setIsViewChanged}
+											hideModal={hideModal}
 										/>
 									) : (
 										<Signup
 											setOpened={setOpened}
 											setShowRegisteredComp={setShowRegisteredComp}
 											setShowLogin={setShowLogin}
+											setIsModalOpened={setOpened}
+											setIsViewChanged={setIsViewChanged}
+											hideModal={hideModal}
 										/>
 									)}
 									<FormInnerWrapper>

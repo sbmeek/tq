@@ -5,13 +5,12 @@ import en from 'lang/en';
 import es from 'lang/es';
 import esFlag from 'assets/images/lang-flags/es-flag.png';
 import enFlag from 'assets/images/lang-flags/en-flag.png';
-
-type LangSelectedType = 'en' | 'es';
+import LangsEnum from 'lang/LangsEnum';
 
 interface IContextState {
 	socket: SocketIOClientStatic['Socket'];
 	lang: object;
-	langSelected: LangSelectedType;
+	langSelected: LangsEnum;
 	availableLangs: object;
 	isTester: boolean;
 }
@@ -24,10 +23,10 @@ interface IContextAction {
 const initialState: IContextState = {
 	socket: io(),
 	lang: en,
-	langSelected: 'en',
+	langSelected: LangsEnum.en,
 	availableLangs: {
-		en: { title: 'English', flag: enFlag },
-		es: { title: 'Español', flag: esFlag }
+		[LangsEnum.en]: { title: 'English', flag: enFlag },
+		[LangsEnum.es]: { title: 'Español', flag: esFlag }
 	},
 	isTester: false
 };
@@ -40,7 +39,7 @@ export enum ActionEnum {
 
 function getLang(langPrefix: string) {
 	switch (langPrefix) {
-		case 'es':
+		case LangsEnum.es:
 			return es;
 		default:
 			return en;
