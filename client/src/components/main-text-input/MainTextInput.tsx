@@ -88,27 +88,41 @@ export default function MainTextInput<
 		});
 	};
 
+	const isUsernameAvailaible = async (username: string) => {
+		const data = await axios.get(
+			`/user/is_username_available?${new URLSearchParams({
+				username
+			})}`
+		);
+		return data;
+	};
+
 	const handleFieldChange = (
 		e: ChangeEvent<HTMLInputElement> & KeyboardEvent<HTMLInputElement>
 	) => {
 		const curr = tqForm.current!;
 		const targetElement = e.target as HTMLInputElement;
 		clearTimeout(timerID as NodeJS.Timeout);
+
 		if (targetElement.value) {
 			setIsLoading(true);
-			timerID = setTimeout(() => {
-				setIsValid(targetElement.value.length >= 3);
-				setIsLoading(false);
+			timerID = setTimeout(async () => {
+				isUsernameAvailaible(targetElement.value).then(({ data }) => {
+					setIsValid(targetElement.value.length >= 3 && data.isOk);
+					setIsLoading(false);
+				});
 			}, 800);
 		} else {
 			setIsLoading(false);
 			setIsValid(null);
 		}
+
 		if (e.key === 'Enter' && targetElement.value.length >= 3) {
 			curr.dispatchEvent(new Event('submit', { cancelable: true }));
 			curr.disabled = true;
 			isFieldDisabled.current = true;
 		}
+
 		if (!isFieldDisabled.current) {
 			let { value: val } = targetElement;
 			const valLengthMinus1 = val.length - 1;
