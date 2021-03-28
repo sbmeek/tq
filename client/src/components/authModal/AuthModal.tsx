@@ -142,6 +142,7 @@ export default function AuthModal<
 						}}
 						onOverlayMouseDownOrTouch={handleOverlayClick}
 						isActive={opened}
+						dataCY="auth-modal"
 					>
 						<Prompt when={isViewChanged} message={lang['IsViewChanged']} />
 						{!showRegisteredComp ? (

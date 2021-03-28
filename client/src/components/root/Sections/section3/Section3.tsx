@@ -23,7 +23,7 @@ function Section3() {
 	const { ref, inView } = useInView(inViewOptions);
 
 	return (
-		<Section ref={ref} isVisible={inView}>
+		<Section ref={ref} isVisible={inView} data-cy="root-section3">
 			<FirstRowSection3>
 				<LogoMaxSection3 src={logoMaxSection3} alt="logo3" />
 				<LogoMinSection3 src={logoMinSection3} alt="logo3" />

@@ -27,7 +27,7 @@ function Section2() {
 	const { ref, inView } = useInView(inViewOptions);
 
 	return (
-		<Section ref={ref} isVisible={inView}>
+		<Section ref={ref} isVisible={inView} data-cy="root-section2">
 			<FirstRow>
 				<Logo src={logoSection2} alt="logo-section2" />
 			</FirstRow>

@@ -29,7 +29,7 @@ function Section5<
 	const lang = useContext(InitContext).state.lang.Root.Section5;
 
 	return (
-		<Section ref={inViewRef} isVisible={inView}>
+		<Section ref={inViewRef} isVisible={inView} data-cy="root-section5">
 			<LogoPic>
 				<source media="(max-width: 515px)" srcSet={logoMinGeneral} />
 				<LogoImg src={logoMaxGeneral} alt="logo-section5" />

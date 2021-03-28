@@ -14,6 +14,7 @@ interface ModalProps extends IsActiveType {
 	customContainer?: CustomType;
 	customInnerContainer?: CustomType;
 	customStyle?: CustomStyles;
+	dataCY?: string;
 	onOverlayMouseDownOrTouch?: (
 		eventObject: React.MouseEvent<any> & React.TouchEvent<any>
 	) => void;
@@ -41,6 +42,7 @@ export default function Modal(
 			<Wrapper
 				{...props.customWrapper?.props}
 				customStyles={props.customWrapper?.customStyles}
+				data-cy={props.dataCY}
 			>
 				<Container
 					isActive={props.isActive}

@@ -24,7 +24,7 @@ function Section4() {
 	const { ref, inView } = useInView(inViewOptions);
 
 	return (
-		<Section ref={ref} isVisible={inView}>
+		<Section ref={ref} isVisible={inView} data-cy="root-section4">
 			<FirstRowSection4>
 				<LogoPicSection4>
 					<source media="(max-width: 390px)" srcSet={logoReMinSection4} />

@@ -36,10 +36,10 @@ function Section1<
 	const { ref, inView } = useInView(inViewOptions);
 
 	return (
-		<Section ref={ref} isVisible={inView}>
+		<Section ref={ref} isVisible={inView} data-cy="root-section1">
 			<FirstRow>
 				<ButtonFlyContainer>
-					<button onClick={handleAuthClick}>
+					<button onClick={handleAuthClick} data-cy="btn-login">
 						{lang['BtnLogin']} <img src={sim} alt="sim" />
 					</button>
 				</ButtonFlyContainer>

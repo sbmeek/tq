@@ -29,7 +29,7 @@ export default function Root() {
 		<>
 			<HideMenucitoStyle />
 			<AuthModal opened={showAuthModal} setOpened={setShowAuthModal} />
-			<Container>
+			<Container data-cy="root-container">
 				<Section1 handleAuthClick={handleAuthClick} />
 				<Section2 />
 				<Section3 />
