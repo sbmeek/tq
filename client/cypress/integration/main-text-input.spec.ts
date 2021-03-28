@@ -6,14 +6,14 @@ describe('Main page', () => {
 	});
 
 	it('should render', () => {
-		cy.get('[data-testid="main-container"]').should('be.visible');
+		cy.get('[data-cy="main-container"]').first().should('be.visible');
 	});
 
-	context('field', () => {
+	context('main-text-input', () => {
 		let usernameField: Cypress.Chainable;
 
 		beforeEach(() => {
-			usernameField = cy.get('[data-testid="username-field"]');
+			usernameField = cy.get('[data-cy="username-field"]').first();
 		});
 
 		it('should not allow spaces at field start', () => {
@@ -23,19 +23,19 @@ describe('Main page', () => {
 		it('should replace spaces with dashes', () => {
 			usernameField
 				.type('this is a  test  ')
-				.should('have.text', 'this-is-a-test-');
+				.should('have.value', 'this-is-a-test-');
 		});
 
 		it('should be editable on focus', () => {
 			usernameField
 				.focus()
 				.type('is editable')
-				.should('have.text', 'is-editable');
+				.should('have.value', 'is-editable');
 		});
 
 		it('should show submit button when field is filled', () => {
 			usernameField.type('filled');
-			cy.get('[data-testid="btn-submit"]').should('exist');
+			cy.get('[data-cy="btn-submit"]').should('exist');
 		});
 	});
 });

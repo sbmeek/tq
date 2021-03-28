@@ -160,6 +160,7 @@ export default function MainTextInput<
 			onSubmit={handleFormSubmit}
 			formCustomStyle={formCustomStyle}
 			ref={tqForm}
+			data-cy="main-container"
 		>
 			<Input
 				value={username}
@@ -178,10 +179,10 @@ export default function MainTextInput<
 				autoComplete="off"
 				maxLength={20}
 				placeholder={!inputMode ? lang['InputPlaceholder'] : ''}
-				data-testid="username-field"
+				data-cy="username-field"
 			/>
 			{showSubmitBtn && (
-				<MainBtn type="submit" data-testid="btn-submit">
+				<MainBtn type="submit" data-cy="btn-submit">
 					<img src={arrow} alt="arrow" />
 				</MainBtn>
 			)}

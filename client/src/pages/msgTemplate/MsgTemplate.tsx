@@ -75,7 +75,7 @@ export default function Template() {
 				actualMsg: undefined
 			});
 		}
-	}, [location, actualMsg]);
+	}, [location, actualMsg, history]);
 
 	const handleStickerAnimationEnd = useCallback(() => {
 		setRunToggleStickerAnim(false);

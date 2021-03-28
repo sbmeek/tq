@@ -9,5 +9,5 @@ build
 # testing
 coverage
 .nyc_output
-cypress/videos
-cypress/screenshots
+client/cypress/videos
+client/cypress/screenshots

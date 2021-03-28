@@ -13,7 +13,7 @@ export default function App() {
 		(store: RootStateOrAny) => store.auth
 	);
 	let { socket, isTester } = useContext(InitContext).state;
-	const PRIVATE_MODE = process.env.NODE_ENV === 'production';
+	const PRIVATE_MODE = process.env.REACT_APP_ENV === 'production';
 
 	useEffect(() => {
 		if (user !== undefined)

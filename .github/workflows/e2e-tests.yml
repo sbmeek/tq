@@ -1,0 +1,39 @@
+name: e2e tests
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x, 14.x]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm run ipkgs
+      - run: npm run ci-test
+        env:
+          DB_CONNECTION_STRING: ${{ secrets.DB_CONNECTION_STRING }}
+          DB_USERNAME: ${{ secrets.DB_USERNAME }}
+          DB_USERPWD: ${{ secrets.DB_USERPWD }}
+          DB_NAME: ${{ secrets.DB_NAME }}
+          SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
+          TQ_P_ENC: ${{ secrets.TQ_P_ENC }}
+          EPROC_KEY: ${{ secrets.EPROC_KEY }}
+          G_MAIL_ACCOUNT: ${{ secrets.G_MAIL_ACCOUNT }}
+          G_CLIENT_ID: ${{ secrets.G_CLIENT_ID }}
+          G_CLIENT_SECRET: ${{ secrets.G_CLIENT_SECRET }}
+          G_REFRESH_TOKEN: ${{ secrets.G_REFRESH_TOKEN }}
+          G_ACCESS_TOKEN: ${{ secrets.G_ACCESS_TOKEN }}
+          FACEBOOK_APP_ID: ${{ secrets.FACEBOOK_APP_ID }}
+          FACEBOOK_APP_SECRET: ${{ secrets.FACEBOOK_APP_SECRET }}

@@ -10,11 +10,17 @@
 		"i-server": "cd server && npm install",
 		"b-server": "cd server && npm run build",
 		"b-client": "cd client && npm run build",
-		"build": "npm run b-server && npm run b-client",
+		"build": "npm run b-server && cross-env REACT_APP_ENV=production npm run b-client",
 		"prod": "git checkout prod && git merge master",
 		"heroku-prebuild": "npm run i-server",
 		"heroku-postbuild": "npm run i-client",
-		"start": "cd server && npm start"
+		"start": "cd server && npm start",
+		"ib-server": "npm run i-server && npm run b-server",
+		"ib-client": "npm run i-client && cross-env REACT_APP_ENV=test npm run b-client",
+		"b-test": "npm run ib-server && npm run ib-client",
+		"build-start": "npm run b-test && cross-env NODE_ENV=test npm start",
+		"cypress-run": "cd client && npm run test",
+		"ci-test": "start-server-and-test build-start http://localhost:2017 cypress-run"
 	},
 	"repository": {
 		"type": "git",
@@ -29,16 +35,18 @@
 	"homepage": "https://github.com/SBMeek/tq#readme",
 	"devDependencies": {
 		"concurrently": "^5.2.0",
+		"cross-env": "^7.0.3",
 		"dotenv": "^8.2.0",
 		"husky": "^4.3.0",
 		"lint-staged": "^10.4.0",
-		"prettier": "2.0.5",
-		"pretty-quick": "^3.0.2"
+		"prettier": "^2.2.1",
+		"pretty-quick": "^3.1.0",
+		"start-server-and-test": "^1.12.1"
 	},
 	"lint-staged": {
 		"*": [
 			"pretty-quick --staged",
-			"prettier --write --ignore-unknown --loglevel debug"
+			"prettier --write --ignore-unknown"
 		]
 	},
 	"husky": {
