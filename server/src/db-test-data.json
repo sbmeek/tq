@@ -1,0 +1,44 @@
+{
+	"users": [
+		{
+			"createdAt": "2020-09-04T15:53:59.386+00:00",
+			"username": "test1",
+			"enteredname": "test1",
+			"keyOrPwd": "$2b$10$iJ.vH6qCnt36wLcHMXtB/test-pwd-crpt",
+			"willExpireAt": "2020-09-07T00:00:00.000+00:00",
+			"expired": false,
+			"isPermanentAccount": false,
+			"messages": [
+				{
+					"sentAt": "2020-09-04T13:36:46.085+00:00",
+					"readed": false,
+					"content": "test-msg1"
+				}
+			]
+		},
+		{
+			"createdAt": "2020-10-05T15:53:59.386+00:00",
+			"username": "test2",
+			"enteredname": "test2",
+			"keyOrPwd": "$2b$10$iJ.vH6qCnt36wLcHMXtB/test-pwd-crpt",
+			"willExpireAt": "2020-10-08T00:00:00.000+00:00",
+			"expired": false,
+			"isPermanentAccount": false,
+			"messages": [
+				{
+					"sentAt": "2020-09-04T13:36:46.085+00:00",
+					"readed": false,
+					"content": "test-msg2"
+				}
+			]
+		}
+	],
+	"tests": [
+		{
+			"id": 1
+		},
+		{
+			"id": 2
+		}
+	]
+}

@@ -4,7 +4,8 @@
 	"description": "<p align=\"center\">\r   <img src=\"https://avatars0.githubusercontent.com/t/3800248?s=280&v=4\" title=\"TQ\"/>\r </p>\r </br>",
 	"main": "index.js",
 	"scripts": {
-		"tq": "concurrently -n \"server,client\" -c 'green,blue' \"cd server && npm run dev\" \"cd client && npm start\"",
+		"tq:dev": "concurrently -n \"server,client\" -c 'green,blue' \"cd server && npm run dev\" \"cd client && npm start\"",
+		"tq:test": "concurrently -n \"server,client\" -c 'green,blue' \"cd server && cross-env NODE_ENV=test npm run dev\" \"cd client && cross-env NODE_ENV=test npm start\"",
 		"ipkgs": "npm i && concurrently -n \"root-pkgs,server-pkgs,client-pkgs\" -c 'red,green,blue' \"npm i\" \"cd server && npm i\" \"cd client && npm i\"",
 		"i-client": "cd client && npm install",
 		"i-server": "cd server && npm install",

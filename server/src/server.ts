@@ -8,7 +8,7 @@ import sessions from 'client-sessions';
 import helmet from 'helmet';
 require('dotenv').config();
 
-const { SESSION_SECRET, NODE_ENV } = process.env;
+const { SESSION_SECRET, NODE_ENV, CI } = process.env;
 const isTestEnv = process.env.NODE_ENV === 'test';
 
 const app = express();
@@ -75,7 +75,7 @@ if (!isTestEnv) {
 // Routes
 app.use('/user', userRoutes);
 
-if (isTestEnv) {
+if (isTestEnv && CI) {
 	console.log = () => 0;
 }
 
