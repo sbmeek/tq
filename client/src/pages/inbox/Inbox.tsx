@@ -30,28 +30,30 @@ export default function () {
 	const {
 		user: { messages }
 	} = useSelector((store: RootStateOrAny) => store.auth);
-	const [msgsList, setMsgsList] = useState([]);
-	const [answeredMsgs, setAnsweredMsgs] = useState([]);
+	const [msgsList, setMsgsList] = useState<ITQMessage[] | null>(null);
+	const [answeredMsgs, setAnsweredMsgs] = useState<ITQMessage[] | null>(null);
 
 	useEffect(() => {
-		let _msgList = messages.filter((e: ITQMessage) => undefined === e.answer);
+		let _msgList = messages.filter((d: ITQMessage) => undefined === d.answer);
 		setMsgsList(_msgList);
-		_msgList = messages.filter((e: ITQMessage) => undefined !== e.answer);
+		_msgList = messages.filter((d: ITQMessage) => undefined !== d.answer);
 		setAnsweredMsgs(_msgList);
 	}, [messages]);
 
 	return (
 		<Inbox
-			messages={[...msgsList].reverse()}
-			answeredMsgs={[...answeredMsgs].reverse()}
+			messages={null === msgsList ? msgsList : [...msgsList].reverse()}
+			answeredMsgs={
+				null === answeredMsgs ? answeredMsgs : [...answeredMsgs].reverse()
+			}
 		/>
 	);
 }
 
 const Inbox = <
 	T extends {
-		messages: ITQMessage[];
-		answeredMsgs: ITQMessage[];
+		messages: ITQMessage[] | null;
+		answeredMsgs: ITQMessage[] | null;
 	}
 >({
 	messages,
@@ -99,12 +101,14 @@ const Inbox = <
 	};
 
 	const handleAnswerMsgClick = (_e: MouseEvent, msgId: string) => {
-		const actualMsg = messages.filter((m) => m._id === msgId)[0];
+		const actualMsg = (messages || []).find((m) => m._id === msgId);
 		history.push({
 			pathname: '/message',
 			state: { actualMsg }
 		});
 	};
+
+	if (!messages || !answeredMsgs) return <></>;
 
 	return (
 		<Container>
